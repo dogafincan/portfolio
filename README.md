@@ -2,10 +2,11 @@
 
 Personal portfolio website for showcasing projects built by Doga Fincan.
 
-This repo is intentionally starting as documentation-first. The app has not
-been scaffolded yet; the first implementation pass should use the sibling
-projects in `~/Documents/sui-snapshot` and `~/Documents/sui-airdrop` as the
-reference for stack, styling, deployment, and workflow conventions.
+This repo started documentation-first. The app has now been scaffolded as a
+minimal TanStack Start app that renders a temporary
+`hello world` page. Future implementation passes should continue to use the
+sibling projects in `~/Documents/sui-snapshot` and `~/Documents/sui-airdrop` as
+the reference for stack, styling, deployment, and workflow conventions.
 
 ## Product Direction
 
@@ -45,10 +46,10 @@ Relevant shared guidance from those projects:
 - Reuse sibling patterns when they already solved the same design or workflow
   problem, while keeping product boundaries explicit.
 
-## Planned Stack
+## Current Stack
 
-Use the same core web stack as `sui-snapshot` and `sui-airdrop`, trimmed for a
-portfolio site:
+The app uses the same core web stack as `sui-snapshot` and `sui-airdrop`,
+trimmed for a portfolio site:
 
 - Vite+
 - TanStack Start
@@ -129,16 +130,18 @@ Portfolio-specific adaptation:
 - Do not use oversized marketing sections that delay access to the projects.
 - Favor dense but polished project information over decorative filler.
 
-## Future Implementation Notes
+## Local Commands
 
-When the app is scaffolded, keep the sibling command style:
+Use the sibling command style:
 
-- use `npx vp env setup`
-- use `npx vp install`
-- use `npx vp dev`, `npx vp check`, `npx vp test`, and `npx vp build`
-- use `npx vp run deploy`, `npx vp run smoke:deploy`, and
-  `npx vp run smoke:browser` for Cloudflare release checks if equivalent scripts
-  are added
+- `npx vp env setup`
+- `npx vp install`
+- `npx vp dev`
+- `npx vp check`
+- `npx vp test`
+- `npx vp build`
+- `npx vp preview --host 127.0.0.1`
+- `npx vp run deploy`
+- `npx vp run cf-typegen`
 
-Until a `package.json` exists in this repo, these commands are planned
-conventions rather than runnable local commands.
+The default dev server script uses port `3000`.

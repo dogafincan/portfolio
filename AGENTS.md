@@ -3,8 +3,9 @@
 ## Project Overview
 
 This repository will become a personal portfolio website for showcasing projects
-built by Doga Fincan. The current repo is documentation-only; no application
-toolchain has been scaffolded yet.
+built by Doga Fincan. It is currently a minimal TanStack Start app that renders
+a temporary `hello world` page while the real portfolio surface is still
+unbuilt.
 
 The portfolio should reuse the proven stack and design direction from:
 
@@ -35,9 +36,9 @@ explicitly needed.
   state just because the sibling apps use them. A portfolio website should stay
   simpler unless a concrete feature requires that complexity.
 
-## Planned Stack
+## Current Stack
 
-Use this as the target stack when implementation begins:
+Use this as the current stack:
 
 - Vite+
 - TanStack Start
@@ -116,33 +117,27 @@ Portfolio-specific adaptation:
   content that delays access to projects.
 - Favor polished, scannable project information over ornamental layout.
 
-## Expected Files After Scaffold
+## Important Files
 
-The exact structure should follow the scaffold and sibling conventions, but the
-likely important files are:
+The current scaffold follows the sibling conventions. Important files:
 
 - `src/routes/index.tsx`: portfolio entry route and social metadata
 - `src/routes/__root.tsx`: root document, app shell, font preload, manifest
   links, and theme-color metadata
-- `src/routes/-__root.test.ts`: root document regression coverage
-- `src/routes/-index.test.ts`: route metadata and social preview coverage
+- `src/routes/index.lazy.tsx`: visible temporary route component attachment
 - `src/styles.css`: global Tailwind v4 tokens, mesh background, and chrome color
   variables
+- `src/components/hello-world.tsx`: temporary placeholder page
+- `src/components/hello-world.test.tsx`: current rendering smoke test
 - `src/components/ui/*`: shadcn components installed only as needed
-- `src/components/*`: portfolio sections, project cards, and project detail
-  components
-- `src/lib/*`: structured project data, formatting helpers, and content helpers
+- `src/lib/utils.ts`: shadcn `cn` helper
 - `public/manifest.json`: PWA manifest colors and icons
-- `public/og-image.png`: 1200x630 social preview image
 - `vite.config.ts`: Vite+ and TanStack configuration
-- `wrangler.jsonc`: Cloudflare Worker configuration, if deployed through
-  Workers
+- `wrangler.jsonc`: Cloudflare Worker configuration
 
 ## Local Commands
 
-No local app commands exist yet because the repo has no `package.json`.
-
-After scaffold, prefer the sibling command pattern:
+Prefer the sibling command pattern:
 
 - `npx vp env setup`
 - `npx vp install`
@@ -152,20 +147,18 @@ After scaffold, prefer the sibling command pattern:
 - `npx vp build`
 - `npx vp preview --host 127.0.0.1`
 - `npx vp run deploy`
-- `npx vp run smoke:deploy`
-- `npx vp run smoke:browser`
-- `npx vp run cf-typegen`, if Cloudflare types are configured
+- `npx vp run cf-typegen`
 
 Invoke Vite+ through `npx vp ...` so the repo-local CLI is used even when `vp`
 is not on the shell `PATH`.
 
 ## Verification
 
-For docs-only changes before scaffold:
+For docs-only changes:
 
 - `git diff --check`
 
-For implementation changes after scaffold:
+For implementation changes:
 
 - run the narrowest relevant tests first
 - run `npx vp check`

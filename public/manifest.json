@@ -1,0 +1,9 @@
+{
+  "short_name": "Portfolio",
+  "name": "Portfolio",
+  "icons": [],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#b9d0f8",
+  "background_color": "#b9d0f8"
+}
