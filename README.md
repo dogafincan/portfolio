@@ -61,6 +61,8 @@ trimmed for a portfolio site:
 - Inter variable font through Fontsource
 - Lucide for product UI icons
 - Cloudflare Workers for deployment
+- Node.js `24.14.0` pinned through `.node-version` for local and Cloudflare
+  Workers Builds
 - npm as the package manager
 
 Do not add Sui-specific libraries by default. The portfolio can link to and
@@ -145,3 +147,7 @@ Use the sibling command style:
 - `npx vp run cf-typegen`
 
 The default dev server script uses port `3000`.
+
+Cloudflare Workers Builds should respect `.node-version`. If the dashboard has
+a `NODE_VERSION` build variable, keep it aligned with the file so `npx vp check`
+can load `vite.config.ts` during deployment.

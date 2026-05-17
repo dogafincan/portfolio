@@ -50,6 +50,8 @@ Use this as the current stack:
 - Inter variable font via Fontsource
 - Lucide for product UI icons
 - Cloudflare Workers deployment
+- Node.js `24.14.0` pinned through `.node-version` for local and Cloudflare
+  Workers Builds
 - npm package manager
 
 Expected portfolio omissions unless explicitly justified:
@@ -134,6 +136,8 @@ The current scaffold follows the sibling conventions. Important files:
 - `public/manifest.json`: PWA manifest colors and icons
 - `vite.config.ts`: Vite+ and TanStack configuration
 - `wrangler.jsonc`: Cloudflare Worker configuration
+- `.node-version`: Node.js version pin used by local tooling and Cloudflare
+  Workers Builds
 
 ## Local Commands
 
@@ -151,6 +155,10 @@ Prefer the sibling command pattern:
 
 Invoke Vite+ through `npx vp ...` so the repo-local CLI is used even when `vp`
 is not on the shell `PATH`.
+
+Keep Cloudflare's `NODE_VERSION` build variable unset or aligned with
+`.node-version`; the default Workers Builds Node version can fail before
+`npx vp check` loads the TypeScript Vite config.
 
 ## Verification
 
