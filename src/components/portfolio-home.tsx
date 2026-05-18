@@ -117,10 +117,10 @@ export function PortfolioHome() {
             />
           </div>
           <div className="flex min-w-0 flex-col gap-2">
-            <h1 className="text-4xl font-semibold tracking-normal text-balance sm:text-5xl">
+            <h1 className="text-balance text-4xl leading-tight font-bold tracking-tight">
               Doga Fincan
             </h1>
-            <p className="max-w-[43rem] text-balance text-lg font-medium md:max-w-full">
+            <p className="max-w-[40rem] text-balance text-lg font-medium md:max-w-full">
               Focused web utilities and product systems built with React, Cloudflare, and careful
               user-facing workflows.
             </p>

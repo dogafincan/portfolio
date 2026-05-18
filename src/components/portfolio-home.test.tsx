@@ -17,9 +17,16 @@ describe("PortfolioHome", () => {
     const appHeader = title.closest("header");
     const appLogo = container.querySelector('[data-slot="app-logo"]');
     const appLogoImage = container.querySelector('[data-slot="app-logo-image"]');
+    const appTitleBlock = title.parentElement;
+    const appSubtitle = appTitleBlock?.querySelector("p");
 
     expect(appHeader?.className).toBe(
       "flex flex-col items-center gap-4 text-center text-foreground",
+    );
+    expect(appTitleBlock?.className).toBe("flex min-w-0 flex-col gap-2");
+    expect(title.className).toBe("text-balance text-4xl leading-tight font-bold tracking-tight");
+    expect(appSubtitle?.className).toBe(
+      "max-w-[40rem] text-balance text-lg font-medium md:max-w-full",
     );
     expect(appLogo?.className).toBe("relative size-15 shrink-0 overflow-hidden");
     expect(appLogoImage?.getAttribute("src")).toBe("/app-logo-120.png");
