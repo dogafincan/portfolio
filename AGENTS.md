@@ -22,24 +22,63 @@ explicitly needed.
 ## Working Rules
 
 - Ground answers and changes in the current checkout. For this repo, first check
-  `README.md`, `AGENTS.md`, git state, and any source/config files that exist.
+  `README.md`, `AGENTS.md`, `PRD.md`, `DESIGN.md`, git state, and any
+  source/config files that exist.
 - When borrowing a pattern from `sui-snapshot` or `sui-airdrop`, inspect the
   sibling docs or source first. Do not rely on memory alone for current behavior.
 - Keep work to one coherent slice. Commit finished slices locally. Push only
   when the user explicitly asks.
-- Keep `README.md` and `AGENTS.md` aligned when a durable project rule changes:
-  `README.md` owns human-facing product/workflow guidance, while `AGENTS.md`
-  owns agent-facing repo rules and verification expectations.
+- Keep durable docs aligned when a project rule changes: `README.md` owns
+  human-facing product/workflow guidance, `AGENTS.md` owns agent-facing repo
+  rules and verification expectations, `PRD.md` owns product scope/progress, and
+  `DESIGN.md` owns visual/layout/copy/icon contracts.
 - Prefer narrow, in-place docs or implementation updates over broad speculative
   rewrites.
 - Keep project content in `src/content/projects.ts` until there is a concrete
   need for MDX, a CMS, or separate case-study routes.
 - Reuse the imported shadcn/Base UI primitives in `src/components/ui/*` before
   adding custom primitives.
+- Use `DESIGN.md` as the source of truth for UI, copy, icon, layout, alert,
+  social-preview, responsive, and loading-state rules instead of duplicating
+  that guidance here.
+- When work is product-scope driven, inspect the `PRD.md` implementation
+  progress table first and update it precisely with `Done`/`Pending` status.
 - Do not add Sui wallet flows, transaction signing, Mysten SDK dependencies,
   Turnstile, rate limiting, Durable Objects, KV, D1, R2, queues, or backend
   state just because the sibling apps use them. A portfolio website should stay
   simpler unless a concrete feature requires that complexity.
+
+## Agent Workflow Defaults
+
+- Start by identifying the user's intended mode: `analysis-only`, `implement`, or
+  `diagnose`. Stay read-only for writeups, architecture comparisons, status
+  checks, and "do not write code" requests until the user explicitly asks for
+  changes.
+- Ground current-behavior answers in the checkout, not memory alone. Inspect the
+  relevant content module, component, route, test, `wrangler.jsonc`, `README.md`,
+  `AGENTS.md`, `PRD.md`, and `DESIGN.md` before describing shipped behavior.
+- Keep implementation work to one coherent slice. When work is PRD-driven,
+  inspect the top `PRD.md` implementation-progress table first, use it as the
+  slice boundary, and update it without claiming broad PRD sections are complete.
+- If a sibling repo already fixed the same issue, inspect that implementation
+  before designing a new one. Reuse the pattern only where it fits this repo's
+  portfolio scope; do not import snapshot holder-query behavior, airdrop
+  funding, transfer signing, Turnstile, Durable Objects, or wallet flows.
+- Durable workflow, product, and UI rules belong in docs when they repeat. Keep
+  `README.md`, `AGENTS.md`, `PRD.md`, and `DESIGN.md` aligned by ownership.
+- For deploy, runtime, Cloudflare, or performance incidents, diagnose the failing
+  layer before editing source. If local checks passed and the failure is in
+  deploy validation, auth/config, dashboard setup, or provider response, verify
+  that layer before creating source changes.
+- Preserve user changes in the worktree. Check `git status --short --branch`
+  before edits and before committing.
+- Commit finished work that warrants a commit in focused local commits unless the
+  user says not to. Split unrelated changes into reviewable commits, but do not
+  force artificial splits for one cohesive docs or behavior change. Push only
+  when the user explicitly asks, and after pushing confirm
+  `git rev-list --left-right --count origin/main...HEAD` returns `0 0`.
+- When browser automation creates local artifacts, clean or isolate them before
+  the final status, verification, and commit flow.
 
 ## Current Stack
 
@@ -85,54 +124,19 @@ Expected portfolio omissions unless explicitly justified:
 
 ## Shared Design System
 
-Follow the reusable UI rules from `sui-snapshot` and `sui-airdrop` unless the
-portfolio receives a deliberate product-specific exception.
-
-- Use shadcn/ui on Base UI primitives, the `base-luma` style or preset,
-  Tailwind CSS v4 tokens, Inter, and consistent component composition.
-- Preload the concrete Fontsource Inter latin `woff2` asset from the root
-  document before the stylesheet link. Add regression coverage once the app has
-  a root document.
-- Prefer existing shadcn components before custom primitives.
-- Use the shared mesh-gradient page chrome in light and dark mode.
-- Keep browser `theme-color`, safe-area colors, CSS variables, and manifest
-  color values aligned with the mesh top color.
-- Use the shared rounded-square logo container system. Only the inner glyph
-  should be project-specific.
-- Use app logo assets for favicons, install icons, and header logo sources.
-- Render the header logo with explicit `width`, `height`, `sizes`, and `srcset`
-  attributes.
-- Use Lucide icons for interface actions and status cues.
-- Keep clickable button targets at least 44px tall.
-- Use outline buttons for visible workflow actions that are not the current
-  primary action.
-- Use cards for project items and repeated content. Do not nest cards inside
-  cards; use muted shadcn `Item` surfaces for compact metadata inside cards.
-- Keep typography readable and restrained: strong page title, concise subtitle,
-  semibold card/item titles, and base-size descriptions.
-- Make copy understandable to non-technical visitors. Say what the project does
-  and why it matters before naming libraries or infrastructure.
-- Support all viewport widths without text overflow, clipped buttons, or
-  overlapping project metadata.
-- Respect system dark mode. Do not add a manual theme switch unless requested.
-- Build OG/social images from the dark-mode header composition only: logo, site
-  title, and subtitle in white.
-- Keep the portfolio home organized around structured content, project cards,
-  and muted `Item` summaries. Add new surfaces by extending the existing content
-  and component model before creating one-off markup.
-
-Portfolio-specific adaptation:
-
-- The site can be more editorial than the sibling utility apps, but the first
-  screen must still lead with the project showcase or a clear path into it.
-- Avoid oversized marketing sections, generic hero filler, and decorative
-  content that delays access to projects.
-- Favor polished, scannable project information over ornamental layout.
+Follow `DESIGN.md` for visual, layout, copy, icon, social-preview, responsive,
+and interaction rules. The short version: keep real project content first, use
+the shared sibling UI system, keep the rounded muted workbench and project cards
+scannable, avoid decorative filler, and do not import Sui-specific workflow UI
+unless the portfolio scope deliberately changes.
 
 ## Important Files
 
 The current implementation follows the sibling conventions. Important files:
 
+- `PRD.md`: portfolio product scope, implementation progress, acceptance
+  criteria, and pending slices
+- `DESIGN.md`: visual system and portfolio-specific UI contracts
 - `src/routes/index.tsx`: portfolio entry route and social metadata
 - `src/routes/__root.tsx`: root document, app shell, font preload, manifest
   links, and theme-color metadata
@@ -189,6 +193,7 @@ Keep Cloudflare's `NODE_VERSION` build variable unset or aligned with
 
 For docs-only changes:
 
+- `npx vp check`
 - `git diff --check`
 
 For implementation changes:
