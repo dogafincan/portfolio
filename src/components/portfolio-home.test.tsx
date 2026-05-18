@@ -54,6 +54,10 @@ describe("PortfolioHome", () => {
     const projectCards = Array.from(projectsSection.querySelectorAll('[data-slot="card"]'));
 
     expect(projectCards.length).toBe(portfolioProjects.length);
+    expect(screen.queryByRole("heading", { level: 2, name: "Projects" })).toBeNull();
+    expect(
+      screen.queryByText("Real project surfaces come first here:", { exact: false }),
+    ).toBeNull();
     expect(projectsSection.className).toContain("bg-muted/60");
     expect(projectsSection.className).toContain("rounded-[2.25rem]");
 

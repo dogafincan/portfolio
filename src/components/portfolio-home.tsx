@@ -134,18 +134,9 @@ export function PortfolioHome() {
 
         <section
           id="projects"
-          aria-labelledby="projects-heading"
+          aria-label="Projects"
           className="min-w-0 rounded-[2.25rem] bg-muted/60 p-3 ring-1 ring-foreground/5 sm:p-4 dark:ring-foreground/10"
         >
-          <div className="mb-4 flex flex-col gap-2 px-1 sm:px-2">
-            <h2 id="projects-heading" className="text-2xl font-semibold tracking-normal">
-              Projects
-            </h2>
-            <p className="max-w-3xl text-base text-muted-foreground">
-              Real project surfaces come first here: what the app does, the role it plays, and the
-              implementation choices that matter.
-            </p>
-          </div>
           <div className="grid gap-4 lg:grid-cols-2">
             {portfolioProjects.map((project, index) => (
               <ProjectCard
