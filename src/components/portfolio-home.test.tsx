@@ -1,0 +1,73 @@
+// @vitest-environment jsdom
+
+import { cleanup, render, screen, within } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vite-plus/test";
+
+import { PortfolioHome } from "@/components/portfolio-home";
+import { portfolioProjects } from "@/content/projects";
+
+describe("PortfolioHome", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("renders the portfolio header and real project cards", () => {
+    const { container } = render(<PortfolioHome />);
+    const title = screen.getByRole("heading", { level: 1, name: "Doga Fincan" });
+    const appHeader = title.closest("header");
+    const appLogo = container.querySelector('[data-slot="app-logo"]');
+    const appLogoImage = container.querySelector('[data-slot="app-logo-image"]');
+
+    expect(appHeader?.className).toBe(
+      "flex flex-col items-center gap-4 text-center text-foreground",
+    );
+    expect(appLogo?.className).toBe("relative size-15 shrink-0 overflow-hidden");
+    expect(appLogoImage?.getAttribute("src")).toBe("/app-logo-120.png");
+    expect(appLogoImage?.getAttribute("srcset")).toBe(
+      "/app-logo-120.png 120w, /apple-touch-icon.png 180w",
+    );
+    expect(screen.queryByText("hello world")).toBeNull();
+
+    for (const project of portfolioProjects) {
+      expect(screen.getByRole("heading", { level: 3, name: project.name })).toBeTruthy();
+      expect(screen.getByText(project.summary)).toBeTruthy();
+      expect(screen.getByLabelText(`View ${project.name} source`).getAttribute("href")).toBe(
+        project.sourceUrl,
+      );
+
+      const image = screen.getByAltText(project.imageAlt);
+      expect(image.getAttribute("src")).toBe(project.image);
+      expect(image.getAttribute("width")).toBe("1200");
+      expect(image.getAttribute("height")).toBe("630");
+
+      if (project.liveUrl) {
+        expect(screen.getByLabelText(`Open ${project.name}`).getAttribute("href")).toBe(
+          project.liveUrl,
+        );
+      }
+    }
+  });
+
+  it("keeps project metadata inside cards and compact muted items", () => {
+    const { container } = render(<PortfolioHome />);
+    const projectsSection = screen.getByRole("region", { name: "Projects" });
+    const projectCards = Array.from(projectsSection.querySelectorAll('[data-slot="card"]'));
+
+    expect(projectCards.length).toBe(portfolioProjects.length);
+    expect(projectsSection.className).toContain("bg-muted/60");
+    expect(projectsSection.className).toContain("rounded-[2.25rem]");
+
+    for (const projectCard of projectCards) {
+      const stackItem = within(projectCard as HTMLElement)
+        .getByText("Stack")
+        .closest('[data-slot="item"]');
+      const nestedCards = projectCard.querySelectorAll('[data-slot="card"]');
+
+      expect(stackItem?.getAttribute("data-variant")).toBe("muted");
+      expect(stackItem?.querySelector('[data-lucide="project-stack"]')).toBeTruthy();
+      expect(nestedCards.length).toBe(0);
+    }
+
+    expect(container.querySelectorAll("[data-lucide]").length).toBeGreaterThan(0);
+  });
+});

@@ -2,11 +2,11 @@
 
 Personal portfolio website for showcasing projects built by Doga Fincan.
 
-This repo started documentation-first. The app has now been scaffolded as a
-minimal TanStack Start app that renders a temporary
-`hello world` page. Future implementation passes should continue to use the
-sibling projects in `~/Documents/sui-snapshot` and `~/Documents/sui-airdrop` as
-the reference for stack, styling, deployment, and workflow conventions.
+This repo started documentation-first and now renders a real portfolio index.
+The first implemented surface showcases built projects, links to live/source
+targets, and carries over the shared TanStack Start, shadcn/ui, Tailwind, Inter,
+Lucide, mesh-chrome, social-preview, and verification conventions from the
+sibling apps in `~/Documents/sui-snapshot` and `~/Documents/sui-airdrop`.
 
 ## Product Direction
 
@@ -27,6 +27,11 @@ Expected content:
 Avoid fake metrics, vague claims, and decorative sections that do not help a
 visitor evaluate the work.
 
+Current content lives in `src/content/projects.ts`. Prefer editing that
+structured module before scattering project data through components. A CMS,
+MDX, or separate case-study route should wait until the project list outgrows
+the current static content shape.
+
 ## Reference Projects
 
 Use these sibling repos as the current source of truth for shared workspace
@@ -45,6 +50,10 @@ Relevant shared guidance from those projects:
   relying on assumptions.
 - Reuse sibling patterns when they already solved the same design or workflow
   problem, while keeping product boundaries explicit.
+- Import the portable UI layer from siblings before inventing new primitives:
+  shadcn `Button`, `Card`, `Badge`, `Item`, `Separator`, root-head metadata
+  tests, icon-system tests, and mesh-style tests fit this portfolio. Sui wallet,
+  CSV, Durable Object, Turnstile, and transaction code does not.
 
 ## Current Stack
 
@@ -83,6 +92,9 @@ clearly needs them.
   content immediately.
 - Keep implementation smaller than the sibling utility apps unless a portfolio
   feature needs the extra complexity.
+- Use real project images or product-owned assets for visual previews. The
+  current project cards reuse sibling OG images as thumbnails because those
+  images represent the actual shipped apps.
 
 ## Shared Web App Design System
 
@@ -123,6 +135,9 @@ a workflow utility.
 - Respect system dark mode. Do not add a manual theme switch unless requested.
 - Build OG/social images from the dark-mode header composition: logo, site
   title, and subtitle in white.
+- Keep the portfolio home organized around structured content, project cards,
+  and muted `Item` summaries. Avoid adding one-off project card markup unless
+  the shared component model is no longer enough.
 
 Portfolio-specific adaptation:
 
@@ -131,6 +146,30 @@ Portfolio-specific adaptation:
   showcase or a clear path into it.
 - Do not use oversized marketing sections that delay access to the projects.
 - Favor dense but polished project information over decorative filler.
+
+## Code Organization
+
+The imported sibling organization now used here:
+
+- `src/content/projects.ts`: structured project records and reusable build
+  principles.
+- `src/components/portfolio-home.tsx`: the `/` route surface, including the
+  header, project card grid, build-principles section, and footer.
+- `src/components/ui/button.tsx`, `card.tsx`, `badge.tsx`, `item.tsx`, and
+  `separator.tsx`: the portable shadcn/Base UI primitives copied from the
+  sibling apps.
+- `src/routes/-__root.test.ts`: regression guard for app chrome, manifest
+  links, Inter preload ordering, and icon metadata.
+- `src/routes/-index.test.ts`: regression guard for canonical URL and
+  Open Graph/X metadata.
+- `src/styles.test.ts`: regression guard for the shared CSS-only mesh chrome.
+- `src/components/icon-system.test.ts`: regression guard that keeps product UI
+  icons on Lucide.
+- `public/app-logo.svg`, `public/app-logo-120.png`, `public/apple-touch-icon.png`,
+  `public/android-chrome-*.png`, `public/favicon-*`, and `public/og-image.*`:
+  portfolio-owned logo and social assets.
+- `public/projects/*-og.png`: local project preview images copied from the
+  shipped sibling apps.
 
 ## Local Commands
 

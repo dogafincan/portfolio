@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="og-bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#182246" />
+      <stop offset="0.46" stop-color="#146b8f" />
+      <stop offset="1" stop-color="#463483" />
+    </linearGradient>
+    <radialGradient id="og-glow-left" cx="0" cy="0" r="1" gradientTransform="translate(285 200) rotate(39) scale(445 250)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c5c0fd" stop-opacity="0.58" />
+      <stop offset="1" stop-color="#c5c0fd" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="og-glow-right" cx="0" cy="0" r="1" gradientTransform="translate(930 412) rotate(143) scale(420 238)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#79ccf6" stop-opacity="0.5" />
+      <stop offset="1" stop-color="#79ccf6" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="og-logo-bg" x1="372" y1="150" x2="472" y2="254" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c5c0fd" />
+      <stop offset="0.45" stop-color="#79ccf6" />
+      <stop offset="1" stop-color="#b9d0f8" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#og-bg)" />
+  <rect width="1200" height="630" fill="url(#og-glow-left)" />
+  <rect width="1200" height="630" fill="url(#og-glow-right)" />
+  <g transform="translate(372 143)">
+    <rect width="120" height="120" rx="30" fill="url(#og-logo-bg)" />
+    <path
+      d="M39.4 82.5V33.8h25.3c9.6 0 15.9 6.4 15.9 15s-6.4 15-15.9 15H50.6v18.8H39.4Zm11.3-28.1H64c3.8 0 6.2-2.2 6.2-5.6s-2.4-5.6-6.2-5.6H50.6v11.3Z"
+      fill="#111827"
+    />
+  </g>
+  <text
+    x="520"
+    y="198"
+    fill="#ffffff"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    font-size="70"
+    font-weight="720"
+    letter-spacing="0"
+  >
+    Doga Fincan
+  </text>
+  <text
+    x="520"
+    y="258"
+    fill="#e9f7ff"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    font-size="32"
+    font-weight="520"
+    letter-spacing="0"
+  >
+    Focused web utilities and product systems
+  </text>
+</svg>

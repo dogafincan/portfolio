@@ -3,9 +3,10 @@
 ## Project Overview
 
 This repository will become a personal portfolio website for showcasing projects
-built by Doga Fincan. It is currently a minimal TanStack Start app that renders
-a temporary `hello world` page while the real portfolio surface is still
-unbuilt.
+built by Doga Fincan. It is a TanStack Start app whose `/` route now renders a
+real project showcase with structured project data, sibling-derived UI
+primitives, logo/social assets, and regression coverage for shared web-app
+conventions.
 
 The portfolio should reuse the proven stack and design direction from:
 
@@ -31,6 +32,10 @@ explicitly needed.
   owns agent-facing repo rules and verification expectations.
 - Prefer narrow, in-place docs or implementation updates over broad speculative
   rewrites.
+- Keep project content in `src/content/projects.ts` until there is a concrete
+  need for MDX, a CMS, or separate case-study routes.
+- Reuse the imported shadcn/Base UI primitives in `src/components/ui/*` before
+  adding custom primitives.
 - Do not add Sui wallet flows, transaction signing, Mysten SDK dependencies,
   Turnstile, rate limiting, Durable Objects, KV, D1, R2, queues, or backend
   state just because the sibling apps use them. A portfolio website should stay
@@ -71,6 +76,8 @@ Expected portfolio omissions unless explicitly justified:
 - Show real project content early on the first screen.
 - Present each project with a clear name, short description, role, status,
   stack, and relevant links.
+- Use real product-owned visuals for project previews. Current project cards use
+  the sibling apps' OG images because they show the shipped products.
 - Use project detail or case-study pages only when a project needs the space.
 - Explain technical work in plain language before implementation details.
 - Avoid fake metrics, vague claims, and decorative sections that do not help a
@@ -110,6 +117,9 @@ portfolio receives a deliberate product-specific exception.
 - Respect system dark mode. Do not add a manual theme switch unless requested.
 - Build OG/social images from the dark-mode header composition only: logo, site
   title, and subtitle in white.
+- Keep the portfolio home organized around structured content, project cards,
+  and muted `Item` summaries. Add new surfaces by extending the existing content
+  and component model before creating one-off markup.
 
 Portfolio-specific adaptation:
 
@@ -121,19 +131,35 @@ Portfolio-specific adaptation:
 
 ## Important Files
 
-The current scaffold follows the sibling conventions. Important files:
+The current implementation follows the sibling conventions. Important files:
 
 - `src/routes/index.tsx`: portfolio entry route and social metadata
 - `src/routes/__root.tsx`: root document, app shell, font preload, manifest
   links, and theme-color metadata
-- `src/routes/index.lazy.tsx`: visible temporary route component attachment
+- `src/routes/index.lazy.tsx`: visible portfolio route component attachment
 - `src/styles.css`: global Tailwind v4 tokens, mesh background, and chrome color
   variables
-- `src/components/hello-world.tsx`: temporary placeholder page
-- `src/components/hello-world.test.tsx`: current rendering smoke test
-- `src/components/ui/*`: shadcn components installed only as needed
+- `src/styles.test.ts`: regression guard for the shared mesh-gradient CSS
+- `src/components/portfolio-home.tsx`: portfolio header, project grid, build
+  principles, and footer
+- `src/components/portfolio-home.test.tsx`: rendering and structure coverage for
+  the portfolio surface
+- `src/content/projects.ts`: structured project records and reusable principles
+- `src/components/icon-system.test.ts`: regression guard that keeps product
+  icons on Lucide
+- `src/components/ui/*`: imported shadcn/Base UI primitives used by the
+  portfolio surface
 - `src/lib/utils.ts`: shadcn `cn` helper
+- `src/routes/-__root.test.ts`: regression guard for manifest links, app logo
+  assets, Inter font preload ordering, and theme-color metadata
+- `src/routes/-index.test.ts`: regression guard for canonical and social
+  preview metadata
 - `public/manifest.json`: PWA manifest colors and icons
+- `public/app-logo.svg`, `public/app-logo-120.png`, `public/apple-touch-icon.png`,
+  `public/android-chrome-*.png`, `public/favicon-*`, and `public/og-image.*`:
+  portfolio-owned app and social assets
+- `public/projects/*-og.png`: local thumbnails copied from shipped sibling app
+  social images
 - `vite.config.ts`: Vite+ and TanStack configuration
 - `wrangler.jsonc`: Cloudflare Worker configuration
 - `.node-version`: Node.js version pin used by local tooling and Cloudflare

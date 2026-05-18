@@ -242,8 +242,6 @@
         color-mix(in oklab, white 8%, var(--portfolio-hero-mesh-cyan)) 40%,
         color-mix(in oklab, white 14%, var(--portfolio-hero-mesh-lavender)) 100%
       );
-    transform: scaleY(1.04);
-    transform-origin: top center;
   }
 
   .dark body::before {
