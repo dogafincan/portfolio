@@ -23,6 +23,8 @@ import { cn } from "@/lib/utils";
 
 const HEADER_LOGO = "/app-logo-120.png";
 const HEADER_LOGO_SRCSET = "/app-logo-120.png 120w, /apple-touch-icon.png 180w";
+const WORKBENCH_CONTAINER_CLASS_NAME =
+  "grid w-full min-w-0 max-w-full flex-1 grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background";
 
 function ProjectCard({
   project,
@@ -134,10 +136,11 @@ export function PortfolioHome() {
 
         <section
           id="projects"
+          data-slot="portfolio-workbench"
           aria-label="Projects"
-          className="min-w-0 rounded-[2.25rem] bg-muted/60 p-3 ring-1 ring-foreground/5 sm:p-4 dark:ring-foreground/10"
+          className={WORKBENCH_CONTAINER_CLASS_NAME}
         >
-          <div className="grid gap-4 lg:grid-cols-2">
+          <div className="grid gap-4 lg:col-span-2 lg:grid-cols-2">
             {portfolioProjects.map((project, index) => (
               <ProjectCard
                 key={project.slug}

@@ -54,12 +54,17 @@ describe("PortfolioHome", () => {
     const projectCards = Array.from(projectsSection.querySelectorAll('[data-slot="card"]'));
 
     expect(projectCards.length).toBe(portfolioProjects.length);
+    expect(projectsSection.getAttribute("data-slot")).toBe("portfolio-workbench");
+    expect(projectsSection.className).toBe(
+      "grid w-full min-w-0 max-w-full flex-1 grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background",
+    );
+    expect(projectsSection.firstElementChild?.className).toBe(
+      "grid gap-4 lg:col-span-2 lg:grid-cols-2",
+    );
     expect(screen.queryByRole("heading", { level: 2, name: "Projects" })).toBeNull();
     expect(
       screen.queryByText("Real project surfaces come first here:", { exact: false }),
     ).toBeNull();
-    expect(projectsSection.className).toContain("bg-muted/60");
-    expect(projectsSection.className).toContain("rounded-[2.25rem]");
 
     for (const projectCard of projectCards) {
       const stackItem = within(projectCard as HTMLElement)
