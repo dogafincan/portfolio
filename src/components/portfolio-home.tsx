@@ -10,15 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Item,
-  ItemContent,
-  ItemDescription,
-  ItemGroup,
-  ItemMedia,
-  ItemTitle,
-} from "@/components/ui/item";
-import { portfolioPrinciples, portfolioProjects, type PortfolioProject } from "@/content/projects";
+import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
+import { portfolioProjects, type PortfolioProject } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
 const HEADER_LOGO = "/app-logo-120.png";
@@ -149,32 +142,6 @@ export function PortfolioHome() {
               />
             ))}
           </div>
-        </section>
-
-        <section id="principles" aria-labelledby="principles-heading" className="grid gap-4">
-          <div className="flex flex-col gap-2">
-            <h2 id="principles-heading" className="text-2xl font-semibold tracking-normal">
-              Build Principles
-            </h2>
-            <p className="max-w-3xl text-base text-muted-foreground">
-              These are the durable patterns imported from the sibling Sui apps: useful surfaces,
-              clear state ownership, and code organization that stays portable.
-            </p>
-          </div>
-
-          <ItemGroup className="grid gap-3 md:grid-cols-2">
-            {portfolioPrinciples.map(({ title, description, Icon }) => (
-              <Item key={title} variant="muted" className="items-start">
-                <ItemMedia variant="icon" className="mt-0.5 text-muted-foreground">
-                  <Icon aria-hidden="true" />
-                </ItemMedia>
-                <ItemContent>
-                  <ItemTitle>{title}</ItemTitle>
-                  <ItemDescription>{description}</ItemDescription>
-                </ItemContent>
-              </Item>
-            ))}
-          </ItemGroup>
         </section>
 
         <footer className="flex flex-col gap-3 border-t pt-6 text-base text-muted-foreground sm:flex-row sm:items-center sm:justify-between">

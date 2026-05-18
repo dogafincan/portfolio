@@ -62,9 +62,11 @@ describe("PortfolioHome", () => {
       "grid gap-4 lg:col-span-2 lg:grid-cols-2",
     );
     expect(screen.queryByRole("heading", { level: 2, name: "Projects" })).toBeNull();
+    expect(screen.queryByRole("heading", { level: 2, name: "Build Principles" })).toBeNull();
     expect(
       screen.queryByText("Real project surfaces come first here:", { exact: false }),
     ).toBeNull();
+    expect(container.querySelector("#principles")).toBeNull();
 
     for (const projectCard of projectCards) {
       const stackItem = within(projectCard as HTMLElement)

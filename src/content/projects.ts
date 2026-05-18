@@ -1,13 +1,3 @@
-import {
-  CircleDollarSign,
-  Cloud,
-  FileSpreadsheet,
-  ListChecks,
-  PanelsTopLeft,
-  ShieldCheck,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-
 export type PortfolioProject = {
   name: string;
   slug: string;
@@ -20,12 +10,6 @@ export type PortfolioProject = {
   sourceUrl: string;
   stack: string[];
   highlights: string[];
-};
-
-export type PortfolioPrinciple = {
-  title: string;
-  description: string;
-  Icon: LucideIcon;
 };
 
 export const portfolioProjects: PortfolioProject[] = [
@@ -81,44 +65,5 @@ export const portfolioProjects: PortfolioProject[] = [
       "Shared mesh chrome and logo system",
       "Repo-local tests for social, icon, and style conventions",
     ],
-  },
-];
-
-export const portfolioPrinciples: PortfolioPrinciple[] = [
-  {
-    title: "Focused product surfaces",
-    description:
-      "Each app puts the useful workflow or project content on the first screen instead of hiding it behind generic marketing copy.",
-    Icon: PanelsTopLeft,
-  },
-  {
-    title: "Plain-language technical work",
-    description:
-      "The UI explains what happened and what to do next before naming libraries, infrastructure, or internal runtime details.",
-    Icon: ListChecks,
-  },
-  {
-    title: "Operational guardrails",
-    description:
-      "Public tools are sized around real platform limits, verified deploy paths, and recovery behavior rather than optimistic happy paths.",
-    Icon: ShieldCheck,
-  },
-  {
-    title: "Portable system pieces",
-    description:
-      "Shared chrome, Inter, Lucide icons, shadcn primitives, and Vite+ commands move between projects while product-specific runtime code stays isolated.",
-    Icon: Cloud,
-  },
-  {
-    title: "Data contracts before decoration",
-    description:
-      "Tables, CSV formats, caps, and preview summaries get treated as product contracts, not just implementation details.",
-    Icon: FileSpreadsheet,
-  },
-  {
-    title: "Clear cost ownership",
-    description:
-      "Wallet prompts, backend work, and execution fees are shown near the exact action that creates the obligation.",
-    Icon: CircleDollarSign,
   },
 ];

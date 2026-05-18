@@ -151,10 +151,9 @@ Portfolio-specific adaptation:
 
 The imported sibling organization now used here:
 
-- `src/content/projects.ts`: structured project records and reusable build
-  principles.
+- `src/content/projects.ts`: structured project records for the portfolio grid.
 - `src/components/portfolio-home.tsx`: the `/` route surface, including the
-  header, project card grid, build-principles section, and footer.
+  header, project card grid, and footer.
 - `src/components/ui/button.tsx`, `card.tsx`, `badge.tsx`, `item.tsx`, and
   `separator.tsx`: the portable shadcn/Base UI primitives copied from the
   sibling apps.
