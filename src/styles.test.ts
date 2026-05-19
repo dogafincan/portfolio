@@ -34,7 +34,7 @@ describe("global styles", () => {
     const meshLayer = styles.slice(meshLayerStart, meshLayerEnd);
 
     expect(styles).toContain("--portfolio-hero-gradient-height: 1000px;");
-    expect(styles).toContain("--portfolio-app-chrome-color: #dbe7ff;");
+    expect(styles).toContain("--portfolio-app-chrome-color: #dcecfd;");
     expect(styles).toContain("--portfolio-app-chrome-color: #5068bd;");
     expect(lightRoot).toContain("--portfolio-hero-mesh-pale-blue: #dbe7ff;");
     expect(lightRoot).toContain("--portfolio-hero-mesh-cyan: #c7efff;");
