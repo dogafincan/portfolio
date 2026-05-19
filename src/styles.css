@@ -80,14 +80,14 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --portfolio-app-chrome-color: #b9d0f8;
+  --portfolio-app-chrome-color: #dbe7ff;
   --portfolio-hero-gradient-height: 1000px;
-  --portfolio-hero-mesh-pale-blue: #bbc8fe;
-  --portfolio-hero-mesh-cyan: #79ccf6;
-  --portfolio-hero-mesh-teal: #76c2db;
-  --portfolio-hero-mesh-sky: #93c7e7;
-  --portfolio-hero-mesh-lavender: #c5c0fd;
-  --portfolio-hero-mesh-purple: #b68ffe;
+  --portfolio-hero-mesh-pale-blue: #dbe7ff;
+  --portfolio-hero-mesh-cyan: #c7efff;
+  --portfolio-hero-mesh-teal: #ccecf5;
+  --portfolio-hero-mesh-sky: #d2ecff;
+  --portfolio-hero-mesh-lavender: #e3ddff;
+  --portfolio-hero-mesh-purple: #d9ceff;
 }
 
 .dark {
@@ -123,7 +123,13 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --portfolio-app-chrome-color: #3f8fc2;
+  --portfolio-app-chrome-color: #5068bd;
+  --portfolio-hero-mesh-pale-blue: #bbc8fe;
+  --portfolio-hero-mesh-cyan: #79ccf6;
+  --portfolio-hero-mesh-teal: #76c2db;
+  --portfolio-hero-mesh-sky: #93c7e7;
+  --portfolio-hero-mesh-lavender: #c5c0fd;
+  --portfolio-hero-mesh-purple: #b68ffe;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -160,7 +166,13 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
-    --portfolio-app-chrome-color: #3f8fc2;
+    --portfolio-app-chrome-color: #5068bd;
+    --portfolio-hero-mesh-pale-blue: #bbc8fe;
+    --portfolio-hero-mesh-cyan: #79ccf6;
+    --portfolio-hero-mesh-teal: #76c2db;
+    --portfolio-hero-mesh-sky: #93c7e7;
+    --portfolio-hero-mesh-lavender: #c5c0fd;
+    --portfolio-hero-mesh-purple: #b68ffe;
   }
 }
 
@@ -190,12 +202,6 @@
     height: var(--portfolio-hero-gradient-height);
     pointer-events: none;
     background:
-      linear-gradient(
-        to bottom,
-        var(--portfolio-app-chrome-color) 0,
-        var(--portfolio-app-chrome-color) 2.75rem,
-        transparent 7rem
-      ),
       linear-gradient(
         to bottom,
         transparent 0%,
@@ -248,12 +254,6 @@
     background:
       linear-gradient(
         to bottom,
-        var(--portfolio-app-chrome-color) 0,
-        var(--portfolio-app-chrome-color) 2.75rem,
-        transparent 7rem
-      ),
-      linear-gradient(
-        to bottom,
         transparent 0%,
         transparent 40%,
         color-mix(in oklab, transparent 82%, var(--background)) 58%,
@@ -280,12 +280,6 @@
   @media (prefers-color-scheme: dark) {
     body::before {
       background:
-        linear-gradient(
-          to bottom,
-          var(--portfolio-app-chrome-color) 0,
-          var(--portfolio-app-chrome-color) 2.75rem,
-          transparent 7rem
-        ),
         linear-gradient(
           to bottom,
           transparent 0%,

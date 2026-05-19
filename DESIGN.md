@@ -31,10 +31,14 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Preload the concrete Fontsource Inter latin `woff2` asset from the root
   document before the stylesheet link. Keep the preload order covered by the
   root head regression test.
-- Use the shared mesh-gradient page chrome. Light mode uses a pastel mesh, dark
-  mode uses a darker mesh, and each app chooses only its own colors. Keep browser
-  theme-color metadata, manifest colors, CSS chrome variables, and mobile
-  safe-area blending aligned.
+- Use the shared mesh-gradient page chrome. Light mode uses a very soft pastel
+  mesh that keeps the header title/subtitle readable, dark mode keeps the richer
+  darker mesh, and each app chooses only its own colors. Keep browser theme-color
+  metadata, manifest colors, CSS chrome variables, and mobile safe-area blending
+  aligned.
+- Do not add a solid browser-chrome color band at the top of the mesh. Match
+  `theme-color` and manifest colors to the mesh instead of covering the mesh
+  with a separate strip.
 - Respect system dark mode. Do not add a manual theme switch unless the product
   explicitly needs one.
 - Use the shared logo asset pattern: favicon, install icons, header logo, and
