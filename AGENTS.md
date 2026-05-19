@@ -144,7 +144,7 @@ The current implementation follows the sibling conventions. Important files:
 - `src/styles.css`: global Tailwind v4 tokens, mesh background, and chrome color
   variables
 - `src/styles.test.ts`: regression guard for the shared mesh-gradient CSS
-- `src/components/portfolio-home.tsx`: portfolio header, project grid, and footer
+- `src/components/portfolio-home.tsx`: portfolio header and project grid
 - `src/components/portfolio-home.test.tsx`: rendering and structure coverage for
   the portfolio surface
 - `src/content/projects.ts`: structured project records for the portfolio grid

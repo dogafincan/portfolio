@@ -143,19 +143,6 @@ export function PortfolioHome() {
             ))}
           </div>
         </section>
-
-        <footer className="flex flex-col gap-3 border-t pt-6 text-base text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <span>Built with the same TanStack Start, Vite+, Tailwind, and Cloudflare stack.</span>
-          <a
-            className={cn(buttonVariants({ variant: "outline", size: "sm" }), "w-fit")}
-            href="https://github.com/dogafincan"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Code2 aria-hidden="true" data-icon="inline-start" />
-            GitHub
-          </a>
-        </footer>
       </div>
     </main>
   );

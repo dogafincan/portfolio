@@ -138,7 +138,7 @@ The imported sibling organization now used here:
 - `DESIGN.md`: visual system and portfolio-specific UI contracts.
 - `src/content/projects.ts`: structured project records for the portfolio grid.
 - `src/components/portfolio-home.tsx`: the `/` route surface, including the
-  header, project card grid, and footer.
+  header and project card grid.
 - `src/components/ui/button.tsx`, `card.tsx`, `badge.tsx`, `item.tsx`, and
   `separator.tsx`: the portable shadcn/Base UI primitives copied from the
   sibling apps.

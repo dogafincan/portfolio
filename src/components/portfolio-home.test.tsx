@@ -74,6 +74,11 @@ describe("PortfolioHome", () => {
       screen.queryByText("Real project surfaces come first here:", { exact: false }),
     ).toBeNull();
     expect(container.querySelector("#principles")).toBeNull();
+    expect(projectsSection.nextElementSibling).toBeNull();
+    expect(
+      screen.queryByText("Built with the same TanStack Start, Vite+", { exact: false }),
+    ).toBeNull();
+    expect(screen.queryByRole("link", { name: "GitHub" })).toBeNull();
 
     for (const projectCard of projectCards) {
       const stackItem = within(projectCard as HTMLElement)

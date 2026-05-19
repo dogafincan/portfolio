@@ -92,11 +92,11 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Keep the portfolio a focused public project showcase, not a blog, dashboard,
   CMS, or Sui utility runtime.
 - Preserve the single-route structure until a project genuinely needs its own
-  case-study page: header, rounded muted project workbench, project cards, and
-  footer.
+  case-study page: header, rounded muted project workbench, and project cards.
 - The primary visitor flow is: land on the page, identify the person and project
-  focus, scan real project cards, open a live project or source link, and use the
-  footer/profile links when needed.
+  focus, scan real project cards, and open a live project or source link.
+- Do not place visible footer/profile content below the project workbench unless
+  a future product decision gives that surface concrete visitor value.
 - Do not add wallet connection, transaction signing, Mysten SDK dependencies,
   Turnstile, rate limiting, Durable Objects, KV, D1, R2, queues, or backend state
   just because the sibling apps use them.

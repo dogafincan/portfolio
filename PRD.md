@@ -14,9 +14,10 @@ treated as complete.
 | Done    | Align project workbench container      | 8.1, 9.1, 13        | `05aff21` | Matches the portfolio workbench container to the sibling Snapshot/Airdrop workbench treatment.          |
 | Done    | Remove build-principles section        | 6, 8.1, 9.1         | `ad7c462` | Removes the extra principles section and keeps the route focused on project cards.                      |
 | Done    | Align header typography                | 8.1, 9.1, 13        | `88a46d0` | Matches the portfolio title/subtitle sizing, weight, tracking, and foreground color to sibling apps.    |
+| Done    | Remove footer/profile content          | 6, 8.1, 8.3, 13     | `TBD`     | Removes the visible content below the project workbench so the route ends on project cards.             |
 | Pending | Project case-study pages               | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                       |
 | Pending | Production smoke scripts and runbook   | 12, 15              | -         | Add portfolio-specific release gates when deploys need the same production-hardening depth as siblings. |
-| Pending | Contact or profile action beyond links | 7, 8.3, 9.9         | -         | Add only when the portfolio needs a direct contact workflow instead of simple profile/source links.     |
+| Pending | Contact or profile action beyond links | 7, 8.3, 9.9         | -         | Add only when the portfolio needs a direct contact or profile workflow beyond simple project links.     |
 
 ---
 
@@ -148,10 +149,9 @@ The current product includes:
    links.
 4. Live project links when available.
 5. Source links.
-6. Footer with GitHub profile link.
-7. App logo, favicon, install icons, manifest, and social preview image.
-8. Responsive light/dark mesh page chrome.
-9. Regression tests for shared conventions.
+6. App logo, favicon, install icons, manifest, and social preview image.
+7. Responsive light/dark mesh page chrome.
+8. Regression tests for shared conventions.
 
 Future scope may include:
 
@@ -171,7 +171,6 @@ The `/` route should load into a useful portfolio surface:
 2. Visitor immediately sees the project workbench.
 3. Visitor scans real project cards.
 4. Visitor opens a live project or source link.
-5. Visitor can continue to the footer/profile link.
 ```
 
 Do not reintroduce a visible `Projects` intro block or a `Build Principles`
@@ -186,9 +185,9 @@ project card.
 
 ### 8.3 Contact/profile surface
 
-The current footer profile link is enough. Add a contact form or dedicated
-contact route only after deciding where messages go, how abuse is handled, and
-what privacy or retention policy applies.
+No separate footer/profile surface is currently shown below the workbench. Add a
+contact form, profile block, or dedicated contact route only after deciding where
+messages go, how abuse is handled, and what privacy or retention policy applies.
 
 ## 9. Functional requirements
 
@@ -331,8 +330,8 @@ The product is ready for the current portfolio scope when:
    conventions.
 6. Product UI icons use Lucide.
 7. Social metadata uses an absolute HTTPS image URL.
-8. The page has no visible generic project intro or build-principles filler
-   section.
+8. The page has no visible generic project intro, build-principles filler
+   section, or footer/profile content below the workbench.
 9. The layout has no horizontal overflow at mobile and desktop widths.
 10. `npx vp check`, `npx vp test`, and `npx vp build` pass before production
     readiness is claimed.
