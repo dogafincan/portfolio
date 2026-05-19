@@ -57,6 +57,7 @@ describe("PortfolioHome", () => {
       expect(icon.getAttribute("src")).toBe(project.icon);
       expect(icon.getAttribute("width")).toBe("60");
       expect(icon.getAttribute("height")).toBe("60");
+      expect(icon.className).toBe("size-15 justify-self-center rounded-[1.125rem]");
 
       expect(screen.getByLabelText(`Open ${project.name} app`).getAttribute("href")).toBe(
         project.liveUrl,

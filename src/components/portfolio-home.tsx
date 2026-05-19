@@ -28,7 +28,7 @@ function ProjectCard({
           height="60"
           loading={loading}
           decoding="async"
-          className="size-15 rounded-[1.125rem]"
+          className="size-15 justify-self-center rounded-[1.125rem]"
         />
         <CardTitle>
           <h3 className="m-0">{project.name}</h3>
