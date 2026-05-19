@@ -56,8 +56,8 @@ export const portfolioProjects: PortfolioProject[] = [
       "A project showcase that reuses the shared workspace design system without importing Sui runtime complexity.",
     role: "Content structure, UI system adaptation, Cloudflare deployment setup",
     status: "In progress",
-    image: "/og-image.png",
-    imageAlt: "Doga Fincan portfolio social preview with the portfolio logo and subtitle.",
+    image: "/projects/portfolio-og.png",
+    imageAlt: "Portfolio project preview with the portfolio logo, title, and product description.",
     sourceUrl: "https://github.com/dogafincan/portfolio",
     stack: ["TanStack Start", "React 19", "Tailwind CSS v4", "Vite+"],
     highlights: [
