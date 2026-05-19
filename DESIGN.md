@@ -110,6 +110,8 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Keep the header visually aligned with the sibling app headers: app logo,
   title, concise subtitle, centered text, and foreground text color by
   inheritance.
+- The header subtitle should feel informal and personal: language learning,
+  exercise, and building useful things are part of the positioning.
 - The title class currently matches the sibling apps:
   `text-balance text-4xl leading-tight font-bold tracking-tight`.
 - The subtitle class currently matches the snapshot header width treatment:

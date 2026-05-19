@@ -29,11 +29,17 @@ describe("index route head", () => {
     expect(source).toContain('name: "twitter:image"');
     expect(source).toContain('rel: "canonical"');
     expect(source).toContain("href: SITE_URL");
+    expect(source).toContain(
+      "I'm into learning languages, getting my reps in, and building useful things for the web.",
+    );
+    expect(source).not.toContain(
+      "Focused web utilities and product systems built with React, Cloudflare, and careful user-facing workflows.",
+    );
 
     expect(siteUrlMatch?.[1]).toBe("https://portfolio.dogafincan.workers.dev");
     expect(socialImageMatch?.[1]).toMatch(/^\/og-image\.png\?v=\d+$/);
     expect(new URL(`${siteUrlMatch?.[1]}${socialImageMatch?.[1]}`).href).toBe(
-      "https://portfolio.dogafincan.workers.dev/og-image.png?v=20260518",
+      "https://portfolio.dogafincan.workers.dev/og-image.png?v=20260519",
     );
     expect(source).not.toContain('const SOCIAL_IMAGE = "/og-image.png";');
 

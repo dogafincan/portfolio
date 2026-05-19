@@ -28,6 +28,9 @@ describe("PortfolioHome", () => {
     expect(appSubtitle?.className).toBe(
       "max-w-[40rem] text-balance text-lg font-medium md:max-w-full",
     );
+    expect(appSubtitle?.textContent).toBe(
+      "I'm into learning languages, getting my reps in, and building useful things for the web.",
+    );
     expect(appLogo?.className).toBe("relative size-15 shrink-0 overflow-hidden");
     expect(appLogoImage?.getAttribute("src")).toBe("/app-logo-120.png");
     expect(appLogoImage?.getAttribute("srcset")).toBe(

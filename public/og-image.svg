@@ -49,6 +49,17 @@
     font-weight="520"
     letter-spacing="0"
   >
-    Focused web utilities and product systems
+    I'm into learning languages, getting my reps in,
+  </text>
+  <text
+    x="520"
+    y="304"
+    fill="#e9f7ff"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    font-size="32"
+    font-weight="520"
+    letter-spacing="0"
+  >
+    and building useful things for the web.
   </text>
 </svg>

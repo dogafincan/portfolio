@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 
 const PAGE_TITLE = "Doga Fincan Portfolio";
 const PAGE_DESCRIPTION =
-  "Focused web utilities and product systems built with React, Cloudflare, and careful user-facing workflows.";
+  "I'm into learning languages, getting my reps in, and building useful things for the web.";
 const SITE_URL = "https://portfolio.dogafincan.workers.dev";
-const SOCIAL_IMAGE = `${SITE_URL}/og-image.png?v=20260518`;
+const SOCIAL_IMAGE = `${SITE_URL}/og-image.png?v=20260519`;
 
 export const Route = createFileRoute("/")({
   head: () => ({

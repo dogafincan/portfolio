@@ -111,8 +111,8 @@ export function PortfolioHome() {
               Doga Fincan
             </h1>
             <p className="max-w-[40rem] text-balance text-lg font-medium md:max-w-full">
-              Focused web utilities and product systems built with React, Cloudflare, and careful
-              user-facing workflows.
+              I'm into learning languages, getting my reps in, and building useful things for the
+              web.
             </p>
           </div>
         </header>
