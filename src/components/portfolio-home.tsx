@@ -1,16 +1,7 @@
-import { ArrowUpRight, Layers3 } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { portfolioProjects, type PortfolioProject } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
@@ -28,61 +19,34 @@ function ProjectCard({
 }) {
   return (
     <Card className="min-w-0">
-      <img
-        src={project.image}
-        alt={project.imageAlt}
-        width="1200"
-        height="630"
-        loading={loading}
-        decoding="async"
-        className="aspect-[1200/630] w-full bg-muted object-cover"
-      />
-      <CardHeader>
-        <div className="mb-2 flex flex-wrap items-center gap-2">
-          <Badge variant={project.status === "Live utility" ? "default" : "secondary"}>
-            {project.status}
-          </Badge>
-          <span className="text-sm font-medium text-muted-foreground">{project.role}</span>
-        </div>
+      <CardHeader className="gap-4">
+        <img
+          data-slot="project-icon"
+          src={project.icon}
+          alt={project.iconAlt}
+          width="60"
+          height="60"
+          loading={loading}
+          decoding="async"
+          className="size-15 rounded-[1.125rem]"
+        />
         <CardTitle>
           <h3 className="m-0">{project.name}</h3>
         </CardTitle>
-        <CardDescription>{project.summary}</CardDescription>
+        <CardDescription>{project.subtitle}</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-1 flex-col gap-5">
-        <Item variant="muted">
-          <ItemMedia variant="icon" className="text-muted-foreground">
-            <Layers3 aria-hidden="true" data-lucide="project-stack" />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>Stack</ItemTitle>
-            <ItemDescription>{project.stack.join(", ")}</ItemDescription>
-          </ItemContent>
-        </Item>
-
-        <ul className="grid gap-2 text-base text-muted-foreground">
-          {project.highlights.map((highlight) => (
-            <li key={highlight} className="flex gap-2">
-              <span className="mt-[0.72rem] size-1.5 shrink-0 rounded-full bg-primary/70" />
-              <span>{highlight}</span>
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-      {project.liveUrl ? (
-        <CardFooter className="mt-auto flex flex-wrap gap-2">
-          <a
-            className={cn(buttonVariants({ variant: "default", size: "sm" }))}
-            href={project.liveUrl}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`Open ${project.name}`}
-          >
-            <ArrowUpRight aria-hidden="true" data-icon="inline-start" />
-            Open
-          </a>
-        </CardFooter>
-      ) : null}
+      <CardFooter className="mt-auto flex flex-wrap gap-2">
+        <a
+          className={cn(buttonVariants({ variant: "default", size: "sm" }))}
+          href={project.liveUrl}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Open ${project.name} app`}
+        >
+          <ArrowUpRight aria-hidden="true" data-icon="inline-start" />
+          Open app
+        </a>
+      </CardFooter>
     </Card>
   );
 }

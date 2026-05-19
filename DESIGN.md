@@ -129,24 +129,23 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 
 - Project data lives in `src/content/projects.ts`. Extend that structured data
   before creating one-off project markup.
-- Each card should show name, status, role, short description, stack, highlights,
-  and a live link when the project has a useful public surface.
-- Use real product-owned visual previews. The current Sui project cards use the
-  sibling apps' OG images because they represent shipped product surfaces.
-- Keep stack metadata in a muted `Item` surface inside the card.
-- Keep highlight bullets plain and scannable. Avoid fake metrics, broad claims,
-  or implementation jargon that does not help a visitor evaluate the work.
+- Each card should show only the product-owned app icon, name, short subtitle,
+  and a live app link.
+- Do not show status badges, role text, stack metadata, implementation
+  highlights, source links, or large preview images in project cards for now.
+  Move that depth into future case-study pages if needed.
 - Use primary treatment for live project actions. Do not show source actions for
   private project repositories.
-- Keep card images, button rows, metadata, and long project names responsive
-  without overflow.
+- Keep icons, button rows, subtitles, and long project names responsive without
+  overflow.
 
 ## Portfolio Copy
 
 - Explain what the project does before naming libraries or infrastructure.
 - Keep copy concrete and phase-accurate. Do not imply projects are live,
   production-ready, or complete unless the project record and links support it.
-- Use "project", "live utility", "stack", and "role" consistently.
+- Keep project-card subtitles concise. Save implementation detail for future
+  case-study pages.
 - Avoid decorative product principles, generic claims, and repeated manifesto
   copy that delays access to the project list.
 - Technical depth belongs in future case-study pages when a project needs that

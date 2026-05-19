@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { cleanup, render, screen, within } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vite-plus/test";
 
 import { PortfolioHome } from "@/components/portfolio-home";
@@ -49,23 +49,25 @@ describe("PortfolioHome", () => {
 
     for (const project of portfolioProjects) {
       expect(screen.getByRole("heading", { level: 3, name: project.name })).toBeTruthy();
-      expect(screen.getByText(project.summary)).toBeTruthy();
+      expect(screen.getByText(project.subtitle)).toBeTruthy();
       expect(screen.queryByLabelText(`View ${project.name} source`)).toBeNull();
 
-      const image = screen.getByAltText(project.imageAlt);
-      expect(image.getAttribute("src")).toBe(project.image);
-      expect(image.getAttribute("width")).toBe("1200");
-      expect(image.getAttribute("height")).toBe("630");
+      const icon = screen.getByAltText(project.iconAlt);
+      expect(icon.getAttribute("data-slot")).toBe("project-icon");
+      expect(icon.getAttribute("src")).toBe(project.icon);
+      expect(icon.getAttribute("width")).toBe("60");
+      expect(icon.getAttribute("height")).toBe("60");
 
-      if (project.liveUrl) {
-        expect(screen.getByLabelText(`Open ${project.name}`).getAttribute("href")).toBe(
-          project.liveUrl,
-        );
-      }
+      expect(screen.getByLabelText(`Open ${project.name} app`).getAttribute("href")).toBe(
+        project.liveUrl,
+      );
+      expect(screen.getByLabelText(`Open ${project.name} app`).getAttribute("target")).toBe(
+        "_blank",
+      );
     }
   });
 
-  it("keeps project metadata inside cards and compact muted items", () => {
+  it("keeps project cards limited to icon, title, subtitle, and app link", () => {
     const { container } = render(<PortfolioHome />);
     const projectsSection = screen.getByRole("region", { name: "Projects" });
     const projectCards = Array.from(projectsSection.querySelectorAll('[data-slot="card"]'));
@@ -90,18 +92,20 @@ describe("PortfolioHome", () => {
     ).toBeNull();
     expect(screen.queryByRole("link", { name: "GitHub" })).toBeNull();
     expect(screen.queryByText("Source")).toBeNull();
-
-    for (const projectCard of projectCards) {
-      const stackItem = within(projectCard as HTMLElement)
-        .getByText("Stack")
-        .closest('[data-slot="item"]');
-      const nestedCards = projectCard.querySelectorAll('[data-slot="card"]');
-
-      expect(stackItem?.getAttribute("data-variant")).toBe("muted");
-      expect(stackItem?.querySelector('[data-lucide="project-stack"]')).toBeTruthy();
-      expect(nestedCards.length).toBe(0);
-    }
-
-    expect(container.querySelectorAll("[data-lucide]").length).toBeGreaterThan(0);
+    expect(screen.queryByText("Live utility")).toBeNull();
+    expect(screen.queryByText("Stack")).toBeNull();
+    expect(screen.queryByText("Product design,", { exact: false })).toBeNull();
+    expect(screen.queryByText("TanStack Start", { exact: false })).toBeNull();
+    expect(screen.queryByText("CSV cleanup before", { exact: false })).toBeNull();
+    expect(screen.queryByText("Worker-safe snapshot", { exact: false })).toBeNull();
+    expect(container.querySelectorAll('[data-slot="project-icon"]').length).toBe(
+      portfolioProjects.length,
+    );
+    expect(screen.getAllByRole("link", { name: /Open .* app/ }).length).toBe(
+      portfolioProjects.length,
+    );
+    expect(container.querySelectorAll('[data-icon="inline-start"]').length).toBe(
+      portfolioProjects.length,
+    );
   });
 });

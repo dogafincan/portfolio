@@ -113,10 +113,11 @@ Expected portfolio omissions unless explicitly justified:
 
 - Build a real project showcase, not a placeholder landing page.
 - Show real project content early on the first screen.
-- Present each project with a clear name, short description, role, status,
-  stack, and relevant links.
-- Use real product-owned visuals for project previews. Current project cards use
-  the sibling apps' OG images because they show the shipped products.
+- Present each project with a product icon, clear name, short subtitle, and a
+  live app link.
+- Keep project cards intentionally compact for now. Move role, status, stack,
+  implementation highlights, and larger product visuals into future case-study
+  pages if the portfolio needs that depth.
 - Use project detail or case-study pages only when a project needs the space.
 - Explain technical work in plain language before implementation details.
 - Avoid fake metrics, vague claims, and decorative sections that do not help a
@@ -161,8 +162,7 @@ The current implementation follows the sibling conventions. Important files:
 - `public/app-logo.svg`, `public/app-logo-120.png`, `public/apple-touch-icon.png`,
   `public/android-chrome-*.png`, `public/favicon-*`, and `public/og-image.*`:
   portfolio-owned app and social assets
-- `public/projects/*-og.png`: local thumbnails copied from shipped sibling app
-  social images
+- `public/projects/*-icon.png`: local app icons copied from shipped sibling apps
 - `vite.config.ts`: Vite+ and TanStack configuration
 - `wrangler.jsonc`: Cloudflare Worker configuration
 - `.node-version`: Node.js version pin used by local tooling and Cloudflare

@@ -43,7 +43,7 @@ Keep the site simple, fast, and consistent with the sibling apps.
 | --------------- | ------------------------------------------------------------------ |
 | App surface     | Single `/` route until case-study pages are justified              |
 | Primary content | Structured project records in `src/content/projects.ts`            |
-| Current visuals | Product-owned OG/social images for project previews                |
+| Current visuals | Product-owned app icons in compact project cards                   |
 | Frontend        | React 19                                                           |
 | App framework   | TanStack Start and TanStack Router                                 |
 | Toolchain       | Vite+                                                              |
@@ -68,8 +68,7 @@ a future portfolio feature needs it.
 The portfolio needs to show credible project work without becoming a marketing
 site or importing the operational complexity of the sibling Sui utilities. A
 visitor should understand the project surface, the role played, the current
-status, the stack, and where to inspect the work without reading a long landing
-page.
+focus, and where to open the app without reading a long landing page.
 
 ## 4. Target visitors
 
@@ -95,7 +94,7 @@ Visitors should be able to:
 2. See real project content without scrolling past generic marketing sections.
 3. Understand each listed project in one short scan.
 4. Open a live project when it exists.
-5. See the role, status, stack, and practical highlights for each project.
+5. See each project's icon, title, and short subtitle without extra metadata.
 6. View the site comfortably on mobile and desktop.
 
 ### 5.2 Owner goals
@@ -144,8 +143,7 @@ The current product includes:
 
 1. Header with portfolio logo, title, and concise subtitle.
 2. Structured sibling-project list.
-3. Project cards with image, status, role, name, summary, stack, highlights, and
-   live links when available.
+3. Project cards with app icon, name, short subtitle, and live app link.
 4. Live project links when available.
 5. App logo, favicon, install icons, manifest, and social preview image.
 6. Responsive light/dark mesh page chrome.
@@ -200,19 +198,17 @@ messages go, how abuse is handled, and what privacy or retention policy applies.
 ### 9.2 Project records
 
 - Project content lives in `src/content/projects.ts`.
-- Each project record includes name, slug, summary, role, status, image,
-  imageAlt, stack, and highlights.
+- Each project record includes name, slug, subtitle, icon, iconAlt, and liveUrl.
 - Do not list the portfolio website as one of its own projects.
-- `liveUrl` is optional and should only be present when a useful live surface
-  exists.
+- `liveUrl` should only point to a useful public app surface.
 
 ### 9.3 Project cards
 
 - Render one card for each project record.
-- Use real product-owned visual previews.
-- Show status and role before the project name.
-- Show summary before stack and implementation highlights.
-- Use muted shadcn `Item` surfaces for compact metadata.
+- Use real product-owned app icons.
+- Show only the project icon, name, short subtitle, and live app link.
+- Do not show status, role, stack, implementation highlights, source links, or
+  large preview images in project cards for now.
 - Do not nest cards inside project cards.
 
 ### 9.4 Links
@@ -323,9 +319,9 @@ rules here.
 The product is ready for the current portfolio scope when:
 
 1. The `/` route renders a portfolio header and real project cards.
-2. Each project card shows a sibling project with a visual preview, status,
-   role, name, summary, stack, highlights, and optional live link.
-3. Live links render only when available.
+2. Each project card shows a sibling project with an app icon, name, subtitle,
+   and live app link.
+3. Live links open in a new browser tab.
 4. Project data is structured in `src/content/projects.ts`.
 5. The app uses the shared mesh chrome, logo assets, Inter preload, and manifest
    conventions.
@@ -344,10 +340,10 @@ The product is ready for the current portfolio scope when:
 The product is a focused personal portfolio built on the same TanStack Start,
 Vite+, shadcn/Base UI, Tailwind, Inter, Lucide, and Cloudflare Workers system as
 the sibling Sui utility apps. It shows real projects first, using structured
-project records, product-owned visuals, concise plain-language summaries,
-implementation highlights, and live links when useful. It deliberately avoids
-listing itself as a project, source links for private repositories, wallet
-flows, Sui transaction logic, storage bindings, and backend state unless a
+project records, product-owned app icons, concise plain-language subtitles, and
+live app links. It deliberately avoids listing itself as a project, source links
+for private repositories, wallet flows, Sui transaction logic, storage bindings,
+and backend state unless a
 future portfolio feature needs them.
 
 ## 17. Reference links

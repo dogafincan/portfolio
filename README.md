@@ -25,14 +25,13 @@ Use the same durable documentation split as the sibling apps:
 
 The site should make the projects the main surface, not hide them behind a
 generic landing page. A visitor should quickly understand what each project
-does, why it exists, how it was built, and where to try it when a live surface
-is available.
+does and where to try it when a live surface is available.
 
 Expected content:
 
 - project index for built work outside the portfolio site itself
-- focused project cards with product name, short description, role, status,
-  stack, highlights, and live links when available
+- focused project cards with product icon, name, short subtitle, and a live app
+  link
 - project detail or case-study pages when a project needs more context
 - concise explanations of technical decisions in plain language
 - contact or profile links only where they support the portfolio goal
@@ -109,10 +108,9 @@ clearly needs them.
   content immediately.
 - Keep implementation smaller than the sibling utility apps unless a portfolio
   feature needs the extra complexity.
-- Use real project images or product-owned assets for visual previews. The
-  current project cards reuse sibling OG images as thumbnails because those
-  images represent the actual shipped apps. The portfolio site should not list
-  itself as one of its own products.
+- Use product-owned app icons in project cards. Keep deeper visuals, stack
+  details, and implementation notes for future case-study pages. The portfolio
+  site should not list itself as one of its own products.
 
 ## Shared Web App Design System
 
@@ -153,8 +151,8 @@ The imported sibling organization now used here:
 - `public/app-logo.svg`, `public/app-logo-120.png`, `public/apple-touch-icon.png`,
   `public/android-chrome-*.png`, `public/favicon-*`, and `public/og-image.*`:
   portfolio-owned logo and social assets.
-- `public/projects/*-og.png`: local project preview images copied from the
-  shipped sibling apps.
+- `public/projects/*-icon.png`: local app icons copied from the shipped sibling
+  apps.
 
 ## Local Commands
 
