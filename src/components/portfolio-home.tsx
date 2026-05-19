@@ -55,7 +55,7 @@ export function PortfolioHome() {
   return (
     <main className="min-h-screen px-4 py-6 text-foreground sm:px-6 lg:px-8">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 py-8 sm:py-10">
-        <header className="flex flex-col items-center gap-4 text-center text-foreground">
+        <header className="flex flex-col items-center gap-4 text-center text-slate-950">
           <div data-slot="app-logo" className="relative size-15 shrink-0 overflow-hidden">
             <img
               data-slot="app-logo-image"
@@ -74,7 +74,7 @@ export function PortfolioHome() {
             <h1 className="text-balance text-4xl leading-tight font-bold tracking-tight">
               Doga Fincan
             </h1>
-            <p className="max-w-[40rem] text-balance text-lg font-medium md:max-w-full">
+            <p className="max-w-[40rem] text-balance text-lg font-medium text-slate-900/80 md:max-w-full">
               <span>
                 I'm into learning languages, nutrition and exercise, and building cool things.
               </span>{" "}

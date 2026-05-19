@@ -31,20 +31,20 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Preload the concrete Fontsource Inter latin `woff2` asset from the root
   document before the stylesheet link. Keep the preload order covered by the
   root head regression test.
-- Use the shared mesh-gradient page chrome. Light mode uses a very soft pastel
-  mesh that keeps the header title/subtitle readable, dark mode keeps the richer
-  darker mesh, and each app chooses only its own colors. Keep browser theme-color
-  metadata, manifest colors, CSS chrome variables, and mobile safe-area blending
-  aligned.
-- Do not add a solid browser-chrome color band at the top of the mesh. Match
-  `theme-color` and manifest colors to the mesh instead of covering the mesh
-  with a separate strip.
+- Use the shared mesh-gradient page chrome. The header mesh and header text stay
+  visually identical in light and dark mode, while the workbench and everything
+  inside it continue to follow system color mode. Each app chooses its own mesh
+  colors so the projects keep distinct identities.
+- The browser safe-area color must equal the top color of the mesh exactly.
+  Match `theme-color`, manifest colors, and CSS chrome variables to that top
+  mesh color. Use a soft fade from the top color into the mesh instead of a hard
+  browser-chrome strip.
 - Respect system dark mode. Do not add a manual theme switch unless the product
   explicitly needs one.
 - Use the shared logo asset pattern: favicon, install icons, header logo, and
   social image derive from the same app logo family. Header logos must render
   with explicit `width`, `height`, `sizes`, and `srcset`.
-- Build OG and social images from the dark-mode header composition only: logo,
+- Build OG and social images from the light-mode header composition only: logo,
   site title, and subtitle. Do not include project cards, workbench controls,
   marketing sections, or decorative mockups in social images.
 - Use a rounded muted workbench as the main app surface. It should contain the
@@ -165,8 +165,8 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - The current social image points to `public/og-image.png` with a cache-busting
   query. If `public/og-image.png` changes, update `SITE_URL`, the `SOCIAL_IMAGE`
   query, and `src/routes/-index.test.ts` together.
-- Keep the image a 1200x630 PNG rendered from the dark-mode header composition
-  only: logo, site title, and subtitle in white.
+- Keep the image a 1200x630 PNG rendered from the light-mode header composition
+  only: logo, site title, and subtitle.
 
 ## Not Yet Implemented
 

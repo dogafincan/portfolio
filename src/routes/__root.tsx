@@ -4,8 +4,8 @@ import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import interLatinWghtNormal from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import appCss from "../styles.css?url";
 
-const APP_CHROME_COLOR = "#dcecfd";
-const APP_CHROME_COLOR_DARK = "#5068bd";
+const APP_CHROME_COLOR = "#d2f2ff";
+const APP_CHROME_COLOR_DARK = APP_CHROME_COLOR;
 
 export const Route = createRootRoute({
   head: () => ({

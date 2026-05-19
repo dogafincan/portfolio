@@ -223,7 +223,7 @@ messages go, how abuse is handled, and what privacy or retention policy applies.
 
 - Root document should include manifest links, app icons, font preload ordering,
   and theme-color metadata.
-- Manifest colors should match the page chrome top color.
+- Manifest colors should match the page chrome top color exactly.
 - Header logo images should define `width`, `height`, `sizes`, and `srcset`.
 
 ### 9.6 Social preview
@@ -231,7 +231,7 @@ messages go, how abuse is handled, and what privacy or retention policy applies.
 - Social metadata must use absolute HTTPS URLs for images.
 - The social image must be `public/og-image.png` with a cache-busting query in
   `src/routes/index.tsx`.
-- The social image should use the dark-mode header composition only.
+- The social image should use the light-mode header composition only.
 
 ### 9.7 Shared UI conventions
 

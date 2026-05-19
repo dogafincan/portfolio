@@ -12,14 +12,7 @@ describe("global styles", () => {
     expect(styles).not.toContain("@custom-variant dark (&:is(.dark *));");
   });
 
-  it("does not use global styles to swap the header logo by theme", () => {
-    const styles = readFileSync("src/styles.css", "utf8");
-
-    expect(styles).not.toContain('[data-slot="app-logo-for-light-mode"]');
-    expect(styles).not.toContain('[data-slot="app-logo-for-dark-mode"]');
-  });
-
-  it("uses a CSS-only mesh background that fades into the theme background", () => {
+  it("keeps the header mesh palette stable across color schemes", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const rootStart = styles.indexOf(":root {");
     const rootEnd = styles.indexOf("\n}\n\n.dark", rootStart);
@@ -29,40 +22,49 @@ describe("global styles", () => {
     const darkClass = styles.slice(darkClassStart, darkClassEnd);
     const darkMediaStart = styles.indexOf("@media (prefers-color-scheme: dark)");
     const darkMedia = styles.slice(darkMediaStart, styles.indexOf("\n}\n\n@layer", darkMediaStart));
+
+    expect(styles.match(/--portfolio-app-chrome-color:/g)).toHaveLength(1);
+    expect(styles).toContain("--portfolio-app-chrome-color: #d2f2ff;");
+    expect(lightRoot).toContain("--portfolio-hero-mesh-pale-blue: #d2f2ff;");
+    expect(lightRoot).toContain("--portfolio-hero-mesh-cyan: #c0edff;");
+    expect(lightRoot).toContain("--portfolio-hero-mesh-teal: #ccf6ff;");
+    expect(lightRoot).toContain("--portfolio-hero-mesh-sky: #b9ecff;");
+    expect(lightRoot).toContain("--portfolio-hero-mesh-lavender: #f0e8ff;");
+    expect(lightRoot).toContain("--portfolio-hero-mesh-purple: #f4d9f2;");
+    expect(lightRoot).not.toContain("--portfolio-hero-mesh-purple: #b68ffe;");
+    expect(darkClass).not.toContain("--portfolio-hero-mesh");
+    expect(darkClass).not.toContain("--portfolio-app-chrome-color");
+    expect(darkMedia).not.toContain("--portfolio-hero-mesh");
+    expect(darkMedia).not.toContain("--portfolio-app-chrome-color");
+    expect(styles).not.toContain(".dark body::before");
+    expect(styles).not.toContain("#5068bd 0%");
+    expect(styles).not.toContain("#2189b9 43%");
+    expect(styles).not.toContain("#7861c5 100%");
+  });
+
+  it("does not use global styles to swap the header logo by theme", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+
+    expect(styles).not.toContain('[data-slot="app-logo-for-light-mode"]');
+    expect(styles).not.toContain('[data-slot="app-logo-for-dark-mode"]');
+  });
+
+  it("uses a CSS-only mesh background that fades into the theme background", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
     const meshLayerStart = styles.indexOf("body::before");
     const meshLayerEnd = styles.indexOf("code {", meshLayerStart);
     const meshLayer = styles.slice(meshLayerStart, meshLayerEnd);
 
     expect(styles).toContain("--portfolio-hero-gradient-height: 1000px;");
-    expect(styles).toContain("--portfolio-app-chrome-color: #dcecfd;");
-    expect(styles).toContain("--portfolio-app-chrome-color: #5068bd;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-pale-blue: #dbe7ff;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-cyan: #c7efff;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-teal: #ccecf5;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-sky: #d2ecff;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-lavender: #e3ddff;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-purple: #d9ceff;");
-    expect(lightRoot).not.toContain("--portfolio-hero-mesh-purple: #b68ffe;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-pale-blue: #bbc8fe;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-cyan: #79ccf6;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-teal: #76c2db;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-sky: #93c7e7;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-lavender: #c5c0fd;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-purple: #b68ffe;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-pale-blue: #bbc8fe;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-cyan: #79ccf6;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-teal: #76c2db;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-sky: #93c7e7;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-lavender: #c5c0fd;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-purple: #b68ffe;");
-    expect(styles).toContain(".dark body::before");
-    expect(styles).toContain("#5068bd 0%");
-    expect(styles).toContain("#2189b9 43%");
-    expect(styles).toContain("#7861c5 100%");
     expect(meshLayer).toContain("position: absolute;");
     expect(meshLayer).not.toContain("position: fixed;");
     expect(meshLayer).toContain("height: var(--portfolio-hero-gradient-height);");
-    expect(meshLayer).not.toContain("var(--portfolio-app-chrome-color)");
+    expect(meshLayer).toContain("var(--portfolio-app-chrome-color) 0%");
+    expect(meshLayer).toContain(
+      "color-mix(in oklab, var(--portfolio-app-chrome-color) 70%, transparent) 8%",
+    );
+    expect(meshLayer).toContain("transparent 18%");
+    expect(meshLayer).not.toContain("var(--portfolio-app-chrome-color) 2.75rem");
     expect(meshLayer).not.toContain("transparent 7rem");
     expect(meshLayer).toContain("ellipse 38% 26% at 50% 29%");
     expect(meshLayer).toContain("ellipse 48% 42% at 14% 44%");

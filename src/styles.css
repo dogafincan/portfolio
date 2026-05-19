@@ -80,14 +80,14 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --portfolio-app-chrome-color: #dcecfd;
+  --portfolio-app-chrome-color: #d2f2ff;
   --portfolio-hero-gradient-height: 1000px;
-  --portfolio-hero-mesh-pale-blue: #dbe7ff;
-  --portfolio-hero-mesh-cyan: #c7efff;
-  --portfolio-hero-mesh-teal: #ccecf5;
-  --portfolio-hero-mesh-sky: #d2ecff;
-  --portfolio-hero-mesh-lavender: #e3ddff;
-  --portfolio-hero-mesh-purple: #d9ceff;
+  --portfolio-hero-mesh-pale-blue: #d2f2ff;
+  --portfolio-hero-mesh-cyan: #c0edff;
+  --portfolio-hero-mesh-teal: #ccf6ff;
+  --portfolio-hero-mesh-sky: #b9ecff;
+  --portfolio-hero-mesh-lavender: #f0e8ff;
+  --portfolio-hero-mesh-purple: #f4d9f2;
 }
 
 .dark {
@@ -123,13 +123,6 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --portfolio-app-chrome-color: #5068bd;
-  --portfolio-hero-mesh-pale-blue: #bbc8fe;
-  --portfolio-hero-mesh-cyan: #79ccf6;
-  --portfolio-hero-mesh-teal: #76c2db;
-  --portfolio-hero-mesh-sky: #93c7e7;
-  --portfolio-hero-mesh-lavender: #c5c0fd;
-  --portfolio-hero-mesh-purple: #b68ffe;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -166,13 +159,6 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
-    --portfolio-app-chrome-color: #5068bd;
-    --portfolio-hero-mesh-pale-blue: #bbc8fe;
-    --portfolio-hero-mesh-cyan: #79ccf6;
-    --portfolio-hero-mesh-teal: #76c2db;
-    --portfolio-hero-mesh-sky: #93c7e7;
-    --portfolio-hero-mesh-lavender: #c5c0fd;
-    --portfolio-hero-mesh-purple: #b68ffe;
   }
 }
 
@@ -202,6 +188,12 @@
     height: var(--portfolio-hero-gradient-height);
     pointer-events: none;
     background:
+      linear-gradient(
+        to bottom,
+        var(--portfolio-app-chrome-color) 0%,
+        color-mix(in oklab, var(--portfolio-app-chrome-color) 70%, transparent) 8%,
+        transparent 18%
+      ),
       linear-gradient(
         to bottom,
         transparent 0%,
@@ -248,62 +240,6 @@
         color-mix(in oklab, white 8%, var(--portfolio-hero-mesh-cyan)) 40%,
         color-mix(in oklab, white 14%, var(--portfolio-hero-mesh-lavender)) 100%
       );
-  }
-
-  .dark body::before {
-    background:
-      linear-gradient(
-        to bottom,
-        transparent 0%,
-        transparent 40%,
-        color-mix(in oklab, transparent 82%, var(--background)) 58%,
-        color-mix(in oklab, transparent 48%, var(--background)) 76%,
-        var(--background) 100%
-      ),
-      radial-gradient(
-        ellipse 42% 30% at 50% 32%,
-        rgb(203 191 255 / 86%) 0%,
-        rgb(151 126 240 / 66%) 42%,
-        transparent 76%
-      ),
-      radial-gradient(
-        ellipse 74% 50% at 46% 8%,
-        rgb(112 144 226 / 90%) 0%,
-        rgb(55 149 198 / 78%) 50%,
-        transparent 82%
-      ),
-      radial-gradient(ellipse 50% 44% at 12% 48%, rgb(103 77 214 / 64%) 0%, transparent 70%),
-      radial-gradient(ellipse 52% 44% at 86% 48%, rgb(88 109 222 / 62%) 0%, transparent 70%),
-      linear-gradient(120deg, #5068bd 0%, #2189b9 43%, #7861c5 100%);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    body::before {
-      background:
-        linear-gradient(
-          to bottom,
-          transparent 0%,
-          transparent 40%,
-          color-mix(in oklab, transparent 82%, var(--background)) 58%,
-          color-mix(in oklab, transparent 48%, var(--background)) 76%,
-          var(--background) 100%
-        ),
-        radial-gradient(
-          ellipse 42% 30% at 50% 32%,
-          rgb(203 191 255 / 86%) 0%,
-          rgb(151 126 240 / 66%) 42%,
-          transparent 76%
-        ),
-        radial-gradient(
-          ellipse 74% 50% at 46% 8%,
-          rgb(112 144 226 / 90%) 0%,
-          rgb(55 149 198 / 78%) 50%,
-          transparent 82%
-        ),
-        radial-gradient(ellipse 50% 44% at 12% 48%, rgb(103 77 214 / 64%) 0%, transparent 70%),
-        radial-gradient(ellipse 52% 44% at 86% 48%, rgb(88 109 222 / 62%) 0%, transparent 70%),
-        linear-gradient(120deg, #5068bd 0%, #2189b9 43%, #7861c5 100%);
-    }
   }
 
   code {
