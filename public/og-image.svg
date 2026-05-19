@@ -49,7 +49,7 @@
     font-weight="520"
     letter-spacing="0"
   >
-    I love learning languages, staying active,
+    Hit me up if you're into learning languages,
   </text>
   <text
     x="520"
@@ -60,6 +60,17 @@
     font-weight="520"
     letter-spacing="0"
   >
-    and building things for web, mobile, and more.
+    nutrition and exercise, and/or
+  </text>
+  <text
+    x="520"
+    y="346"
+    fill="#e9f7ff"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    font-size="32"
+    font-weight="520"
+    letter-spacing="0"
+  >
+    building cool things.
   </text>
 </svg>

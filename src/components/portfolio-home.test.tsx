@@ -29,7 +29,7 @@ describe("PortfolioHome", () => {
       "max-w-[40rem] text-balance text-lg font-medium md:max-w-full",
     );
     expect(appSubtitle?.textContent).toBe(
-      "I love learning languages, staying active, and building things for the web, mobile, and whatever else sounds fun.",
+      "Hit me up if you're into learning languages, nutrition and exercise, and/or building cool things.",
     );
     expect(appLogo?.className).toBe("relative size-15 shrink-0 overflow-hidden");
     expect(appLogoImage?.getAttribute("src")).toBe("/app-logo-120.png");
