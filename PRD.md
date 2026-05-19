@@ -14,7 +14,7 @@ treated as complete.
 | Done    | Align project workbench container      | 8.1, 9.1, 13        | `05aff21` | Matches the portfolio workbench container to the sibling Snapshot/Airdrop workbench treatment.          |
 | Done    | Remove build-principles section        | 6, 8.1, 9.1         | `ad7c462` | Removes the extra principles section and keeps the route focused on project cards.                      |
 | Done    | Align header typography                | 8.1, 9.1, 13        | `88a46d0` | Matches the portfolio title/subtitle sizing, weight, tracking, and foreground color to sibling apps.    |
-| Done    | Remove footer/profile content          | 6, 8.1, 8.3, 13     | `TBD`     | Removes the visible content below the project workbench so the route ends on project cards.             |
+| Done    | Remove footer/profile content          | 6, 8.1, 8.3, 13     | `96a0bc7` | Removes the visible content below the project workbench so the route ends on project cards.             |
 | Pending | Project case-study pages               | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                       |
 | Pending | Production smoke scripts and runbook   | 12, 15              | -         | Add portfolio-specific release gates when deploys need the same production-hardening depth as siblings. |
 | Pending | Contact or profile action beyond links | 7, 8.3, 9.9         | -         | Add only when the portfolio needs a direct contact or profile workflow beyond simple project links.     |
