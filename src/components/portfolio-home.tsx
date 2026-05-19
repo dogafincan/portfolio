@@ -111,8 +111,8 @@ export function PortfolioHome() {
               Doga Fincan
             </h1>
             <p className="max-w-[40rem] text-balance text-lg font-medium md:max-w-full">
-              I'm into learning languages, getting my reps in, and building useful things for the
-              web.
+              I love learning languages, staying active, and building things for the web, mobile,
+              and whatever else sounds fun.
             </p>
           </div>
         </header>
