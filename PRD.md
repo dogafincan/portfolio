@@ -8,7 +8,7 @@ treated as complete.
 
 | Status  | Slice                                  | PRD coverage        | Commit    | Notes                                                                                                   |
 | ------- | -------------------------------------- | ------------------- | --------- | ------------------------------------------------------------------------------------------------------- |
-| Done    | Project showcase surface               | 1, 7, 8, 9, 10      | `e221b4d` | Replaces the starter page with a real portfolio route, structured project records, cards, and links.    |
+| Done    | Project showcase surface               | 1, 7, 8, 9, 10      | `e221b4d` | Replaces the starter page with a real portfolio route, structured sibling-project records and cards.    |
 | Done    | Shared app chrome and metadata         | 9.5-9.7, 12, 13, 15 | `e221b4d` | Adds logo assets, mesh chrome, root metadata, social preview assets, and regression coverage.           |
 | Done    | Remove project-section intro copy      | 8.1, 9.1, 13        | `3b6d334` | Removes the visible `Projects` heading/subtitle so the project cards lead the workbench.                |
 | Done    | Align project workbench container      | 8.1, 9.1, 13        | `05aff21` | Matches the portfolio workbench container to the sibling Snapshot/Airdrop workbench treatment.          |
@@ -143,7 +143,7 @@ The product will not include by default:
 The current product includes:
 
 1. Header with portfolio logo, title, and concise subtitle.
-2. Structured project list.
+2. Structured sibling-project list.
 3. Project cards with image, status, role, name, summary, stack, highlights, and
    live links when available.
 4. Live project links when available.
@@ -167,7 +167,8 @@ The `/` route should load into a useful portfolio surface:
 ```text
 1. Visitor sees the logo, name, and concise positioning line.
 2. Visitor immediately sees the project workbench.
-3. Visitor scans real project cards.
+3. Visitor scans real project cards without seeing the portfolio site listed as
+   its own product.
 4. Visitor opens a live project when one is available.
 ```
 
@@ -201,6 +202,7 @@ messages go, how abuse is handled, and what privacy or retention policy applies.
 - Project content lives in `src/content/projects.ts`.
 - Each project record includes name, slug, summary, role, status, image,
   imageAlt, stack, and highlights.
+- Do not list the portfolio website as one of its own projects.
 - `liveUrl` is optional and should only be present when a useful live surface
   exists.
 
@@ -321,8 +323,8 @@ rules here.
 The product is ready for the current portfolio scope when:
 
 1. The `/` route renders a portfolio header and real project cards.
-2. Each project card shows a visual preview, status, role, name, summary, stack,
-   highlights, and optional live link.
+2. Each project card shows a sibling project with a visual preview, status,
+   role, name, summary, stack, highlights, and optional live link.
 3. Live links render only when available.
 4. Project data is structured in `src/content/projects.ts`.
 5. The app uses the shared mesh chrome, logo assets, Inter preload, and manifest
@@ -344,9 +346,9 @@ Vite+, shadcn/Base UI, Tailwind, Inter, Lucide, and Cloudflare Workers system as
 the sibling Sui utility apps. It shows real projects first, using structured
 project records, product-owned visuals, concise plain-language summaries,
 implementation highlights, and live links when useful. It deliberately avoids
-source links for private repositories, wallet flows, Sui transaction logic,
-storage bindings, and backend state unless a future portfolio feature needs
-them.
+listing itself as a project, source links for private repositories, wallet
+flows, Sui transaction logic, storage bindings, and backend state unless a
+future portfolio feature needs them.
 
 ## 17. Reference links
 

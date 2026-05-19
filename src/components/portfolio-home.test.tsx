@@ -34,6 +34,8 @@ describe("PortfolioHome", () => {
       "/app-logo-120.png 120w, /apple-touch-icon.png 180w",
     );
     expect(screen.queryByText("hello world")).toBeNull();
+    expect(portfolioProjects.map((project) => project.slug)).not.toContain("portfolio");
+    expect(screen.queryByRole("heading", { level: 3, name: "Portfolio" })).toBeNull();
 
     for (const project of portfolioProjects) {
       expect(screen.getByRole("heading", { level: 3, name: project.name })).toBeTruthy();

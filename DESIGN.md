@@ -93,6 +93,8 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   CMS, or Sui utility runtime.
 - Preserve the single-route structure until a project genuinely needs its own
   case-study page: header, rounded muted project workbench, and project cards.
+- Do not list the portfolio website as one of its own project cards; visitors
+  are already viewing that surface.
 - The primary visitor flow is: land on the page, identify the person and project
   focus, scan real project cards, and open a live project when one is available.
 - Do not place visible footer/profile content below the project workbench unless

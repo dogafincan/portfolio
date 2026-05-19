@@ -46,20 +46,4 @@ export const portfolioProjects: PortfolioProject[] = [
       "Recovery paths for interrupted campaigns and fee top-ups",
     ],
   },
-  {
-    name: "Portfolio",
-    slug: "portfolio",
-    summary:
-      "A project showcase that reuses the shared workspace design system without importing Sui runtime complexity.",
-    role: "Content structure, UI system adaptation, Cloudflare deployment setup",
-    status: "In progress",
-    image: "/projects/portfolio-og.png",
-    imageAlt: "Portfolio project preview with the portfolio logo, title, and product description.",
-    stack: ["TanStack Start", "React 19", "Tailwind CSS v4", "Vite+"],
-    highlights: [
-      "Structured project data before adding a CMS",
-      "Shared mesh chrome and logo system",
-      "Repo-local tests for social, icon, and style conventions",
-    ],
-  },
 ];

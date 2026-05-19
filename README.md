@@ -30,7 +30,7 @@ is available.
 
 Expected content:
 
-- project index for built work
+- project index for built work outside the portfolio site itself
 - focused project cards with product name, short description, role, status,
   stack, highlights, and live links when available
 - project detail or case-study pages when a project needs more context
@@ -111,7 +111,8 @@ clearly needs them.
   feature needs the extra complexity.
 - Use real project images or product-owned assets for visual previews. The
   current project cards reuse sibling OG images as thumbnails because those
-  images represent the actual shipped apps.
+  images represent the actual shipped apps. The portfolio site should not list
+  itself as one of its own products.
 
 ## Shared Web App Design System
 
