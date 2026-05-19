@@ -31,6 +31,13 @@ describe("PortfolioHome", () => {
     expect(appSubtitle?.textContent).toBe(
       "I'm into learning languages, nutrition and exercise, and building cool things. Reach out if you're building something interesting.",
     );
+    expect(appSubtitle?.querySelector("span:first-child")?.textContent).toBe(
+      "I'm into learning languages, nutrition and exercise, and building cool things.",
+    );
+    expect(appSubtitle?.querySelector("span:last-child")?.className).toBe("md:block");
+    expect(appSubtitle?.querySelector("span:last-child")?.textContent).toBe(
+      "Reach out if you're building something interesting.",
+    );
     expect(appLogo?.className).toBe("relative size-15 shrink-0 overflow-hidden");
     expect(appLogoImage?.getAttribute("src")).toBe("/app-logo-120.png");
     expect(appLogoImage?.getAttribute("srcset")).toBe(

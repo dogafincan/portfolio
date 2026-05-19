@@ -117,6 +117,9 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   `text-balance text-4xl leading-tight font-bold tracking-tight`.
 - The subtitle class currently matches the snapshot header width treatment:
   `max-w-[40rem] text-balance text-lg font-medium md:max-w-full`.
+- Keep `Reach out if you're building something interesting.` in a second
+  subtitle sentence span with `md:block` so larger screens do not flatten the
+  full subtitle into one long line.
 - Keep the project workbench class aligned with the sibling workbench container
   until there is a deliberate portfolio-specific exception:
   `grid w-full min-w-0 max-w-full flex-1 grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background`.

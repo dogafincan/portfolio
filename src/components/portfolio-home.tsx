@@ -75,8 +75,10 @@ export function PortfolioHome() {
               Doga Fincan
             </h1>
             <p className="max-w-[40rem] text-balance text-lg font-medium md:max-w-full">
-              I'm into learning languages, nutrition and exercise, and building cool things. Reach
-              out if you're building something interesting.
+              <span>
+                I'm into learning languages, nutrition and exercise, and building cool things.
+              </span>{" "}
+              <span className="md:block">Reach out if you're building something interesting.</span>
             </p>
           </div>
         </header>
