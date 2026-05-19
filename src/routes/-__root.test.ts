@@ -2,6 +2,17 @@ import { readFileSync } from "node:fs";
 
 import { describe, expect, it } from "vite-plus/test";
 
+function readPngSize(path: string) {
+  const image = readFileSync(new URL(path, import.meta.url));
+
+  expect(image.subarray(0, 8).toString("hex")).toBe("89504e470d0a1a0a");
+
+  return {
+    width: image.readUInt32BE(16),
+    height: image.readUInt32BE(20),
+  };
+}
+
 describe("RootDocument head", () => {
   it("declares app manifest, shared logo assets, and mobile chrome colors", () => {
     const source = readFileSync(new URL("./__root.tsx", import.meta.url), "utf8");
@@ -22,7 +33,8 @@ describe("RootDocument head", () => {
     expect(source).toContain('media="(prefers-color-scheme: dark)"');
     expect(source).toContain('rel: "manifest"');
     expect(source).toContain('href: "/manifest.json"');
-    expect(source).toContain('href: "/favicon.svg"');
+    expect(source).toContain('href: "/favicon.ico"');
+    expect(source).not.toContain('href: "/favicon.svg"');
     expect(source).toContain('href: "/favicon-16x16.png"');
     expect(source).toContain('href: "/favicon-32x32.png"');
     expect(source).toContain('rel: "apple-touch-icon"');
@@ -33,5 +45,15 @@ describe("RootDocument head", () => {
     expect(manifest).toContain('"/android-chrome-512x512.png"');
     expect(manifest).toContain('"theme_color": "#b9d0f8"');
     expect(manifest).toContain('"background_color": "#b9d0f8"');
+    expect(readPngSize("../../public/app-logo-120.png")).toEqual({ width: 120, height: 120 });
+    expect(readPngSize("../../public/apple-touch-icon.png")).toEqual({ width: 180, height: 180 });
+    expect(readPngSize("../../public/android-chrome-192x192.png")).toEqual({
+      width: 192,
+      height: 192,
+    });
+    expect(readPngSize("../../public/android-chrome-512x512.png")).toEqual({
+      width: 512,
+      height: 512,
+    });
   });
 });

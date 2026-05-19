@@ -159,9 +159,9 @@ The current implementation follows the sibling conventions. Important files:
 - `src/routes/-index.test.ts`: regression guard for canonical and social
   preview metadata
 - `public/manifest.json`: PWA manifest colors and icons
-- `public/app-logo.svg`, `public/app-logo-120.png`, `public/apple-touch-icon.png`,
-  `public/android-chrome-*.png`, `public/favicon-*`, and `public/og-image.*`:
-  portfolio-owned app and social assets
+- `public/app-logo-120.png`, `public/apple-touch-icon.png`,
+  `public/android-chrome-*.png`, `public/favicon.ico`, `public/favicon-*`, and
+  `public/og-image.*`: portfolio-owned app and social assets
 - `public/projects/*-icon.png`: local app icons copied from shipped sibling apps
 - `vite.config.ts`: Vite+ and TanStack configuration
 - `wrangler.jsonc`: Cloudflare Worker configuration

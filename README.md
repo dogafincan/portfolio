@@ -148,9 +148,9 @@ The imported sibling organization now used here:
 - `src/styles.test.ts`: regression guard for the shared CSS-only mesh chrome.
 - `src/components/icon-system.test.ts`: regression guard that keeps product UI
   icons on Lucide.
-- `public/app-logo.svg`, `public/app-logo-120.png`, `public/apple-touch-icon.png`,
-  `public/android-chrome-*.png`, `public/favicon-*`, and `public/og-image.*`:
-  portfolio-owned logo and social assets.
+- `public/app-logo-120.png`, `public/apple-touch-icon.png`,
+  `public/android-chrome-*.png`, `public/favicon.ico`, `public/favicon-*`, and
+  `public/og-image.*`: portfolio-owned logo and social assets.
 - `public/projects/*-icon.png`: local app icons copied from the shipped sibling
   apps.
 
