@@ -111,8 +111,8 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   title, concise subtitle, centered text, and foreground text color by
   inheritance.
 - The header subtitle should feel informal and personal: language learning,
-  nutrition and exercise, and building things across surfaces are part of the
-  positioning.
+  nutrition and exercise, building things, and inviting interesting builder
+  conversations are part of the positioning.
 - The title class currently matches the sibling apps:
   `text-balance text-4xl leading-tight font-bold tracking-tight`.
 - The subtitle class currently matches the snapshot header width treatment:

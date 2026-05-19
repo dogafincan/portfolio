@@ -49,28 +49,39 @@
     font-weight="520"
     letter-spacing="0"
   >
-    Hit me up if you're into learning languages,
+    I'm into learning languages,
   </text>
   <text
     x="520"
-    y="304"
+    y="296"
     fill="#e9f7ff"
     font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     font-size="32"
     font-weight="520"
     letter-spacing="0"
   >
-    nutrition and exercise, and/or
+    nutrition and exercise, and building
   </text>
   <text
     x="520"
-    y="346"
+    y="336"
     fill="#e9f7ff"
     font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     font-size="32"
     font-weight="520"
     letter-spacing="0"
   >
-    building cool things.
+    cool things. Reach out if you're
+  </text>
+  <text
+    x="520"
+    y="376"
+    fill="#e9f7ff"
+    font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    font-size="32"
+    font-weight="520"
+    letter-spacing="0"
+  >
+    building something interesting.
   </text>
 </svg>

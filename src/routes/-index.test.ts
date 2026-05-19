@@ -30,11 +30,12 @@ describe("index route head", () => {
     expect(source).toContain('rel: "canonical"');
     expect(source).toContain("href: SITE_URL");
     expect(source).toContain(
-      "Hit me up if you're into learning languages, nutrition and exercise, and/or building cool things.",
+      "I'm into learning languages, nutrition and exercise, and building cool things. Reach out if you're building something interesting.",
     );
     expect(source).not.toContain(
       "Focused web utilities and product systems built with React, Cloudflare, and careful user-facing workflows.",
     );
+    expect(source).not.toContain("Hit me up");
     expect(source).not.toContain("getting my reps in");
     expect(source).not.toContain("staying active");
     expect(source).not.toContain("building useful things for the web");
@@ -42,7 +43,7 @@ describe("index route head", () => {
     expect(siteUrlMatch?.[1]).toBe("https://portfolio.dogafincan.workers.dev");
     expect(socialImageMatch?.[1]).toMatch(/^\/og-image\.png\?v=\d+$/);
     expect(new URL(`${siteUrlMatch?.[1]}${socialImageMatch?.[1]}`).href).toBe(
-      "https://portfolio.dogafincan.workers.dev/og-image.png?v=20260521",
+      "https://portfolio.dogafincan.workers.dev/og-image.png?v=20260522",
     );
     expect(source).not.toContain('const SOCIAL_IMAGE = "/og-image.png";');
 
