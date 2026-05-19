@@ -3,10 +3,10 @@
 Personal portfolio website for showcasing projects built by Doga Fincan.
 
 This repo started documentation-first and now renders a real portfolio index.
-The first implemented surface showcases built projects, links to live/source
-targets, and carries over the shared TanStack Start, shadcn/ui, Tailwind, Inter,
-Lucide, mesh-chrome, social-preview, and verification conventions from the
-sibling apps in `~/Documents/sui-snapshot` and `~/Documents/sui-airdrop`.
+The first implemented surface showcases built projects, links to live targets
+when available, and carries over the shared TanStack Start, shadcn/ui, Tailwind,
+Inter, Lucide, mesh-chrome, social-preview, and verification conventions from
+the sibling apps in `~/Documents/sui-snapshot` and `~/Documents/sui-airdrop`.
 
 ## Documentation Map
 
@@ -25,14 +25,14 @@ Use the same durable documentation split as the sibling apps:
 
 The site should make the projects the main surface, not hide them behind a
 generic landing page. A visitor should quickly understand what each project
-does, why it exists, how it was built, and where to try it or inspect the
-source when links are available.
+does, why it exists, how it was built, and where to try it when a live surface
+is available.
 
 Expected content:
 
 - project index for built work
 - focused project cards with product name, short description, role, status,
-  stack, and links
+  stack, highlights, and live links when available
 - project detail or case-study pages when a project needs more context
 - concise explanations of technical decisions in plain language
 - contact or profile links only where they support the portfolio goal

@@ -7,7 +7,6 @@ export type PortfolioProject = {
   image: string;
   imageAlt: string;
   liveUrl?: string;
-  sourceUrl: string;
   stack: string[];
   highlights: string[];
 };
@@ -23,7 +22,6 @@ export const portfolioProjects: PortfolioProject[] = [
     image: "/projects/sui-snapshot-og.png",
     imageAlt: "Sui Snapshot social preview with the app logo and product description.",
     liveUrl: "https://sui-snapshot.dogafincan.workers.dev",
-    sourceUrl: "https://github.com/dogafincan/sui-snapshot",
     stack: ["TanStack Start", "Cloudflare Workers", "Sui GraphQL RPC", "shadcn/ui"],
     highlights: [
       "Worker-safe snapshot batches",
@@ -41,7 +39,6 @@ export const portfolioProjects: PortfolioProject[] = [
     image: "/projects/sui-airdrop-og.png",
     imageAlt: "Sui Airdrop social preview with the app logo and product description.",
     liveUrl: "https://sui-airdrop.dogafincan.workers.dev",
-    sourceUrl: "https://github.com/dogafincan/sui-airdrop",
     stack: ["TanStack Start", "Durable Objects", "Mysten dApp Kit", "Sui SDK"],
     highlights: [
       "CSV cleanup before the 10,000-wallet campaign cap",
@@ -58,7 +55,6 @@ export const portfolioProjects: PortfolioProject[] = [
     status: "In progress",
     image: "/projects/portfolio-og.png",
     imageAlt: "Portfolio project preview with the portfolio logo, title, and product description.",
-    sourceUrl: "https://github.com/dogafincan/portfolio",
     stack: ["TanStack Start", "React 19", "Tailwind CSS v4", "Vite+"],
     highlights: [
       "Structured project data before adding a CMS",

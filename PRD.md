@@ -26,14 +26,14 @@ treated as complete.
 The product is a personal portfolio website for showcasing projects built by
 Doga Fincan. It should present real project work early, explain what each
 project does in plain language, and provide clear links to live surfaces and
-source code when those links are available.
+details that help visitors evaluate the work.
 
 The product promise:
 
 ```text
 Show real projects first.
 Explain what they do.
-Make the live product and source easy to inspect.
+Make live products easy to inspect when they are available.
 Keep the site simple, fast, and consistent with the sibling apps.
 ```
 
@@ -82,8 +82,8 @@ collaborators, hiring teams, users, and other builders.
 ### 4.2 Secondary visitors
 
 **Technical reviewers**
-People who want to inspect implementation choices, repository structure, source
-links, and shared product-system decisions.
+People who want to inspect implementation choices, public project behavior, and
+shared product-system decisions.
 
 ## 5. Goals
 
@@ -95,9 +95,8 @@ Visitors should be able to:
 2. See real project content without scrolling past generic marketing sections.
 3. Understand each listed project in one short scan.
 4. Open a live project when it exists.
-5. Inspect source code when it is public.
-6. See the role, status, stack, and practical highlights for each project.
-7. View the site comfortably on mobile and desktop.
+5. See the role, status, stack, and practical highlights for each project.
+6. View the site comfortably on mobile and desktop.
 
 ### 5.2 Owner goals
 
@@ -146,12 +145,11 @@ The current product includes:
 1. Header with portfolio logo, title, and concise subtitle.
 2. Structured project list.
 3. Project cards with image, status, role, name, summary, stack, highlights, and
-   links.
+   live links when available.
 4. Live project links when available.
-5. Source links.
-6. App logo, favicon, install icons, manifest, and social preview image.
-7. Responsive light/dark mesh page chrome.
-8. Regression tests for shared conventions.
+5. App logo, favicon, install icons, manifest, and social preview image.
+6. Responsive light/dark mesh page chrome.
+7. Regression tests for shared conventions.
 
 Future scope may include:
 
@@ -170,7 +168,7 @@ The `/` route should load into a useful portfolio surface:
 1. Visitor sees the logo, name, and concise positioning line.
 2. Visitor immediately sees the project workbench.
 3. Visitor scans real project cards.
-4. Visitor opens a live project or source link.
+4. Visitor opens a live project when one is available.
 ```
 
 Do not reintroduce a visible `Projects` intro block or a `Build Principles`
@@ -202,7 +200,7 @@ messages go, how abuse is handled, and what privacy or retention policy applies.
 
 - Project content lives in `src/content/projects.ts`.
 - Each project record includes name, slug, summary, role, status, image,
-  imageAlt, sourceUrl, stack, and highlights.
+  imageAlt, stack, and highlights.
 - `liveUrl` is optional and should only be present when a useful live surface
   exists.
 
@@ -217,8 +215,9 @@ messages go, how abuse is handled, and what privacy or retention policy applies.
 
 ### 9.4 Links
 
-- Source links are required for each listed project.
 - Live links are optional.
+- Do not show repository source links in the portfolio; project repositories may
+  be private.
 - External links should open in a new tab and use `rel="noreferrer"`.
 - Buttons should have accessible labels that include the project name.
 
@@ -323,7 +322,7 @@ The product is ready for the current portfolio scope when:
 
 1. The `/` route renders a portfolio header and real project cards.
 2. Each project card shows a visual preview, status, role, name, summary, stack,
-   highlights, and source link.
+   highlights, and optional live link.
 3. Live links render only when available.
 4. Project data is structured in `src/content/projects.ts`.
 5. The app uses the shared mesh chrome, logo assets, Inter preload, and manifest
@@ -344,9 +343,10 @@ The product is a focused personal portfolio built on the same TanStack Start,
 Vite+, shadcn/Base UI, Tailwind, Inter, Lucide, and Cloudflare Workers system as
 the sibling Sui utility apps. It shows real projects first, using structured
 project records, product-owned visuals, concise plain-language summaries,
-implementation highlights, and clear live/source links. It deliberately avoids
-wallet flows, Sui transaction logic, storage bindings, and backend state unless a
-future portfolio feature needs them.
+implementation highlights, and live links when useful. It deliberately avoids
+source links for private repositories, wallet flows, Sui transaction logic,
+storage bindings, and backend state unless a future portfolio feature needs
+them.
 
 ## 17. Reference links
 

@@ -38,9 +38,7 @@ describe("PortfolioHome", () => {
     for (const project of portfolioProjects) {
       expect(screen.getByRole("heading", { level: 3, name: project.name })).toBeTruthy();
       expect(screen.getByText(project.summary)).toBeTruthy();
-      expect(screen.getByLabelText(`View ${project.name} source`).getAttribute("href")).toBe(
-        project.sourceUrl,
-      );
+      expect(screen.queryByLabelText(`View ${project.name} source`)).toBeNull();
 
       const image = screen.getByAltText(project.imageAlt);
       expect(image.getAttribute("src")).toBe(project.image);
@@ -79,6 +77,7 @@ describe("PortfolioHome", () => {
       screen.queryByText("Built with the same TanStack Start, Vite+", { exact: false }),
     ).toBeNull();
     expect(screen.queryByRole("link", { name: "GitHub" })).toBeNull();
+    expect(screen.queryByText("Source")).toBeNull();
 
     for (const projectCard of projectCards) {
       const stackItem = within(projectCard as HTMLElement)

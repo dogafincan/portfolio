@@ -53,14 +53,14 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   needed, use `Item`.
 - Give each project card a concise title and description. Put implementation
   details after the plain-language explanation of what the project does.
-- Keep actions in the card that owns their state. Project live/source actions
-  belong in the project card. Future contact or case-study actions should live
-  near the content they operate on.
+- Keep actions in the card that owns their state. Project live actions belong in
+  the project card. Future contact or case-study actions should live near the
+  content they operate on.
 - Keep every clickable button target at least `44px` tall across variants.
   Touch comfort wins over compact density for primary actions and utility
   controls.
 - Add semantic leading Lucide icons to text buttons for concrete actions such as
-  opening a project, viewing source, navigating to a case study, or contacting.
+  opening a project, navigating to a case study, or contacting.
   Loading states should swap the icon for a spinner without shifting the label.
 - Labels, card titles, and item titles should be readable base-size or larger
   semibold type; descriptions should remain base-size normal weight.
@@ -94,7 +94,7 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Preserve the single-route structure until a project genuinely needs its own
   case-study page: header, rounded muted project workbench, and project cards.
 - The primary visitor flow is: land on the page, identify the person and project
-  focus, scan real project cards, and open a live project or source link.
+  focus, scan real project cards, and open a live project when one is available.
 - Do not place visible footer/profile content below the project workbench unless
   a future product decision gives that surface concrete visitor value.
 - Do not add wallet connection, transaction signing, Mysten SDK dependencies,
@@ -125,14 +125,14 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Project data lives in `src/content/projects.ts`. Extend that structured data
   before creating one-off project markup.
 - Each card should show name, status, role, short description, stack, highlights,
-  and relevant links.
+  and a live link when the project has a useful public surface.
 - Use real product-owned visual previews. The current Sui project cards use the
   sibling apps' OG images because they represent shipped product surfaces.
 - Keep stack metadata in a muted `Item` surface inside the card.
 - Keep highlight bullets plain and scannable. Avoid fake metrics, broad claims,
   or implementation jargon that does not help a visitor evaluate the work.
-- Use primary treatment only for the most useful action on a card. Use outline
-  treatment for visible secondary actions such as source links.
+- Use primary treatment for live project actions. Do not show source actions for
+  private project repositories.
 - Keep card images, button rows, metadata, and long project names responsive
   without overflow.
 
@@ -141,7 +141,7 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Explain what the project does before naming libraries or infrastructure.
 - Keep copy concrete and phase-accurate. Do not imply projects are live,
   production-ready, or complete unless the project record and links support it.
-- Use "project", "live utility", "source", "stack", and "role" consistently.
+- Use "project", "live utility", "stack", and "role" consistently.
 - Avoid decorative product principles, generic claims, and repeated manifesto
   copy that delays access to the project list.
 - Technical depth belongs in future case-study pages when a project needs that

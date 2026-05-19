@@ -1,4 +1,4 @@
-import { ArrowUpRight, Code2, Layers3 } from "lucide-react";
+import { ArrowUpRight, Layers3 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
@@ -69,8 +69,8 @@ function ProjectCard({
           ))}
         </ul>
       </CardContent>
-      <CardFooter className="mt-auto flex flex-wrap gap-2">
-        {project.liveUrl ? (
+      {project.liveUrl ? (
+        <CardFooter className="mt-auto flex flex-wrap gap-2">
           <a
             className={cn(buttonVariants({ variant: "default", size: "sm" }))}
             href={project.liveUrl}
@@ -81,18 +81,8 @@ function ProjectCard({
             <ArrowUpRight aria-hidden="true" data-icon="inline-start" />
             Open
           </a>
-        ) : null}
-        <a
-          className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-          href={project.sourceUrl}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`View ${project.name} source`}
-        >
-          <Code2 aria-hidden="true" data-icon="inline-start" />
-          Source
-        </a>
-      </CardFooter>
+        </CardFooter>
+      ) : null}
     </Card>
   );
 }
