@@ -152,9 +152,11 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   the app's exact subtitle, and a live app link.
 - Wrap each product icon in a full-width decorative logo panel inside the card
   padding. The panel should contain only the icon, use a radius that relates to
-  the project card radius, and use a small mesh gradient made from that
-  project's mesh colors: pastel versions in light mode and darker companion
-  versions in dark mode.
+  the project card radius, and use a small mesh gradient tied to the
+  corresponding app's identity. Light mode can use the app's full pastel header
+  mesh palette. Dark mode should not mix several companion hues in the logo
+  panel; it should use the color at the bottom of that app's dark header mesh
+  as the base, then build depth with lighter versions of that same color only.
 - Do not show status badges, role text, stack metadata, implementation
   highlights, source links, or large preview images in project cards for now.
   Move that depth into future case-study pages if needed.
