@@ -275,42 +275,130 @@
   .dark [data-slot="project-icon-panel"][data-project="sui-airdrop"] {
     background-color: #3a2348;
     background-image:
-      radial-gradient(circle at 16% 18%, #5a2f50 0%, transparent 38%),
-      radial-gradient(circle at 84% 18%, #4d3974 0%, transparent 36%),
-      radial-gradient(circle at 24% 82%, #7b4639 0%, transparent 40%),
-      radial-gradient(circle at 78% 78%, #733355 0%, transparent 42%),
-      linear-gradient(135deg, #4a2a45 0%, #6b3d47 38%, #6d365d 68%, #3f3766 100%);
+      radial-gradient(
+        circle at 16% 18%,
+        color-mix(in oklab, white 34%, #3a2348) 0%,
+        transparent 38%
+      ),
+      radial-gradient(
+        circle at 84% 18%,
+        color-mix(in oklab, white 24%, #3a2348) 0%,
+        transparent 36%
+      ),
+      radial-gradient(
+        circle at 24% 82%,
+        color-mix(in oklab, white 18%, #3a2348) 0%,
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 78% 78%,
+        color-mix(in oklab, white 14%, #3a2348) 0%,
+        transparent 42%
+      ),
+      linear-gradient(
+        135deg,
+        #3a2348 0%,
+        color-mix(in oklab, white 14%, #3a2348) 38%,
+        color-mix(in oklab, white 24%, #3a2348) 68%,
+        color-mix(in oklab, white 34%, #3a2348) 100%
+      );
   }
 
   .dark [data-slot="project-icon-panel"][data-project="sui-snapshot"] {
     background-color: #172d4d;
     background-image:
-      radial-gradient(circle at 16% 18%, #33406f 0%, transparent 38%),
-      radial-gradient(circle at 84% 20%, #3d3575 0%, transparent 36%),
-      radial-gradient(circle at 24% 82%, #22536e 0%, transparent 40%),
-      radial-gradient(circle at 78% 78%, #254677 0%, transparent 42%),
-      linear-gradient(135deg, #172d4d 0%, #1f4d78 38%, #303f76 68%, #3d3575 100%);
+      radial-gradient(
+        circle at 16% 18%,
+        color-mix(in oklab, white 34%, #172d4d) 0%,
+        transparent 38%
+      ),
+      radial-gradient(
+        circle at 84% 20%,
+        color-mix(in oklab, white 24%, #172d4d) 0%,
+        transparent 36%
+      ),
+      radial-gradient(
+        circle at 24% 82%,
+        color-mix(in oklab, white 18%, #172d4d) 0%,
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 78% 78%,
+        color-mix(in oklab, white 14%, #172d4d) 0%,
+        transparent 42%
+      ),
+      linear-gradient(
+        135deg,
+        #172d4d 0%,
+        color-mix(in oklab, white 14%, #172d4d) 38%,
+        color-mix(in oklab, white 24%, #172d4d) 68%,
+        color-mix(in oklab, white 34%, #172d4d) 100%
+      );
   }
 
   @media (prefers-color-scheme: dark) {
     [data-slot="project-icon-panel"][data-project="sui-airdrop"] {
       background-color: #3a2348;
       background-image:
-        radial-gradient(circle at 16% 18%, #5a2f50 0%, transparent 38%),
-        radial-gradient(circle at 84% 18%, #4d3974 0%, transparent 36%),
-        radial-gradient(circle at 24% 82%, #7b4639 0%, transparent 40%),
-        radial-gradient(circle at 78% 78%, #733355 0%, transparent 42%),
-        linear-gradient(135deg, #4a2a45 0%, #6b3d47 38%, #6d365d 68%, #3f3766 100%);
+        radial-gradient(
+          circle at 16% 18%,
+          color-mix(in oklab, white 34%, #3a2348) 0%,
+          transparent 38%
+        ),
+        radial-gradient(
+          circle at 84% 18%,
+          color-mix(in oklab, white 24%, #3a2348) 0%,
+          transparent 36%
+        ),
+        radial-gradient(
+          circle at 24% 82%,
+          color-mix(in oklab, white 18%, #3a2348) 0%,
+          transparent 40%
+        ),
+        radial-gradient(
+          circle at 78% 78%,
+          color-mix(in oklab, white 14%, #3a2348) 0%,
+          transparent 42%
+        ),
+        linear-gradient(
+          135deg,
+          #3a2348 0%,
+          color-mix(in oklab, white 14%, #3a2348) 38%,
+          color-mix(in oklab, white 24%, #3a2348) 68%,
+          color-mix(in oklab, white 34%, #3a2348) 100%
+        );
     }
 
     [data-slot="project-icon-panel"][data-project="sui-snapshot"] {
       background-color: #172d4d;
       background-image:
-        radial-gradient(circle at 16% 18%, #33406f 0%, transparent 38%),
-        radial-gradient(circle at 84% 20%, #3d3575 0%, transparent 36%),
-        radial-gradient(circle at 24% 82%, #22536e 0%, transparent 40%),
-        radial-gradient(circle at 78% 78%, #254677 0%, transparent 42%),
-        linear-gradient(135deg, #172d4d 0%, #1f4d78 38%, #303f76 68%, #3d3575 100%);
+        radial-gradient(
+          circle at 16% 18%,
+          color-mix(in oklab, white 34%, #172d4d) 0%,
+          transparent 38%
+        ),
+        radial-gradient(
+          circle at 84% 20%,
+          color-mix(in oklab, white 24%, #172d4d) 0%,
+          transparent 36%
+        ),
+        radial-gradient(
+          circle at 24% 82%,
+          color-mix(in oklab, white 18%, #172d4d) 0%,
+          transparent 40%
+        ),
+        radial-gradient(
+          circle at 78% 78%,
+          color-mix(in oklab, white 14%, #172d4d) 0%,
+          transparent 42%
+        ),
+        linear-gradient(
+          135deg,
+          #172d4d 0%,
+          color-mix(in oklab, white 14%, #172d4d) 38%,
+          color-mix(in oklab, white 24%, #172d4d) 68%,
+          color-mix(in oklab, white 34%, #172d4d) 100%
+        );
     }
   }
 }
