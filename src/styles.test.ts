@@ -9,8 +9,10 @@ describe("global styles", () => {
     expect(styles).toContain("@media (prefers-color-scheme: dark)");
     expect(styles).toContain("color-scheme: light;");
     expect(styles).toContain("color-scheme: dark;");
-    expect(styles.match(/--background: #20264f;/g)).toHaveLength(2);
-    expect(styles).not.toContain("--background: oklch(0.145 0 0);");
+    expect(styles.match(/--background: oklch\(0.145 0 0\);/g)).toHaveLength(2);
+    expect(styles).toContain("--portfolio-page-background: var(--background);");
+    expect(styles.match(/--portfolio-page-background: #20264f;/g)).toHaveLength(2);
+    expect(styles).not.toContain("--background: #20264f;");
     expect(styles).not.toContain("@custom-variant dark (&:is(.dark *));");
   });
 
@@ -74,9 +76,9 @@ describe("global styles", () => {
     expect(meshLayer).toContain("radial-gradient");
     expect(meshLayer).toContain("to bottom");
     expect(meshLayer).toContain("transparent 40%");
-    expect(meshLayer).toContain("transparent 82%, var(--background)");
-    expect(meshLayer).toContain("transparent 48%, var(--background)");
-    expect(meshLayer).toContain("var(--background)");
+    expect(meshLayer).toContain("transparent 82%, var(--portfolio-page-background)");
+    expect(meshLayer).toContain("transparent 48%, var(--portfolio-page-background)");
+    expect(meshLayer).toContain("var(--portfolio-page-background)");
     expect(meshLayer).not.toContain("scale(");
     expect(meshLayer).not.toContain("scaleX(");
     expect(meshLayer).not.toContain("scaleY(");

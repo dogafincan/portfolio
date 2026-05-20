@@ -81,6 +81,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --portfolio-app-chrome-color: #d2f2ff;
+  --portfolio-page-background: var(--background);
   --portfolio-hero-gradient-height: 1000px;
   --portfolio-hero-mesh-pale-blue: #d2f2ff;
   --portfolio-hero-mesh-cyan: #c0edff;
@@ -92,7 +93,7 @@
 
 .dark {
   color-scheme: dark;
-  --background: #20264f;
+  --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -123,12 +124,13 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --portfolio-page-background: #20264f;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --background: #20264f;
+    --background: oklch(0.145 0 0);
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.205 0 0);
     --card-foreground: oklch(0.985 0 0);
@@ -159,6 +161,7 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
+    --portfolio-page-background: #20264f;
   }
 }
 
@@ -170,7 +173,7 @@
   html {
     @apply font-sans;
     min-height: 100%;
-    background: var(--background);
+    background: var(--portfolio-page-background);
   }
 
   body {
@@ -178,6 +181,7 @@
     position: relative;
     isolation: isolate;
     overflow-x: hidden;
+    background: var(--portfolio-page-background);
   }
 
   body::before {
@@ -198,9 +202,9 @@
         to bottom,
         transparent 0%,
         transparent 40%,
-        color-mix(in oklab, transparent 82%, var(--background)) 58%,
-        color-mix(in oklab, transparent 48%, var(--background)) 76%,
-        var(--background) 100%
+        color-mix(in oklab, transparent 82%, var(--portfolio-page-background)) 58%,
+        color-mix(in oklab, transparent 48%, var(--portfolio-page-background)) 76%,
+        var(--portfolio-page-background) 100%
       ),
       radial-gradient(
         ellipse 38% 26% at 50% 29%,
