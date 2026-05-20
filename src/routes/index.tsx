@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-const PAGE_TITLE = "Doga Fincan Portfolio";
+const PAGE_TITLE = "Doga Fincan";
 const PAGE_DESCRIPTION =
   "I'm into learning languages, nutrition and exercise, and building cool things. Reach out if you're building something interesting.";
 const SITE_URL = "https://dogafincan.com";

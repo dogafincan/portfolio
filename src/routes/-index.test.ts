@@ -29,6 +29,8 @@ describe("index route head", () => {
     expect(source).toContain('name: "twitter:image"');
     expect(source).toContain('rel: "canonical"');
     expect(source).toContain("href: SITE_URL");
+    expect(source).toContain('const PAGE_TITLE = "Doga Fincan";');
+    expect(source).not.toContain('const PAGE_TITLE = "Doga Fincan Portfolio";');
     expect(source).toContain(
       "I'm into learning languages, nutrition and exercise, and building cool things. Reach out if you're building something interesting.",
     );
