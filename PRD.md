@@ -6,18 +6,19 @@ This table tracks implementation slices for future chats. `Done` rows are
 already implemented. `Pending` rows are planned work only and should not be
 treated as complete.
 
-| Status  | Slice                                  | PRD coverage        | Commit    | Notes                                                                                                   |
-| ------- | -------------------------------------- | ------------------- | --------- | ------------------------------------------------------------------------------------------------------- |
-| Done    | Project showcase surface               | 1, 7, 8, 9, 10      | `e221b4d` | Replaces the starter page with a real portfolio route, structured sibling-project records and cards.    |
-| Done    | Shared app chrome and metadata         | 9.5-9.7, 12, 13, 15 | `e221b4d` | Adds logo assets, mesh chrome, root metadata, social preview assets, and regression coverage.           |
-| Done    | Remove project-section intro copy      | 8.1, 9.1, 13        | `3b6d334` | Removes the visible `Projects` heading/subtitle so the project cards lead the workbench.                |
-| Done    | Align project workbench container      | 8.1, 9.1, 13        | `05aff21` | Matches the portfolio workbench container to the sibling Snapshot/Airdrop workbench treatment.          |
-| Done    | Remove build-principles section        | 6, 8.1, 9.1         | `ad7c462` | Removes the extra principles section and keeps the route focused on project cards.                      |
-| Done    | Align header typography                | 8.1, 9.1, 13        | `88a46d0` | Matches the portfolio title/subtitle sizing, weight, tracking, and foreground color to sibling apps.    |
-| Done    | Remove footer/profile content          | 6, 8.1, 8.3, 13     | `96a0bc7` | Removes the visible content below the project workbench so the route ends on project cards.             |
-| Pending | Project case-study pages               | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                       |
-| Pending | Production smoke scripts and runbook   | 12, 15              | -         | Add portfolio-specific release gates when deploys need the same production-hardening depth as siblings. |
-| Pending | Contact or profile action beyond links | 7, 8.3, 9.9         | -         | Add only when the portfolio needs a direct contact or profile workflow beyond simple project links.     |
+| Status  | Slice                                | PRD coverage        | Commit    | Notes                                                                                                   |
+| ------- | ------------------------------------ | ------------------- | --------- | ------------------------------------------------------------------------------------------------------- |
+| Done    | Project showcase surface             | 1, 7, 8, 9, 10      | `e221b4d` | Replaces the starter page with a real portfolio route, structured sibling-project records and cards.    |
+| Done    | Shared app chrome and metadata       | 9.5-9.7, 12, 13, 15 | `e221b4d` | Adds logo assets, mesh chrome, root metadata, social preview assets, and regression coverage.           |
+| Done    | Remove project-section intro copy    | 8.1, 9.1, 13        | `3b6d334` | Removes the visible `Projects` heading/subtitle so the project cards lead the workbench.                |
+| Done    | Align project workbench container    | 8.1, 9.1, 13        | `05aff21` | Matches the portfolio workbench container to the sibling Snapshot/Airdrop workbench treatment.          |
+| Done    | Remove build-principles section      | 6, 8.1, 9.1         | `ad7c462` | Removes the extra principles section and keeps the route focused on project cards.                      |
+| Done    | Align header typography              | 8.1, 9.1, 13        | `88a46d0` | Matches the portfolio title/subtitle sizing, weight, tracking, and foreground color to sibling apps.    |
+| Done    | Remove footer/profile content        | 6, 8.1, 8.3, 13     | `96a0bc7` | Removes the visible content below the project workbench so the route ends on project cards.             |
+| Done    | Header social profile links          | 7, 8.1, 8.3, 9.1    | -         | Adds compact X and GitHub icon links between the header subtitle and project workbench.                 |
+| Pending | Project case-study pages             | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                       |
+| Pending | Production smoke scripts and runbook | 12, 15              | -         | Add portfolio-specific release gates when deploys need the same production-hardening depth as siblings. |
+| Pending | Contact action beyond profile links  | 7, 8.3, 9.9         | -         | Add only when the portfolio needs a direct contact workflow beyond simple profile links.                |
 
 ---
 
@@ -142,12 +143,13 @@ The product will not include by default:
 The current product includes:
 
 1. Header with portfolio logo, title, and concise subtitle.
-2. Structured sibling-project list.
-3. Project cards with app icon, name, short subtitle, and live app link.
-4. Live project links when available.
-5. App logo, favicon, install icons, manifest, and social preview image.
-6. Responsive light/dark mesh page chrome.
-7. Regression tests for shared conventions.
+2. Compact header profile links for X and GitHub.
+3. Structured sibling-project list.
+4. Project cards with app icon, name, short subtitle, and live app link.
+5. Live project links when available.
+6. App logo, favicon, install icons, manifest, and social preview image.
+7. Responsive light/dark mesh page chrome.
+8. Regression tests for shared conventions.
 
 Future scope may include:
 
@@ -164,10 +166,11 @@ The `/` route should load into a useful portfolio surface:
 
 ```text
 1. Visitor sees the logo, name, and concise positioning line.
-2. Visitor immediately sees the project workbench.
-3. Visitor scans real project cards without seeing the portfolio site listed as
+2. Visitor can open the owner's X or GitHub profile from compact header icons.
+3. Visitor immediately sees the project workbench.
+4. Visitor scans real project cards without seeing the portfolio site listed as
    its own product.
-4. Visitor opens a live project when one is available.
+5. Visitor opens a live project when one is available.
 ```
 
 Do not reintroduce a visible `Projects` intro block or a `Build Principles`
@@ -182,15 +185,19 @@ project card.
 
 ### 8.3 Contact/profile surface
 
-No separate footer/profile surface is currently shown below the workbench. Add a
-contact form, profile block, or dedicated contact route only after deciding where
-messages go, how abuse is handled, and what privacy or retention policy applies.
+X and GitHub profile links are currently shown as compact icon links in the
+header between the subtitle and project workbench. No separate footer/profile
+surface is currently shown below the workbench. Add a contact form, profile
+block, or dedicated contact route only after deciding where messages go, how
+abuse is handled, and what privacy or retention policy applies.
 
 ## 9. Functional requirements
 
 ### 9.1 Header and workbench
 
 - Header title and subtitle should use the shared sibling typography treatment.
+- Compact X and GitHub icon links should sit between the subtitle and project
+  workbench.
 - The project workbench should use the same rounded muted container treatment as
   the sibling workbenches until there is a deliberate portfolio exception.
 - The first meaningful content after the header should be real project cards.
@@ -222,6 +229,8 @@ messages go, how abuse is handled, and what privacy or retention policy applies.
   be private.
 - External links should open in a new tab and use `rel="noreferrer"`.
 - Buttons should have accessible labels that include the project name.
+- Header profile links should have accessible labels that include the profile
+  destination.
 
 ### 9.5 Metadata and manifest
 
@@ -331,12 +340,13 @@ The product is ready for the current portfolio scope when:
    conventions.
 6. Product UI icons use Lucide.
 7. Social metadata uses an absolute HTTPS image URL.
-8. The page has no visible generic project intro, build-principles filler
+8. Header X and GitHub profile links open in a new browser tab.
+9. The page has no visible generic project intro, build-principles filler
    section, or footer/profile content below the workbench.
-9. The layout has no horizontal overflow at mobile and desktop widths.
-10. `npx vp check`, `npx vp test`, and `npx vp build` pass before production
+10. The layout has no horizontal overflow at mobile and desktop widths.
+11. `npx vp check`, `npx vp test`, and `npx vp build` pass before production
     readiness is claimed.
-11. `README.md`, `AGENTS.md`, `PRD.md`, and `DESIGN.md` each document their
+12. `README.md`, `AGENTS.md`, `PRD.md`, and `DESIGN.md` each document their
     owned part of the project without duplicating broad policy.
 
 ## 16. One-paragraph product definition

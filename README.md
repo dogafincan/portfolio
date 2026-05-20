@@ -30,6 +30,7 @@ does and where to try it when a live surface is available.
 Expected content:
 
 - project index for built work outside the portfolio site itself
+- compact X and GitHub profile links in the header
 - focused project cards with product icon, name, short subtitle, and a live app
   link
 - project detail or case-study pages when a project needs more context

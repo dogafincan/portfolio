@@ -19,6 +19,10 @@ describe("PortfolioHome", () => {
     const appLogoImage = container.querySelector('[data-slot="app-logo-image"]');
     const appTitleBlock = title.parentElement;
     const appSubtitle = appTitleBlock?.querySelector("p");
+    const socialLinks = container.querySelector('[data-slot="profile-links"]');
+    const xLink = screen.getByRole("link", { name: "Open Doga Fincan on X" });
+    const githubLink = screen.getByRole("link", { name: "Open Doga Fincan on GitHub" });
+    const workbench = container.querySelector('[data-slot="portfolio-workbench"]');
 
     expect(appHeader?.className).toBe(
       "flex flex-col items-center gap-4 text-center text-slate-950",
@@ -38,6 +42,22 @@ describe("PortfolioHome", () => {
     expect(appSubtitle?.querySelector("span:last-child")?.textContent).toBe(
       "Reach out if you're building something interesting.",
     );
+    expect(socialLinks?.className).toBe("flex items-center justify-center gap-2 text-slate-950");
+    expect(socialLinks?.previousElementSibling).toBe(appTitleBlock);
+    expect(socialLinks?.parentElement).toBe(appHeader);
+    expect(workbench?.previousElementSibling).toBe(appHeader);
+    expect(xLink.getAttribute("href")).toBe("https://x.com/dogafincan");
+    expect(xLink.getAttribute("target")).toBe("_blank");
+    expect(xLink.getAttribute("rel")).toBe("noreferrer");
+    expect(githubLink.getAttribute("href")).toBe("https://github.com/dogafincan");
+    expect(githubLink.getAttribute("target")).toBe("_blank");
+    expect(githubLink.getAttribute("rel")).toBe("noreferrer");
+    for (const link of [xLink, githubLink]) {
+      expect(link.className).toBe(
+        "inline-flex size-11 items-center justify-center rounded-full text-slate-950 transition-colors hover:bg-slate-950/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/30",
+      );
+    }
+    expect(socialLinks?.querySelectorAll("svg").length).toBe(2);
     expect(appLogo?.className).toBe("relative size-15 shrink-0 overflow-hidden");
     expect(appLogoImage?.getAttribute("src")).toBe("/app-logo-120.png");
     expect(appLogoImage?.getAttribute("srcset")).toBe(
@@ -107,7 +127,8 @@ describe("PortfolioHome", () => {
     expect(
       screen.queryByText("Built with the same TanStack Start, Vite+", { exact: false }),
     ).toBeNull();
-    expect(screen.queryByRole("link", { name: "GitHub" })).toBeNull();
+    expect(screen.queryByLabelText("View Sui Airdrop source")).toBeNull();
+    expect(screen.queryByLabelText("View Sui Snapshot source")).toBeNull();
     expect(screen.queryByText("Source")).toBeNull();
     expect(screen.queryByText("Live utility")).toBeNull();
     expect(screen.queryByText("Stack")).toBeNull();
