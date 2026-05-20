@@ -31,6 +31,8 @@ describe("RootDocument head", () => {
     expect(source).toContain('media="(prefers-color-scheme: light)"');
     expect(source).toContain("content={APP_CHROME_COLOR_DARK}");
     expect(source).toContain('media="(prefers-color-scheme: dark)"');
+    expect(source).toContain("<body>");
+    expect(source).not.toContain('<body className="bg-background">');
     expect(source).toContain('rel: "manifest"');
     expect(source).toContain('href: "/manifest.json"');
     expect(source).toContain('href: "/favicon.ico"');

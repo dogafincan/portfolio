@@ -76,7 +76,7 @@ function RootDocument({ children }: { children: ReactNode }) {
         />
         <HeadContent />
       </head>
-      <body className="bg-background">
+      <body>
         {children}
         <Scripts />
       </body>
