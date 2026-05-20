@@ -81,7 +81,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --portfolio-app-chrome-color: #d2f2ff;
-  --portfolio-page-background: var(--background);
+  --portfolio-page-background: var(--portfolio-app-chrome-color);
   --portfolio-hero-gradient-height: 1000px;
   --portfolio-hero-mesh-pale-blue: #d2f2ff;
   --portfolio-hero-mesh-cyan: #c0edff;
@@ -124,7 +124,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --portfolio-page-background: #20264f;
+  --portfolio-page-background: var(--portfolio-app-chrome-color);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -161,7 +161,7 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
-    --portfolio-page-background: #20264f;
+    --portfolio-page-background: var(--portfolio-app-chrome-color);
   }
 }
 

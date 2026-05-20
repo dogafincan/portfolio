@@ -10,8 +10,11 @@ describe("global styles", () => {
     expect(styles).toContain("color-scheme: light;");
     expect(styles).toContain("color-scheme: dark;");
     expect(styles.match(/--background: oklch\(0.145 0 0\);/g)).toHaveLength(2);
-    expect(styles).toContain("--portfolio-page-background: var(--background);");
-    expect(styles.match(/--portfolio-page-background: #20264f;/g)).toHaveLength(2);
+    expect(
+      styles.match(/--portfolio-page-background: var\(--portfolio-app-chrome-color\);/g),
+    ).toHaveLength(3);
+    expect(styles).not.toContain("--portfolio-page-background: var(--background);");
+    expect(styles).not.toContain("--portfolio-page-background: #20264f;");
     expect(styles).not.toContain("--background: #20264f;");
     expect(styles).not.toContain("@custom-variant dark (&:is(.dark *));");
   });
@@ -37,16 +40,16 @@ describe("global styles", () => {
     expect(lightRoot).toContain("--portfolio-hero-mesh-purple: #f4d9f2;");
     expect(lightRoot).not.toContain("--portfolio-hero-mesh-purple: #b68ffe;");
     expect(darkClass).not.toContain("--portfolio-hero-mesh");
-    expect(darkClass).not.toContain("--portfolio-app-chrome-color");
+    expect(darkClass).not.toContain("--portfolio-app-chrome-color:");
     expect(darkMedia).not.toContain("--portfolio-hero-mesh");
-    expect(darkMedia).not.toContain("--portfolio-app-chrome-color");
+    expect(darkMedia).not.toContain("--portfolio-app-chrome-color:");
     expect(styles).not.toContain(".dark body::before");
     expect(styles).not.toContain("#5068bd 0%");
     expect(styles).not.toContain("#2189b9 43%");
     expect(styles).not.toContain("#7861c5 100%");
   });
 
-  it("uses the chrome color for the root safe-area background", () => {
+  it("uses the chrome color for root safe areas and page background", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const htmlStart = styles.indexOf("html {");
     const htmlEnd = styles.indexOf("\n  }\n\n  body", htmlStart);
@@ -58,6 +61,7 @@ describe("global styles", () => {
     expect(htmlBlock).toContain("background: var(--portfolio-app-chrome-color);");
     expect(htmlBlock).not.toContain("background: var(--portfolio-page-background);");
     expect(bodyBlock).toContain("background: var(--portfolio-page-background);");
+    expect(styles).toContain("--portfolio-app-chrome-color: #d2f2ff;");
   });
 
   it("does not use global styles to swap the header logo by theme", () => {
