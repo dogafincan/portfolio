@@ -40,11 +40,12 @@ describe("index route head", () => {
     expect(source).not.toContain("staying active");
     expect(source).not.toContain("building useful things for the web");
 
-    expect(siteUrlMatch?.[1]).toBe("https://portfolio.dogafincan.workers.dev");
+    expect(siteUrlMatch?.[1]).toBe("https://dogafincan.com");
     expect(socialImageMatch?.[1]).toMatch(/^\/og-image\.png\?v=\d+$/);
     expect(new URL(`${siteUrlMatch?.[1]}${socialImageMatch?.[1]}`).href).toBe(
-      "https://portfolio.dogafincan.workers.dev/og-image.png?v=2026052003",
+      "https://dogafincan.com/og-image.png?v=2026052004",
     );
+    expect(source).not.toContain("portfolio.dogafincan.workers.dev");
     expect(source).not.toContain('const SOCIAL_IMAGE = "/og-image.png";');
 
     expect(ogImage.subarray(0, 8).toString("hex")).toBe("89504e470d0a1a0a");

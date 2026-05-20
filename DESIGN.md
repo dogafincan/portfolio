@@ -185,6 +185,9 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 
 - Preserve the social preview contract in `src/routes/index.tsx`. Open Graph and
   X/Twitter image tags must use absolute HTTPS URLs, not root-relative paths.
+- The canonical and social-preview base URL is `https://dogafincan.com`. The
+  `www.dogafincan.com` custom domain should render the same apex canonical,
+  `og:url`, `og:image`, `og:image:secure_url`, and `twitter:image` values.
 - The current social image points to `public/og-image.png` with a cache-busting
   query. If `public/og-image.png` changes, update `SITE_URL`, the `SOCIAL_IMAGE`
   query, and `src/routes/-index.test.ts` together.
