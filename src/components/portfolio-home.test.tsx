@@ -86,21 +86,31 @@ describe("PortfolioHome", () => {
       expect(screen.getByText(project.subtitle)).toBeTruthy();
       expect(screen.queryByLabelText(`View ${project.name} source`)).toBeNull();
 
-      const iconPanel = container.querySelector(
-        `[data-slot="project-icon-panel"][data-project="${project.slug}"]`,
+      const summaryItem = container.querySelector(
+        `[data-slot="project-summary-item"][data-project="${project.slug}"]`,
       );
       const icon = screen.getByAltText(project.iconAlt);
-      expect(iconPanel?.className).toBe(
-        "group/item flex w-full flex-wrap items-center rounded-2xl border text-sm transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 [a]:transition-colors [a]:hover:bg-muted border-transparent bg-muted/50 gap-3.5 min-h-32 justify-center overflow-hidden p-6 sm:min-h-36",
+      const iconMedia = summaryItem?.querySelector('[data-slot="item-media"]');
+      const itemContent = summaryItem?.querySelector('[data-slot="item-content"]');
+      const itemTitle = summaryItem?.querySelector('[data-slot="item-title"]');
+      const itemDescription = summaryItem?.querySelector('[data-slot="item-description"]');
+      expect(summaryItem?.className).toBe(
+        "group/item flex w-full items-center rounded-2xl border text-sm transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 [a]:transition-colors [a]:hover:bg-muted border-transparent bg-muted/50 gap-3.5 px-4 py-3.5 min-h-32 flex-nowrap overflow-hidden sm:min-h-36",
       );
-      expect(iconPanel?.firstElementChild).toBe(icon);
+      expect(summaryItem?.firstElementChild).toBe(iconMedia);
+      expect(iconMedia?.firstElementChild).toBe(icon);
+      expect(iconMedia?.nextElementSibling).toBe(itemContent);
+      expect(itemContent?.contains(itemTitle ?? null)).toBe(true);
+      expect(itemContent?.contains(itemDescription ?? null)).toBe(true);
+      expect(itemTitle?.querySelector("h3")?.textContent).toBe(project.name);
+      expect(itemDescription?.textContent).toBe(project.subtitle);
+      expect(summaryItem?.querySelector('[data-slot="card-title"]')).toBeNull();
+      expect(summaryItem?.querySelector('[data-slot="card-description"]')).toBeNull();
       expect(icon.getAttribute("data-slot")).toBe("project-icon");
       expect(icon.getAttribute("src")).toBe(project.icon);
       expect(icon.getAttribute("width")).toBe("60");
       expect(icon.getAttribute("height")).toBe("60");
-      expect(icon.className).toBe(
-        "size-15 rounded-[1.125rem] shadow-[0_1rem_2.5rem_rgb(15_23_42/0.14)]",
-      );
+      expect(icon.className).toBe("size-full rounded-[1.125rem]");
 
       expect(screen.getByLabelText(`Open ${project.name} app`).getAttribute("href")).toBe(
         project.liveUrl,
@@ -146,11 +156,15 @@ describe("PortfolioHome", () => {
     expect(container.querySelectorAll('[data-slot="project-icon"]').length).toBe(
       portfolioProjects.length,
     );
-    expect(container.querySelectorAll('[data-slot="project-icon-panel"]').length).toBe(
+    expect(container.querySelectorAll('[data-slot="project-summary-item"]').length).toBe(
       portfolioProjects.length,
     );
-    expect(container.querySelector('[data-slot="project-icon-panel"][style]')).toBeNull();
-    expect(container.querySelector('[data-slot="project-icon-panel"].bg-muted\\/50')).toBeTruthy();
+    expect(container.querySelector('[data-slot="project-summary-item"][style]')).toBeNull();
+    expect(
+      container.querySelector('[data-slot="project-summary-item"].bg-muted\\/50'),
+    ).toBeTruthy();
+    expect(container.querySelectorAll('[data-slot="card-title"]').length).toBe(0);
+    expect(container.querySelectorAll('[data-slot="card-description"]').length).toBe(0);
     expect(screen.getAllByRole("link", { name: /Open .* app/ }).length).toBe(
       portfolioProjects.length,
     );

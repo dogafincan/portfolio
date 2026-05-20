@@ -155,10 +155,10 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   before creating one-off project markup.
 - Each card should show only the product-owned app icon, the app's exact title,
   the app's exact subtitle, and a live app link.
-- Wrap each product icon in a full-width logo panel inside the card padding.
-  The panel should contain only the icon and use the shadcn `Item` muted variant
-  treatment exactly, including `border-transparent bg-muted/50`, in both light
-  and dark mode. Do not apply project-specific mesh gradients to logo panels.
+- Place each product icon, project title, and project subtitle together inside
+  one full-width shadcn `Item` using the muted variant. Keep the icon on the
+  left, vertically centered, with the title and subtitle stacked to the right.
+  The live app button stays outside the `Item` in the card footer.
 - Do not show status badges, role text, stack metadata, implementation
   highlights, source links, or large preview images in project cards for now.
   Move that depth into future case-study pages if needed.

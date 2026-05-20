@@ -216,10 +216,9 @@ abuse is handled, and what privacy or retention policy applies.
 ### 9.3 Project cards
 
 - Render one card for each project record.
-- Use real product-owned app icons inside the muted `Item`-style logo panel
-  defined in `DESIGN.md`.
-- Show only the project icon, app-matched name, app-matched subtitle, and live
-  app link.
+- Use real product-owned app icons, app-matched names, and app-matched subtitles
+  inside the muted `Item` summary defined in `DESIGN.md`.
+- Keep the live app link outside the summary item as the card footer action.
 - Do not show status, role, stack, implementation highlights, source links, or
   large preview images in project cards for now.
 - Do not nest cards inside project cards.
