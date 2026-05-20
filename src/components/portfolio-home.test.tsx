@@ -59,12 +59,21 @@ describe("PortfolioHome", () => {
       expect(screen.getByText(project.subtitle)).toBeTruthy();
       expect(screen.queryByLabelText(`View ${project.name} source`)).toBeNull();
 
+      const iconPanel = container.querySelector(
+        `[data-slot="project-icon-panel"][data-project="${project.slug}"]`,
+      );
       const icon = screen.getByAltText(project.iconAlt);
+      expect(iconPanel?.className).toBe(
+        "flex min-h-32 w-full items-center justify-center overflow-hidden rounded-[2rem] p-6 sm:min-h-36",
+      );
+      expect(iconPanel?.firstElementChild).toBe(icon);
       expect(icon.getAttribute("data-slot")).toBe("project-icon");
       expect(icon.getAttribute("src")).toBe(project.icon);
       expect(icon.getAttribute("width")).toBe("60");
       expect(icon.getAttribute("height")).toBe("60");
-      expect(icon.className).toBe("size-15 justify-self-center rounded-[1.125rem]");
+      expect(icon.className).toBe(
+        "size-15 rounded-[1.125rem] shadow-[0_1rem_2.5rem_rgb(15_23_42/0.14)]",
+      );
 
       expect(screen.getByLabelText(`Open ${project.name} app`).getAttribute("href")).toBe(
         project.liveUrl,
@@ -109,6 +118,22 @@ describe("PortfolioHome", () => {
     expect(container.querySelectorAll('[data-slot="project-icon"]').length).toBe(
       portfolioProjects.length,
     );
+    expect(container.querySelectorAll('[data-slot="project-icon-panel"]').length).toBe(
+      portfolioProjects.length,
+    );
+    const airdropIconPanel = container.querySelector<HTMLElement>(
+      '[data-slot="project-icon-panel"][data-project="sui-airdrop"]',
+    );
+    const snapshotIconPanel = container.querySelector<HTMLElement>(
+      '[data-slot="project-icon-panel"][data-project="sui-snapshot"]',
+    );
+
+    expect(airdropIconPanel?.style.backgroundColor).toBe("rgb(255, 240, 234)");
+    expect(airdropIconPanel?.style.backgroundImage).toContain("radial-gradient");
+    expect(airdropIconPanel?.style.backgroundImage).toContain("rgb(234, 217, 255)");
+    expect(snapshotIconPanel?.style.backgroundColor).toBe("rgb(231, 240, 255)");
+    expect(snapshotIconPanel?.style.backgroundImage).toContain("radial-gradient");
+    expect(snapshotIconPanel?.style.backgroundImage).toContain("rgb(220, 213, 255)");
     expect(screen.getAllByRole("link", { name: /Open .* app/ }).length).toBe(
       portfolioProjects.length,
     );

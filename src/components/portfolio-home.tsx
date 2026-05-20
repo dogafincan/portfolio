@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import type { CSSProperties } from "react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +10,21 @@ const HEADER_LOGO = "/app-logo-120.png";
 const HEADER_LOGO_SRCSET = "/app-logo-120.png 120w, /apple-touch-icon.png 180w";
 const WORKBENCH_CONTAINER_CLASS_NAME =
   "grid w-full min-w-0 max-w-full flex-1 grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background";
+const PROJECT_ICON_PANEL_CLASS_NAME =
+  "flex min-h-32 w-full items-center justify-center overflow-hidden rounded-[2rem] p-6 sm:min-h-36";
+
+const PROJECT_ICON_PANEL_STYLES: Record<string, CSSProperties> = {
+  "sui-airdrop": {
+    backgroundColor: "#fff0ea",
+    backgroundImage:
+      "radial-gradient(circle at 16% 18%, #fff4f0 0%, transparent 38%), radial-gradient(circle at 84% 18%, #ead9ff 0%, transparent 36%), radial-gradient(circle at 24% 82%, #ffe0c2 0%, transparent 40%), radial-gradient(circle at 78% 78%, #ffc1d8 0%, transparent 42%), linear-gradient(135deg, #fff4f0 0%, #ffd2c7 38%, #ffd6ec 68%, #d8d7ff 100%)",
+  },
+  "sui-snapshot": {
+    backgroundColor: "#e7f0ff",
+    backgroundImage:
+      "radial-gradient(circle at 16% 18%, #e9e7ff 0%, transparent 38%), radial-gradient(circle at 84% 20%, #dcd5ff 0%, transparent 36%), radial-gradient(circle at 24% 82%, #d9f7ff 0%, transparent 40%), radial-gradient(circle at 78% 78%, #c9e3ff 0%, transparent 42%), linear-gradient(135deg, #e7f0ff 0%, #d6edff 38%, #dcdfff 68%, #dcd5ff 100%)",
+  },
+};
 
 function ProjectCard({
   project,
@@ -20,16 +36,23 @@ function ProjectCard({
   return (
     <Card className="min-w-0">
       <CardHeader className="gap-4">
-        <img
-          data-slot="project-icon"
-          src={project.icon}
-          alt={project.iconAlt}
-          width="60"
-          height="60"
-          loading={loading}
-          decoding="async"
-          className="size-15 justify-self-center rounded-[1.125rem]"
-        />
+        <div
+          data-slot="project-icon-panel"
+          data-project={project.slug}
+          className={PROJECT_ICON_PANEL_CLASS_NAME}
+          style={PROJECT_ICON_PANEL_STYLES[project.slug]}
+        >
+          <img
+            data-slot="project-icon"
+            src={project.icon}
+            alt={project.iconAlt}
+            width="60"
+            height="60"
+            loading={loading}
+            decoding="async"
+            className="size-15 rounded-[1.125rem] shadow-[0_1rem_2.5rem_rgb(15_23_42/0.14)]"
+          />
+        </div>
         <CardTitle>
           <h3 className="m-0">{project.name}</h3>
         </CardTitle>
