@@ -173,7 +173,7 @@
   html {
     @apply font-sans;
     min-height: 100%;
-    background: var(--portfolio-page-background);
+    background: var(--portfolio-app-chrome-color);
   }
 
   body {

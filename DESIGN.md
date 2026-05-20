@@ -37,7 +37,9 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   colors so the projects keep distinct identities.
 - The browser safe-area color must equal the top color of the mesh exactly.
   Match `theme-color`, manifest colors, and CSS chrome variables to that top
-  mesh color. Use a soft fade from the top color into the mesh instead of a hard
+  mesh color. Keep the root `html` background on that same chrome color because
+  iOS Safari can paint notched safe areas from the document root before the body
+  mesh begins. Use a soft fade from the top color into the mesh instead of a hard
   browser-chrome strip.
 - In dark mode, the page background visible beyond the mesh should continue as
   a darker portfolio mesh-tail color, not neutral black. Keep this page/chrome

@@ -46,6 +46,20 @@ describe("global styles", () => {
     expect(styles).not.toContain("#7861c5 100%");
   });
 
+  it("uses the chrome color for the root safe-area background", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const htmlStart = styles.indexOf("html {");
+    const htmlEnd = styles.indexOf("\n  }\n\n  body", htmlStart);
+    const bodyStart = styles.indexOf("body {", htmlEnd);
+    const bodyEnd = styles.indexOf("\n  }\n\n  body::before", bodyStart);
+    const htmlBlock = styles.slice(htmlStart, htmlEnd);
+    const bodyBlock = styles.slice(bodyStart, bodyEnd);
+
+    expect(htmlBlock).toContain("background: var(--portfolio-app-chrome-color);");
+    expect(htmlBlock).not.toContain("background: var(--portfolio-page-background);");
+    expect(bodyBlock).toContain("background: var(--portfolio-page-background);");
+  });
+
   it("does not use global styles to swap the header logo by theme", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
