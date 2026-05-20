@@ -9,6 +9,8 @@ describe("global styles", () => {
     expect(styles).toContain("@media (prefers-color-scheme: dark)");
     expect(styles).toContain("color-scheme: light;");
     expect(styles).toContain("color-scheme: dark;");
+    expect(styles.match(/--background: #20264f;/g)).toHaveLength(2);
+    expect(styles).not.toContain("--background: oklch(0.145 0 0);");
     expect(styles).not.toContain("@custom-variant dark (&:is(.dark *));");
   });
 
