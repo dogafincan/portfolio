@@ -158,7 +158,9 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Place each product icon, project title, and project subtitle together inside
   one full-width shadcn `Item` using the muted variant. Keep the icon on the
   left, vertically centered, with the title and subtitle stacked to the right.
-  The live app button stays outside the `Item` in the card footer.
+  Logos should render as a 45px rounded square, about 75% of the original 60px
+  size, with a neutral gray border and no drop shadow. The live app button stays
+  outside the `Item` in the card footer.
 - Do not show status badges, role text, stack metadata, implementation
   highlights, source links, or large preview images in project cards for now.
   Move that depth into future case-study pages if needed.

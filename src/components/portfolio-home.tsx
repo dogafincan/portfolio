@@ -14,7 +14,7 @@ const WORKBENCH_CONTAINER_CLASS_NAME =
   "grid w-full min-w-0 max-w-full flex-1 grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background";
 const PROJECT_SUMMARY_ITEM_CLASS_NAME = "min-h-32 flex-nowrap overflow-hidden sm:min-h-36";
 const PROJECT_ICON_MEDIA_CLASS_NAME =
-  "size-15 overflow-visible rounded-[1.125rem] shadow-[0_1rem_2.5rem_rgb(15_23_42/0.14)]";
+  "size-[2.8125rem] overflow-hidden rounded-[0.875rem] border border-border bg-background";
 const PROFILE_LINK_CLASS_NAME =
   "inline-flex size-11 items-center justify-center rounded-full text-slate-950 transition-colors hover:bg-slate-950/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/30";
 
@@ -67,11 +67,11 @@ function ProjectCard({
               data-slot="project-icon"
               src={project.icon}
               alt={project.iconAlt}
-              width="60"
-              height="60"
+              width="45"
+              height="45"
               loading={loading}
               decoding="async"
-              className="size-full rounded-[1.125rem]"
+              className="size-full object-cover"
             />
           </ItemMedia>
           <ItemContent className="min-w-0">

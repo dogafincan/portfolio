@@ -97,6 +97,9 @@ describe("PortfolioHome", () => {
       expect(summaryItem?.className).toBe(
         "group/item flex w-full items-center rounded-2xl border text-sm transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 [a]:transition-colors [a]:hover:bg-muted border-transparent bg-muted/50 gap-3.5 px-4 py-3.5 min-h-32 flex-nowrap overflow-hidden sm:min-h-36",
       );
+      expect(iconMedia?.className).toBe(
+        "flex shrink-0 items-center justify-center gap-2 self-center [&_svg]:pointer-events-none [&_svg]:text-current size-[2.8125rem] overflow-hidden rounded-[0.875rem] border border-border bg-background",
+      );
       expect(summaryItem?.firstElementChild).toBe(iconMedia);
       expect(iconMedia?.firstElementChild).toBe(icon);
       expect(iconMedia?.nextElementSibling).toBe(itemContent);
@@ -108,9 +111,9 @@ describe("PortfolioHome", () => {
       expect(summaryItem?.querySelector('[data-slot="card-description"]')).toBeNull();
       expect(icon.getAttribute("data-slot")).toBe("project-icon");
       expect(icon.getAttribute("src")).toBe(project.icon);
-      expect(icon.getAttribute("width")).toBe("60");
-      expect(icon.getAttribute("height")).toBe("60");
-      expect(icon.className).toBe("size-full rounded-[1.125rem]");
+      expect(icon.getAttribute("width")).toBe("45");
+      expect(icon.getAttribute("height")).toBe("45");
+      expect(icon.className).toBe("size-full object-cover");
 
       expect(screen.getByLabelText(`Open ${project.name} app`).getAttribute("href")).toBe(
         project.liveUrl,
@@ -163,6 +166,11 @@ describe("PortfolioHome", () => {
     expect(
       container.querySelector('[data-slot="project-summary-item"].bg-muted\\/50'),
     ).toBeTruthy();
+    expect(
+      container.querySelector(
+        '[data-slot="item-media"].shadow-\\[0_1rem_2\\.5rem_rgb\\(15_23_42\\/0\\.14\\)\\]',
+      ),
+    ).toBeNull();
     expect(container.querySelectorAll('[data-slot="card-title"]').length).toBe(0);
     expect(container.querySelectorAll('[data-slot="card-description"]').length).toBe(0);
     expect(screen.getAllByRole("link", { name: /Open .* app/ }).length).toBe(
