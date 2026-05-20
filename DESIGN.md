@@ -35,16 +35,15 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   visually identical in light and dark mode, while the workbench and everything
   inside it continue to follow system color mode. Each app chooses its own mesh
   colors so the projects keep distinct identities.
-- The browser safe-area color must equal the top color of the mesh exactly.
-  Match `theme-color`, manifest colors, and CSS chrome variables to that top
-  mesh color. Keep the root `html` background on that same chrome color because
-  iOS Safari can paint notched safe areas from the document root before the body
-  mesh begins. Use a soft fade from the top color into the mesh instead of a hard
-  browser-chrome strip.
-- In dark mode, the page background visible beyond the mesh should continue as
-  a darker portfolio mesh-tail color, not neutral black. Keep this page/chrome
-  background separate from workbench, card, and form surface tokens so those
-  surfaces continue to follow system color mode.
+- The browser safe-area color and the visible page background beyond the mesh
+  must equal the top color of the mesh exactly in both light and dark mode.
+  Match `theme-color`, manifest colors, CSS chrome variables, the root `html`
+  background, and the body page background to that top mesh color. iOS Safari can
+  paint notched safe areas from the document root before the body mesh begins,
+  and the bottom browser chrome can reveal the same page background the mesh
+  fades into.
+- Keep the shared chrome color separate from workbench, card, and form surface
+  tokens so those surfaces continue to follow system color mode.
 - Respect system dark mode. Do not add a manual theme switch unless the product
   explicitly needs one.
 - Use the shared logo asset pattern: favicon, install icons, header logo, and

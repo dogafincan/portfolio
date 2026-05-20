@@ -17,6 +17,7 @@ treated as complete.
 | Done    | Remove footer/profile content        | 6, 8.1, 8.3, 13     | `96a0bc7` | Removes the visible content below the project workbench so the route ends on project cards.             |
 | Done    | Header social profile links          | 7, 8.1, 8.3, 9.1    | -         | Adds compact X and GitHub icon links between the header subtitle and project workbench.                 |
 | Done    | Desktop viewport vertical centering  | 8.1, 9.1, 13        | -         | Centers the header and workbench on desktop when the first viewport has spare space below the cards.    |
+| Done    | Unified page chrome background       | 9.5, 9.7, 13        | -         | Aligns top safe areas, bottom page background, theme color, and mesh tail to the same chrome color.     |
 | Pending | Project case-study pages             | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                       |
 | Pending | Production smoke scripts and runbook | 12, 15              | -         | Add portfolio-specific release gates when deploys need the same production-hardening depth as siblings. |
 | Pending | Contact action beyond profile links  | 7, 8.3, 9.9         | -         | Add only when the portfolio needs a direct contact workflow beyond simple profile links.                |

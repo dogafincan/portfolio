@@ -124,9 +124,9 @@ Design principles that should remain visible in day-to-day work:
 - Show real project content early.
 - Use the shared mesh chrome, app logo system, Inter preload, Lucide icons,
   shadcn/Base UI primitives, and rounded muted workbench.
-- Treat the mesh chrome as app identity: the safe-area and theme color match
-  the top of the mesh, while dark mode fades into a darker mesh-tail color
-  instead of neutral black.
+- Treat the mesh chrome as app identity: safe areas, theme color, manifest
+  color, and the visible page background at the top and bottom of the app match
+  the top of the mesh in both light and dark mode.
 - Keep project cards scannable, responsive, and backed by structured content.
 - Explain what projects do before naming libraries or infrastructure.
 - Avoid generic hero filler, decorative principles sections, fake metrics, and
