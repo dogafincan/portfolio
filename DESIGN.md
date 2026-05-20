@@ -136,6 +136,10 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Keep `Reach out if you're building something interesting.` in a second
   subtitle sentence span with `md:block` so larger screens do not flatten the
   full subtitle into one long line.
+- On desktop, vertically center the header, profile links, and project workbench
+  inside the first viewport when the current project count leaves spare space
+  below the workbench. Keep the mobile flow top-first so stacked project cards
+  remain easy to scan from the initial load position.
 - Keep the project workbench class aligned with the sibling workbench container
   until there is a deliberate portfolio-specific exception:
   `grid w-full min-w-0 max-w-full flex-1 grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background`.

@@ -14,6 +14,7 @@ describe("PortfolioHome", () => {
   it("renders the portfolio header and real project cards", () => {
     const { container } = render(<PortfolioHome />);
     const title = screen.getByRole("heading", { level: 1, name: "Doga Fincan" });
+    const main = container.querySelector("main");
     const appHeader = title.closest("header");
     const appLogo = container.querySelector('[data-slot="app-logo"]');
     const appLogoImage = container.querySelector('[data-slot="app-logo-image"]');
@@ -24,6 +25,12 @@ describe("PortfolioHome", () => {
     const githubLink = screen.getByRole("link", { name: "Open Doga Fincan on GitHub" });
     const workbench = container.querySelector('[data-slot="portfolio-workbench"]');
 
+    expect(main?.className).toBe(
+      "flex min-h-screen flex-col px-4 py-6 text-foreground sm:px-6 lg:justify-center lg:px-8",
+    );
+    expect(main?.firstElementChild?.className).toBe(
+      "mx-auto flex w-full max-w-6xl flex-col gap-8 py-8 sm:py-10",
+    );
     expect(appHeader?.className).toBe(
       "flex flex-col items-center gap-4 text-center text-slate-950",
     );
