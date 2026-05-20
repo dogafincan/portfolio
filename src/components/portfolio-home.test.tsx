@@ -61,12 +61,12 @@ describe("PortfolioHome", () => {
     expect(githubLink.getAttribute("rel")).toBe("noreferrer");
     for (const link of [xLink, githubLink]) {
       expect(link.className).toBe(
-        "inline-flex size-[4.125rem] items-center justify-center rounded-full text-slate-950 transition-colors hover:bg-slate-950/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/30",
+        "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-slate-950 transition-colors hover:bg-slate-950/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/30",
       );
     }
     expect(socialLinks?.querySelectorAll("svg").length).toBe(2);
     for (const icon of socialLinks?.querySelectorAll("svg") ?? []) {
-      expect(icon.className.baseVal).toBe("size-[1.875rem]");
+      expect(icon.className.baseVal).toBe("size-[1.5625rem]");
     }
     expect(appLogo?.className).toBe("relative size-15 shrink-0 overflow-hidden");
     expect(appLogoImage?.getAttribute("src")).toBe("/app-logo-120.png");
