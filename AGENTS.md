@@ -41,6 +41,11 @@ explicitly needed.
 - Use `DESIGN.md` as the source of truth for UI, copy, icon, layout, alert,
   social-preview, responsive, and loading-state rules instead of duplicating
   that guidance here.
+- For mesh chrome changes, inspect `src/styles.css`, `src/routes/__root.tsx`,
+  `public/manifest.json`, `src/styles.test.ts`, and `src/routes/-__root.test.ts`
+  together. The browser safe-area and `theme-color` must match the top of the
+  mesh, and the dark-mode page background should continue the mesh tail without
+  changing workbench or card surface tokens.
 - When work is product-scope driven, inspect the `PRD.md` implementation
   progress table first and update it precisely with `Done`/`Pending` status.
 - Do not add Sui wallet flows, transaction signing, Mysten SDK dependencies,

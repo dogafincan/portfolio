@@ -39,6 +39,10 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   Match `theme-color`, manifest colors, and CSS chrome variables to that top
   mesh color. Use a soft fade from the top color into the mesh instead of a hard
   browser-chrome strip.
+- In dark mode, the page background visible beyond the mesh should continue as
+  a darker portfolio mesh-tail color, not neutral black. Keep this page/chrome
+  background separate from workbench, card, and form surface tokens so those
+  surfaces continue to follow system color mode.
 - Respect system dark mode. Do not add a manual theme switch unless the product
   explicitly needs one.
 - Use the shared logo asset pattern: favicon, install icons, header logo, and

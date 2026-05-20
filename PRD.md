@@ -205,7 +205,8 @@ messages go, how abuse is handled, and what privacy or retention policy applies.
 ### 9.3 Project cards
 
 - Render one card for each project record.
-- Use real product-owned app icons.
+- Use real product-owned app icons inside the decorative logo panel defined in
+  `DESIGN.md`.
 - Show only the project icon, name, short subtitle, and live app link.
 - Do not show status, role, stack, implementation highlights, source links, or
   large preview images in project cards for now.
