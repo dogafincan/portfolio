@@ -141,7 +141,8 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Wrap each product icon in a full-width decorative logo panel inside the card
   padding. The panel should contain only the icon, use a radius that relates to
   the project card radius, and use a small mesh gradient made from that
-  project's light-mode mesh colors.
+  project's mesh colors: pastel versions in light mode and darker companion
+  versions in dark mode.
 - Do not show status badges, role text, stack metadata, implementation
   highlights, source links, or large preview images in project cards for now.
   Move that depth into future case-study pages if needed.

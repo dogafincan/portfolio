@@ -84,4 +84,24 @@ describe("global styles", () => {
     expect(meshLayer).not.toContain("scaleY(");
     expect(meshLayer).not.toContain("url(");
   });
+
+  it("uses project-specific logo panel meshes in light and dark mode", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const panelStylesStart = styles.indexOf('[data-slot="project-icon-panel"]');
+    const panelStyles = styles.slice(panelStylesStart);
+
+    expect(panelStyles).toContain('[data-slot="project-icon-panel"][data-project="sui-airdrop"]');
+    expect(panelStyles).toContain('[data-slot="project-icon-panel"][data-project="sui-snapshot"]');
+    expect(panelStyles).toContain("background-color: #fff0ea;");
+    expect(panelStyles).toContain("background-color: #e7f0ff;");
+    expect(panelStyles).toContain("#ead9ff");
+    expect(panelStyles).toContain("#dcd5ff");
+    expect(panelStyles).toContain('.dark [data-slot="project-icon-panel"]');
+    expect(panelStyles).toContain("@media (prefers-color-scheme: dark)");
+    expect(panelStyles.match(/background-color: #3a2348;/g)).toHaveLength(2);
+    expect(panelStyles.match(/background-color: #172d4d;/g)).toHaveLength(2);
+    expect(panelStyles).toContain("#5a2f50");
+    expect(panelStyles).toContain("#3d3575");
+    expect(panelStyles).not.toContain("PROJECT_ICON_PANEL_STYLES");
+  });
 });

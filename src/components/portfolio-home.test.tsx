@@ -121,19 +121,7 @@ describe("PortfolioHome", () => {
     expect(container.querySelectorAll('[data-slot="project-icon-panel"]').length).toBe(
       portfolioProjects.length,
     );
-    const airdropIconPanel = container.querySelector<HTMLElement>(
-      '[data-slot="project-icon-panel"][data-project="sui-airdrop"]',
-    );
-    const snapshotIconPanel = container.querySelector<HTMLElement>(
-      '[data-slot="project-icon-panel"][data-project="sui-snapshot"]',
-    );
-
-    expect(airdropIconPanel?.style.backgroundColor).toBe("rgb(255, 240, 234)");
-    expect(airdropIconPanel?.style.backgroundImage).toContain("radial-gradient");
-    expect(airdropIconPanel?.style.backgroundImage).toContain("rgb(234, 217, 255)");
-    expect(snapshotIconPanel?.style.backgroundColor).toBe("rgb(231, 240, 255)");
-    expect(snapshotIconPanel?.style.backgroundImage).toContain("radial-gradient");
-    expect(snapshotIconPanel?.style.backgroundImage).toContain("rgb(220, 213, 255)");
+    expect(container.querySelector('[data-slot="project-icon-panel"][style]')).toBeNull();
     expect(screen.getAllByRole("link", { name: /Open .* app/ }).length).toBe(
       portfolioProjects.length,
     );

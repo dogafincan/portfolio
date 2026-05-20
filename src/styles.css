@@ -250,3 +250,67 @@
     @apply font-mono;
   }
 }
+
+@layer components {
+  [data-slot="project-icon-panel"][data-project="sui-airdrop"] {
+    background-color: #fff0ea;
+    background-image:
+      radial-gradient(circle at 16% 18%, #fff4f0 0%, transparent 38%),
+      radial-gradient(circle at 84% 18%, #ead9ff 0%, transparent 36%),
+      radial-gradient(circle at 24% 82%, #ffe0c2 0%, transparent 40%),
+      radial-gradient(circle at 78% 78%, #ffc1d8 0%, transparent 42%),
+      linear-gradient(135deg, #fff4f0 0%, #ffd2c7 38%, #ffd6ec 68%, #d8d7ff 100%);
+  }
+
+  [data-slot="project-icon-panel"][data-project="sui-snapshot"] {
+    background-color: #e7f0ff;
+    background-image:
+      radial-gradient(circle at 16% 18%, #e9e7ff 0%, transparent 38%),
+      radial-gradient(circle at 84% 20%, #dcd5ff 0%, transparent 36%),
+      radial-gradient(circle at 24% 82%, #d9f7ff 0%, transparent 40%),
+      radial-gradient(circle at 78% 78%, #c9e3ff 0%, transparent 42%),
+      linear-gradient(135deg, #e7f0ff 0%, #d6edff 38%, #dcdfff 68%, #dcd5ff 100%);
+  }
+
+  .dark [data-slot="project-icon-panel"][data-project="sui-airdrop"] {
+    background-color: #3a2348;
+    background-image:
+      radial-gradient(circle at 16% 18%, #5a2f50 0%, transparent 38%),
+      radial-gradient(circle at 84% 18%, #4d3974 0%, transparent 36%),
+      radial-gradient(circle at 24% 82%, #7b4639 0%, transparent 40%),
+      radial-gradient(circle at 78% 78%, #733355 0%, transparent 42%),
+      linear-gradient(135deg, #4a2a45 0%, #6b3d47 38%, #6d365d 68%, #3f3766 100%);
+  }
+
+  .dark [data-slot="project-icon-panel"][data-project="sui-snapshot"] {
+    background-color: #172d4d;
+    background-image:
+      radial-gradient(circle at 16% 18%, #33406f 0%, transparent 38%),
+      radial-gradient(circle at 84% 20%, #3d3575 0%, transparent 36%),
+      radial-gradient(circle at 24% 82%, #22536e 0%, transparent 40%),
+      radial-gradient(circle at 78% 78%, #254677 0%, transparent 42%),
+      linear-gradient(135deg, #172d4d 0%, #1f4d78 38%, #303f76 68%, #3d3575 100%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    [data-slot="project-icon-panel"][data-project="sui-airdrop"] {
+      background-color: #3a2348;
+      background-image:
+        radial-gradient(circle at 16% 18%, #5a2f50 0%, transparent 38%),
+        radial-gradient(circle at 84% 18%, #4d3974 0%, transparent 36%),
+        radial-gradient(circle at 24% 82%, #7b4639 0%, transparent 40%),
+        radial-gradient(circle at 78% 78%, #733355 0%, transparent 42%),
+        linear-gradient(135deg, #4a2a45 0%, #6b3d47 38%, #6d365d 68%, #3f3766 100%);
+    }
+
+    [data-slot="project-icon-panel"][data-project="sui-snapshot"] {
+      background-color: #172d4d;
+      background-image:
+        radial-gradient(circle at 16% 18%, #33406f 0%, transparent 38%),
+        radial-gradient(circle at 84% 20%, #3d3575 0%, transparent 36%),
+        radial-gradient(circle at 24% 82%, #22536e 0%, transparent 40%),
+        radial-gradient(circle at 78% 78%, #254677 0%, transparent 42%),
+        linear-gradient(135deg, #172d4d 0%, #1f4d78 38%, #303f76 68%, #3d3575 100%);
+    }
+  }
+}
