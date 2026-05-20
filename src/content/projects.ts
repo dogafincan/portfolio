@@ -11,8 +11,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     name: "Sui Airdrop",
     slug: "sui-airdrop",
-    subtitle:
-      "Turns a Sui Snapshot CSV into a previewed, funded, backend-executed airdrop campaign.",
+    subtitle: "Create a fixed-amount token airdrop from a Sui Snapshot CSV.",
     icon: "/projects/sui-airdrop-icon.png",
     iconAlt: "Sui Airdrop app icon.",
     liveUrl: "https://sui-airdrop.dogafincan.workers.dev",
@@ -21,7 +20,7 @@ export const portfolioProjects: PortfolioProject[] = [
     name: "Sui Snapshot",
     slug: "sui-snapshot",
     subtitle:
-      "Creates ranked holder lists for Sui coins or NFT collections and exports the rows as a clean CSV.",
+      "Generate a ranked holder list for a Sui coin or NFT collection and export it as CSV.",
     icon: "/projects/sui-snapshot-icon.png",
     iconAlt: "Sui Snapshot app icon.",
     liveUrl: "https://sui-snapshot.dogafincan.workers.dev",

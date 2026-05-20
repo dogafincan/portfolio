@@ -140,8 +140,8 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 
 - Project data lives in `src/content/projects.ts`. Extend that structured data
   before creating one-off project markup.
-- Each card should show only the product-owned app icon, name, short subtitle,
-  and a live app link.
+- Each card should show only the product-owned app icon, the app's exact title,
+  the app's exact subtitle, and a live app link.
 - Wrap each product icon in a full-width decorative logo panel inside the card
   padding. The panel should contain only the icon, use a radius that relates to
   the project card radius, and use a small mesh gradient made from that
@@ -160,8 +160,8 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Explain what the project does before naming libraries or infrastructure.
 - Keep copy concrete and phase-accurate. Do not imply projects are live,
   production-ready, or complete unless the project record and links support it.
-- Keep project-card subtitles concise. Save implementation detail for future
-  case-study pages.
+- Keep project-card subtitles matched to the apps themselves. Save
+  implementation detail for future case-study pages.
 - Avoid decorative product principles, generic claims, and repeated manifesto
   copy that delays access to the project list.
 - Technical depth belongs in future case-study pages when a project needs that

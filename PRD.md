@@ -199,6 +199,8 @@ messages go, how abuse is handled, and what privacy or retention policy applies.
 
 - Project content lives in `src/content/projects.ts`.
 - Each project record includes name, slug, subtitle, icon, iconAlt, and liveUrl.
+- Project names and subtitles should exactly match the corresponding app's
+  current title and subtitle.
 - Do not list the portfolio website as one of its own projects.
 - `liveUrl` should only point to a useful public app surface.
 
@@ -207,7 +209,8 @@ messages go, how abuse is handled, and what privacy or retention policy applies.
 - Render one card for each project record.
 - Use real product-owned app icons inside the decorative logo panel defined in
   `DESIGN.md`.
-- Show only the project icon, name, short subtitle, and live app link.
+- Show only the project icon, app-matched name, app-matched subtitle, and live
+  app link.
 - Do not show status, role, stack, implementation highlights, source links, or
   large preview images in project cards for now.
 - Do not nest cards inside project cards.
