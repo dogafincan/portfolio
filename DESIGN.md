@@ -122,10 +122,10 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - The header subtitle should feel informal and personal: language learning,
   nutrition and exercise, building things, and inviting interesting builder
   conversations are part of the positioning.
-- Place compact X and GitHub icon-only links after the title/subtitle block and
-  before the project workbench. The links should inherit the header color,
-  remain at least `44px` square, open in a new tab, and use accessible labels
-  that name the destination.
+- Place X and GitHub icon-only links after the title/subtitle block and before
+  the project workbench. The links should inherit the header color, render as
+  `66px` square targets with `30px` brand marks, open in a new tab, and use
+  accessible labels that name the destination.
 - Use inline SVG brand marks for the X and GitHub profile links because they
   are exact profile-brand marks, not new product UI icon-family dependencies.
   They should use `currentColor` so they stay aligned with the header title and
