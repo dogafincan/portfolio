@@ -91,7 +91,7 @@ describe("PortfolioHome", () => {
       );
       const icon = screen.getByAltText(project.iconAlt);
       expect(iconPanel?.className).toBe(
-        "flex min-h-32 w-full items-center justify-center overflow-hidden rounded-[2rem] p-6 sm:min-h-36",
+        "group/item flex w-full flex-wrap items-center rounded-2xl border text-sm transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 [a]:transition-colors [a]:hover:bg-muted border-transparent bg-muted/50 gap-3.5 min-h-32 justify-center overflow-hidden p-6 sm:min-h-36",
       );
       expect(iconPanel?.firstElementChild).toBe(icon);
       expect(icon.getAttribute("data-slot")).toBe("project-icon");
@@ -150,6 +150,7 @@ describe("PortfolioHome", () => {
       portfolioProjects.length,
     );
     expect(container.querySelector('[data-slot="project-icon-panel"][style]')).toBeNull();
+    expect(container.querySelector('[data-slot="project-icon-panel"].bg-muted\\/50')).toBeTruthy();
     expect(screen.getAllByRole("link", { name: /Open .* app/ }).length).toBe(
       portfolioProjects.length,
     );

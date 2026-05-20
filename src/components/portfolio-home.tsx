@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Item } from "@/components/ui/item";
 import { portfolioProjects, type PortfolioProject } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
@@ -11,8 +12,7 @@ const PORTFOLIO_MAIN_CLASS_NAME =
   "flex min-h-screen flex-col px-4 py-6 text-foreground sm:px-6 lg:justify-center lg:px-8";
 const WORKBENCH_CONTAINER_CLASS_NAME =
   "grid w-full min-w-0 max-w-full flex-1 grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background";
-const PROJECT_ICON_PANEL_CLASS_NAME =
-  "flex min-h-32 w-full items-center justify-center overflow-hidden rounded-[2rem] p-6 sm:min-h-36";
+const PROJECT_ICON_PANEL_CLASS_NAME = "min-h-32 justify-center overflow-hidden p-6 sm:min-h-36";
 const PROFILE_LINK_CLASS_NAME =
   "inline-flex size-11 items-center justify-center rounded-full text-slate-950 transition-colors hover:bg-slate-950/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/30";
 
@@ -54,7 +54,8 @@ function ProjectCard({
   return (
     <Card className="min-w-0">
       <CardHeader className="gap-4">
-        <div
+        <Item
+          variant="muted"
           data-slot="project-icon-panel"
           data-project={project.slug}
           className={PROJECT_ICON_PANEL_CLASS_NAME}
@@ -69,7 +70,7 @@ function ProjectCard({
             decoding="async"
             className="size-15 rounded-[1.125rem] shadow-[0_1rem_2.5rem_rgb(15_23_42/0.14)]"
           />
-        </div>
+        </Item>
         <CardTitle>
           <h3 className="m-0">{project.name}</h3>
         </CardTitle>

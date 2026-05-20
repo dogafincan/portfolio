@@ -103,35 +103,14 @@ describe("global styles", () => {
     expect(meshLayer).not.toContain("url(");
   });
 
-  it("uses project-specific logo panel meshes in light mode and single-hue meshes in dark mode", () => {
+  it("does not style project logo panels with standalone mesh backgrounds", () => {
     const styles = readFileSync("src/styles.css", "utf8");
-    const panelStylesStart = styles.indexOf('[data-slot="project-icon-panel"]');
-    const panelStyles = styles.slice(panelStylesStart);
 
-    expect(panelStyles).toContain('[data-slot="project-icon-panel"][data-project="sui-airdrop"]');
-    expect(panelStyles).toContain('[data-slot="project-icon-panel"][data-project="sui-snapshot"]');
-    expect(panelStyles).toContain("background-color: #fff0ea;");
-    expect(panelStyles).toContain("background-color: #e7f0ff;");
-    expect(panelStyles).toContain("#ead9ff");
-    expect(panelStyles).toContain("#dcd5ff");
-    expect(panelStyles).toContain('.dark [data-slot="project-icon-panel"]');
-    expect(panelStyles).toContain("@media (prefers-color-scheme: dark)");
-    expect(panelStyles.match(/background-color: #3a2348;/g)).toHaveLength(2);
-    expect(panelStyles.match(/background-color: #172d4d;/g)).toHaveLength(2);
-    expect(panelStyles).toContain("color-mix(in oklab, white 14%, #3a2348)");
-    expect(panelStyles).toContain("color-mix(in oklab, white 24%, #3a2348)");
-    expect(panelStyles).toContain("color-mix(in oklab, white 34%, #3a2348)");
-    expect(panelStyles).toContain("color-mix(in oklab, white 14%, #172d4d)");
-    expect(panelStyles).toContain("color-mix(in oklab, white 24%, #172d4d)");
-    expect(panelStyles).toContain("color-mix(in oklab, white 34%, #172d4d)");
-    expect(panelStyles).not.toContain("#5a2f50");
-    expect(panelStyles).not.toContain("#4d3974");
-    expect(panelStyles).not.toContain("#7b4639");
-    expect(panelStyles).not.toContain("#733355");
-    expect(panelStyles).not.toContain("#33406f");
-    expect(panelStyles).not.toContain("#3d3575");
-    expect(panelStyles).not.toContain("#22536e");
-    expect(panelStyles).not.toContain("#254677");
-    expect(panelStyles).not.toContain("PROJECT_ICON_PANEL_STYLES");
+    expect(styles).not.toContain('[data-slot="project-icon-panel"]');
+    expect(styles).not.toContain("#fff0ea;");
+    expect(styles).not.toContain("#e7f0ff;");
+    expect(styles).not.toContain("#3a2348;");
+    expect(styles).not.toContain("#172d4d;");
+    expect(styles).not.toContain("PROJECT_ICON_PANEL_STYLES");
   });
 });
