@@ -55,6 +55,9 @@ Keep the site simple, fast, and consistent with the sibling apps.
 | Design language | See `DESIGN.md`                                                    |
 | Styling         | See `DESIGN.md`                                                    |
 | Icons           | Lucide only for product UI                                         |
+| Design source   | `DESIGN.md` owns UI, copy, layout, icons, and social preview rules |
+| Human docs      | `README.md` explains product, workflow, commands, and deployment   |
+| Agent docs      | `AGENTS.md` explains repo rules, verification, and work habits     |
 | Sui runtime     | Not included unless a future portfolio feature explicitly needs it |
 | Content backend | None; repo-owned structured content is the current source of truth |
 | Auth            | None                                                               |

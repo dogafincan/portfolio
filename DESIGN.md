@@ -8,7 +8,8 @@ slices.
 
 Before changing UI, copy, layout, icons, loading states, empty states, social
 images, or responsive behavior, read this file and compare the current sibling
-`sui-snapshot` and `sui-airdrop` design files for general principles.
+`sui-snapshot`, `sui-airdrop`, and `memedex` design files for general
+principles.
 
 ## Shared Workspace Design System
 
@@ -93,7 +94,8 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   their containers.
 - When syncing design between sibling apps, copy general principles, not
   product-specific behavior. `sui-snapshot` owns snapshot export, `sui-airdrop`
-  owns wallet funding and airdrop execution, and `portfolio` owns project
+  owns wallet funding and airdrop execution, `memedex` owns discovery, voting,
+  ranking, review, and moderation surfaces, and `portfolio` owns project
   showcase content.
 
 ## Portfolio Product Shape
@@ -113,6 +115,8 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   just because the sibling apps use them.
 - The portfolio may describe Sui projects, but Sui-specific workflows stay in
   the sibling apps.
+- The portfolio may list or link to Memedex, but memecoin discovery, voting,
+  ranking, review, and moderation workflows stay in Memedex.
 
 ## Header And Project Workbench
 

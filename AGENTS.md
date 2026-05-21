@@ -12,6 +12,7 @@ The portfolio should reuse the proven stack and design direction from:
 
 - `~/Documents/sui-snapshot`
 - `~/Documents/sui-airdrop`
+- `~/Documents/memedex`
 
 Those sibling apps are the reference for TanStack Start, Vite+, Cloudflare
 Workers, shadcn/ui, Tailwind CSS v4, Inter, Lucide icons, shared mesh-gradient
@@ -19,13 +20,28 @@ chrome, and repo workflow conventions. The portfolio should keep the same
 general system while avoiding Sui-specific runtime dependencies unless they are
 explicitly needed.
 
+## Documentation Boundaries
+
+- `README.md`: human-facing product, workflow, stack, deployment, and
+  verification guidance.
+- `AGENTS.md`: repo-local agent rules, command conventions, editing guidance,
+  and verification expectations.
+- `PRD.md`: product scope, implementation-progress table, settled product
+  decisions, acceptance criteria, and pending slices.
+- `DESIGN.md`: source of truth for visual system, layout, copy, icons, social
+  preview, responsive behavior, loading states, and portfolio UI contracts.
+
+Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
+`PRD.md` and `DESIGN.md` aligned when product or UI decisions change.
+
 ## Working Rules
 
 - Ground answers and changes in the current checkout. For this repo, first check
   `README.md`, `AGENTS.md`, `PRD.md`, `DESIGN.md`, git state, and any
   source/config files that exist.
-- When borrowing a pattern from `sui-snapshot` or `sui-airdrop`, inspect the
-  sibling docs or source first. Do not rely on memory alone for current behavior.
+- When borrowing a pattern from `sui-snapshot`, `sui-airdrop`, or `memedex`,
+  inspect the sibling docs or source first. Do not rely on memory alone for
+  current behavior.
 - Keep work to one coherent slice. Commit finished slices locally. Push only
   when the user explicitly asks.
 - Keep durable docs aligned when a project rule changes: `README.md` owns
@@ -52,6 +68,9 @@ explicitly needed.
   Turnstile, rate limiting, Durable Objects, KV, D1, R2, queues, or backend
   state just because the sibling apps use them. A portfolio website should stay
   simpler unless a concrete feature requires that complexity.
+- Do not add Memedex voting, ranking, moderation, submission, or discovery-board
+  flows to the portfolio. The portfolio may link to Memedex as a project, but
+  its own route stays a project showcase.
 
 ## Agent Workflow Defaults
 
@@ -68,7 +87,8 @@ explicitly needed.
 - If a sibling repo already fixed the same issue, inspect that implementation
   before designing a new one. Reuse the pattern only where it fits this repo's
   portfolio scope; do not import snapshot holder-query behavior, airdrop
-  funding, transfer signing, Turnstile, Durable Objects, or wallet flows.
+  funding, transfer signing, Turnstile, Durable Objects, wallet flows, or
+  Memedex voting/ranking behavior.
 - Durable workflow, product, and UI rules belong in docs when they repeat. Keep
   `README.md`, `AGENTS.md`, `PRD.md`, and `DESIGN.md` aligned by ownership.
 - For deploy, runtime, Cloudflare, or performance incidents, diagnose the failing
@@ -84,6 +104,12 @@ explicitly needed.
   `git rev-list --left-right --count origin/main...HEAD` returns `0 0`.
 - When browser automation creates local artifacts, clean or isolate them before
   the final status, verification, and commit flow.
+- Preserve the social preview contract in `src/routes/index.tsx`. Open Graph and
+  X/Twitter image tags must use absolute HTTPS URLs, not root-relative paths,
+  and must point to `public/og-image.png` with a cache-busting query. If
+  `public/og-image.png` changes, update `SITE_URL`, the `SOCIAL_IMAGE`
+  cache-busting query, and `src/routes/-index.test.ts` together. Keep the image
+  a 1200x630 PNG rendered from the light-mode header composition.
 
 ## Current Stack
 

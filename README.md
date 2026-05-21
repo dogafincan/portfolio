@@ -6,7 +6,8 @@ This repo started documentation-first and now renders a real portfolio index.
 The first implemented surface showcases built projects, links to live targets
 when available, and carries over the shared TanStack Start, shadcn/ui, Tailwind,
 Inter, Lucide, mesh-chrome, social-preview, and verification conventions from
-the sibling apps in `~/Documents/sui-snapshot` and `~/Documents/sui-airdrop`.
+the sibling apps in `~/Documents/sui-snapshot`, `~/Documents/sui-airdrop`, and
+`~/Documents/memedex`.
 
 ## Documentation Map
 
@@ -52,6 +53,7 @@ patterns:
 
 - `~/Documents/sui-snapshot`
 - `~/Documents/sui-airdrop`
+- `~/Documents/memedex`
 
 Relevant shared guidance from those projects:
 
@@ -70,12 +72,13 @@ Relevant shared guidance from those projects:
 - Import the portable UI layer from siblings before inventing new primitives:
   shadcn `Button`, `Card`, `Badge`, `Item`, `Separator`, root-head metadata
   tests, icon-system tests, and mesh-style tests fit this portfolio. Sui wallet,
-  CSV, Durable Object, Turnstile, and transaction code does not.
+  CSV, Durable Object, Turnstile, transaction code, and Memedex voting or
+  ranking behavior does not.
 
 ## Current Stack
 
 The app uses the same core web stack as `sui-snapshot` and `sui-airdrop`,
-trimmed for a portfolio site:
+with the same frontend baseline as `memedex`, trimmed for a portfolio site:
 
 - Vite+
 - TanStack Start
@@ -131,6 +134,23 @@ Design principles that should remain visible in day-to-day work:
 - Explain what projects do before naming libraries or infrastructure.
 - Avoid generic hero filler, decorative principles sections, fake metrics, and
   card nesting.
+
+## Social Preview
+
+The `/` route declares Open Graph and X/Twitter Card metadata in
+`src/routes/index.tsx`. The social image is `public/og-image.png`, a 1200x630
+PNG rendered from the light-mode header composition.
+
+Keep social preview image URLs absolute HTTPS URLs. X may not render card
+images from root-relative values such as `/og-image.png`, even when the asset is
+publicly reachable. If the deployed domain changes, update `SITE_URL`,
+`SOCIAL_IMAGE`, and the expectations in `src/routes/-index.test.ts`.
+
+If `public/og-image.png` changes, also update the cache-busting query parameter
+in `SOCIAL_IMAGE`. X caches card metadata and card images; after deploying
+metadata changes, refresh with the X Card Validator when available, or share a
+fresh URL such as `/?card=YYYYMMDD` or a new short URL so X treats the card as a
+new fetch.
 
 ## Code Organization
 
