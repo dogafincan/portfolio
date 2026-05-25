@@ -105,7 +105,7 @@ export function PortfolioHome() {
         <header className="flex flex-col items-center gap-4 text-center text-slate-950">
           <div
             data-slot="app-logo"
-            className="relative size-15 shrink-0 overflow-hidden rounded-xl border border-border bg-background"
+            className="relative size-15 shrink-0 overflow-hidden rounded-xl border border-neutral-200 bg-white"
           >
             <img
               data-slot="app-logo-image"

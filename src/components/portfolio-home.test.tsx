@@ -69,7 +69,7 @@ describe("PortfolioHome", () => {
       expect(icon.className.baseVal).toBe("size-[1.5625rem]");
     }
     expect(appLogo?.className).toBe(
-      "relative size-15 shrink-0 overflow-hidden rounded-xl border border-border bg-background",
+      "relative size-15 shrink-0 overflow-hidden rounded-xl border border-neutral-200 bg-white",
     );
     expect(appLogo?.className).not.toContain("rounded-full");
     expect(appLogoImage?.getAttribute("src")).toBe("/app-logo-120.png");
