@@ -241,7 +241,9 @@ abuse is handled, and what privacy or retention policy applies.
 - Root document should include manifest links, app icons, font preload ordering,
   and theme-color metadata.
 - Manifest colors should match the page chrome top color exactly.
-- Header logo images should define `width`, `height`, `sizes`, and `srcset`.
+- Header logo images should define `width`, `height`, `sizes`, and `srcset`,
+  and the header logo wrapper should preserve the logo's rounded-square shape
+  while showing a visible border.
 
 ### 9.6 Social preview
 

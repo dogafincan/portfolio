@@ -49,7 +49,8 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   explicitly needs one.
 - Use the shared logo asset pattern: favicon, install icons, header logo, and
   social image derive from the same app logo family. Header logos must render
-  with explicit `width`, `height`, `sizes`, and `srcset`.
+  with explicit `width`, `height`, `sizes`, `srcset`, and a visible border
+  wrapper that preserves the app logo's rounded-square shape.
 - Build OG and social images from the light-mode header composition only: logo,
   site title, and subtitle. Do not include project cards, workbench controls,
   marketing sections, or decorative mockups in social images.

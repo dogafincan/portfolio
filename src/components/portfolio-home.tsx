@@ -103,7 +103,10 @@ export function PortfolioHome() {
     <main className={PORTFOLIO_MAIN_CLASS_NAME}>
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 py-8 sm:py-10">
         <header className="flex flex-col items-center gap-4 text-center text-slate-950">
-          <div data-slot="app-logo" className="relative size-15 shrink-0 overflow-hidden">
+          <div
+            data-slot="app-logo"
+            className="relative size-15 shrink-0 overflow-hidden rounded-xl border border-border bg-background"
+          >
             <img
               data-slot="app-logo-image"
               src={HEADER_LOGO}
