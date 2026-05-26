@@ -15,8 +15,10 @@ const WORKBENCH_CONTAINER_CLASS_NAME =
 const PROJECT_SUMMARY_ITEM_CLASS_NAME = "min-h-32 flex-nowrap overflow-hidden sm:min-h-36";
 const PROJECT_ICON_MEDIA_CLASS_NAME =
   "size-[2.8125rem] overflow-hidden rounded-[0.875rem] border border-border bg-background";
+const KEYBOARD_ACTION_FOCUS_CLASS_NAME =
+  "focus-visible:ring-3 focus-visible:ring-slate-950/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 const PROFILE_LINK_CLASS_NAME =
-  "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-slate-950 transition-colors hover:bg-slate-950/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/30";
+  "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-slate-950 transition-colors hover:bg-slate-950/10 focus-visible:outline-none";
 
 function XLogoIcon() {
   return (
@@ -84,7 +86,10 @@ function ProjectCard({
       </CardHeader>
       <CardFooter className="mt-auto flex flex-wrap gap-2">
         <a
-          className={cn(buttonVariants({ variant: "default", size: "sm" }))}
+          className={cn(
+            buttonVariants({ variant: "default", size: "sm" }),
+            KEYBOARD_ACTION_FOCUS_CLASS_NAME,
+          )}
           href={project.liveUrl}
           target="_blank"
           rel="noreferrer"
@@ -137,7 +142,7 @@ export function PortfolioHome() {
             className="flex items-center justify-center gap-2 text-slate-950"
           >
             <a
-              className={PROFILE_LINK_CLASS_NAME}
+              className={cn(PROFILE_LINK_CLASS_NAME, KEYBOARD_ACTION_FOCUS_CLASS_NAME)}
               href="https://x.com/dogafincan"
               target="_blank"
               rel="noreferrer"
@@ -147,7 +152,7 @@ export function PortfolioHome() {
               <XLogoIcon />
             </a>
             <a
-              className={PROFILE_LINK_CLASS_NAME}
+              className={cn(PROFILE_LINK_CLASS_NAME, KEYBOARD_ACTION_FOCUS_CLASS_NAME)}
               href="https://github.com/dogafincan"
               target="_blank"
               rel="noreferrer"

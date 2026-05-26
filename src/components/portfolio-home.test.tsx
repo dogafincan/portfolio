@@ -61,7 +61,7 @@ describe("PortfolioHome", () => {
     expect(githubLink.getAttribute("rel")).toBe("noreferrer");
     for (const link of [xLink, githubLink]) {
       expect(link.className).toBe(
-        "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-slate-950 transition-colors hover:bg-slate-950/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/30",
+        "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-slate-950 transition-colors hover:bg-slate-950/10 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-slate-950/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
       );
     }
     expect(socialLinks?.querySelectorAll("svg").length).toBe(2);
@@ -185,5 +185,31 @@ describe("PortfolioHome", () => {
     expect(container.querySelectorAll('[data-icon="inline-start"]').length).toBe(
       portfolioProjects.length,
     );
+  });
+
+  it("keeps profile and app actions in the keyboard tab order", () => {
+    render(<PortfolioHome />);
+
+    const expectedKeyboardTargets = [
+      "Open Doga Fincan on X",
+      "Open Doga Fincan on GitHub",
+      ...portfolioProjects.map((project) => `Open ${project.name} app`),
+    ];
+
+    const keyboardTargets = screen.getAllByRole("link").filter((link) => {
+      const label = link.getAttribute("aria-label");
+      return label !== null && expectedKeyboardTargets.includes(label);
+    });
+
+    expect(keyboardTargets.map((link) => link.getAttribute("aria-label"))).toEqual(
+      expectedKeyboardTargets,
+    );
+
+    for (const target of keyboardTargets) {
+      expect(target.tabIndex).toBe(0);
+      expect(target.className).toContain("focus-visible:ring-3");
+      expect(target.className).toContain("focus-visible:ring-slate-950/60");
+      expect(target.className).toContain("focus-visible:ring-offset-2");
+    }
   });
 });
