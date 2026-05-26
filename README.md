@@ -218,6 +218,10 @@ deploy, or performance incidents.
 - If a durable rule repeats, document it in the right file: `README.md` for
   human-facing workflow/product guidance, `AGENTS.md` for agent rules,
   `PRD.md` for product scope/progress, and `DESIGN.md` for visual/copy rules.
+- Visitor-facing recoverable provider/browser errors follow the shared
+  third-party pattern from `DESIGN.md`: name the outside service when known,
+  show safe human-readable outside guidance by default, and fall back to generic
+  app-owned next steps when the outside message is missing or unsafe.
 - Finished work that warrants a commit should be committed in focused local
   commits. Push only when explicitly requested, then confirm upstream sync with
   `git rev-list --left-right --count origin/main...HEAD`.

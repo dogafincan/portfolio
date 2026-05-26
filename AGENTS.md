@@ -91,6 +91,11 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   Memedex voting/ranking behavior.
 - Durable workflow, product, and UI rules belong in docs when they repeat. Keep
   `README.md`, `AGENTS.md`, `PRD.md`, and `DESIGN.md` aligned by ownership.
+- For browser, deploy, auth/config, provider, dynamic-content, or other
+  third-party recoverable errors that become visitor-facing or docs-facing,
+  follow `DESIGN.md`'s reusable third-party error pattern instead of inventing
+  one-off failure copy. This repo currently has no wallet-specific
+  implementation.
 - For deploy, runtime, Cloudflare, or performance incidents, diagnose the failing
   layer before editing source. If local checks passed and the failure is in
   deploy validation, auth/config, dashboard setup, or provider response, verify

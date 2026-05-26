@@ -89,6 +89,17 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   not expose backend internals, transaction digests, chunks, batches, raw units,
   proof data, stack names, runtime names, or provider implementation details in
   visitor-facing copy unless the page is explicitly a technical case study.
+- For recoverable errors that originate in a third-party product, API, or
+  browser capability, classify the failure by the portfolio-owned action first,
+  then name the outside service when known and show safe, human-readable outside
+  guidance by default. Use the pattern `[Service] says: [message]` only after
+  trimming whitespace, redacting long identifiers, capping length, and rejecting
+  stack traces, JSON, signatures, raw payloads, route IDs, base64 blobs, debug
+  dumps, and other internal details. If the outside message is missing or
+  unsafe, hide it and show a generic next step the visitor can act on. This repo
+  currently has no wallet, auth, transaction, or provider-mediated app workflow,
+  so the rule is for future dynamic content, embeds, contact actions, browser
+  capabilities, and deployment/provider incident copy.
 - Model async states explicitly if the portfolio adds dynamic content. Loading
   skeletons should mirror the final card structure, and failure states should
   have deliberate button and alert states.
