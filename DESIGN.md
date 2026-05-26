@@ -73,11 +73,10 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   Touch comfort wins over compact density for primary actions and utility
   controls.
 - Keep keyboard focus visible on every profile and live-project action. These
-  links should stay in natural DOM order and share the same strong,
-  high-contrast focus outline so the currently selected item is easy to
-  identify. Prefer non-animated outline-based focus indicators here instead of
-  animated box-shadow rings because Safari link navigation can behave
-  inconsistently while ring shadows transition.
+  links should stay in natural DOM order and share the same compact focus ring
+  recipe so the currently selected item is easy to identify without making the
+  social icon state feel oversized. Keep the ring non-animated on focus and use
+  a small offset so the ring stays visible around dark project buttons.
 - Add semantic leading Lucide icons to text buttons for concrete actions such as
   opening a project, navigating to a case study, or contacting.
   Loading states should swap the icon for a spinner without shifting the label.
@@ -149,7 +148,7 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Place X and GitHub icon-only links after the title/subtitle block and before
   the project workbench. The links should inherit the header color, render as
   `55px` square targets with `25px` brand marks, open in a new tab, and use
-  accessible labels that name the destination. Keep their keyboard focus outline
+  accessible labels that name the destination. Keep their keyboard focus ring
   aligned with the project live app actions.
 - Use inline SVG brand marks for the X and GitHub profile links because they
   are exact profile-brand marks, not new product UI icon-family dependencies.
@@ -192,7 +191,7 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Use primary treatment for live project actions. Do not show source actions for
   private project repositories.
 - Keep the live app action as a normal external link in the card footer, in
-  project order, with the shared keyboard focus outline.
+  project order, with the shared keyboard focus ring.
 - Keep icons, button rows, subtitles, and long project names responsive without
   overflow.
 

@@ -61,7 +61,7 @@ describe("PortfolioHome", () => {
     expect(githubLink.getAttribute("rel")).toBe("noreferrer");
     for (const link of [xLink, githubLink]) {
       expect(link.className).toBe(
-        "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-slate-950 hover:bg-slate-950/10 transition-colors focus-visible:transition-none focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-sky-700",
+        "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-slate-950 hover:bg-slate-950/10 transition-colors focus-visible:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
       );
     }
     expect(socialLinks?.querySelectorAll("svg").length).toBe(2);
@@ -209,10 +209,13 @@ describe("PortfolioHome", () => {
       expect(target.tabIndex).toBe(0);
       expect(target.className).toContain("transition-colors");
       expect(target.className).toContain("focus-visible:transition-none");
-      expect(target.className).toContain("focus-visible:outline-4");
-      expect(target.className).toContain("focus-visible:outline-offset-4");
-      expect(target.className).toContain("focus-visible:outline-sky-700");
-      expect(target.className).not.toContain("focus-visible:ring-");
+      expect(target.className).toContain("focus-visible:outline-none");
+      expect(target.className).toContain("focus-visible:ring-2");
+      expect(target.className).toContain("focus-visible:ring-slate-950/40");
+      expect(target.className).toContain("focus-visible:ring-offset-2");
+      expect(target.className).toContain("focus-visible:ring-offset-background");
+      expect(target.className).not.toContain("focus-visible:outline-4");
+      expect(target.className).not.toContain("focus-visible:outline-sky-700");
     }
   });
 });

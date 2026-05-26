@@ -16,7 +16,7 @@ treated as complete.
 | Done    | Align header typography              | 8.1, 9.1, 13        | `88a46d0` | Matches the portfolio title/subtitle sizing, weight, tracking, and foreground color to sibling apps.    |
 | Done    | Remove footer/profile content        | 6, 8.1, 8.3, 13     | `96a0bc7` | Removes the visible content below the project workbench so the route ends on project cards.             |
 | Done    | Header social profile links          | 7, 8.1, 8.3, 9.1    | -         | Adds compact X and GitHub icon links between the header subtitle and project workbench.                 |
-| Done    | Keyboard-visible action focus        | 8.1, 9.4, 13        | -         | Keeps profile and live app links in DOM tab order with a visible shared focus outline.                  |
+| Done    | Keyboard-visible action focus        | 8.1, 9.4, 13        | -         | Keeps profile and live app links in DOM tab order with the same visible focus ring treatment.           |
 | Done    | Desktop viewport vertical centering  | 8.1, 9.1, 13        | -         | Centers the header and workbench on desktop when the first viewport has spare space below the cards.    |
 | Done    | Unified page chrome background       | 9.5, 9.7, 13        | -         | Aligns top safe areas, bottom page background, theme color, and mesh tail to the same chrome color.     |
 | Pending | Project case-study pages             | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                       |
@@ -239,7 +239,8 @@ abuse is handled, and what privacy or retention policy applies.
 - Header profile links should have accessible labels that include the profile
   destination.
 - Header profile links and project live app links should stay in their natural
-  DOM tab order and use a visible shared focus outline when keyboard-focused.
+  DOM tab order and use a visible shared focus ring treatment when
+  keyboard-focused.
 
 ### 9.5 Metadata and manifest
 
