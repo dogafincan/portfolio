@@ -16,9 +16,9 @@ const PROJECT_SUMMARY_ITEM_CLASS_NAME = "min-h-32 flex-nowrap overflow-hidden sm
 const PROJECT_ICON_MEDIA_CLASS_NAME =
   "size-[2.8125rem] overflow-hidden rounded-[0.875rem] border border-border bg-background";
 const KEYBOARD_ACTION_FOCUS_CLASS_NAME =
-  "focus-visible:ring-3 focus-visible:ring-slate-950/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+  "transition-colors focus-visible:transition-none focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-sky-700";
 const PROFILE_LINK_CLASS_NAME =
-  "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-slate-950 transition-colors hover:bg-slate-950/10 focus-visible:outline-none";
+  "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-slate-950 transition-colors hover:bg-slate-950/10";
 
 function XLogoIcon() {
   return (
