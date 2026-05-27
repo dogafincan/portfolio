@@ -12,6 +12,11 @@ describe("portfolioProjects", () => {
       })),
     ).toEqual([
       {
+        slug: "sui-swap",
+        name: "Sui Swap",
+        subtitle: "Swap between Sui assets in a focused, simple flow.",
+      },
+      {
         slug: "sui-airdrop",
         name: "Sui Airdrop",
         subtitle: "Create a fixed-amount token airdrop from a Sui Snapshot CSV.",

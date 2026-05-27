@@ -9,6 +9,14 @@ export type PortfolioProject = {
 
 export const portfolioProjects: PortfolioProject[] = [
   {
+    name: "Sui Swap",
+    slug: "sui-swap",
+    subtitle: "Swap between Sui assets in a focused, simple flow.",
+    icon: "/projects/sui-swap-icon.png",
+    iconAlt: "Sui Swap app icon.",
+    liveUrl: "https://sui-swap.dogafincan.workers.dev",
+  },
+  {
     name: "Sui Airdrop",
     slug: "sui-airdrop",
     subtitle: "Create a fixed-amount token airdrop from a Sui Snapshot CSV.",
