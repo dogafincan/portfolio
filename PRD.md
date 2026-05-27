@@ -254,9 +254,9 @@ abuse is handled, and what privacy or retention policy applies.
 ### 9.6 Social preview
 
 - Social metadata must use absolute HTTPS URLs for images.
-- The social image must be `public/og-image.png` with a cache-busting query in
-  `src/routes/index.tsx`.
-- The social image should use the light-mode header composition only.
+- The social image must be a manually supplied checked-in
+  `public/og-image.png` with a cache-busting query in `src/routes/index.tsx`.
+- Do not add a social SVG source or image-generation path for the social image.
 
 ### 9.7 Shared UI conventions
 

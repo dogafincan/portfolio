@@ -114,7 +114,8 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   and must point to `public/og-image.png` with a cache-busting query. If
   `public/og-image.png` changes, update `SITE_URL`, the `SOCIAL_IMAGE`
   cache-busting query, and `src/routes/-index.test.ts` together. Keep the image
-  a 1200x630 PNG rendered from the light-mode header composition.
+  as a manually supplied checked-in 1200x630 PNG; do not add a social SVG source
+  or image-generation path.
 
 ## Current Stack
 
@@ -197,7 +198,7 @@ The current implementation follows the sibling conventions. Important files:
 - `public/manifest.json`: PWA manifest colors and icons
 - `public/app-logo-120.png`, `public/apple-touch-icon.png`,
   `public/android-chrome-*.png`, `public/favicon.ico`, `public/favicon-*`, and
-  `public/og-image.*`: portfolio-owned app and social assets
+  `public/og-image.png`: portfolio-owned app and social assets
 - `public/projects/*-icon.png`: local app icons copied from shipped sibling apps
 - `vite.config.ts`: Vite+ and TanStack configuration
 - `wrangler.jsonc`: Cloudflare Worker configuration

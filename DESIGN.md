@@ -47,15 +47,16 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   tokens so those surfaces continue to follow system color mode.
 - Respect system dark mode. Do not add a manual theme switch unless the product
   explicitly needs one.
-- Use the shared logo asset pattern: favicon, install icons, header logo, and
-  social image derive from the same app logo family. Header logos must render
-  with explicit `width`, `height`, `sizes`, `srcset`, and a visible border
-  wrapper that preserves the app logo's rounded-square shape. Use
-  theme-invariant light-mode wrapper colors (`border-neutral-200 bg-white`) so
-  the logo and border look the same in light and dark mode.
-- Build OG and social images from the light-mode header composition only: logo,
-  site title, and subtitle. Do not include project cards, workbench controls,
-  marketing sections, or decorative mockups in social images.
+- Use manually supplied checked-in PNG/ICO assets for favicon, install icons,
+  header logo, and social image. Header logos must render with explicit
+  `width`, `height`, `sizes`, `srcset`, and a visible border wrapper that
+  preserves the app logo's rounded-square shape. Use theme-invariant light-mode
+  wrapper colors (`border-neutral-200 bg-white`) so the logo and border look the
+  same in light and dark mode.
+- Keep OG and social images as manually supplied 1200x630 PNGs. They should use
+  the restrained light-mode header composition only: logo, site title, and
+  subtitle. Do not add social SVG sources, image-generation paths, project
+  cards, workbench controls, marketing sections, or decorative mockups.
 - Use a rounded muted workbench as the main app surface. It should contain the
   project cards, preserve enough padding for nested depth, and keep outer radius,
   inner card radius, and spacing visually related at every breakpoint.
@@ -214,11 +215,11 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - The canonical and social-preview base URL is `https://dogafincan.com`. The
   `www.dogafincan.com` custom domain should render the same apex canonical,
   `og:url`, `og:image`, `og:image:secure_url`, and `twitter:image` values.
-- The current social image points to `public/og-image.png` with a cache-busting
-  query. If `public/og-image.png` changes, update `SITE_URL`, the `SOCIAL_IMAGE`
-  query, and `src/routes/-index.test.ts` together.
-- Keep the image a 1200x630 PNG rendered from the light-mode header composition
-  only: logo, site title, and subtitle.
+- The current social image points to the manually supplied
+  `public/og-image.png` with a cache-busting query. If `public/og-image.png`
+  changes, update `SITE_URL`, the `SOCIAL_IMAGE` query, and
+  `src/routes/-index.test.ts` together. Keep it a checked-in 1200x630 PNG with
+  no separate SVG source or generation path.
 
 ## Not Yet Implemented
 

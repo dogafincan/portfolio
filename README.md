@@ -138,8 +138,9 @@ Design principles that should remain visible in day-to-day work:
 ## Social Preview
 
 The `/` route declares Open Graph and X/Twitter Card metadata in
-`src/routes/index.tsx`. The social image is `public/og-image.png`, a 1200x630
-PNG rendered from the light-mode header composition.
+`src/routes/index.tsx`. The social image is `public/og-image.png`, a manually
+supplied checked-in 1200x630 PNG. Do not add a social SVG source or
+image-generation path for it.
 
 Keep social preview image URLs absolute HTTPS URLs. X may not render card
 images from root-relative values such as `/og-image.png`, even when the asset is
@@ -174,7 +175,7 @@ The imported sibling organization now used here:
   icons on Lucide.
 - `public/app-logo-120.png`, `public/apple-touch-icon.png`,
   `public/android-chrome-*.png`, `public/favicon.ico`, `public/favicon-*`, and
-  `public/og-image.*`: portfolio-owned logo and social assets.
+  `public/og-image.png`: portfolio-owned logo and social assets.
 - `public/projects/*-icon.png`: local app icons copied from the shipped sibling
   apps.
 
