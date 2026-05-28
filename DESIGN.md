@@ -32,15 +32,20 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Preload the concrete Fontsource Inter latin `woff2` asset from the root
   document before the stylesheet link. Keep the preload order covered by the
   root head regression test.
-- Use the shared mesh-gradient page chrome. Light mode keeps the pale
-  app-specific mesh and dark header text. Dark mode uses a distinct darker mesh
-  with white header title, subtitle, and header links, while the workbench and
-  everything inside it continue to follow system color mode. Choose dark mesh
-  colors as light as possible while keeping the white header text readable;
-  avoid dark brown and dark green. Dark meshes do not need to be literal darker
-  versions of the light palette when a different palette looks better. The
-  dark mesh must still read as a mesh: individual blobs should be visible, and
-  each sibling app should be distinguishable by its dark mesh colors or shape.
+- Use the shared mesh-gradient page chrome. Light mode uses pastel mesh colors
+  and dark header text. Dark mode uses cool jewel-tone mesh colors with white
+  header title, subtitle, and header links, while the workbench and everything
+  inside it continue to follow system color mode. In both schemes, keep the
+  mesh's top and bottom chrome color close to Tailwind cyan, sky, or blue, then
+  use blurred abstract shapes near the pastel or cool jewel-tone equivalents of
+  Tailwind indigo, violet, purple, fuchsia, pink, and rose. Choose light-mode
+  colors as light as possible while keeping black header text readable, and
+  choose dark-mode colors as light as possible while keeping white header text
+  readable. Avoid dark brown and dark green. Dark meshes do not need to be
+  literal darker versions of the light palette when a different palette looks
+  better. The dark mesh must still read as a mesh: individual blobs should be
+  visible, and each sibling app should be distinguishable by its dark mesh
+  colors or shape.
 - The browser safe-area color and the visible page background beyond the mesh
   must equal the active top and bottom color of the mesh exactly in both light
   and dark mode. Match scheme-specific `theme-color` meta entries, CSS chrome
