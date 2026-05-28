@@ -32,17 +32,23 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Preload the concrete Fontsource Inter latin `woff2` asset from the root
   document before the stylesheet link. Keep the preload order covered by the
   root head regression test.
-- Use the shared mesh-gradient page chrome. The header mesh and header text stay
-  visually identical in light and dark mode, while the workbench and everything
-  inside it continue to follow system color mode. Each app chooses its own mesh
-  colors so the projects keep distinct identities.
+- Use the shared mesh-gradient page chrome. Light mode keeps the pale
+  app-specific mesh and dark header text. Dark mode uses a distinct darker mesh
+  with white header title, subtitle, and header links, while the workbench and
+  everything inside it continue to follow system color mode. Choose dark mesh
+  colors as light as possible while keeping the white header text readable;
+  avoid dark brown and dark green. Dark meshes do not need to be literal darker
+  versions of the light palette when a different palette looks better. The
+  dark mesh must still read as a mesh: individual blobs should be visible, and
+  each sibling app should be distinguishable by its dark mesh colors or shape.
 - The browser safe-area color and the visible page background beyond the mesh
-  must equal the top color of the mesh exactly in both light and dark mode.
-  Match `theme-color`, manifest colors, CSS chrome variables, the root `html`
-  background, and the body page background to that top mesh color. iOS Safari can
-  paint notched safe areas from the document root before the body mesh begins,
-  and the bottom browser chrome can reveal the same page background the mesh
-  fades into.
+  must equal the active top and bottom color of the mesh exactly in both light
+  and dark mode. Match scheme-specific `theme-color` meta entries, CSS chrome
+  variables, the root `html` background, and the body page background to the
+  active mesh color. Keep static manifest colors tied to the light-mode chrome
+  unless a separate install-color decision changes them. iOS Safari can paint
+  notched safe areas from the document root before the body mesh begins, and the
+  bottom browser chrome can reveal the same page background the mesh fades into.
 - Keep the shared chrome color separate from workbench, card, and form surface
   tokens so those surfaces continue to follow system color mode.
 - Respect system dark mode. Do not add a manual theme switch unless the product
@@ -52,7 +58,8 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   `width`, `height`, `sizes`, `srcset`, and a visible border wrapper that
   preserves the app logo's rounded-square shape. Use theme-invariant light-mode
   wrapper colors (`border-neutral-200 bg-white`) so the logo and border look the
-  same in light and dark mode.
+  same in light and dark mode. Do not change the logo asset or border treatment
+  when changing dark mesh colors.
 - Keep OG and social images as manually supplied 1200x630 PNGs. They should use
   the restrained light-mode header composition only: logo, site title, and
   subtitle. Do not add social SVG sources, image-generation paths, project

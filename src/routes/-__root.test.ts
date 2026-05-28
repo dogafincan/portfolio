@@ -19,7 +19,7 @@ describe("RootDocument head", () => {
     const manifest = readFileSync(new URL("../../public/manifest.json", import.meta.url), "utf8");
 
     expect(source).toContain('const APP_CHROME_COLOR = "#d2f2ff";');
-    expect(source).toContain("const APP_CHROME_COLOR_DARK = APP_CHROME_COLOR;");
+    expect(source).toContain('const APP_CHROME_COLOR_DARK = "#427ba9";');
     expect(source).toContain(
       'import interLatinWghtNormal from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";',
     );

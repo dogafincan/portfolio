@@ -129,7 +129,10 @@ Design principles that should remain visible in day-to-day work:
   shadcn/Base UI primitives, and rounded muted workbench.
 - Treat the mesh chrome as app identity: safe areas, theme color, manifest
   color, and the visible page background at the top and bottom of the app match
-  the top of the mesh in both light and dark mode.
+  the active mesh color in both light and dark mode. Static manifest colors stay
+  tied to the light-mode chrome unless a separate install-color decision changes
+  them. Dark meshes should have visible blobs and stay distinguishable from
+  sibling apps.
 - Keep project cards scannable, responsive, and backed by structured content.
 - Explain what projects do before naming libraries or infrastructure.
 - Avoid generic hero filler, decorative principles sections, fake metrics, and

@@ -32,12 +32,12 @@ describe("PortfolioHome", () => {
       "mx-auto flex w-full max-w-6xl flex-col gap-8 py-8 sm:py-10",
     );
     expect(appHeader?.className).toBe(
-      "flex flex-col items-center gap-4 text-center text-slate-950",
+      "flex flex-col items-center gap-4 text-center text-slate-950 dark:text-white",
     );
     expect(appTitleBlock?.className).toBe("flex min-w-0 flex-col gap-2");
     expect(title.className).toBe("text-balance text-4xl leading-tight font-bold tracking-tight");
     expect(appSubtitle?.className).toBe(
-      "max-w-[40rem] text-balance text-lg font-medium text-slate-900/80 md:max-w-full",
+      "max-w-[40rem] text-balance text-lg font-medium text-slate-900/80 dark:text-white/82 md:max-w-full",
     );
     expect(appSubtitle?.textContent).toBe(
       "I'm into learning languages, nutrition and exercise, and building cool things. Reach out if you're building something interesting.",
@@ -49,7 +49,9 @@ describe("PortfolioHome", () => {
     expect(appSubtitle?.querySelector("span:last-child")?.textContent).toBe(
       "Reach out if you're building something interesting.",
     );
-    expect(socialLinks?.className).toBe("flex items-center justify-center gap-2 text-slate-950");
+    expect(socialLinks?.className).toBe(
+      "flex items-center justify-center gap-2 text-slate-950 dark:text-white",
+    );
     expect(socialLinks?.previousElementSibling).toBe(appTitleBlock);
     expect(socialLinks?.parentElement).toBe(appHeader);
     expect(workbench?.previousElementSibling).toBe(appHeader);
@@ -61,7 +63,7 @@ describe("PortfolioHome", () => {
     expect(githubLink.getAttribute("rel")).toBe("noreferrer");
     for (const link of [xLink, githubLink]) {
       expect(link.className).toBe(
-        "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-slate-950 hover:bg-slate-950/10 transition-colors focus-visible:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-slate-950 hover:bg-slate-950/10 dark:text-white dark:hover:bg-white/12 transition-colors focus-visible:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-white/45",
       );
     }
     expect(socialLinks?.querySelectorAll("svg").length).toBe(2);

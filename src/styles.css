@@ -83,12 +83,24 @@
   --portfolio-app-chrome-color: #d2f2ff;
   --portfolio-page-background: var(--portfolio-app-chrome-color);
   --portfolio-hero-gradient-height: 1000px;
+  --portfolio-hero-mesh-highlight: white;
   --portfolio-hero-mesh-pale-blue: #d2f2ff;
   --portfolio-hero-mesh-cyan: #c0edff;
   --portfolio-hero-mesh-teal: #ccf6ff;
   --portfolio-hero-mesh-sky: #b9ecff;
   --portfolio-hero-mesh-lavender: #f0e8ff;
   --portfolio-hero-mesh-purple: #f4d9f2;
+  --portfolio-hero-mesh-core-highlight-start: 82%;
+  --portfolio-hero-mesh-core-highlight-mid: 62%;
+  --portfolio-hero-mesh-wash-highlight-start: 24%;
+  --portfolio-hero-mesh-wash-transparent-mid: 22%;
+  --portfolio-hero-mesh-left-transparent: 18%;
+  --portfolio-hero-mesh-right-transparent: 18%;
+  --portfolio-hero-mesh-bottom-transparent: 22%;
+  --portfolio-hero-mesh-center-transparent: 28%;
+  --portfolio-hero-mesh-base-highlight-start: 18%;
+  --portfolio-hero-mesh-base-highlight-mid: 8%;
+  --portfolio-hero-mesh-base-highlight-end: 14%;
 }
 
 .dark {
@@ -124,7 +136,26 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --portfolio-app-chrome-color: #427ba9;
   --portfolio-page-background: var(--portfolio-app-chrome-color);
+  --portfolio-hero-mesh-highlight: #427ba9;
+  --portfolio-hero-mesh-pale-blue: #427ba9;
+  --portfolio-hero-mesh-cyan: #4b91c8;
+  --portfolio-hero-mesh-teal: #5987cf;
+  --portfolio-hero-mesh-sky: #7282d6;
+  --portfolio-hero-mesh-lavender: #8d70cf;
+  --portfolio-hero-mesh-purple: #b469b1;
+  --portfolio-hero-mesh-core-highlight-start: 34%;
+  --portfolio-hero-mesh-core-highlight-mid: 18%;
+  --portfolio-hero-mesh-wash-highlight-start: 10%;
+  --portfolio-hero-mesh-wash-transparent-mid: 8%;
+  --portfolio-hero-mesh-left-transparent: 6%;
+  --portfolio-hero-mesh-right-transparent: 6%;
+  --portfolio-hero-mesh-bottom-transparent: 8%;
+  --portfolio-hero-mesh-center-transparent: 8%;
+  --portfolio-hero-mesh-base-highlight-start: 4%;
+  --portfolio-hero-mesh-base-highlight-mid: 0%;
+  --portfolio-hero-mesh-base-highlight-end: 4%;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -161,7 +192,26 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
+    --portfolio-app-chrome-color: #427ba9;
     --portfolio-page-background: var(--portfolio-app-chrome-color);
+    --portfolio-hero-mesh-highlight: #427ba9;
+    --portfolio-hero-mesh-pale-blue: #427ba9;
+    --portfolio-hero-mesh-cyan: #4b91c8;
+    --portfolio-hero-mesh-teal: #5987cf;
+    --portfolio-hero-mesh-sky: #7282d6;
+    --portfolio-hero-mesh-lavender: #8d70cf;
+    --portfolio-hero-mesh-purple: #b469b1;
+    --portfolio-hero-mesh-core-highlight-start: 34%;
+    --portfolio-hero-mesh-core-highlight-mid: 18%;
+    --portfolio-hero-mesh-wash-highlight-start: 10%;
+    --portfolio-hero-mesh-wash-transparent-mid: 8%;
+    --portfolio-hero-mesh-left-transparent: 6%;
+    --portfolio-hero-mesh-right-transparent: 6%;
+    --portfolio-hero-mesh-bottom-transparent: 8%;
+    --portfolio-hero-mesh-center-transparent: 8%;
+    --portfolio-hero-mesh-base-highlight-start: 4%;
+    --portfolio-hero-mesh-base-highlight-mid: 0%;
+    --portfolio-hero-mesh-base-highlight-end: 4%;
   }
 }
 
@@ -208,41 +258,96 @@
       ),
       radial-gradient(
         ellipse 38% 26% at 50% 29%,
-        color-mix(in oklab, white 82%, var(--portfolio-hero-mesh-lavender)) 0%,
-        color-mix(in oklab, white 62%, var(--portfolio-hero-mesh-purple)) 44%,
+        color-mix(
+            in oklab,
+            var(--portfolio-hero-mesh-highlight) var(--portfolio-hero-mesh-core-highlight-start),
+            var(--portfolio-hero-mesh-lavender)
+          )
+          0%,
+        color-mix(
+            in oklab,
+            var(--portfolio-hero-mesh-highlight) var(--portfolio-hero-mesh-core-highlight-mid),
+            var(--portfolio-hero-mesh-purple)
+          )
+          44%,
         transparent 76%
       ),
       radial-gradient(
         ellipse 72% 44% at 48% 8%,
-        color-mix(in oklab, white 24%, var(--portfolio-hero-mesh-pale-blue)) 0%,
-        color-mix(in oklab, transparent 22%, var(--portfolio-hero-mesh-sky)) 52%,
+        color-mix(
+            in oklab,
+            var(--portfolio-hero-mesh-highlight) var(--portfolio-hero-mesh-wash-highlight-start),
+            var(--portfolio-hero-mesh-pale-blue)
+          )
+          0%,
+        color-mix(
+            in oklab,
+            transparent var(--portfolio-hero-mesh-wash-transparent-mid),
+            var(--portfolio-hero-mesh-sky)
+          )
+          52%,
         transparent 82%
       ),
       radial-gradient(
         ellipse 48% 42% at 14% 44%,
-        color-mix(in oklab, transparent 18%, var(--portfolio-hero-mesh-purple)) 0%,
+        color-mix(
+            in oklab,
+            transparent var(--portfolio-hero-mesh-left-transparent),
+            var(--portfolio-hero-mesh-purple)
+          )
+          0%,
         transparent 68%
       ),
       radial-gradient(
         ellipse 50% 42% at 84% 44%,
-        color-mix(in oklab, transparent 18%, var(--portfolio-hero-mesh-purple)) 0%,
+        color-mix(
+            in oklab,
+            transparent var(--portfolio-hero-mesh-right-transparent),
+            var(--portfolio-hero-mesh-purple)
+          )
+          0%,
         transparent 68%
       ),
       radial-gradient(
         ellipse 48% 42% at 74% 82%,
-        color-mix(in oklab, transparent 22%, var(--portfolio-hero-mesh-lavender)) 0%,
+        color-mix(
+            in oklab,
+            transparent var(--portfolio-hero-mesh-bottom-transparent),
+            var(--portfolio-hero-mesh-lavender)
+          )
+          0%,
         transparent 70%
       ),
       radial-gradient(
         ellipse 42% 46% at 46% 60%,
-        color-mix(in oklab, transparent 28%, var(--portfolio-hero-mesh-teal)) 0%,
+        color-mix(
+            in oklab,
+            transparent var(--portfolio-hero-mesh-center-transparent),
+            var(--portfolio-hero-mesh-teal)
+          )
+          0%,
         transparent 72%
       ),
       linear-gradient(
         120deg,
-        color-mix(in oklab, white 18%, var(--portfolio-hero-mesh-pale-blue)) 0%,
-        color-mix(in oklab, white 8%, var(--portfolio-hero-mesh-cyan)) 40%,
-        color-mix(in oklab, white 14%, var(--portfolio-hero-mesh-lavender)) 100%
+        color-mix(
+            in oklab,
+            var(--portfolio-hero-mesh-highlight) var(--portfolio-hero-mesh-base-highlight-start),
+            var(--portfolio-hero-mesh-pale-blue)
+          )
+          0%,
+        color-mix(
+            in oklab,
+            var(--portfolio-hero-mesh-highlight) var(--portfolio-hero-mesh-base-highlight-mid),
+            var(--portfolio-hero-mesh-cyan)
+          )
+          40%,
+        color-mix(
+            in oklab,
+            var(--portfolio-hero-mesh-highlight) var(--portfolio-hero-mesh-base-highlight-end),
+            var(--portfolio-hero-mesh-lavender)
+          )
+          100%
       );
   }
 

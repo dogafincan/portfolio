@@ -59,9 +59,11 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   that guidance here.
 - For mesh chrome changes, inspect `src/styles.css`, `src/routes/__root.tsx`,
   `public/manifest.json`, `src/styles.test.ts`, and `src/routes/-__root.test.ts`
-  together. The browser safe-area and `theme-color` must match the top of the
-  mesh, and the visible page background should use that same chrome color in
-  both light and dark mode without changing workbench or card surface tokens.
+  together. The browser safe-area and scheme-specific `theme-color` must match
+  the active top and bottom mesh color, while the static manifest color remains
+  tied to light mode unless an install-color decision changes it. Keep dark mesh
+  blobs visibly mesh-like and distinguishable from sibling apps. Do this without
+  changing workbench or card surface tokens.
 - When work is product-scope driven, inspect the `PRD.md` implementation
   progress table first and update it precisely with `Done`/`Pending` status.
 - Do not add Sui wallet flows, transaction signing, Mysten SDK dependencies,
