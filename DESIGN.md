@@ -38,14 +38,16 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   inside it continue to follow system color mode. In both schemes, keep the
   mesh's top and bottom chrome color close to Tailwind cyan, sky, or blue, then
   use blurred abstract shapes near the pastel or cool jewel-tone equivalents of
-  Tailwind indigo, violet, purple, fuchsia, pink, and rose. Choose light-mode
+  Tailwind cyan, sky, blue, indigo, violet, purple, fuchsia, pink, and rose.
+  Dark meshes should show both a sky-blue/cyan blurred shape and a
+  purple/violet blurred shape over the blue chrome. Choose light-mode
   colors as light as possible while keeping black header text readable, and
   choose dark-mode colors as light as possible while keeping white header text
   readable. Avoid dark brown and dark green. Dark meshes do not need to be
   literal darker versions of the light palette when a different palette looks
   better. The dark mesh must still read as a mesh: individual blobs should be
-  visible, and each sibling app should be distinguishable by its dark mesh
-  colors or shape.
+  visible, it should not collapse into only purple or only solid blue, and each
+  sibling app should be distinguishable by its dark mesh colors or shape.
 - The browser safe-area color and the visible page background beyond the mesh
   must equal the active top and bottom color of the mesh exactly in both light
   and dark mode. Match scheme-specific `theme-color` meta entries, CSS chrome

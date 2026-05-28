@@ -63,10 +63,10 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   the active top and bottom mesh color, while the static manifest color remains
   tied to light mode unless an install-color decision changes it. Light meshes
   use pastel colors; dark meshes use cool jewel-tone colors. Keep the base
-  chrome near cyan, sky, or blue, use blurred indigo, violet, purple, fuchsia,
-  pink, and rose family shapes, and keep dark mesh blobs visibly mesh-like and
-  distinguishable from sibling apps. Do this without changing workbench or card
-  surface tokens.
+  chrome near cyan, sky, or blue, include both sky-blue/cyan and purple/violet
+  blurred shapes, allow optional indigo, fuchsia, pink, and rose accents, and
+  keep dark mesh blobs visibly mesh-like and distinguishable from sibling apps.
+  Do this without changing workbench or card surface tokens.
 - When work is product-scope driven, inspect the `PRD.md` implementation
   progress table first and update it precisely with `Done`/`Pending` status.
 - Do not add Sui wallet flows, transaction signing, Mysten SDK dependencies,

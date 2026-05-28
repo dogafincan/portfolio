@@ -131,10 +131,12 @@ Design principles that should remain visible in day-to-day work:
   color, and the visible page background at the top and bottom of the app match
   the active mesh color in both light and dark mode. Light mode uses pastel mesh
   colors; dark mode uses cool jewel-tone mesh colors. In both schemes, keep the
-  base chrome near cyan, sky, or blue and use blurred indigo, violet, purple,
-  fuchsia, pink, and rose family shapes. Static manifest colors stay tied to the
-  light-mode chrome unless a separate install-color decision changes them. Dark
-  meshes should have visible blobs and stay distinguishable from sibling apps.
+  base chrome near cyan, sky, or blue and include both sky-blue/cyan and
+  purple/violet blurred shapes, with optional indigo, fuchsia, pink, and rose
+  accents. Static manifest colors stay tied to the light-mode chrome unless a
+  separate install-color decision changes them. Dark meshes should have visible
+  blobs, avoid collapsing into only purple or solid blue, and stay
+  distinguishable from sibling apps.
 - Keep project cards scannable, responsive, and backed by structured content.
 - Explain what projects do before naming libraries or infrastructure.
 - Avoid generic hero filler, decorative principles sections, fake metrics, and

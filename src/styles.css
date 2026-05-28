@@ -97,6 +97,9 @@
   --portfolio-hero-mesh-sky: #b9ecff;
   --portfolio-hero-mesh-lavender: #f0e8ff;
   --portfolio-hero-mesh-purple: #f4d9f2;
+  --portfolio-hero-mesh-left-shape: var(--portfolio-hero-mesh-purple);
+  --portfolio-hero-mesh-right-shape: var(--portfolio-hero-mesh-purple);
+  --portfolio-hero-mesh-bottom-shape: var(--portfolio-hero-mesh-lavender);
   --portfolio-hero-mesh-core-highlight-start: 82%;
   --portfolio-hero-mesh-core-highlight-mid: 62%;
   --portfolio-hero-mesh-wash-highlight-start: 24%;
@@ -150,15 +153,18 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --portfolio-app-chrome-color: #427ba9;
+  --portfolio-app-chrome-color: #4078bf;
   --portfolio-page-background: var(--portfolio-app-chrome-color);
-  --portfolio-hero-mesh-highlight: #427ba9;
-  --portfolio-hero-mesh-pale-blue: #427ba9;
+  --portfolio-hero-mesh-highlight: #4078bf;
+  --portfolio-hero-mesh-pale-blue: #4078bf;
   --portfolio-hero-mesh-cyan: #4b91c8;
-  --portfolio-hero-mesh-teal: #5987cf;
-  --portfolio-hero-mesh-sky: #7282d6;
-  --portfolio-hero-mesh-lavender: #8d70cf;
-  --portfolio-hero-mesh-purple: #b469b1;
+  --portfolio-hero-mesh-teal: #528bd0;
+  --portfolio-hero-mesh-sky: #607fd8;
+  --portfolio-hero-mesh-lavender: #7b74d2;
+  --portfolio-hero-mesh-purple: #9670c4;
+  --portfolio-hero-mesh-left-shape: var(--portfolio-hero-mesh-cyan);
+  --portfolio-hero-mesh-right-shape: var(--portfolio-hero-mesh-purple);
+  --portfolio-hero-mesh-bottom-shape: var(--portfolio-hero-mesh-teal);
   --portfolio-hero-mesh-core-highlight-start: 34%;
   --portfolio-hero-mesh-core-highlight-mid: 18%;
   --portfolio-hero-mesh-wash-highlight-start: 10%;
@@ -213,15 +219,18 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
-    --portfolio-app-chrome-color: #427ba9;
+    --portfolio-app-chrome-color: #4078bf;
     --portfolio-page-background: var(--portfolio-app-chrome-color);
-    --portfolio-hero-mesh-highlight: #427ba9;
-    --portfolio-hero-mesh-pale-blue: #427ba9;
+    --portfolio-hero-mesh-highlight: #4078bf;
+    --portfolio-hero-mesh-pale-blue: #4078bf;
     --portfolio-hero-mesh-cyan: #4b91c8;
-    --portfolio-hero-mesh-teal: #5987cf;
-    --portfolio-hero-mesh-sky: #7282d6;
-    --portfolio-hero-mesh-lavender: #8d70cf;
-    --portfolio-hero-mesh-purple: #b469b1;
+    --portfolio-hero-mesh-teal: #528bd0;
+    --portfolio-hero-mesh-sky: #607fd8;
+    --portfolio-hero-mesh-lavender: #7b74d2;
+    --portfolio-hero-mesh-purple: #9670c4;
+    --portfolio-hero-mesh-left-shape: var(--portfolio-hero-mesh-cyan);
+    --portfolio-hero-mesh-right-shape: var(--portfolio-hero-mesh-purple);
+    --portfolio-hero-mesh-bottom-shape: var(--portfolio-hero-mesh-teal);
     --portfolio-hero-mesh-core-highlight-start: 34%;
     --portfolio-hero-mesh-core-highlight-mid: 18%;
     --portfolio-hero-mesh-wash-highlight-start: 10%;
@@ -288,7 +297,7 @@
         color-mix(
             in oklab,
             var(--portfolio-hero-mesh-highlight) var(--portfolio-hero-mesh-core-highlight-mid),
-            var(--portfolio-hero-mesh-purple)
+            var(--portfolio-hero-mesh-left-shape)
           )
           44%,
         transparent 76%
@@ -314,7 +323,7 @@
         color-mix(
             in oklab,
             transparent var(--portfolio-hero-mesh-left-transparent),
-            var(--portfolio-hero-mesh-purple)
+            var(--portfolio-hero-mesh-right-shape)
           )
           0%,
         transparent 68%
@@ -334,7 +343,7 @@
         color-mix(
             in oklab,
             transparent var(--portfolio-hero-mesh-bottom-transparent),
-            var(--portfolio-hero-mesh-lavender)
+            var(--portfolio-hero-mesh-bottom-shape)
           )
           0%,
         transparent 70%

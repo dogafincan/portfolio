@@ -39,29 +39,56 @@ describe("global styles", () => {
     expect(lightRoot).toContain("--portfolio-hero-mesh-sky: #b9ecff;");
     expect(lightRoot).toContain("--portfolio-hero-mesh-lavender: #f0e8ff;");
     expect(lightRoot).toContain("--portfolio-hero-mesh-purple: #f4d9f2;");
+    expect(lightRoot).toContain(
+      "--portfolio-hero-mesh-left-shape: var(--portfolio-hero-mesh-purple);",
+    );
+    expect(lightRoot).toContain(
+      "--portfolio-hero-mesh-right-shape: var(--portfolio-hero-mesh-purple);",
+    );
+    expect(lightRoot).toContain(
+      "--portfolio-hero-mesh-bottom-shape: var(--portfolio-hero-mesh-lavender);",
+    );
     expect(lightRoot).not.toContain("--portfolio-hero-mesh-purple: #b68ffe;");
     expect(lightRoot).toContain("--portfolio-hero-mesh-core-highlight-start: 82%;");
     expect(lightRoot).toContain("--portfolio-hero-mesh-wash-highlight-start: 24%;");
     expect(lightRoot).toContain("--portfolio-hero-mesh-left-transparent: 18%;");
-    expect(darkClass).toContain("--portfolio-app-chrome-color: #427ba9;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-highlight: #427ba9;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-pale-blue: #427ba9;");
+    expect(darkClass).toContain("--portfolio-app-chrome-color: #4078bf;");
+    expect(darkClass).toContain("--portfolio-hero-mesh-highlight: #4078bf;");
+    expect(darkClass).toContain("--portfolio-hero-mesh-pale-blue: #4078bf;");
     expect(darkClass).toContain("--portfolio-hero-mesh-cyan: #4b91c8;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-teal: #5987cf;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-sky: #7282d6;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-lavender: #8d70cf;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-purple: #b469b1;");
+    expect(darkClass).toContain("--portfolio-hero-mesh-teal: #528bd0;");
+    expect(darkClass).toContain("--portfolio-hero-mesh-sky: #607fd8;");
+    expect(darkClass).toContain("--portfolio-hero-mesh-lavender: #7b74d2;");
+    expect(darkClass).toContain("--portfolio-hero-mesh-purple: #9670c4;");
+    expect(darkClass).toContain(
+      "--portfolio-hero-mesh-left-shape: var(--portfolio-hero-mesh-cyan);",
+    );
+    expect(darkClass).toContain(
+      "--portfolio-hero-mesh-right-shape: var(--portfolio-hero-mesh-purple);",
+    );
+    expect(darkClass).toContain(
+      "--portfolio-hero-mesh-bottom-shape: var(--portfolio-hero-mesh-teal);",
+    );
     expect(darkClass).toContain("--portfolio-hero-mesh-core-highlight-start: 34%;");
     expect(darkClass).toContain("--portfolio-hero-mesh-wash-highlight-start: 10%;");
     expect(darkClass).toContain("--portfolio-hero-mesh-left-transparent: 6%;");
-    expect(darkMedia).toContain("--portfolio-app-chrome-color: #427ba9;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-highlight: #427ba9;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-pale-blue: #427ba9;");
+    expect(darkMedia).toContain("--portfolio-app-chrome-color: #4078bf;");
+    expect(darkMedia).toContain("--portfolio-hero-mesh-highlight: #4078bf;");
+    expect(darkMedia).toContain("--portfolio-hero-mesh-pale-blue: #4078bf;");
     expect(darkMedia).toContain("--portfolio-hero-mesh-cyan: #4b91c8;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-teal: #5987cf;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-sky: #7282d6;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-lavender: #8d70cf;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-purple: #b469b1;");
+    expect(darkMedia).toContain("--portfolio-hero-mesh-teal: #528bd0;");
+    expect(darkMedia).toContain("--portfolio-hero-mesh-sky: #607fd8;");
+    expect(darkMedia).toContain("--portfolio-hero-mesh-lavender: #7b74d2;");
+    expect(darkMedia).toContain("--portfolio-hero-mesh-purple: #9670c4;");
+    expect(darkMedia).toContain(
+      "--portfolio-hero-mesh-left-shape: var(--portfolio-hero-mesh-cyan);",
+    );
+    expect(darkMedia).toContain(
+      "--portfolio-hero-mesh-right-shape: var(--portfolio-hero-mesh-purple);",
+    );
+    expect(darkMedia).toContain(
+      "--portfolio-hero-mesh-bottom-shape: var(--portfolio-hero-mesh-teal);",
+    );
     expect(darkMedia).toContain("--portfolio-hero-mesh-core-highlight-start: 34%;");
     expect(darkMedia).toContain("--portfolio-hero-mesh-wash-highlight-start: 10%;");
     expect(darkMedia).toContain("--portfolio-hero-mesh-left-transparent: 6%;");
@@ -84,7 +111,7 @@ describe("global styles", () => {
     expect(htmlBlock).not.toContain("background: var(--portfolio-page-background);");
     expect(bodyBlock).toContain("background: var(--portfolio-page-background);");
     expect(styles).toContain("--portfolio-app-chrome-color: #d2f2ff;");
-    expect(styles).toContain("--portfolio-app-chrome-color: #427ba9;");
+    expect(styles).toContain("--portfolio-app-chrome-color: #4078bf;");
   });
 
   it("defines iMessage-blue primary button colors for light and dark schemes", () => {
@@ -164,6 +191,9 @@ describe("global styles", () => {
     expect(meshLayer).toContain("var(--portfolio-hero-mesh-core-highlight-start)");
     expect(meshLayer).toContain("var(--portfolio-hero-mesh-wash-highlight-start)");
     expect(meshLayer).toContain("var(--portfolio-hero-mesh-left-transparent)");
+    expect(meshLayer).toContain("var(--portfolio-hero-mesh-left-shape)");
+    expect(meshLayer).toContain("var(--portfolio-hero-mesh-right-shape)");
+    expect(meshLayer).toContain("var(--portfolio-hero-mesh-bottom-shape)");
     expect(meshLayer).toContain("radial-gradient");
     expect(meshLayer).toContain("to bottom");
     expect(meshLayer).toContain("transparent 40%");
