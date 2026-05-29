@@ -114,7 +114,7 @@ describe("global styles", () => {
     expect(styles).toContain("--portfolio-app-chrome-color: #4078bf;");
   });
 
-  it("defines iMessage-blue primary button colors for light and dark schemes", () => {
+  it("defines softened iMessage-blue primary button colors for light and dark schemes", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const rootStart = styles.indexOf(":root {");
     const rootEnd = styles.indexOf("\n}\n\n.dark", rootStart);
@@ -126,38 +126,50 @@ describe("global styles", () => {
     const darkMedia = styles.slice(darkMediaStart, styles.indexOf("\n}\n\n@layer", darkMediaStart));
 
     expect(styles.match(/--button-primary:/g)).toHaveLength(3);
-    expect(lightRoot).toContain("--button-primary: #007aff;");
-    expect(lightRoot).toContain("--button-primary-hover: #0071eb;");
-    expect(lightRoot).toContain("--button-primary-active: #0067d6;");
+    expect(lightRoot).toContain("--button-primary: color-mix(in oklab, #007aff 90%, #ffffff);");
+    expect(lightRoot).toContain(
+      "--button-primary-hover: color-mix(in oklab, #0071eb 90%, #ffffff);",
+    );
+    expect(lightRoot).toContain(
+      "--button-primary-active: color-mix(in oklab, #0067d6 90%, #ffffff);",
+    );
     expect(lightRoot).toContain("--button-primary-disabled: #9ed2ff;");
     expect(lightRoot).toContain("--button-primary-foreground: #ffffff;");
     expect(lightRoot).toContain(
       "--button-primary-disabled-foreground: color-mix(in oklab, #ffffff 82%, transparent);",
     );
     expect(lightRoot).toContain(
-      "--button-primary-ring: color-mix(in oklab, #007aff 40%, transparent);",
+      "--button-primary-ring: color-mix(in oklab, var(--button-primary) 40%, transparent);",
     );
-    expect(darkClass).toContain("--button-primary: #0a84ff;");
-    expect(darkClass).toContain("--button-primary-hover: #007aff;");
-    expect(darkClass).toContain("--button-primary-active: #006ed6;");
+    expect(darkClass).toContain("--button-primary: color-mix(in oklab, #0a84ff 90%, var(--card));");
+    expect(darkClass).toContain(
+      "--button-primary-hover: color-mix(in oklab, #007aff 90%, var(--card));",
+    );
+    expect(darkClass).toContain(
+      "--button-primary-active: color-mix(in oklab, #006ed6 90%, var(--card));",
+    );
     expect(darkClass).toContain("--button-primary-disabled: #1b5f9e;");
     expect(darkClass).toContain("--button-primary-foreground: #ffffff;");
     expect(darkClass).toContain(
       "--button-primary-disabled-foreground: color-mix(in oklab, #ffffff 70%, transparent);",
     );
     expect(darkClass).toContain(
-      "--button-primary-ring: color-mix(in oklab, #0a84ff 50%, transparent);",
+      "--button-primary-ring: color-mix(in oklab, var(--button-primary) 50%, transparent);",
     );
-    expect(darkMedia).toContain("--button-primary: #0a84ff;");
-    expect(darkMedia).toContain("--button-primary-hover: #007aff;");
-    expect(darkMedia).toContain("--button-primary-active: #006ed6;");
+    expect(darkMedia).toContain("--button-primary: color-mix(in oklab, #0a84ff 90%, var(--card));");
+    expect(darkMedia).toContain(
+      "--button-primary-hover: color-mix(in oklab, #007aff 90%, var(--card));",
+    );
+    expect(darkMedia).toContain(
+      "--button-primary-active: color-mix(in oklab, #006ed6 90%, var(--card));",
+    );
     expect(darkMedia).toContain("--button-primary-disabled: #1b5f9e;");
     expect(darkMedia).toContain("--button-primary-foreground: #ffffff;");
     expect(darkMedia).toContain(
       "--button-primary-disabled-foreground: color-mix(in oklab, #ffffff 70%, transparent);",
     );
     expect(darkMedia).toContain(
-      "--button-primary-ring: color-mix(in oklab, #0a84ff 50%, transparent);",
+      "--button-primary-ring: color-mix(in oklab, var(--button-primary) 50%, transparent);",
     );
   });
 
