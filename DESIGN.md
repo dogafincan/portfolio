@@ -84,12 +84,6 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Keep actions in the card that owns their state. Project live actions belong in
   the project card. Future contact or case-study actions should live near the
   content they operate on.
-- The default `Button` variant is the primary button treatment. Keep it on an
-  Apple iMessage-style blue with white text: `#007aff` in light mode and
-  `#0a84ff` in dark mode, plus matching hover, active, expanded, focus, and
-  disabled state colors. Keep this button color separate from the global
-  `--primary` token so badges, links, progress, and other non-button surfaces
-  do not inherit the action blue by accident.
 - Keep every clickable button target at least `44px` tall across variants.
   Touch comfort wins over compact density for primary actions and utility
   controls.
