@@ -125,18 +125,12 @@ adapting the pattern to a project showcase instead of a workflow utility.
 Design principles that should remain visible in day-to-day work:
 
 - Show real project content early.
-- Use the shared mesh chrome, app logo system, Inter preload, Lucide icons,
-  shadcn/Base UI primitives, and rounded muted workbench.
-- Treat the mesh chrome as app identity: safe areas, theme color, manifest
-  color, and the visible page background at the top and bottom of the app match
-  the active mesh color in both light and dark mode. Light mode uses pastel mesh
-  colors; dark mode uses cool jewel-tone mesh colors. In both schemes, keep the
-  base chrome near cyan, sky, or blue and include both sky-blue/cyan and
-  purple/violet blurred shapes, with optional indigo, fuchsia, pink, and rose
-  accents. Static manifest colors stay tied to the light-mode chrome unless a
-  separate install-color decision changes them. Dark meshes should have visible
-  blobs, avoid collapsing into only purple or solid blue, and stay
-  distinguishable from sibling apps.
+- Use the shared `DESIGN.md` `Header Section / Mesh Gradient` treatment, app
+  logo system, Inter preload, Lucide icons, shadcn/Base UI primitives, and
+  rounded muted workbench.
+- Treat `DESIGN.md`'s `Header Section / Mesh Gradient` as the source of truth
+  for safe areas, theme color, manifest color, visible page background, header
+  identity colors, and decorative mesh/cloud colors.
 - Keep project cards scannable, responsive, and backed by structured content.
 - Explain what projects do before naming libraries or infrastructure.
 - Avoid generic hero filler, decorative principles sections, fake metrics, and

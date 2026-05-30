@@ -154,7 +154,7 @@ The current product includes:
 4. Project cards with app icon, name, short subtitle, and live app link.
 5. Live project links when available.
 6. App logo, favicon, install icons, manifest, and social preview image.
-7. Responsive light/dark mesh page chrome.
+7. Responsive shared header mesh page chrome.
 8. Regression tests for shared conventions.
 
 Future scope may include:

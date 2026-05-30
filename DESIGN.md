@@ -32,30 +32,6 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Preload the concrete Fontsource Inter latin `woff2` asset from the root
   document before the stylesheet link. Keep the preload order covered by the
   root head regression test.
-- Use the shared mesh-gradient page chrome. Light mode uses pastel mesh colors
-  and dark header text. Dark mode uses cool jewel-tone mesh colors with white
-  header title, subtitle, and header links, while the workbench and everything
-  inside it continue to follow system color mode. In both schemes, keep the
-  mesh's top and bottom chrome color close to Tailwind cyan, sky, or blue, then
-  use blurred abstract shapes near the pastel or cool jewel-tone equivalents of
-  Tailwind cyan, sky, blue, indigo, violet, purple, fuchsia, pink, and rose.
-  Dark meshes should show both a sky-blue/cyan blurred shape and a
-  purple/violet blurred shape over the blue chrome. Choose light-mode
-  colors as light as possible while keeping black header text readable, and
-  choose dark-mode colors as light as possible while keeping white header text
-  readable. Avoid dark brown and dark green. Dark meshes do not need to be
-  literal darker versions of the light palette when a different palette looks
-  better. The dark mesh must still read as a mesh: individual blobs should be
-  visible, it should not collapse into only purple or only solid blue, and each
-  sibling app should be distinguishable by its dark mesh colors or shape.
-- The browser safe-area color and the visible page background beyond the mesh
-  must equal the active top and bottom color of the mesh exactly in both light
-  and dark mode. Match scheme-specific `theme-color` meta entries, CSS chrome
-  variables, the root `html` background, and the body page background to the
-  active mesh color. Keep static manifest colors tied to the light-mode chrome
-  unless a separate install-color decision changes them. iOS Safari can paint
-  notched safe areas from the document root before the body mesh begins, and the
-  bottom browser chrome can reveal the same page background the mesh fades into.
 - Keep the shared chrome color separate from workbench, card, and form surface
   tokens so those surfaces continue to follow system color mode.
 - Respect system dark mode. Do not add a manual theme switch unless the product
@@ -66,7 +42,7 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   preserves the app logo's rounded-square shape. Use theme-invariant light-mode
   wrapper colors (`border-neutral-200 bg-white`) so the logo and border look the
   same in light and dark mode. Do not change the logo asset or border treatment
-  when changing dark mesh colors.
+  when changing the header mesh treatment.
 - Keep OG and social images as manually supplied 1200x630 PNGs. They should use
   the restrained light-mode header composition only: logo, site title, and
   subtitle. Do not add social SVG sources, image-generation paths, project
@@ -138,6 +114,105 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   owns wallet funding and airdrop execution, `memedex` owns discovery, voting,
   ranking, review, and moderation surfaces, and `portfolio` owns project
   showcase content.
+
+## Header Section / Mesh Gradient
+
+This section documents the shared visual treatment for app header areas across
+projects. Treat these rules as a reusable visual system, not an app-specific
+layout.
+
+- Use one identity color treatment in both light mode and dark mode. The app
+  logo, header title, and header subtitle should render in white (`#FFFFFF`) in
+  all themes so the app identity stays consistent and readable against the
+  mesh-gradient background.
+- The app's primary background color and theme color should be a bright, clean
+  light blue: primary light blue `#43C3EC`. Use this for the page background,
+  browser safe-area/chrome color, root `html` and `body` backgrounds, and
+  `theme-color` meta entries unless a project records a specific install-color
+  exception.
+- The page background should primarily read as `#43C3EC`. When a mesh-gradient
+  or decorative blurred-cloud treatment is used in the header, the top and
+  bottom of the composition must remain the same light blue (`#43C3EC`) so the
+  UI does not become a full multicolor gradient. The blue should feel like the
+  base canvas, with the other colors appearing only as soft atmospheric accents.
+- Header mesh treatments should contain decorative blurred cloud-like shapes.
+  The exact generated cloud type may vary per project, but it should stay soft,
+  abstract, airy, and non-literal. Suitable inspirations include cirrus,
+  altocumulus, stratocumulus, lenticular, and soft vapor-like blobs. The
+  implementation should not require realistic cloud imagery; prefer CSS radial
+  gradients, blurred blobs, or mesh-gradient layers.
+- Use these accent colors for the decorative cloud shapes:
+  soft lavender `#CDBBFF`, periwinkle violet `#9F8CFF`, pale icy blue
+  `#BDEEFF`, soft pink-lilac `#F0B7FF`, and light violet-blue `#7FA8FF`.
+- Avoid the greenish tint from the references. Do not introduce mint, lime, or
+  greenish-cyan accent clouds. The base blue may remain cyan-blue, but the
+  decorative accents should stay within lavender, violet, pale blue,
+  periwinkle, and pink-lilac.
+- Position the cloud shapes mostly behind and around the header identity
+  elements: behind the app logo, behind the title, and behind the subtitle. They
+  should also appear near the sides of the top part of the main
+  workbench/container card so the card feels embedded into the atmosphere.
+  Clouds should not dominate the bottom of the UI; the lower part of the screen
+  should return clearly to the base light blue (`#43C3EC`).
+- The composition should read as a centered identity stack above the primary
+  workbench: app logo, app title, subtitle, then the rounded muted workbench.
+  The mesh should form a soft horizontal cloud band behind that stack, with the
+  strongest color concentration around the logo/title/subtitle and the upper
+  sides of the workbench.
+- Dark mode keeps the same bright blue page chrome and atmospheric header cloud
+  treatment. Only workbench, card, form, item, alert, and text surfaces inside
+  the workbench switch to system dark-mode tokens. Do not replace the header
+  with a separate dark header palette.
+- Keep enough clear blue above the identity stack for mobile safe areas and
+  enough clear blue below the visible cloud field that the lower screen returns
+  to the base canvas. Avoid carrying saturated accent blobs down the full page.
+
+Implementation guidance:
+
+- Use a relatively positioned page or header wrapper.
+- Use absolutely positioned decorative layers with `pointer-events: none`.
+- Use `radial-gradient(...)` backgrounds or multiple layered radial gradients.
+- Use strong blur, for example `filter: blur(40px)` to `blur(80px)`.
+- Use opacity around `0.45` to `0.85`, depending on light or dark mode.
+- Keep the content layer above the cloud layer with `z-index`.
+- Use `overflow: hidden` on the header or page wrapper to keep cloud edges
+  clean.
+- Prefer CSS-generated shapes over static image assets unless exact
+  reproduction is required.
+
+General Tailwind/CSS shape:
+
+```tsx
+<main className="relative min-h-dvh overflow-hidden bg-[#43C3EC]">
+  <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[34rem] overflow-hidden">
+    <div className="absolute inset-0 bg-[#43C3EC]" />
+    <div
+      className="absolute left-1/2 top-8 h-64 w-72 -translate-x-1/2 rounded-full opacity-75 blur-[64px]"
+      style={{ background: "radial-gradient(circle, #CDBBFF 0%, transparent 68%)" }}
+    />
+    <div
+      className="absolute left-[-4rem] top-24 h-72 w-80 rounded-full opacity-65 blur-[72px]"
+      style={{ background: "radial-gradient(circle, #9F8CFF 0%, transparent 70%)" }}
+    />
+    <div
+      className="absolute right-[-3rem] top-20 h-72 w-80 rounded-full opacity-70 blur-[72px]"
+      style={{ background: "radial-gradient(circle, #F0B7FF 0%, transparent 70%)" }}
+    />
+    <div
+      className="absolute left-[18%] top-64 h-56 w-72 rounded-full opacity-55 blur-[56px]"
+      style={{ background: "radial-gradient(circle, #BDEEFF 0%, transparent 72%)" }}
+    />
+    <div
+      className="absolute right-[16%] top-72 h-56 w-72 rounded-full opacity-60 blur-[60px]"
+      style={{ background: "radial-gradient(circle, #7FA8FF 0%, transparent 72%)" }}
+    />
+  </div>
+
+  <header className="relative z-10 text-white">
+    {/* Logo, title, and subtitle stay on the same white treatment in all themes. */}
+  </header>
+</main>
+```
 
 ## Portfolio Product Shape
 
