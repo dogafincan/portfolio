@@ -15,10 +15,10 @@ The portfolio should reuse the proven stack and design direction from:
 - `~/Documents/memedex`
 
 Those sibling apps are the reference for TanStack Start, Vite+, Cloudflare
-Workers, shadcn/ui, Tailwind CSS v4, Inter, Lucide icons, shared mesh-gradient
-chrome, and repo workflow conventions. The portfolio should keep the same
-general system while avoiding Sui-specific runtime dependencies unless they are
-explicitly needed.
+Workers, shadcn/ui, Tailwind CSS v4, Inter, Lucide icons, shared page chrome,
+and repo workflow conventions. The portfolio should keep the same general system
+while avoiding Sui-specific runtime dependencies unless they are explicitly
+needed.
 
 ## Documentation Boundaries
 
@@ -57,12 +57,13 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
 - Use `DESIGN.md` as the source of truth for UI, copy, icon, layout, alert,
   social-preview, responsive, and loading-state rules instead of duplicating
   that guidance here.
-- For mesh chrome changes, inspect `src/styles.css`, `src/routes/__root.tsx`,
-  `public/manifest.json`, `src/styles.test.ts`, and `src/routes/-__root.test.ts`
-  together. Follow `DESIGN.md`'s `Header Section / Mesh Gradient` for the
-  browser safe-area, scheme-specific `theme-color`, root/body backgrounds,
-  visible page chrome, and decorative mesh/cloud colors. Do this without
-  changing workbench or card surface tokens.
+- For page chrome or cloud-background changes, inspect `src/styles.css`,
+  `src/routes/__root.tsx`, `public/manifest.json`, `src/styles.test.ts`,
+  `src/routes/-__root.test.ts`, and any checked-in cloud assets together. Follow
+  `DESIGN.md`'s `Header Section / Cloud Image Background` for browser
+  safe-area, scheme-specific `theme-color`, root/body backgrounds, visible page
+  chrome, and decorative background policy. Do this without changing workbench
+  or card surface tokens.
 - When work is product-scope driven, inspect the `PRD.md` implementation
   progress table first and update it precisely with `Done`/`Pending` status.
 - Do not add Sui wallet flows, transaction signing, Mysten SDK dependencies,
@@ -180,9 +181,9 @@ The current implementation follows the sibling conventions. Important files:
 - `src/routes/__root.tsx`: root document, app shell, font preload, manifest
   links, and theme-color metadata
 - `src/routes/index.lazy.tsx`: visible portfolio route component attachment
-- `src/styles.css`: global Tailwind v4 tokens, mesh background, and chrome color
+- `src/styles.css`: global Tailwind v4 tokens, page chrome, and chrome color
   variables
-- `src/styles.test.ts`: regression guard for the shared mesh-gradient CSS
+- `src/styles.test.ts`: regression guard for the shared page chrome CSS
 - `src/components/portfolio-home.tsx`: portfolio header and project grid
 - `src/components/portfolio-home.test.tsx`: rendering and structure coverage for
   the portfolio surface
@@ -241,5 +242,11 @@ For implementation changes:
 - run `npx vp test` when behavior or rendering changes
 - run `npx vp build` before claiming production readiness or deployability
 - use browser smoke checks for visual or responsive UI changes
+
+For rendered frontend QA, use the in-app Browser or a local browser smoke script
+first when available. Use an alternate browser service such as Playwright or a
+Chrome-backed target only when the preferred browser path is unavailable,
+blocked, or cannot collect the required evidence, and record the fallback reason
+with the verification notes.
 
 Do not claim a command passed unless it was run in the current checkout.

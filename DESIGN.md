@@ -8,8 +8,8 @@ slices.
 
 Before changing UI, copy, layout, icons, loading states, empty states, social
 images, or responsive behavior, read this file and compare the current sibling
-`sui-snapshot`, `sui-airdrop`, and `memedex` design files for general
-principles.
+`sui-swap`, `sui-snapshot`, `sui-airdrop`, and `memedex` design files for
+general principles.
 
 ## Shared Workspace Design System
 
@@ -42,7 +42,7 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   preserves the app logo's rounded-square shape. Use theme-invariant light-mode
   wrapper colors (`border-neutral-200 bg-white`) so the logo and border look the
   same in light and dark mode. Do not change the logo asset or border treatment
-  when changing the header mesh treatment.
+  when changing the header cloud treatment.
 - Keep OG and social images as manually supplied 1200x630 PNGs. They should use
   the restrained light-mode header composition only: logo, site title, and
   subtitle. Do not add social SVG sources, image-generation paths, project
@@ -115,7 +115,7 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   ranking, review, and moderation surfaces, and `portfolio` owns project
   showcase content.
 
-## Header Section / Mesh Gradient
+## Header Section / Cloud Image Background
 
 This section documents the shared visual treatment for app header areas across
 projects. Treat these rules as a reusable visual system, not an app-specific
@@ -124,95 +124,70 @@ layout.
 - Use one identity color treatment in both light mode and dark mode. The app
   logo, header title, and header subtitle should render in white (`#FFFFFF`) in
   all themes so the app identity stays consistent and readable against the
-  mesh-gradient background.
+  blue cloud background.
 - The app's primary background color and theme color should be a bright, clean
   light blue: primary light blue `#43C3EC`. Use this for the page background,
   browser safe-area/chrome color, root `html` and `body` backgrounds, and
   `theme-color` meta entries unless a project records a specific install-color
   exception.
-- The page background should primarily read as `#43C3EC`. When a mesh-gradient
-  or decorative blurred-cloud treatment is used in the header, the top and
-  bottom of the composition must remain the same light blue (`#43C3EC`) so the
-  UI does not become a full multicolor gradient. The blue should feel like the
-  base canvas, with the other colors appearing only as soft atmospheric accents.
-- Header mesh treatments should contain decorative blurred cloud-like shapes.
-  The exact generated cloud type may vary per project, but it should stay soft,
-  abstract, airy, and non-literal. Suitable inspirations include cirrus,
-  altocumulus, stratocumulus, lenticular, and soft vapor-like blobs. The
-  implementation should not require realistic cloud imagery; prefer CSS radial
-  gradients, blurred blobs, or mesh-gradient layers.
-- Use these accent colors for the decorative cloud shapes:
-  soft lavender `#CDBBFF`, periwinkle violet `#9F8CFF`, pale icy blue
-  `#BDEEFF`, soft pink-lilac `#F0B7FF`, and light violet-blue `#7FA8FF`.
+- Treat the cloud field as app identity. Prefer dedicated decorative image
+  assets when matching the shared Sui Swap cloud treatment or another exact
+  visual reference. Use `header-clouds.avif` for the top cloud field and
+  `page-atmosphere.avif` for repeatable page atmosphere unless a repo documents
+  project-specific equivalent asset names.
+- Treat the header cloud asset as the primary identity graphic. It should span
+  the viewport horizontally and cover roughly the upper 80% of the initial
+  viewport, leaving the bottom portion to return toward the base blue. Mobile
+  may crop into the center of the same image.
+- Use the repeatable page-atmosphere asset below and behind the header graphic
+  so long pages do not fall back to plain blue around the workbench. It should
+  repeat vertically, stay sparse, and feel like a natural continuation of the
+  header clouds rather than a symmetrical side frame.
+- Use the same cloud images in light mode and dark mode. Dark mode changes only
+  the workbench/card/form/item surfaces; it must not swap in separate dark
+  background images or a separate dark header palette.
+- Keep the header cloud image behind the header identity stack and around the
+  upper sides of the workbench. The strongest color should sit behind the logo,
+  title, subtitle, and upper card edges. The repeatable atmosphere can add lower
+  density wisps around the workbench sides on both desktop and mobile.
+- Both cloud images should preserve `#43C3EC` at their top and bottom edges so
+  the UI does not become a full multicolor gradient and the repeated atmosphere
+  layer does not show obvious seams. The blue remains the base canvas.
+- The top 5% of the initial viewport should read as clear blue with little or no
+  cloud texture. The bottom 20% should also return clearly to `#43C3EC`. Cloud
+  density should decrease toward the bottom of the image.
+- Decorative cloud images should stay soft, abstract, airy, and non-literal.
+  Suitable inspirations include cirrus, altocumulus, stratocumulus, lenticular,
+  and soft vapor-like blobs. The repeatable page-atmosphere image should keep a
+  similar sparsity to the header graphic and avoid mirrored, symmetrical, or
+  border-like placement.
+- Keep cloud accents within soft lavender `#CDBBFF`, periwinkle violet
+  `#9F8CFF`, pale icy blue `#BDEEFF`, soft pink-lilac `#F0B7FF`, and light
+  violet-blue `#7FA8FF`.
 - Avoid the greenish tint from the references. Do not introduce mint, lime, or
-  greenish-cyan accent clouds. The base blue may remain cyan-blue, but the
-  decorative accents should stay within lavender, violet, pale blue,
-  periwinkle, and pink-lilac.
-- Position the cloud shapes mostly behind and around the header identity
-  elements: behind the app logo, behind the title, and behind the subtitle. They
-  should also appear near the sides of the top part of the main
-  workbench/container card so the card feels embedded into the atmosphere.
-  Clouds should not dominate the bottom of the UI; the lower part of the screen
-  should return clearly to the base light blue (`#43C3EC`).
+  greenish-cyan accent clouds. The base blue may remain cyan-blue.
 - The composition should read as a centered identity stack above the primary
   workbench: app logo, app title, subtitle, then the rounded muted workbench.
-  The mesh should form a soft horizontal cloud band behind that stack, with the
-  strongest color concentration around the logo/title/subtitle and the upper
-  sides of the workbench.
-- Dark mode keeps the same bright blue page chrome and atmospheric header cloud
-  treatment. Only workbench, card, form, item, alert, and text surfaces inside
-  the workbench switch to system dark-mode tokens. Do not replace the header
-  with a separate dark header palette.
-- Keep enough clear blue above the identity stack for mobile safe areas and
-  enough clear blue below the visible cloud field that the lower screen returns
-  to the base canvas. Avoid carrying saturated accent blobs down the full page.
 
 Implementation guidance:
 
-- Use a relatively positioned page or header wrapper.
-- Use absolutely positioned decorative layers with `pointer-events: none`.
-- Use `radial-gradient(...)` backgrounds or multiple layered radial gradients.
-- Use strong blur, for example `filter: blur(40px)` to `blur(80px)`.
-- Use opacity around `0.45` to `0.85`, depending on light or dark mode.
-- Keep the content layer above the cloud layer with `z-index`.
-- Use `overflow: hidden` on the header or page wrapper to keep cloud edges
-  clean.
-- Prefer CSS-generated shapes over static image assets unless exact
-  reproduction is required.
-
-General Tailwind/CSS shape:
-
-```tsx
-<main className="relative min-h-dvh overflow-hidden bg-[#43C3EC]">
-  <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[34rem] overflow-hidden">
-    <div className="absolute inset-0 bg-[#43C3EC]" />
-    <div
-      className="absolute left-1/2 top-8 h-64 w-72 -translate-x-1/2 rounded-full opacity-75 blur-[64px]"
-      style={{ background: "radial-gradient(circle, #CDBBFF 0%, transparent 68%)" }}
-    />
-    <div
-      className="absolute left-[-4rem] top-24 h-72 w-80 rounded-full opacity-65 blur-[72px]"
-      style={{ background: "radial-gradient(circle, #9F8CFF 0%, transparent 70%)" }}
-    />
-    <div
-      className="absolute right-[-3rem] top-20 h-72 w-80 rounded-full opacity-70 blur-[72px]"
-      style={{ background: "radial-gradient(circle, #F0B7FF 0%, transparent 70%)" }}
-    />
-    <div
-      className="absolute left-[18%] top-64 h-56 w-72 rounded-full opacity-55 blur-[56px]"
-      style={{ background: "radial-gradient(circle, #BDEEFF 0%, transparent 72%)" }}
-    />
-    <div
-      className="absolute right-[16%] top-72 h-56 w-72 rounded-full opacity-60 blur-[60px]"
-      style={{ background: "radial-gradient(circle, #7FA8FF 0%, transparent 72%)" }}
-    />
-  </div>
-
-  <header className="relative z-10 text-white">
-    {/* Logo, title, and subtitle stay on the same white treatment in all themes. */}
-  </header>
-</main>
-```
+- Set `html` and `body` backgrounds to `#43C3EC`.
+- Keep `theme-color` and install background colors on `#43C3EC`.
+- Render the header cloud image and repeatable page-atmosphere image as
+  decorative non-interactive layers.
+- Size the header image as a full-bleed field with responsive center cropping on
+  mobile. In CSS, `background-size: cover` on a roughly `80svh` decorative layer
+  is the intended baseline.
+- Size the page-atmosphere image so it remains visible in desktop gutters and in
+  the narrow mobile strips beside the workbench. It may use a larger
+  `background-size` on mobile and `repeat-y` for long pages.
+- Use `pointer-events: none` on decorative layers and keep page content above
+  them.
+- New implementations should not recreate or extend the cloud shapes with CSS
+  radial gradients, blurred blobs, or code-generated mesh layers after cloud
+  image assets are adopted. Use raster image assets as the atmospheric sources.
+- Keep the page background behind the images as `#43C3EC`, and fade or mask the
+  header image edges if needed to avoid visible joins.
 
 ## Portfolio Product Shape
 

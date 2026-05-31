@@ -9,7 +9,7 @@ treated as complete.
 | Status  | Slice                                | PRD coverage        | Commit    | Notes                                                                                                   |
 | ------- | ------------------------------------ | ------------------- | --------- | ------------------------------------------------------------------------------------------------------- |
 | Done    | Project showcase surface             | 1, 7, 8, 9, 10      | `e221b4d` | Replaces the starter page with a real portfolio route, structured sibling-project records and cards.    |
-| Done    | Shared app chrome and metadata       | 9.5-9.7, 12, 13, 15 | `e221b4d` | Adds logo assets, mesh chrome, root metadata, social preview assets, and regression coverage.           |
+| Done    | Shared app chrome and metadata       | 9.5-9.7, 12, 13, 15 | `e221b4d` | Adds logo assets, page chrome, root metadata, social preview assets, and regression coverage.           |
 | Done    | Remove project-section intro copy    | 8.1, 9.1, 13        | `3b6d334` | Removes the visible `Projects` heading/subtitle so the project cards lead the workbench.                |
 | Done    | Align project workbench container    | 8.1, 9.1, 13        | `05aff21` | Matches the portfolio workbench container to the sibling Snapshot/Airdrop workbench treatment.          |
 | Done    | Remove build-principles section      | 6, 8.1, 9.1         | `ad7c462` | Removes the extra principles section and keeps the route focused on project cards.                      |
@@ -121,7 +121,7 @@ The system should:
 1. Keep the app deployable to Cloudflare Workers.
 2. Keep the Node.js version aligned with sibling Workers Builds behavior.
 3. Preserve regression coverage for root metadata, social preview, icon usage,
-   mesh chrome, and the portfolio route.
+   page chrome, and the portfolio route.
 4. Keep UI changes grounded in `DESIGN.md`.
 5. Avoid Sui-specific runtime dependencies until product scope changes.
 6. Prefer static structured content over CMS or backend state.
@@ -154,7 +154,7 @@ The current product includes:
 4. Project cards with app icon, name, short subtitle, and live app link.
 5. Live project links when available.
 6. App logo, favicon, install icons, manifest, and social preview image.
-7. Responsive shared header mesh page chrome.
+7. Responsive shared cloud page chrome.
 8. Regression tests for shared conventions.
 
 Future scope may include:
@@ -348,7 +348,7 @@ The product is ready for the current portfolio scope when:
    and live app link.
 3. Live links open in a new browser tab.
 4. Project data is structured in `src/content/projects.ts`.
-5. The app uses the shared mesh chrome, logo assets, Inter preload, and manifest
+5. The app uses the shared page chrome, logo assets, Inter preload, and manifest
    conventions.
 6. Product UI icons use Lucide.
 7. Social metadata uses an absolute HTTPS image URL.

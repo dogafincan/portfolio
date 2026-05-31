@@ -5,8 +5,9 @@ Personal portfolio website for showcasing projects built by Doga Fincan.
 This repo started documentation-first and now renders a real portfolio index.
 The first implemented surface showcases built projects, links to live targets
 when available, and carries over the shared TanStack Start, shadcn/ui, Tailwind,
-Inter, Lucide, mesh-chrome, social-preview, and verification conventions from
-the sibling apps in `~/Documents/sui-snapshot`, `~/Documents/sui-airdrop`, and
+Inter, Lucide, shared page chrome, social-preview, and verification conventions
+from the sibling apps in `~/Documents/sui-swap`,
+`~/Documents/sui-snapshot`, `~/Documents/sui-airdrop`, and
 `~/Documents/memedex`.
 
 ## Documentation Map
@@ -71,9 +72,9 @@ Relevant shared guidance from those projects:
   problem, while keeping product boundaries explicit.
 - Import the portable UI layer from siblings before inventing new primitives:
   shadcn `Button`, `Card`, `Badge`, `Item`, `Separator`, root-head metadata
-  tests, icon-system tests, and mesh-style tests fit this portfolio. Sui wallet,
-  CSV, Durable Object, Turnstile, transaction code, and Memedex voting or
-  ranking behavior does not.
+  tests, icon-system tests, and page-chrome tests fit this portfolio. Sui
+  wallet, CSV, Durable Object, Turnstile, transaction code, and Memedex voting
+  or ranking behavior does not.
 
 ## Current Stack
 
@@ -125,12 +126,12 @@ adapting the pattern to a project showcase instead of a workflow utility.
 Design principles that should remain visible in day-to-day work:
 
 - Show real project content early.
-- Use the shared `DESIGN.md` `Header Section / Mesh Gradient` treatment, app
-  logo system, Inter preload, Lucide icons, shadcn/Base UI primitives, and
-  rounded muted workbench.
-- Treat `DESIGN.md`'s `Header Section / Mesh Gradient` as the source of truth
-  for safe areas, theme color, manifest color, visible page background, header
-  identity colors, and decorative mesh/cloud colors.
+- Use the shared `DESIGN.md` `Header Section / Cloud Image Background`
+  treatment, app logo system, Inter preload, Lucide icons, shadcn/Base UI
+  primitives, and rounded muted workbench.
+- Treat `DESIGN.md`'s `Header Section / Cloud Image Background` as the source
+  of truth for safe areas, theme color, manifest color, visible page background,
+  header identity colors, and decorative background policy.
 - Keep project cards scannable, responsive, and backed by structured content.
 - Explain what projects do before naming libraries or infrastructure.
 - Avoid generic hero filler, decorative principles sections, fake metrics, and
@@ -171,7 +172,7 @@ The imported sibling organization now used here:
   links, Inter preload ordering, and icon metadata.
 - `src/routes/-index.test.ts`: regression guard for canonical URL and
   Open Graph/X metadata.
-- `src/styles.test.ts`: regression guard for the shared CSS-only mesh chrome.
+- `src/styles.test.ts`: regression guard for the shared page chrome CSS.
 - `src/components/icon-system.test.ts`: regression guard that keeps product UI
   icons on Lucide.
 - `public/app-logo-120.png`, `public/apple-touch-icon.png`,
