@@ -18,7 +18,7 @@ const PROJECT_ICON_MEDIA_CLASS_NAME =
 const KEYBOARD_ACTION_FOCUS_CLASS_NAME =
   "transition-colors focus-visible:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-white/45";
 const PROFILE_LINK_CLASS_NAME =
-  "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-white transition-colors hover:bg-white/12";
+  "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-white drop-shadow-[0_1px_8px_rgba(15,23,42,0.35)] transition-colors hover:bg-white/12";
 
 function XLogoIcon() {
   return (
@@ -126,10 +126,10 @@ export function PortfolioHome() {
             />
           </div>
           <div className="flex min-w-0 flex-col gap-2">
-            <h1 className="text-balance text-4xl leading-tight font-bold tracking-tight text-white">
+            <h1 className="text-balance text-4xl leading-tight font-bold tracking-tight text-white [text-shadow:0_1px_10px_rgba(15,23,42,0.35)]">
               Doga Fincan
             </h1>
-            <p className="max-w-[40rem] text-balance text-lg font-medium text-white md:max-w-full">
+            <p className="max-w-[40rem] text-balance text-lg font-medium text-white [text-shadow:0_1px_10px_rgba(15,23,42,0.35)] md:max-w-full">
               <span className="block">I'm into learning languages,</span>{" "}
               <span className="block">nutrition and exercise, and building</span>{" "}
               <span className="block">cool things. Reach out if you're</span>{" "}

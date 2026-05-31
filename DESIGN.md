@@ -236,9 +236,9 @@ Implementation guidance:
   They should use `currentColor` so they stay aligned with the header title and
   subtitle color treatment.
 - The title class currently matches the sibling apps:
-  `text-balance text-4xl leading-tight font-bold tracking-tight text-white`.
+  `text-balance text-4xl leading-tight font-bold tracking-tight text-white [text-shadow:0_1px_10px_rgba(15,23,42,0.35)]`.
 - The subtitle class currently matches the snapshot header width treatment:
-  `max-w-[40rem] text-balance text-lg font-medium text-white md:max-w-full`.
+  `max-w-[40rem] text-balance text-lg font-medium text-white [text-shadow:0_1px_10px_rgba(15,23,42,0.35)] md:max-w-full`.
 - Keep `Reach out if you're building something interesting.` in a second
   subtitle sentence span with `md:block` so larger screens do not flatten the
   full subtitle into one long line.

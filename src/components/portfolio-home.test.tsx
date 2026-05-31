@@ -35,10 +35,10 @@ describe("PortfolioHome", () => {
     expect(appHeader?.className).toBe("flex flex-col items-center gap-4 text-center text-white");
     expect(appTitleBlock?.className).toBe("flex min-w-0 flex-col gap-2");
     expect(title.className).toBe(
-      "text-balance text-4xl leading-tight font-bold tracking-tight text-white",
+      "text-balance text-4xl leading-tight font-bold tracking-tight text-white [text-shadow:0_1px_10px_rgba(15,23,42,0.35)]",
     );
     expect(appSubtitle?.className).toBe(
-      "max-w-[40rem] text-balance text-lg font-medium text-white md:max-w-full",
+      "max-w-[40rem] text-balance text-lg font-medium text-white [text-shadow:0_1px_10px_rgba(15,23,42,0.35)] md:max-w-full",
     );
     expect(appSubtitle?.textContent).toBe(
       "I'm into learning languages, nutrition and exercise, and building cool things. Reach out if you're building something interesting.",
@@ -70,7 +70,7 @@ describe("PortfolioHome", () => {
     expect(githubLink.getAttribute("rel")).toBe("noreferrer");
     for (const link of [xLink, githubLink]) {
       expect(link.className).toBe(
-        "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-white hover:bg-white/12 transition-colors focus-visible:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-white/45",
+        "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-white drop-shadow-[0_1px_8px_rgba(15,23,42,0.35)] hover:bg-white/12 transition-colors focus-visible:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-white/45",
       );
     }
     expect(socialLinks?.querySelectorAll("svg").length).toBe(2);
