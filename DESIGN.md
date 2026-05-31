@@ -123,8 +123,8 @@ layout.
 
 - Use one identity color treatment in both light mode and dark mode. The app
   logo, header title, and header subtitle should render in white (`#FFFFFF`) in
-  all themes so the app identity stays consistent and readable against the
-  blue cloud background.
+  all themes so the app identity stays consistent and readable against the blue
+  background.
 - The app's primary background color and theme color should be a bright, clean
   light blue: primary light blue `#43C3EC`. Use this for the page background,
   browser safe-area/chrome color, root `html` and `body` backgrounds, and
@@ -174,20 +174,26 @@ Implementation guidance:
 - Set `html` and `body` backgrounds to `#43C3EC`.
 - Keep `theme-color` and install background colors on `#43C3EC`.
 - Render the header cloud image and repeatable page-atmosphere image as
-  decorative non-interactive layers.
+  decorative non-interactive layers. A CSS `body::before` image layer is
+  acceptable for `url("/header-clouds.avif")`, and a lower `body::after` layer is
+  acceptable for `url("/page-atmosphere.avif")`.
 - Size the header image as a full-bleed field with responsive center cropping on
   mobile. In CSS, `background-size: cover` on a roughly `80svh` decorative layer
   is the intended baseline.
 - Size the page-atmosphere image so it remains visible in desktop gutters and in
   the narrow mobile strips beside the workbench. It may use a larger
   `background-size` on mobile and `repeat-y` for long pages.
+- Add a fixed bottom fade from transparent to `#43C3EC` above the repeatable
+  atmosphere layer and below app content. This keeps browser safe areas and the
+  lower viewport edge on the base chrome color even when the repeated background
+  image is cut off mid-cloud.
 - Use `pointer-events: none` on decorative layers and keep page content above
   them.
-- New implementations should not recreate or extend the cloud shapes with CSS
-  radial gradients, blurred blobs, or code-generated mesh layers after cloud
-  image assets are adopted. Use raster image assets as the atmospheric sources.
-- Keep the page background behind the images as `#43C3EC`, and fade or mask the
-  header image edges if needed to avoid visible joins.
+- Do not recreate or extend the cloud shapes with CSS radial gradients, blurred
+  blobs, or code-generated mesh layers. Use raster image assets as the
+  atmospheric sources.
+- Keep the page background behind the images as `#43C3EC`, and fade/mask the
+  header image edges if needed to avoid visible seams.
 
 ## Portfolio Product Shape
 
