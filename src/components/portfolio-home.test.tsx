@@ -34,9 +34,11 @@ describe("PortfolioHome", () => {
     );
     expect(appHeader?.className).toBe("flex flex-col items-center gap-4 text-center text-white");
     expect(appTitleBlock?.className).toBe("flex min-w-0 flex-col gap-2");
-    expect(title.className).toBe("text-balance text-4xl leading-tight font-bold tracking-tight");
+    expect(title.className).toBe(
+      "text-balance text-4xl leading-tight font-bold tracking-tight text-white",
+    );
     expect(appSubtitle?.className).toBe(
-      "max-w-[40rem] text-balance text-lg font-medium text-white/82 md:max-w-full",
+      "max-w-[40rem] text-balance text-lg font-medium text-white md:max-w-full",
     );
     expect(appSubtitle?.textContent).toBe(
       "I'm into learning languages, nutrition and exercise, and building cool things. Reach out if you're building something interesting.",

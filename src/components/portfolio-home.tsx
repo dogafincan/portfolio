@@ -126,10 +126,10 @@ export function PortfolioHome() {
             />
           </div>
           <div className="flex min-w-0 flex-col gap-2">
-            <h1 className="text-balance text-4xl leading-tight font-bold tracking-tight">
+            <h1 className="text-balance text-4xl leading-tight font-bold tracking-tight text-white">
               Doga Fincan
             </h1>
-            <p className="max-w-[40rem] text-balance text-lg font-medium text-white/82 md:max-w-full">
+            <p className="max-w-[40rem] text-balance text-lg font-medium text-white md:max-w-full">
               <span className="block">I'm into learning languages,</span>{" "}
               <span className="block">nutrition and exercise, and building</span>{" "}
               <span className="block">cool things. Reach out if you're</span>{" "}
