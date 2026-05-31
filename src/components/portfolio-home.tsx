@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const HEADER_LOGO = "/app-logo-120.png";
 const HEADER_LOGO_SRCSET = "/app-logo-120.png 120w, /apple-touch-icon.png 180w";
 const PORTFOLIO_MAIN_CLASS_NAME =
-  "flex min-h-screen flex-col px-4 py-6 text-foreground sm:px-6 lg:justify-center lg:px-8";
+  "relative z-10 flex min-h-screen flex-col px-4 py-6 text-foreground sm:px-6 lg:justify-center lg:px-8";
 const WORKBENCH_CONTAINER_CLASS_NAME =
   "grid w-full min-w-0 max-w-full flex-1 grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background";
 const PROJECT_SUMMARY_ITEM_CLASS_NAME = "min-h-32 flex-nowrap overflow-hidden sm:min-h-36";
@@ -18,7 +18,7 @@ const PROJECT_ICON_MEDIA_CLASS_NAME =
 const KEYBOARD_ACTION_FOCUS_CLASS_NAME =
   "transition-colors focus-visible:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-white/45";
 const PROFILE_LINK_CLASS_NAME =
-  "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-slate-950 transition-colors hover:bg-slate-950/10 dark:text-white dark:hover:bg-white/12";
+  "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-white transition-colors hover:bg-white/12";
 
 function XLogoIcon() {
   return (
@@ -107,7 +107,7 @@ export function PortfolioHome() {
   return (
     <main className={PORTFOLIO_MAIN_CLASS_NAME}>
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 py-8 sm:py-10">
-        <header className="flex flex-col items-center gap-4 text-center text-slate-950 dark:text-white">
+        <header className="flex flex-col items-center gap-4 text-center text-white">
           <div
             data-slot="app-logo"
             className="relative size-15 shrink-0 overflow-hidden rounded-xl border border-neutral-200 bg-white"
@@ -129,7 +129,7 @@ export function PortfolioHome() {
             <h1 className="text-balance text-4xl leading-tight font-bold tracking-tight">
               Doga Fincan
             </h1>
-            <p className="max-w-[40rem] text-balance text-lg font-medium text-slate-900/80 dark:text-white/82 md:max-w-full">
+            <p className="max-w-[40rem] text-balance text-lg font-medium text-white/82 md:max-w-full">
               <span>
                 I'm into learning languages, nutrition and exercise, and building cool things.
               </span>{" "}
@@ -139,7 +139,7 @@ export function PortfolioHome() {
           <nav
             aria-label="Doga Fincan social profiles"
             data-slot="profile-links"
-            className="flex items-center justify-center gap-2 text-slate-950 dark:text-white"
+            className="flex items-center justify-center gap-2 text-white"
           >
             <a
               className={cn(PROFILE_LINK_CLASS_NAME, KEYBOARD_ACTION_FOCUS_CLASS_NAME)}

@@ -19,7 +19,7 @@ describe("global styles", () => {
     expect(styles).not.toContain("@custom-variant dark (&:is(.dark *));");
   });
 
-  it("uses distinct light and dark header mesh palettes", () => {
+  it("uses the shared blue page chrome across light and dark schemes", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const rootStart = styles.indexOf(":root {");
     const rootEnd = styles.indexOf("\n}\n\n.dark", rootStart);
@@ -31,67 +31,21 @@ describe("global styles", () => {
     const darkMedia = styles.slice(darkMediaStart, styles.indexOf("\n}\n\n@layer", darkMediaStart));
 
     expect(styles.match(/--portfolio-app-chrome-color:/g)).toHaveLength(3);
-    expect(lightRoot).toContain("--portfolio-app-chrome-color: #d2f2ff;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-highlight: white;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-pale-blue: #d2f2ff;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-cyan: #c0edff;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-teal: #ccf6ff;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-sky: #b9ecff;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-lavender: #f0e8ff;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-purple: #f4d9f2;");
+    expect(lightRoot).toContain("--portfolio-app-chrome-color: #43c3ec;");
+    expect(lightRoot).toContain('--portfolio-header-cloud-image: url("/header-clouds.avif");');
+    expect(lightRoot).toContain("--portfolio-header-cloud-height: 80svh;");
+    expect(lightRoot).toContain("--portfolio-header-cloud-size: cover;");
+    expect(lightRoot).toContain('--portfolio-page-atmosphere-image: url("/page-atmosphere.avif");');
+    expect(lightRoot).toContain("--portfolio-page-atmosphere-size: 180% auto;");
     expect(lightRoot).toContain(
-      "--portfolio-hero-mesh-left-shape: var(--portfolio-hero-mesh-purple);",
+      "--portfolio-safe-area-fade-height: max(8rem, calc(env(safe-area-inset-bottom) + 7rem));",
     );
-    expect(lightRoot).toContain(
-      "--portfolio-hero-mesh-right-shape: var(--portfolio-hero-mesh-purple);",
-    );
-    expect(lightRoot).toContain(
-      "--portfolio-hero-mesh-bottom-shape: var(--portfolio-hero-mesh-lavender);",
-    );
-    expect(lightRoot).not.toContain("--portfolio-hero-mesh-purple: #b68ffe;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-core-highlight-start: 82%;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-wash-highlight-start: 24%;");
-    expect(lightRoot).toContain("--portfolio-hero-mesh-left-transparent: 18%;");
-    expect(darkClass).toContain("--portfolio-app-chrome-color: #4078bf;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-highlight: #4078bf;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-pale-blue: #4078bf;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-cyan: #4b91c8;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-teal: #528bd0;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-sky: #607fd8;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-lavender: #7b74d2;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-purple: #9670c4;");
-    expect(darkClass).toContain(
-      "--portfolio-hero-mesh-left-shape: var(--portfolio-hero-mesh-cyan);",
-    );
-    expect(darkClass).toContain(
-      "--portfolio-hero-mesh-right-shape: var(--portfolio-hero-mesh-purple);",
-    );
-    expect(darkClass).toContain(
-      "--portfolio-hero-mesh-bottom-shape: var(--portfolio-hero-mesh-teal);",
-    );
-    expect(darkClass).toContain("--portfolio-hero-mesh-core-highlight-start: 34%;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-wash-highlight-start: 10%;");
-    expect(darkClass).toContain("--portfolio-hero-mesh-left-transparent: 6%;");
-    expect(darkMedia).toContain("--portfolio-app-chrome-color: #4078bf;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-highlight: #4078bf;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-pale-blue: #4078bf;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-cyan: #4b91c8;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-teal: #528bd0;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-sky: #607fd8;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-lavender: #7b74d2;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-purple: #9670c4;");
-    expect(darkMedia).toContain(
-      "--portfolio-hero-mesh-left-shape: var(--portfolio-hero-mesh-cyan);",
-    );
-    expect(darkMedia).toContain(
-      "--portfolio-hero-mesh-right-shape: var(--portfolio-hero-mesh-purple);",
-    );
-    expect(darkMedia).toContain(
-      "--portfolio-hero-mesh-bottom-shape: var(--portfolio-hero-mesh-teal);",
-    );
-    expect(darkMedia).toContain("--portfolio-hero-mesh-core-highlight-start: 34%;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-wash-highlight-start: 10%;");
-    expect(darkMedia).toContain("--portfolio-hero-mesh-left-transparent: 6%;");
+    expect(darkClass).toContain("--portfolio-app-chrome-color: #43c3ec;");
+    expect(darkMedia).toContain("--portfolio-app-chrome-color: #43c3ec;");
+    expect(styles).not.toContain("--portfolio-hero-gradient-height");
+    expect(styles).not.toContain("--portfolio-hero-mesh");
+    expect(styles).not.toContain("#d2f2ff");
+    expect(styles).not.toContain("#4078bf");
     expect(styles).not.toContain(".dark body::before");
     expect(styles).not.toContain("#5068bd 0%");
     expect(styles).not.toContain("#2189b9 43%");
@@ -110,8 +64,7 @@ describe("global styles", () => {
     expect(htmlBlock).toContain("background: var(--portfolio-app-chrome-color);");
     expect(htmlBlock).not.toContain("background: var(--portfolio-page-background);");
     expect(bodyBlock).toContain("background: var(--portfolio-page-background);");
-    expect(styles).toContain("--portfolio-app-chrome-color: #d2f2ff;");
-    expect(styles).toContain("--portfolio-app-chrome-color: #4078bf;");
+    expect(styles.match(/--portfolio-app-chrome-color: #43c3ec;/g)).toHaveLength(3);
   });
 
   it("defines softened iMessage-blue primary button colors for light and dark schemes", () => {
@@ -180,42 +133,61 @@ describe("global styles", () => {
     expect(styles).not.toContain('[data-slot="app-logo-for-dark-mode"]');
   });
 
-  it("uses a CSS-only mesh background that fades into the theme background", () => {
+  it("uses a decorative image asset as the primary header cloud field", () => {
     const styles = readFileSync("src/styles.css", "utf8");
-    const meshLayerStart = styles.indexOf("body::before");
-    const meshLayerEnd = styles.indexOf("code {", meshLayerStart);
-    const meshLayer = styles.slice(meshLayerStart, meshLayerEnd);
+    const imageLayerStart = styles.indexOf("body::before");
+    const imageLayerEnd = styles.indexOf("body::after", imageLayerStart);
+    const atmosphereLayerStart = styles.indexOf("body::after");
+    const atmosphereLayerEnd = styles.indexOf("main::after", atmosphereLayerStart);
+    const imageLayer = styles.slice(imageLayerStart, imageLayerEnd);
+    const atmosphereLayer = styles.slice(atmosphereLayerStart, atmosphereLayerEnd);
 
-    expect(styles).toContain("--portfolio-hero-gradient-height: 1000px;");
-    expect(meshLayer).toContain("position: absolute;");
-    expect(meshLayer).not.toContain("position: fixed;");
-    expect(meshLayer).toContain("height: var(--portfolio-hero-gradient-height);");
-    expect(meshLayer).toContain("var(--portfolio-app-chrome-color) 0%");
-    expect(meshLayer).toContain(
-      "color-mix(in oklab, var(--portfolio-app-chrome-color) 70%, transparent) 8%",
+    expect(imageLayerStart).toBeGreaterThan(-1);
+    expect(atmosphereLayerStart).toBeGreaterThan(-1);
+    expect(imageLayer).toContain("z-index: 1;");
+    expect(imageLayer).toContain("background-image: var(--portfolio-header-cloud-image);");
+    expect(imageLayer).toContain(
+      "background-position: center var(--portfolio-header-cloud-position-y);",
     );
-    expect(meshLayer).toContain("transparent 18%");
-    expect(meshLayer).not.toContain("var(--portfolio-app-chrome-color) 2.75rem");
-    expect(meshLayer).not.toContain("transparent 7rem");
-    expect(meshLayer).toContain("ellipse 38% 26% at 50% 29%");
-    expect(meshLayer).toContain("ellipse 48% 42% at 14% 44%");
-    expect(meshLayer).toContain("ellipse 50% 42% at 84% 44%");
-    expect(meshLayer).toContain("var(--portfolio-hero-mesh-core-highlight-start)");
-    expect(meshLayer).toContain("var(--portfolio-hero-mesh-wash-highlight-start)");
-    expect(meshLayer).toContain("var(--portfolio-hero-mesh-left-transparent)");
-    expect(meshLayer).toContain("var(--portfolio-hero-mesh-left-shape)");
-    expect(meshLayer).toContain("var(--portfolio-hero-mesh-right-shape)");
-    expect(meshLayer).toContain("var(--portfolio-hero-mesh-bottom-shape)");
-    expect(meshLayer).toContain("radial-gradient");
-    expect(meshLayer).toContain("to bottom");
-    expect(meshLayer).toContain("transparent 40%");
-    expect(meshLayer).toContain("transparent 82%, var(--portfolio-page-background)");
-    expect(meshLayer).toContain("transparent 48%, var(--portfolio-page-background)");
-    expect(meshLayer).toContain("var(--portfolio-page-background)");
-    expect(meshLayer).not.toContain("scale(");
-    expect(meshLayer).not.toContain("scaleX(");
-    expect(meshLayer).not.toContain("scaleY(");
-    expect(meshLayer).not.toContain("url(");
+    expect(imageLayer).toContain("background-repeat: no-repeat;");
+    expect(imageLayer).toContain("background-size: var(--portfolio-header-cloud-size);");
+    expect(imageLayer).toContain("mask-image: linear-gradient");
+    expect(imageLayer).not.toContain("radial-gradient");
+    expect(atmosphereLayer).toContain("z-index: 0;");
+    expect(atmosphereLayer).toContain("background-image: var(--portfolio-page-atmosphere-image);");
+    expect(atmosphereLayer).toContain("background-repeat: repeat-y;");
+    expect(atmosphereLayer).toContain("background-size: var(--portfolio-page-atmosphere-size);");
+    expect(atmosphereLayer).not.toContain("radial-gradient");
+  });
+
+  it("uses image layers instead of a CSS mesh continuation", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const mediaStart = styles.indexOf("@media (min-width: 640px)");
+    const desktopMedia = styles.slice(mediaStart, styles.indexOf("\n}\n\n@layer", mediaStart));
+
+    expect(styles).toContain("--portfolio-header-cloud-height: 80svh;");
+    expect(styles).toContain("--portfolio-header-cloud-size: cover;");
+    expect(styles).toContain("--portfolio-page-atmosphere-size: 180% auto;");
+    expect(desktopMedia).toContain("--portfolio-page-atmosphere-size: 100% auto;");
+    expect(styles).not.toContain("--portfolio-mesh-continuation");
+    expect(styles).not.toContain("--portfolio-hero-mesh");
+  });
+
+  it("fades the bottom safe area back to the chrome color", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const fadeLayerStart = styles.indexOf("main::after");
+    const fadeLayerEnd = styles.indexOf("code {", fadeLayerStart);
+    const fadeLayer = styles.slice(fadeLayerStart, fadeLayerEnd);
+
+    expect(fadeLayerStart).toBeGreaterThan(-1);
+    expect(fadeLayer).toContain("position: fixed;");
+    expect(fadeLayer).toContain("inset: auto 0 0;");
+    expect(fadeLayer).toContain("z-index: -1;");
+    expect(fadeLayer).toContain("height: var(--portfolio-safe-area-fade-height);");
+    expect(fadeLayer).toContain("pointer-events: none;");
+    expect(fadeLayer).toContain("linear-gradient(");
+    expect(fadeLayer).toContain("transparent 0%");
+    expect(fadeLayer).toContain("var(--portfolio-app-chrome-color) 100%");
   });
 
   it("does not style project logo panels with standalone mesh backgrounds", () => {

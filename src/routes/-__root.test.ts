@@ -18,8 +18,8 @@ describe("RootDocument head", () => {
     const source = readFileSync(new URL("./__root.tsx", import.meta.url), "utf8");
     const manifest = readFileSync(new URL("../../public/manifest.json", import.meta.url), "utf8");
 
-    expect(source).toContain('const APP_CHROME_COLOR = "#d2f2ff";');
-    expect(source).toContain('const APP_CHROME_COLOR_DARK = "#4078bf";');
+    expect(source).toContain('const APP_CHROME_COLOR = "#43C3EC";');
+    expect(source).toContain('const APP_CHROME_COLOR_DARK = "#43C3EC";');
     expect(source).toContain(
       'import interLatinWghtNormal from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";',
     );
@@ -45,8 +45,8 @@ describe("RootDocument head", () => {
     expect(source).not.toContain("favicon-dark");
     expect(manifest).toContain('"/android-chrome-192x192.png"');
     expect(manifest).toContain('"/android-chrome-512x512.png"');
-    expect(manifest).toContain('"theme_color": "#d2f2ff"');
-    expect(manifest).toContain('"background_color": "#d2f2ff"');
+    expect(manifest).toContain('"theme_color": "#43C3EC"');
+    expect(manifest).toContain('"background_color": "#43C3EC"');
     expect(readPngSize("../../public/app-logo-120.png")).toEqual({ width: 120, height: 120 });
     expect(readPngSize("../../public/apple-touch-icon.png")).toEqual({ width: 180, height: 180 });
     expect(readPngSize("../../public/android-chrome-192x192.png")).toEqual({

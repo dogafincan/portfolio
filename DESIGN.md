@@ -201,6 +201,9 @@ Implementation guidance:
   CMS, or Sui utility runtime.
 - Preserve the single-route structure until a project genuinely needs its own
   case-study page: header, rounded muted project workbench, and project cards.
+- Use lenticular-cloud-inspired `header-clouds.avif` and `page-atmosphere.avif`
+  assets so Portfolio follows the shared cloud image system without duplicating
+  the exact cloud shape language from sibling apps.
 - Do not list the portfolio website as one of its own project cards; visitors
   are already viewing that surface.
 - The primary visitor flow is: land on the page, identify the person and project
