@@ -130,10 +130,10 @@ export function PortfolioHome() {
               Doga Fincan
             </h1>
             <p className="max-w-[40rem] text-balance text-lg font-medium text-white/82 md:max-w-full">
-              <span>
-                I'm into learning languages, nutrition and exercise, and building cool things.
-              </span>{" "}
-              <span className="md:block">Reach out if you're building something interesting.</span>
+              <span className="block">I'm into learning languages,</span>{" "}
+              <span className="block">nutrition and exercise, and building</span>{" "}
+              <span className="block">cool things. Reach out if you're</span>{" "}
+              <span className="block">building something interesting.</span>
             </p>
           </div>
           <nav
