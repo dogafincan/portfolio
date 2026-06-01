@@ -144,8 +144,8 @@ layout.
   documents project-specific equivalent asset names. On mobile, use only the
   page-atmosphere image for both the header area and the rest of the page so the
   cloud treatment stays continuous in the narrow viewport.
-- Use separate dark-mode cloud assets, such as `header-clouds-dark.png` and
-  `page-atmosphere-dark.png`, instead of tinting CSS gradients. Dark assets
+- Use separate dark-mode cloud assets, such as `header-clouds-dark.avif` and
+  `page-atmosphere-dark.avif`, instead of tinting CSS gradients. Dark assets
   should preserve the same project-specific cloud type, composition, and
   sparseness as light mode while using less bright blue, purple, lavender, and
   pale-blue colors.

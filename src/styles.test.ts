@@ -43,14 +43,14 @@ describe("global styles", () => {
     expect(lightRoot).toContain("--portfolio-page-atmosphere-size: 180% auto;");
     expect(darkClass).toContain("--portfolio-app-chrome-color: #428fa8;");
     expect(darkClass).toContain(
-      '--portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");',
+      '--portfolio-page-atmosphere-image: url("/page-atmosphere-dark.avif");',
     );
     expect(darkClass).toContain(
       "--portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);",
     );
     expect(darkMedia).toContain("--portfolio-app-chrome-color: #428fa8;");
     expect(darkMedia).toContain(
-      '--portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");',
+      '--portfolio-page-atmosphere-image: url("/page-atmosphere-dark.avif");',
     );
     expect(darkMedia).toContain(
       "--portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);",
@@ -188,7 +188,7 @@ describe("global styles", () => {
     );
     expect(desktopMedia).toContain('--portfolio-header-cloud-image: url("/header-clouds.avif");');
     expect(desktopMedia).toContain(
-      '--portfolio-header-cloud-image: url("/header-clouds-dark.png");',
+      '--portfolio-header-cloud-image: url("/header-clouds-dark.avif");',
     );
     expect(desktopMedia).toContain("--portfolio-header-cloud-position-x: center;");
     expect(desktopMedia).toContain("--portfolio-header-cloud-position-y: -6rem;");

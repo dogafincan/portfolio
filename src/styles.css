@@ -148,7 +148,7 @@
   --portfolio-app-chrome-color: #428fa8;
   --portfolio-page-background: var(--portfolio-app-chrome-color);
   --portfolio-header-clearance-color: var(--portfolio-app-chrome-color);
-  --portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");
+  --portfolio-page-atmosphere-image: url("/page-atmosphere-dark.avif");
   --portfolio-page-atmosphere-opacity: 1;
   --portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);
 }
@@ -197,7 +197,7 @@
     --portfolio-app-chrome-color: #428fa8;
     --portfolio-page-background: var(--portfolio-app-chrome-color);
     --portfolio-header-clearance-color: var(--portfolio-app-chrome-color);
-    --portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");
+    --portfolio-page-atmosphere-image: url("/page-atmosphere-dark.avif");
     --portfolio-page-atmosphere-opacity: 1;
     --portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);
   }
@@ -214,14 +214,14 @@
     --portfolio-page-atmosphere-size: 100% auto;
   }
   .dark {
-    --portfolio-header-cloud-image: url("/header-clouds-dark.png");
+    --portfolio-header-cloud-image: url("/header-clouds-dark.avif");
     --portfolio-page-atmosphere-opacity: 1;
   }
 }
 
 @media (prefers-color-scheme: dark) and (min-width: 640px) {
   :root {
-    --portfolio-header-cloud-image: url("/header-clouds-dark.png");
+    --portfolio-header-cloud-image: url("/header-clouds-dark.avif");
     --portfolio-page-atmosphere-opacity: 1;
   }
 }

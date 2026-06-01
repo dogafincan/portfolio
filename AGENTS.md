@@ -202,7 +202,7 @@ The current implementation follows the sibling conventions. Important files:
 - `public/app-logo-120.png`, `public/apple-touch-icon.png`,
   `public/android-chrome-*.png`, `public/favicon.ico`, `public/favicon-*`, and
   `public/og.png`: portfolio-owned app and social assets
-- `public/projects/*-icon.png`: local app icons copied from shipped sibling apps
+- `public/projects/*-icon.avif`: local app icons copied from shipped sibling apps
 - `vite.config.ts`: Vite+ and TanStack configuration
 - `wrangler.jsonc`: Cloudflare Worker configuration
 - `.node-version`: Node.js version pin used by local tooling and Cloudflare
