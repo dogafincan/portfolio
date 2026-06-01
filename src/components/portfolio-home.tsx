@@ -1,13 +1,12 @@
 import { ArrowUpRight } from "lucide-react";
 
+import { AppHeader } from "@/components/app-header";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { portfolioProjects, type PortfolioProject } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
-const HEADER_LOGO = "/app-logo-120.png";
-const HEADER_LOGO_SRCSET = "/app-logo-120.png 120w, /apple-touch-icon.png 180w";
 const PORTFOLIO_MAIN_CLASS_NAME =
   "app-shell relative z-10 flex min-h-screen flex-col px-4 py-6 text-foreground sm:px-6 lg:justify-center lg:px-8";
 const WORKBENCH_CONTAINER_CLASS_NAME =
@@ -107,29 +106,7 @@ export function PortfolioHome() {
   return (
     <main className={PORTFOLIO_MAIN_CLASS_NAME}>
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 py-8 sm:py-10">
-        <header className="flex flex-col items-center gap-4 text-center text-white">
-          <div
-            data-slot="app-logo"
-            className="relative size-15 shrink-0 overflow-hidden rounded-xl border border-neutral-200 bg-white"
-          >
-            <img
-              data-slot="app-logo-image"
-              src={HEADER_LOGO}
-              srcSet={HEADER_LOGO_SRCSET}
-              sizes="60px"
-              width="60"
-              height="60"
-              loading="eager"
-              decoding="async"
-              alt=""
-              className="size-full"
-            />
-          </div>
-          <div className="flex min-w-0 flex-col gap-2">
-            <h1 className="text-balance text-4xl leading-tight font-bold tracking-tight text-white">
-              Doga Fincan
-            </h1>
-          </div>
+        <AppHeader title="Doga Fincan">
           <nav
             aria-label="Doga Fincan social profiles"
             data-slot="profile-links"
@@ -156,7 +133,7 @@ export function PortfolioHome() {
               <GitHubLogoIcon />
             </a>
           </nav>
-        </header>
+        </AppHeader>
 
         <section
           id="projects"

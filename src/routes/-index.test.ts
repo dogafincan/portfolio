@@ -5,10 +5,10 @@ import { describe, expect, it } from "vite-plus/test";
 describe("index route head", () => {
   it("declares Open Graph and Twitter metadata with a 1200x630 image", () => {
     const source = readFileSync(new URL("./index.tsx", import.meta.url), "utf8");
-    const ogImage = readFileSync(new URL("../../public/og-image.png", import.meta.url));
+    const ogImage = readFileSync(new URL("../../public/og.png", import.meta.url));
     const siteUrlMatch = source.match(/const SITE_URL = "([^"]+)";/);
     const socialImageMatch = source.match(
-      /const SOCIAL_IMAGE = `\$\{SITE_URL\}(\/og-image\.png\?v=\d+)`;/,
+      /const SOCIAL_IMAGE = `\$\{SITE_URL\}(\/og\.png\?v=\d+)`;/,
     );
 
     expect(source).toContain('property: "og:type"');
@@ -43,16 +43,16 @@ describe("index route head", () => {
     expect(source).not.toContain("building useful things for the web");
 
     expect(siteUrlMatch?.[1]).toBe("https://dogafincan.com");
-    expect(socialImageMatch?.[1]).toMatch(/^\/og-image\.png\?v=\d+$/);
+    expect(socialImageMatch?.[1]).toMatch(/^\/og\.png\?v=\d+$/);
     expect(new URL(`${siteUrlMatch?.[1]}${socialImageMatch?.[1]}`).href).toBe(
-      "https://dogafincan.com/og-image.png?v=2026052502",
+      "https://dogafincan.com/og.png?v=2026060101",
     );
     expect(source).not.toContain("portfolio.dogafincan.workers.dev");
-    expect(source).not.toContain('const SOCIAL_IMAGE = "/og-image.png";');
+    expect(source).not.toContain('const SOCIAL_IMAGE = "/og.png";');
 
     expect(ogImage.subarray(0, 8).toString("hex")).toBe("89504e470d0a1a0a");
     expect(ogImage.readUInt32BE(16)).toBe(1200);
     expect(ogImage.readUInt32BE(20)).toBe(630);
-    expect(existsSync(new URL("../../public/og-image.svg", import.meta.url))).toBe(false);
+    expect(existsSync(new URL("../../public/og.svg", import.meta.url))).toBe(false);
   });
 });

@@ -254,9 +254,11 @@ abuse is handled, and what privacy or retention policy applies.
 ### 9.6 Social preview
 
 - Social metadata must use absolute HTTPS URLs for images.
-- The social image must be a manually supplied checked-in
-  `public/og-image.png` with a cache-busting query in `src/routes/index.tsx`.
-- Do not add a social SVG source or image-generation path for the social image.
+- The social image must be a generated checked-in `public/og.png` with a
+  cache-busting query in `src/routes/index.tsx`.
+- Generate the social image from the React/Tailwind `/og-preview` route with
+  `npm run generate:og`. Do not add a social SVG source or dynamic request-time
+  image endpoint.
 
 ### 9.7 Shared UI conventions
 

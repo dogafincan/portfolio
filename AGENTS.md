@@ -114,11 +114,11 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   the final status, verification, and commit flow.
 - Preserve the social preview contract in `src/routes/index.tsx`. Open Graph and
   X/Twitter image tags must use absolute HTTPS URLs, not root-relative paths,
-  and must point to `public/og-image.png` with a cache-busting query. If
-  `public/og-image.png` changes, update `SITE_URL`, the `SOCIAL_IMAGE`
-  cache-busting query, and `src/routes/-index.test.ts` together. Keep the image
-  as a manually supplied checked-in 1200x630 PNG; do not add a social SVG source
-  or image-generation path.
+  and must point to `public/og.png` with a cache-busting query. If
+  `public/og.png` changes, update `SITE_URL`, the `SOCIAL_IMAGE`
+  cache-busting query, and `src/routes/-index.test.ts` together. Regenerate the
+  image with `npm run generate:og`; do not add a social SVG source or dynamic
+  request-time image endpoint.
 
 ## Current Stack
 
@@ -201,7 +201,7 @@ The current implementation follows the sibling conventions. Important files:
 - `public/manifest.json`: PWA manifest colors and icons
 - `public/app-logo-120.png`, `public/apple-touch-icon.png`,
   `public/android-chrome-*.png`, `public/favicon.ico`, `public/favicon-*`, and
-  `public/og-image.png`: portfolio-owned app and social assets
+  `public/og.png`: portfolio-owned app and social assets
 - `public/projects/*-icon.png`: local app icons copied from shipped sibling apps
 - `vite.config.ts`: Vite+ and TanStack configuration
 - `wrangler.jsonc`: Cloudflare Worker configuration

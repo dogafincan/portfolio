@@ -4,7 +4,7 @@ const PAGE_TITLE = "Doga Fincan";
 const PAGE_DESCRIPTION =
   "I'm into learning languages, nutrition and exercise, and building cool things. Reach out if you're building something interesting.";
 const SITE_URL = "https://dogafincan.com";
-const SOCIAL_IMAGE = `${SITE_URL}/og-image.png?v=2026052502`;
+const SOCIAL_IMAGE = `${SITE_URL}/og.png?v=2026060101`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -50,7 +50,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:image:alt",
-        content: "Doga Fincan portfolio header with the portfolio logo and product subtitle.",
+        content: "Doga Fincan portfolio header with the portfolio logo and site title.",
       },
       {
         name: "twitter:card",
@@ -78,7 +78,7 @@ export const Route = createFileRoute("/")({
       },
       {
         name: "twitter:image:alt",
-        content: "Doga Fincan portfolio header with the portfolio logo and product subtitle.",
+        content: "Doga Fincan portfolio header with the portfolio logo and site title.",
       },
     ],
     links: [
