@@ -92,7 +92,7 @@
   --portfolio-header-cloud-image: url("/header-clouds.avif");
   --portfolio-header-cloud-height: 80svh;
   --portfolio-header-cloud-position-x: center;
-  --portfolio-header-cloud-position-y: -5rem;
+  --portfolio-header-cloud-position-y: -7rem;
   --portfolio-header-cloud-size: 240% auto;
   --portfolio-page-atmosphere-image: url("/page-atmosphere.avif");
   --portfolio-page-atmosphere-opacity: 0.72;
@@ -100,8 +100,9 @@
   --portfolio-page-atmosphere-size: 180% auto;
   --portfolio-header-clearance-width: 28rem;
   --portfolio-header-clearance-height: 14rem;
+  --portfolio-header-clearance-max-width: 62vw;
   --portfolio-header-clearance-top: 2rem;
-  --portfolio-header-clearance-feather: 2.75rem;
+  --portfolio-header-clearance-feather: 1.25rem;
 }
 
 .dark {
@@ -204,6 +205,8 @@
     --portfolio-header-cloud-position-x: center;
     --portfolio-header-cloud-position-y: -6rem;
     --portfolio-header-cloud-size: cover;
+    --portfolio-header-clearance-max-width: 74vw;
+    --portfolio-header-clearance-feather: 2.75rem;
     --portfolio-page-atmosphere-opacity: 0.8;
     --portfolio-page-atmosphere-size: 100% auto;
   }
@@ -274,7 +277,10 @@
     top: var(--portfolio-header-clearance-top);
     left: 50%;
     z-index: -1;
-    width: min(var(--portfolio-header-clearance-width), 74vw);
+    width: min(
+      var(--portfolio-header-clearance-width),
+      var(--portfolio-header-clearance-max-width)
+    );
     height: var(--portfolio-header-clearance-height);
     transform: translateX(-50%);
     border-radius: 999px;
