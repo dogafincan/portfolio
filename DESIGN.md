@@ -139,29 +139,36 @@ layout.
   to the dark workbench without turning the page into a dark gradient.
 - Treat the cloud field as app identity. Prefer dedicated decorative image
   assets when matching the shared Sui Swap cloud treatment or another exact
-  visual reference. Use `header-clouds.avif` for the top cloud field and
-  `page-atmosphere.avif` for repeatable page atmosphere unless a repo documents
-  project-specific equivalent asset names.
+  visual reference. Use `header-clouds.avif` for the desktop top cloud field
+  and `page-atmosphere.avif` for repeatable page atmosphere unless a repo
+  documents project-specific equivalent asset names. On mobile, use only the
+  page-atmosphere image for both the header area and the rest of the page so the
+  cloud treatment stays continuous in the narrow viewport.
 - Use separate dark-mode cloud assets, such as `header-clouds-dark.png` and
   `page-atmosphere-dark.png`, instead of tinting CSS gradients. Dark assets
   should preserve the same project-specific cloud type, composition, and
   sparseness as light mode while using less bright blue, purple, lavender, and
   pale-blue colors.
-- Treat the header cloud asset as the primary identity graphic. It should span
-  the viewport horizontally and cover roughly the upper 80% of the initial
-  viewport, leaving the bottom portion to return toward the base blue. Mobile
-  may crop into the center of the same image.
-- Use the repeatable page-atmosphere asset below and behind the header graphic
-  so long pages do not fall back to plain blue around the workbench. It should
-  repeat vertically, stay sparse, and feel like a natural continuation of the
-  header clouds rather than a symmetrical side frame.
+- Treat the header cloud asset as the primary desktop identity graphic. It
+  should span the viewport horizontally and cover roughly the upper 80% of the
+  initial viewport, leaving the bottom portion to return toward the base blue.
+  On mobile, do not render a separate header-cloud layer; let the
+  page-atmosphere image carry the header and page background together.
+- Use the repeatable page-atmosphere asset below and behind the desktop header
+  graphic so long pages do not fall back to plain blue around the workbench. On
+  mobile, it is the only atmospheric image for both the header and page body. It
+  should repeat vertically, stay sparse, and feel like a natural continuation of
+  the header clouds rather than a symmetrical side frame.
 - Keep the logo, header title, subtitle, and social/profile buttons on a
   cloud-free center area in every viewport and color scheme. Clouds may and
-  should remain visible to the left, right, or both sides of the identity stack,
-  including on mobile, but must not sit behind the title or social buttons.
+  should remain visible to the left, right, or both sides of the identity stack
+  on desktop, and mobile page-atmosphere wisps may appear around the header, but
+  clouds must not sit behind the title or social buttons.
 - At least one cloud or partial cloud should be visible in the header on desktop
-  and mobile in light and dark mode. If clearance is added behind the identity
-  stack, it should blend into the base chrome color and avoid a symmetrical
+  in light and dark mode. On mobile, the page-atmosphere image should still add
+  subtle cloud texture around the header without requiring a separate
+  header-cloud layer. If clearance is added behind the identity stack on
+  desktop, it should blend into the base chrome color and avoid a symmetrical
   circular or halo-shaped hole; the composition should feel like clouds
   naturally passing around the identity, with small side clouds close enough to
   the logo/title to keep the header alive.
@@ -192,16 +199,15 @@ Implementation guidance:
 - Keep light `theme-color` and install background colors on `#43C3EC`; add a
   dark `theme-color` matching `#2FA9D1` or the repo's documented dark chrome
   blue so mobile safe areas match the dark cloud base.
-- Render the header cloud image and repeatable page-atmosphere image as
+- Render the desktop header cloud image and repeatable page-atmosphere image as
   decorative non-interactive layers. A CSS `body::before` image layer is
-  acceptable for `url("/header-clouds.avif")`, and a lower `body::after` layer is
-  acceptable for `url("/page-atmosphere.avif")`.
-- Size and position the header image as a full-bleed field with responsive
-  cropping. In CSS, `background-size: cover` on a roughly `80svh` decorative
-  layer is the desktop baseline. Mobile may use a larger background size,
-  different background position, or dedicated mobile assets when needed to keep
-  side clouds visible without placing clouds under the identity or social
-  controls.
+  acceptable for `url("/header-clouds.avif")` on desktop, and a lower
+  `body::after` layer is acceptable for `url("/page-atmosphere.avif")`.
+- Size and position the desktop header image as a full-bleed field with
+  responsive cropping. In CSS, `background-size: cover` on a roughly `80svh`
+  decorative layer is the desktop baseline. Below the `sm` breakpoint, hide the
+  separate header-cloud and identity-clearance layers and point the header cloud
+  token at the page-atmosphere image so only one atmospheric graphic renders.
 - Size the page-atmosphere image so it remains visible in desktop gutters and in
   the narrow mobile strips beside the workbench. It may use a larger
   `background-size` on mobile and `repeat-y` for long pages.
