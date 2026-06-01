@@ -129,12 +129,12 @@ layout.
   background.
 - Header title, subtitle, and profile/social icons should use solid white
   without opacity, text shadows, drop shadows, or text strokes.
-- The light-mode app chrome color should be bright, clean light blue `#43C3EC`.
+- The light-mode app chrome color should be muted, clean light blue `#58BAD9`.
   Use it for the page background, browser safe-area/chrome color, root `html`
   and `body` backgrounds, and light `theme-color` meta entries unless a project
   records a specific install-color exception.
-- Dark mode should use a separate, slightly deeper blue app chrome color
-  (`#2FA9D1` in the current shared implementation) for the same safe-area,
+- Dark mode should use a separate, muted, slightly deeper blue app chrome color
+  (`#428FA8` in the current shared implementation) for the same safe-area,
   page-background, and `theme-color` surfaces. This keeps the blue chrome close
   to the dark workbench without turning the page into a dark gradient.
 - Treat the cloud field as app identity. Prefer dedicated decorative image
@@ -149,6 +149,9 @@ layout.
   should preserve the same project-specific cloud type, composition, and
   sparseness as light mode while using less bright blue, purple, lavender, and
   pale-blue colors.
+- The checked-in cloud assets should carry the muted treatment directly. Avoid
+  adding CSS saturation, brightness, or opacity filters as the primary way to
+  dim the artwork; regenerate the raster assets and keep the CSS layers neutral.
 - Treat the header cloud asset as the primary desktop identity graphic. It
   should span the viewport horizontally and cover roughly the upper 80% of the
   initial viewport, leaving the bottom portion to return toward the base blue.
@@ -168,17 +171,17 @@ layout.
   in light and dark mode. On mobile, the page-atmosphere image should still add
   subtle cloud texture around the header without requiring a separate
   header-cloud layer. If clearance is added behind the identity stack on
-  desktop, it should blend into the base chrome color and avoid a symmetrical
-  circular or halo-shaped hole; the composition should feel like clouds
-  naturally passing around the identity, with small side clouds close enough to
-  the logo/title to keep the header alive.
+  desktop, it should use the same muted chrome token as the page background and
+  avoid an undimmed circular or halo-shaped hole; the composition should feel
+  like clouds naturally passing around the identity, with small side clouds close
+  enough to the logo/title to keep the header alive.
 - The repeatable atmosphere can add lower density wisps around the workbench
   sides on both desktop and mobile.
-- Both cloud images should preserve `#43C3EC` at their top and bottom edges so
+- Both cloud images should preserve `#58BAD9` at their top and bottom edges so
   the UI does not become a full multicolor gradient and the repeated atmosphere
   layer does not show obvious seams. The blue remains the base canvas.
 - The top 5% of the initial viewport should read as clear blue with little or no
-  cloud texture. The bottom 20% should also return clearly to `#43C3EC`. Cloud
+  cloud texture. The bottom 20% should also return clearly to `#58BAD9`. Cloud
   density should decrease toward the bottom of the image.
 - Decorative cloud images should stay soft, abstract, airy, and non-literal.
   Suitable inspirations include cirrus, altocumulus, stratocumulus, lenticular,
@@ -195,9 +198,9 @@ layout.
 
 Implementation guidance:
 
-- Set `html` and `body` backgrounds to `#43C3EC`.
-- Keep light `theme-color` and install background colors on `#43C3EC`; add a
-  dark `theme-color` matching `#2FA9D1` or the repo's documented dark chrome
+- Set `html` and `body` backgrounds to `#58BAD9`.
+- Keep light `theme-color` and install background colors on `#58BAD9`; add a
+  dark `theme-color` matching `#428FA8` or the repo's documented dark chrome
   blue so mobile safe areas match the dark cloud base.
 - Render the desktop header cloud image and repeatable page-atmosphere image as
   decorative non-interactive layers. A CSS `body::before` image layer is
@@ -212,17 +215,17 @@ Implementation guidance:
   the narrow mobile strips beside the workbench. It may use a larger
   `background-size` on mobile and `repeat-y` for long pages.
 - Do not add a fixed bottom fade above the repeatable atmosphere layer. Keep the
-  root and page backgrounds on `#43C3EC` so browser safe areas and the lower
+  root and page backgrounds on `#58BAD9` so browser safe areas and the lower
   viewport edge use the base chrome color directly.
 - Use `pointer-events: none` on decorative layers and keep page content above
   them.
 - When enforcing header readability, prefer image positioning and a
-  chrome-color clearance layer over changing the logo, title, social buttons, or
-  workbench. Verify the result in desktop and mobile, light and dark mode.
+  muted chrome-color clearance layer over changing the logo, title, social
+  buttons, or workbench. Verify the result in desktop and mobile, light and dark mode.
 - Do not recreate or extend the cloud shapes with CSS radial gradients, blurred
   blobs, or code-generated mesh layers. Use raster image assets as the
   atmospheric sources.
-- Keep the page background behind the images as `#43C3EC`, and fade/mask the
+- Keep the page background behind the images as `#58BAD9`, and fade/mask the
   header image edges if needed to avoid visible seams.
 
 ## Portfolio Product Shape

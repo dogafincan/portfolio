@@ -31,7 +31,7 @@ describe("global styles", () => {
     const darkMedia = styles.slice(darkMediaStart, styles.indexOf("\n}\n\n@layer", darkMediaStart));
 
     expect(styles.match(/--portfolio-app-chrome-color:/g)).toHaveLength(3);
-    expect(lightRoot).toContain("--portfolio-app-chrome-color: #43c3ec;");
+    expect(lightRoot).toContain("--portfolio-app-chrome-color: #58bad9;");
     expect(lightRoot).toContain(
       "--portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);",
     );
@@ -41,14 +41,14 @@ describe("global styles", () => {
     expect(lightRoot).toContain("--portfolio-header-cloud-size: 240% auto;");
     expect(lightRoot).toContain('--portfolio-page-atmosphere-image: url("/page-atmosphere.avif");');
     expect(lightRoot).toContain("--portfolio-page-atmosphere-size: 180% auto;");
-    expect(darkClass).toContain("--portfolio-app-chrome-color: #2fa9d1;");
+    expect(darkClass).toContain("--portfolio-app-chrome-color: #428fa8;");
     expect(darkClass).toContain(
       '--portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");',
     );
     expect(darkClass).toContain(
       "--portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);",
     );
-    expect(darkMedia).toContain("--portfolio-app-chrome-color: #2fa9d1;");
+    expect(darkMedia).toContain("--portfolio-app-chrome-color: #428fa8;");
     expect(darkMedia).toContain(
       '--portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");',
     );
@@ -77,8 +77,8 @@ describe("global styles", () => {
     expect(htmlBlock).toContain("background: var(--portfolio-app-chrome-color);");
     expect(htmlBlock).not.toContain("background: var(--portfolio-page-background);");
     expect(bodyBlock).toContain("background: var(--portfolio-page-background);");
-    expect(styles.match(/--portfolio-app-chrome-color: #43c3ec;/g)).toHaveLength(1);
-    expect(styles.match(/--portfolio-app-chrome-color: #2fa9d1;/g)).toHaveLength(2);
+    expect(styles.match(/--portfolio-app-chrome-color: #58bad9;/g)).toHaveLength(1);
+    expect(styles.match(/--portfolio-app-chrome-color: #428fa8;/g)).toHaveLength(2);
   });
 
   it("defines softened iMessage-blue primary button colors for light and dark schemes", () => {
@@ -208,15 +208,18 @@ describe("global styles", () => {
     expect(styles).toContain("--portfolio-header-clearance-width: 28rem;");
     expect(styles).toContain("--portfolio-header-clearance-height: 14rem;");
     expect(styles).toContain("--portfolio-header-clearance-feather: 2.75rem;");
+    expect(styles).toContain(
+      "--portfolio-header-clearance-color: var(--portfolio-app-chrome-color);",
+    );
     expect(clearanceStart).toBeGreaterThan(-1);
     expect(clearanceLayer).toContain("z-index: -1;");
     expect(clearanceLayer).toContain("display: none;");
     expect(clearanceLayer).toContain("width: min(var(--portfolio-header-clearance-width), 74vw);");
     expect(clearanceLayer).toContain("height: var(--portfolio-header-clearance-height);");
-    expect(clearanceLayer).toContain("background: var(--portfolio-page-background);");
+    expect(clearanceLayer).toContain("background: var(--portfolio-header-clearance-color);");
     expect(clearanceLayer).toContain("box-shadow: 0 0 var(--portfolio-header-clearance-feather)");
     expect(clearanceLayer).toContain(
-      "var(--portfolio-header-clearance-feather) var(--portfolio-page-background);",
+      "var(--portfolio-header-clearance-feather) var(--portfolio-header-clearance-color);",
     );
   });
 

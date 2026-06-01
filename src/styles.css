@@ -87,15 +87,16 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --portfolio-app-chrome-color: #43c3ec;
+  --portfolio-app-chrome-color: #58bad9;
   --portfolio-page-background: var(--portfolio-app-chrome-color);
+  --portfolio-header-clearance-color: var(--portfolio-app-chrome-color);
   --portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);
   --portfolio-header-cloud-height: 80svh;
   --portfolio-header-cloud-position-x: center;
   --portfolio-header-cloud-position-y: -5rem;
   --portfolio-header-cloud-size: 240% auto;
   --portfolio-page-atmosphere-image: url("/page-atmosphere.avif");
-  --portfolio-page-atmosphere-opacity: 0.72;
+  --portfolio-page-atmosphere-opacity: 1;
   --portfolio-page-atmosphere-position: center top;
   --portfolio-page-atmosphere-size: 180% auto;
   --portfolio-header-clearance-width: 28rem;
@@ -144,9 +145,11 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --portfolio-app-chrome-color: #2fa9d1;
+  --portfolio-app-chrome-color: #428fa8;
   --portfolio-page-background: var(--portfolio-app-chrome-color);
+  --portfolio-header-clearance-color: var(--portfolio-app-chrome-color);
   --portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");
+  --portfolio-page-atmosphere-opacity: 1;
   --portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);
 }
 
@@ -191,9 +194,11 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
-    --portfolio-app-chrome-color: #2fa9d1;
+    --portfolio-app-chrome-color: #428fa8;
     --portfolio-page-background: var(--portfolio-app-chrome-color);
+    --portfolio-header-clearance-color: var(--portfolio-app-chrome-color);
     --portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");
+    --portfolio-page-atmosphere-opacity: 1;
     --portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);
   }
 }
@@ -205,17 +210,19 @@
     --portfolio-header-cloud-position-x: center;
     --portfolio-header-cloud-position-y: -6rem;
     --portfolio-header-cloud-size: cover;
-    --portfolio-page-atmosphere-opacity: 0.8;
+    --portfolio-page-atmosphere-opacity: 1;
     --portfolio-page-atmosphere-size: 100% auto;
   }
   .dark {
     --portfolio-header-cloud-image: url("/header-clouds-dark.png");
+    --portfolio-page-atmosphere-opacity: 1;
   }
 }
 
 @media (prefers-color-scheme: dark) and (min-width: 640px) {
   :root {
     --portfolio-header-cloud-image: url("/header-clouds-dark.png");
+    --portfolio-page-atmosphere-opacity: 1;
   }
 }
 
@@ -291,9 +298,9 @@
     transform: translateX(-50%);
     border-radius: 999px;
     pointer-events: none;
-    background: var(--portfolio-page-background);
+    background: var(--portfolio-header-clearance-color);
     box-shadow: 0 0 var(--portfolio-header-clearance-feather)
-      var(--portfolio-header-clearance-feather) var(--portfolio-page-background);
+      var(--portfolio-header-clearance-feather) var(--portfolio-header-clearance-color);
   }
 
   code {

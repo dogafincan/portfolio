@@ -6,6 +6,7 @@ const PAGE_BACKGROUND = "var(--portfolio-page-background)";
 const CLOUD_IMAGE = "var(--portfolio-header-cloud-image)";
 const ATMOSPHERE_IMAGE = "var(--portfolio-page-atmosphere-image)";
 const CLEARANCE_FEATHER = "var(--portfolio-header-clearance-feather)";
+const CLEARANCE_COLOR = "var(--portfolio-header-clearance-color)";
 
 const CLOUD_MASK = "radial-gradient(ellipse at center, black 0%, black 58%, transparent 78%)";
 
@@ -54,7 +55,7 @@ export function OgImagePreview({ seed, title }: { seed: string; title: string })
           backgroundImage: ATMOSPHERE_IMAGE,
           backgroundPosition: "center top",
           backgroundSize: "100% auto",
-          opacity: 0.64,
+          opacity: 1,
         }}
       />
       {cloudLayers.map((layer, index) => (
@@ -64,8 +65,8 @@ export function OgImagePreview({ seed, title }: { seed: string; title: string })
         aria-hidden="true"
         className="absolute top-1/2 left-1/2 z-10 h-[18rem] w-[48rem] -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
-          background: PAGE_BACKGROUND,
-          boxShadow: `0 0 ${CLEARANCE_FEATHER} ${CLEARANCE_FEATHER} ${PAGE_BACKGROUND}`,
+          background: CLEARANCE_COLOR,
+          boxShadow: `0 0 ${CLEARANCE_FEATHER} ${CLEARANCE_FEATHER} ${CLEARANCE_COLOR}`,
         }}
       />
       <AppHeader className="relative z-20 origin-center scale-[2.35]" title={title} />
