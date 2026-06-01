@@ -133,7 +133,7 @@ export function PortfolioHome() {
           <nav
             aria-label="Doga Fincan social profiles"
             data-slot="profile-links"
-            className="flex -mt-[0.9375rem] mb-[0.9375rem] items-center justify-center gap-2 text-white"
+            className="flex -mt-[0.9375rem] -mb-[0.9375rem] items-center justify-center gap-2 text-white"
           >
             <a
               className={cn(PROFILE_LINK_CLASS_NAME, KEYBOARD_ACTION_FOCUS_CLASS_NAME)}

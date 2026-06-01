@@ -39,7 +39,7 @@ describe("PortfolioHome", () => {
     expect(appSubtitle).toBeNull();
     expect(appHeader?.textContent).not.toContain("I'm into learning languages");
     expect(socialLinks?.className).toBe(
-      "flex -mt-[0.9375rem] mb-[0.9375rem] items-center justify-center gap-2 text-white",
+      "flex -mt-[0.9375rem] -mb-[0.9375rem] items-center justify-center gap-2 text-white",
     );
     expect(socialLinks?.previousElementSibling).toBe(appTitleBlock);
     expect(socialLinks?.parentElement).toBe(appHeader);
