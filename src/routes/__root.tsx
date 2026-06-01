@@ -5,7 +5,7 @@ import interLatinWghtNormal from "@fontsource-variable/inter/files/inter-latin-w
 import appCss from "../styles.css?url";
 
 const APP_CHROME_COLOR = "#43C3EC";
-const APP_CHROME_COLOR_DARK = "#43C3EC";
+const APP_CHROME_COLOR_DARK = "#2FA9D1";
 
 export const Route = createRootRoute({
   head: () => ({

@@ -26,7 +26,7 @@ describe("PortfolioHome", () => {
     const workbench = container.querySelector('[data-slot="portfolio-workbench"]');
 
     expect(main?.className).toBe(
-      "relative z-10 flex min-h-screen flex-col px-4 py-6 text-foreground sm:px-6 lg:justify-center lg:px-8",
+      "app-shell relative z-10 flex min-h-screen flex-col px-4 py-6 text-foreground sm:px-6 lg:justify-center lg:px-8",
     );
     expect(main?.firstElementChild?.className).toBe(
       "mx-auto flex w-full max-w-6xl flex-col gap-8 py-8 sm:py-10",

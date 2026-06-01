@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const HEADER_LOGO = "/app-logo-120.png";
 const HEADER_LOGO_SRCSET = "/app-logo-120.png 120w, /apple-touch-icon.png 180w";
 const PORTFOLIO_MAIN_CLASS_NAME =
-  "relative z-10 flex min-h-screen flex-col px-4 py-6 text-foreground sm:px-6 lg:justify-center lg:px-8";
+  "app-shell relative z-10 flex min-h-screen flex-col px-4 py-6 text-foreground sm:px-6 lg:justify-center lg:px-8";
 const WORKBENCH_CONTAINER_CLASS_NAME =
   "grid w-full min-w-0 max-w-full flex-1 grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background";
 const PROJECT_SUMMARY_ITEM_CLASS_NAME = "min-h-32 flex-nowrap overflow-hidden sm:min-h-36";

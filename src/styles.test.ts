@@ -19,7 +19,7 @@ describe("global styles", () => {
     expect(styles).not.toContain("@custom-variant dark (&:is(.dark *));");
   });
 
-  it("uses the shared blue page chrome across light and dark schemes", () => {
+  it("uses separate light and dark cloud page chrome", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const rootStart = styles.indexOf(":root {");
     const rootEnd = styles.indexOf("\n}\n\n.dark", rootStart);
@@ -37,8 +37,16 @@ describe("global styles", () => {
     expect(lightRoot).toContain("--portfolio-header-cloud-size: cover;");
     expect(lightRoot).toContain('--portfolio-page-atmosphere-image: url("/page-atmosphere.avif");');
     expect(lightRoot).toContain("--portfolio-page-atmosphere-size: 180% auto;");
-    expect(darkClass).toContain("--portfolio-app-chrome-color: #43c3ec;");
-    expect(darkMedia).toContain("--portfolio-app-chrome-color: #43c3ec;");
+    expect(darkClass).toContain("--portfolio-app-chrome-color: #2fa9d1;");
+    expect(darkClass).toContain('--portfolio-header-cloud-image: url("/header-clouds-dark.png");');
+    expect(darkClass).toContain(
+      '--portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");',
+    );
+    expect(darkMedia).toContain("--portfolio-app-chrome-color: #2fa9d1;");
+    expect(darkMedia).toContain('--portfolio-header-cloud-image: url("/header-clouds-dark.png");');
+    expect(darkMedia).toContain(
+      '--portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");',
+    );
     expect(styles).not.toContain("--portfolio-hero-gradient-height");
     expect(styles).not.toContain("--portfolio-hero-mesh");
     expect(styles).not.toContain("#d2f2ff");
@@ -61,7 +69,8 @@ describe("global styles", () => {
     expect(htmlBlock).toContain("background: var(--portfolio-app-chrome-color);");
     expect(htmlBlock).not.toContain("background: var(--portfolio-page-background);");
     expect(bodyBlock).toContain("background: var(--portfolio-page-background);");
-    expect(styles.match(/--portfolio-app-chrome-color: #43c3ec;/g)).toHaveLength(3);
+    expect(styles.match(/--portfolio-app-chrome-color: #43c3ec;/g)).toHaveLength(1);
+    expect(styles.match(/--portfolio-app-chrome-color: #2fa9d1;/g)).toHaveLength(2);
   });
 
   it("defines softened iMessage-blue primary button colors for light and dark schemes", () => {
@@ -168,6 +177,26 @@ describe("global styles", () => {
     expect(desktopMedia).toContain("--portfolio-page-atmosphere-size: 100% auto;");
     expect(styles).not.toContain("--portfolio-mesh-continuation");
     expect(styles).not.toContain("--portfolio-hero-mesh");
+  });
+
+  it("reserves a cloud-free center behind the header identity", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const clearanceStart = styles.indexOf("main.app-shell::before");
+    const clearanceEnd = styles.indexOf("\n  code {", clearanceStart);
+    const clearanceLayer = styles.slice(clearanceStart, clearanceEnd);
+
+    expect(styles).toContain("--portfolio-header-clearance-width: 28rem;");
+    expect(styles).toContain("--portfolio-header-clearance-height: 14rem;");
+    expect(styles).toContain("--portfolio-header-clearance-feather: 2.75rem;");
+    expect(clearanceStart).toBeGreaterThan(-1);
+    expect(clearanceLayer).toContain("z-index: -1;");
+    expect(clearanceLayer).toContain("width: min(var(--portfolio-header-clearance-width), 74vw);");
+    expect(clearanceLayer).toContain("height: var(--portfolio-header-clearance-height);");
+    expect(clearanceLayer).toContain("background: var(--portfolio-page-background);");
+    expect(clearanceLayer).toContain("box-shadow: 0 0 var(--portfolio-header-clearance-feather)");
+    expect(clearanceLayer).toContain(
+      "var(--portfolio-header-clearance-feather) var(--portfolio-page-background);",
+    );
   });
 
   it("does not add a bottom safe-area fade layer", () => {

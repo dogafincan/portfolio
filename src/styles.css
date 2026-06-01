@@ -97,6 +97,10 @@
   --portfolio-page-atmosphere-opacity: 0.72;
   --portfolio-page-atmosphere-position: center top;
   --portfolio-page-atmosphere-size: 180% auto;
+  --portfolio-header-clearance-width: 28rem;
+  --portfolio-header-clearance-height: 14rem;
+  --portfolio-header-clearance-top: 2rem;
+  --portfolio-header-clearance-feather: 2.75rem;
 }
 
 .dark {
@@ -139,8 +143,10 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --portfolio-app-chrome-color: #43c3ec;
+  --portfolio-app-chrome-color: #2fa9d1;
   --portfolio-page-background: var(--portfolio-app-chrome-color);
+  --portfolio-header-cloud-image: url("/header-clouds-dark.png");
+  --portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");
 }
 
 @media (prefers-color-scheme: dark) {
@@ -184,8 +190,10 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
-    --portfolio-app-chrome-color: #43c3ec;
+    --portfolio-app-chrome-color: #2fa9d1;
     --portfolio-page-background: var(--portfolio-app-chrome-color);
+    --portfolio-header-cloud-image: url("/header-clouds-dark.png");
+    --portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");
   }
 }
 
@@ -251,6 +259,26 @@
     background-repeat: repeat-y;
     background-size: var(--portfolio-page-atmosphere-size);
     opacity: var(--portfolio-page-atmosphere-opacity);
+  }
+
+  main.app-shell {
+    position: relative;
+  }
+
+  main.app-shell::before {
+    content: "";
+    position: absolute;
+    top: var(--portfolio-header-clearance-top);
+    left: 50%;
+    z-index: -1;
+    width: min(var(--portfolio-header-clearance-width), 74vw);
+    height: var(--portfolio-header-clearance-height);
+    transform: translateX(-50%);
+    border-radius: 999px;
+    pointer-events: none;
+    background: var(--portfolio-page-background);
+    box-shadow: 0 0 var(--portfolio-header-clearance-feather)
+      var(--portfolio-header-clearance-feather) var(--portfolio-page-background);
   }
 
   code {
