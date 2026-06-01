@@ -92,18 +92,16 @@
   --portfolio-header-cloud-image: url("/header-clouds.avif");
   --portfolio-header-cloud-height: 80svh;
   --portfolio-header-cloud-position-x: center;
-  --portfolio-header-cloud-position-y: -7rem;
+  --portfolio-header-cloud-position-y: -5rem;
   --portfolio-header-cloud-size: 240% auto;
   --portfolio-page-atmosphere-image: url("/page-atmosphere.avif");
   --portfolio-page-atmosphere-opacity: 0.72;
   --portfolio-page-atmosphere-position: center top;
   --portfolio-page-atmosphere-size: 180% auto;
-  --portfolio-header-clearance-width: 100vw;
-  --portfolio-header-clearance-height: 8rem;
-  --portfolio-header-clearance-max-width: 100vw;
-  --portfolio-header-clearance-top: 6rem;
-  --portfolio-header-clearance-feather: 0.75rem;
-  --portfolio-header-clearance-radius: 0;
+  --portfolio-header-clearance-width: 28rem;
+  --portfolio-header-clearance-height: 14rem;
+  --portfolio-header-clearance-top: 2rem;
+  --portfolio-header-clearance-feather: 2.75rem;
 }
 
 .dark {
@@ -206,12 +204,6 @@
     --portfolio-header-cloud-position-x: center;
     --portfolio-header-cloud-position-y: -6rem;
     --portfolio-header-cloud-size: cover;
-    --portfolio-header-clearance-width: 28rem;
-    --portfolio-header-clearance-height: 14rem;
-    --portfolio-header-clearance-max-width: 74vw;
-    --portfolio-header-clearance-top: 2rem;
-    --portfolio-header-clearance-feather: 2.75rem;
-    --portfolio-header-clearance-radius: 999px;
     --portfolio-page-atmosphere-opacity: 0.8;
     --portfolio-page-atmosphere-size: 100% auto;
   }
@@ -282,13 +274,10 @@
     top: var(--portfolio-header-clearance-top);
     left: 50%;
     z-index: -1;
-    width: min(
-      var(--portfolio-header-clearance-width),
-      var(--portfolio-header-clearance-max-width)
-    );
+    width: min(var(--portfolio-header-clearance-width), 74vw);
     height: var(--portfolio-header-clearance-height);
     transform: translateX(-50%);
-    border-radius: var(--portfolio-header-clearance-radius);
+    border-radius: 999px;
     pointer-events: none;
     background: var(--portfolio-page-background);
     box-shadow: 0 0 var(--portfolio-header-clearance-feather)

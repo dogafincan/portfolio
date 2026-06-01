@@ -35,7 +35,7 @@ describe("global styles", () => {
     expect(lightRoot).toContain('--portfolio-header-cloud-image: url("/header-clouds.avif");');
     expect(lightRoot).toContain("--portfolio-header-cloud-height: 80svh;");
     expect(lightRoot).toContain("--portfolio-header-cloud-position-x: center;");
-    expect(lightRoot).toContain("--portfolio-header-cloud-position-y: -7rem;");
+    expect(lightRoot).toContain("--portfolio-header-cloud-position-y: -5rem;");
     expect(lightRoot).toContain("--portfolio-header-cloud-size: 240% auto;");
     expect(lightRoot).toContain('--portfolio-page-atmosphere-image: url("/page-atmosphere.avif");');
     expect(lightRoot).toContain("--portfolio-page-atmosphere-size: 180% auto;");
@@ -174,7 +174,7 @@ describe("global styles", () => {
 
     expect(styles).toContain("--portfolio-header-cloud-height: 80svh;");
     expect(styles).toContain("--portfolio-header-cloud-position-x: center;");
-    expect(styles).toContain("--portfolio-header-cloud-position-y: -7rem;");
+    expect(styles).toContain("--portfolio-header-cloud-position-y: -5rem;");
     expect(styles).toContain("--portfolio-header-cloud-size: 240% auto;");
     expect(desktopMedia).toContain("--portfolio-header-cloud-position-x: center;");
     expect(desktopMedia).toContain("--portfolio-header-cloud-position-y: -6rem;");
@@ -185,34 +185,19 @@ describe("global styles", () => {
     expect(styles).not.toContain("--portfolio-hero-mesh");
   });
 
-  it("reserves a cloud-free mobile title band without a circular logo cutout", () => {
+  it("reserves a cloud-free center behind the header identity", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const clearanceStart = styles.indexOf("main.app-shell::before");
     const clearanceEnd = styles.indexOf("\n  code {", clearanceStart);
     const clearanceLayer = styles.slice(clearanceStart, clearanceEnd);
-    const mediaStart = styles.indexOf("@media (min-width: 640px)");
-    const desktopMedia = styles.slice(mediaStart, styles.indexOf("\n}\n\n@layer", mediaStart));
 
-    expect(styles).toContain("--portfolio-header-clearance-width: 100vw;");
-    expect(styles).toContain("--portfolio-header-clearance-height: 8rem;");
-    expect(styles).toContain("--portfolio-header-clearance-max-width: 100vw;");
-    expect(styles).toContain("--portfolio-header-clearance-top: 6rem;");
-    expect(styles).toContain("--portfolio-header-clearance-feather: 0.75rem;");
-    expect(styles).toContain("--portfolio-header-clearance-radius: 0;");
-    expect(desktopMedia).toContain("--portfolio-header-clearance-width: 28rem;");
-    expect(desktopMedia).toContain("--portfolio-header-clearance-height: 14rem;");
-    expect(desktopMedia).toContain("--portfolio-header-clearance-max-width: 74vw;");
-    expect(desktopMedia).toContain("--portfolio-header-clearance-top: 2rem;");
-    expect(desktopMedia).toContain("--portfolio-header-clearance-feather: 2.75rem;");
-    expect(desktopMedia).toContain("--portfolio-header-clearance-radius: 999px;");
+    expect(styles).toContain("--portfolio-header-clearance-width: 28rem;");
+    expect(styles).toContain("--portfolio-header-clearance-height: 14rem;");
+    expect(styles).toContain("--portfolio-header-clearance-feather: 2.75rem;");
     expect(clearanceStart).toBeGreaterThan(-1);
     expect(clearanceLayer).toContain("z-index: -1;");
-    expect(clearanceLayer).toContain("top: var(--portfolio-header-clearance-top);");
-    expect(clearanceLayer).toContain("width: min(");
-    expect(clearanceLayer).toContain("var(--portfolio-header-clearance-width)");
-    expect(clearanceLayer).toContain("var(--portfolio-header-clearance-max-width)");
+    expect(clearanceLayer).toContain("width: min(var(--portfolio-header-clearance-width), 74vw);");
     expect(clearanceLayer).toContain("height: var(--portfolio-header-clearance-height);");
-    expect(clearanceLayer).toContain("border-radius: var(--portfolio-header-clearance-radius);");
     expect(clearanceLayer).toContain("background: var(--portfolio-page-background);");
     expect(clearanceLayer).toContain("box-shadow: 0 0 var(--portfolio-header-clearance-feather)");
     expect(clearanceLayer).toContain(
