@@ -32,7 +32,9 @@ describe("global styles", () => {
 
     expect(styles.match(/--portfolio-app-chrome-color:/g)).toHaveLength(3);
     expect(lightRoot).toContain("--portfolio-app-chrome-color: #43c3ec;");
-    expect(lightRoot).toContain('--portfolio-header-cloud-image: url("/header-clouds.avif");');
+    expect(lightRoot).toContain(
+      "--portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);",
+    );
     expect(lightRoot).toContain("--portfolio-header-cloud-height: 80svh;");
     expect(lightRoot).toContain("--portfolio-header-cloud-position-x: center;");
     expect(lightRoot).toContain("--portfolio-header-cloud-position-y: -5rem;");
@@ -40,14 +42,18 @@ describe("global styles", () => {
     expect(lightRoot).toContain('--portfolio-page-atmosphere-image: url("/page-atmosphere.avif");');
     expect(lightRoot).toContain("--portfolio-page-atmosphere-size: 180% auto;");
     expect(darkClass).toContain("--portfolio-app-chrome-color: #2fa9d1;");
-    expect(darkClass).toContain('--portfolio-header-cloud-image: url("/header-clouds-dark.png");');
     expect(darkClass).toContain(
       '--portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");',
     );
+    expect(darkClass).toContain(
+      "--portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);",
+    );
     expect(darkMedia).toContain("--portfolio-app-chrome-color: #2fa9d1;");
-    expect(darkMedia).toContain('--portfolio-header-cloud-image: url("/header-clouds-dark.png");');
     expect(darkMedia).toContain(
       '--portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");',
+    );
+    expect(darkMedia).toContain(
+      "--portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);",
     );
     expect(styles).not.toContain("--portfolio-hero-gradient-height");
     expect(styles).not.toContain("--portfolio-hero-mesh");
@@ -153,6 +159,7 @@ describe("global styles", () => {
     expect(imageLayerStart).toBeGreaterThan(-1);
     expect(atmosphereLayerStart).toBeGreaterThan(-1);
     expect(imageLayer).toContain("z-index: 1;");
+    expect(imageLayer).toContain("display: none;");
     expect(imageLayer).toContain("background-image: var(--portfolio-header-cloud-image);");
     expect(imageLayer).toContain("background-position: var(--portfolio-header-cloud-position-x)");
     expect(imageLayer).toContain("var(--portfolio-header-cloud-position-y);");
@@ -176,6 +183,13 @@ describe("global styles", () => {
     expect(styles).toContain("--portfolio-header-cloud-position-x: center;");
     expect(styles).toContain("--portfolio-header-cloud-position-y: -5rem;");
     expect(styles).toContain("--portfolio-header-cloud-size: 240% auto;");
+    expect(styles).toContain(
+      "--portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);",
+    );
+    expect(desktopMedia).toContain('--portfolio-header-cloud-image: url("/header-clouds.avif");');
+    expect(desktopMedia).toContain(
+      '--portfolio-header-cloud-image: url("/header-clouds-dark.png");',
+    );
     expect(desktopMedia).toContain("--portfolio-header-cloud-position-x: center;");
     expect(desktopMedia).toContain("--portfolio-header-cloud-position-y: -6rem;");
     expect(desktopMedia).toContain("--portfolio-header-cloud-size: cover;");
@@ -196,6 +210,7 @@ describe("global styles", () => {
     expect(styles).toContain("--portfolio-header-clearance-feather: 2.75rem;");
     expect(clearanceStart).toBeGreaterThan(-1);
     expect(clearanceLayer).toContain("z-index: -1;");
+    expect(clearanceLayer).toContain("display: none;");
     expect(clearanceLayer).toContain("width: min(var(--portfolio-header-clearance-width), 74vw);");
     expect(clearanceLayer).toContain("height: var(--portfolio-header-clearance-height);");
     expect(clearanceLayer).toContain("background: var(--portfolio-page-background);");

@@ -89,7 +89,7 @@
   --sidebar-ring: oklch(0.708 0 0);
   --portfolio-app-chrome-color: #43c3ec;
   --portfolio-page-background: var(--portfolio-app-chrome-color);
-  --portfolio-header-cloud-image: url("/header-clouds.avif");
+  --portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);
   --portfolio-header-cloud-height: 80svh;
   --portfolio-header-cloud-position-x: center;
   --portfolio-header-cloud-position-y: -5rem;
@@ -146,8 +146,8 @@
   --sidebar-ring: oklch(0.556 0 0);
   --portfolio-app-chrome-color: #2fa9d1;
   --portfolio-page-background: var(--portfolio-app-chrome-color);
-  --portfolio-header-cloud-image: url("/header-clouds-dark.png");
   --portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");
+  --portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -193,19 +193,29 @@
     --sidebar-ring: oklch(0.556 0 0);
     --portfolio-app-chrome-color: #2fa9d1;
     --portfolio-page-background: var(--portfolio-app-chrome-color);
-    --portfolio-header-cloud-image: url("/header-clouds-dark.png");
     --portfolio-page-atmosphere-image: url("/page-atmosphere-dark.png");
+    --portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);
   }
 }
 
 @media (min-width: 640px) {
   :root {
+    --portfolio-header-cloud-image: url("/header-clouds.avif");
     --portfolio-header-cloud-height: 80svh;
     --portfolio-header-cloud-position-x: center;
     --portfolio-header-cloud-position-y: -6rem;
     --portfolio-header-cloud-size: cover;
     --portfolio-page-atmosphere-opacity: 0.8;
     --portfolio-page-atmosphere-size: 100% auto;
+  }
+  .dark {
+    --portfolio-header-cloud-image: url("/header-clouds-dark.png");
+  }
+}
+
+@media (prefers-color-scheme: dark) and (min-width: 640px) {
+  :root {
+    --portfolio-header-cloud-image: url("/header-clouds-dark.png");
   }
 }
 
@@ -233,6 +243,7 @@
     position: absolute;
     inset: 0 0 auto;
     z-index: 1;
+    display: none;
     height: var(--portfolio-header-cloud-height);
     pointer-events: none;
     background-image: var(--portfolio-header-cloud-image);
@@ -274,6 +285,7 @@
     top: var(--portfolio-header-clearance-top);
     left: 50%;
     z-index: -1;
+    display: none;
     width: min(var(--portfolio-header-clearance-width), 74vw);
     height: var(--portfolio-header-clearance-height);
     transform: translateX(-50%);
@@ -286,5 +298,12 @@
 
   code {
     @apply font-mono;
+  }
+
+  @media (min-width: 640px) {
+    body::before,
+    main.app-shell::before {
+      display: block;
+    }
   }
 }
