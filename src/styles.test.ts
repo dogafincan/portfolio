@@ -34,7 +34,9 @@ describe("global styles", () => {
     expect(lightRoot).toContain("--portfolio-app-chrome-color: #43c3ec;");
     expect(lightRoot).toContain('--portfolio-header-cloud-image: url("/header-clouds.avif");');
     expect(lightRoot).toContain("--portfolio-header-cloud-height: 80svh;");
-    expect(lightRoot).toContain("--portfolio-header-cloud-size: cover;");
+    expect(lightRoot).toContain("--portfolio-header-cloud-position-x: center;");
+    expect(lightRoot).toContain("--portfolio-header-cloud-position-y: -5rem;");
+    expect(lightRoot).toContain("--portfolio-header-cloud-size: 240% auto;");
     expect(lightRoot).toContain('--portfolio-page-atmosphere-image: url("/page-atmosphere.avif");');
     expect(lightRoot).toContain("--portfolio-page-atmosphere-size: 180% auto;");
     expect(darkClass).toContain("--portfolio-app-chrome-color: #2fa9d1;");
@@ -152,9 +154,8 @@ describe("global styles", () => {
     expect(atmosphereLayerStart).toBeGreaterThan(-1);
     expect(imageLayer).toContain("z-index: 1;");
     expect(imageLayer).toContain("background-image: var(--portfolio-header-cloud-image);");
-    expect(imageLayer).toContain(
-      "background-position: center var(--portfolio-header-cloud-position-y);",
-    );
+    expect(imageLayer).toContain("background-position: var(--portfolio-header-cloud-position-x)");
+    expect(imageLayer).toContain("var(--portfolio-header-cloud-position-y);");
     expect(imageLayer).toContain("background-repeat: no-repeat;");
     expect(imageLayer).toContain("background-size: var(--portfolio-header-cloud-size);");
     expect(imageLayer).toContain("mask-image: linear-gradient");
@@ -172,7 +173,12 @@ describe("global styles", () => {
     const desktopMedia = styles.slice(mediaStart, styles.indexOf("\n}\n\n@layer", mediaStart));
 
     expect(styles).toContain("--portfolio-header-cloud-height: 80svh;");
-    expect(styles).toContain("--portfolio-header-cloud-size: cover;");
+    expect(styles).toContain("--portfolio-header-cloud-position-x: center;");
+    expect(styles).toContain("--portfolio-header-cloud-position-y: -5rem;");
+    expect(styles).toContain("--portfolio-header-cloud-size: 240% auto;");
+    expect(desktopMedia).toContain("--portfolio-header-cloud-position-x: center;");
+    expect(desktopMedia).toContain("--portfolio-header-cloud-position-y: -6rem;");
+    expect(desktopMedia).toContain("--portfolio-header-cloud-size: cover;");
     expect(styles).toContain("--portfolio-page-atmosphere-size: 180% auto;");
     expect(desktopMedia).toContain("--portfolio-page-atmosphere-size: 100% auto;");
     expect(styles).not.toContain("--portfolio-mesh-continuation");

@@ -91,8 +91,9 @@
   --portfolio-page-background: var(--portfolio-app-chrome-color);
   --portfolio-header-cloud-image: url("/header-clouds.avif");
   --portfolio-header-cloud-height: 80svh;
-  --portfolio-header-cloud-position-y: 0;
-  --portfolio-header-cloud-size: cover;
+  --portfolio-header-cloud-position-x: center;
+  --portfolio-header-cloud-position-y: -5rem;
+  --portfolio-header-cloud-size: 240% auto;
   --portfolio-page-atmosphere-image: url("/page-atmosphere.avif");
   --portfolio-page-atmosphere-opacity: 0.72;
   --portfolio-page-atmosphere-position: center top;
@@ -200,7 +201,8 @@
 @media (min-width: 640px) {
   :root {
     --portfolio-header-cloud-height: 80svh;
-    --portfolio-header-cloud-position-y: 0;
+    --portfolio-header-cloud-position-x: center;
+    --portfolio-header-cloud-position-y: -6rem;
     --portfolio-header-cloud-size: cover;
     --portfolio-page-atmosphere-opacity: 0.8;
     --portfolio-page-atmosphere-size: 100% auto;
@@ -234,7 +236,8 @@
     height: var(--portfolio-header-cloud-height);
     pointer-events: none;
     background-image: var(--portfolio-header-cloud-image);
-    background-position: center var(--portfolio-header-cloud-position-y);
+    background-position: var(--portfolio-header-cloud-position-x)
+      var(--portfolio-header-cloud-position-y);
     background-repeat: no-repeat;
     background-size: var(--portfolio-header-cloud-size);
     -webkit-mask-image: linear-gradient(
