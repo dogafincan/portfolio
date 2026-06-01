@@ -185,10 +185,9 @@ Implementation guidance:
 - Size the page-atmosphere image so it remains visible in desktop gutters and in
   the narrow mobile strips beside the workbench. It may use a larger
   `background-size` on mobile and `repeat-y` for long pages.
-- Add a fixed bottom fade from transparent to `#43C3EC` above the repeatable
-  atmosphere layer and below app content. This keeps browser safe areas and the
-  lower viewport edge on the base chrome color even when the repeated background
-  image is cut off mid-cloud.
+- Do not add a fixed bottom fade above the repeatable atmosphere layer. Keep the
+  root and page backgrounds on `#43C3EC` so browser safe areas and the lower
+  viewport edge use the base chrome color directly.
 - Use `pointer-events: none` on decorative layers and keep page content above
   them.
 - Do not recreate or extend the cloud shapes with CSS radial gradients, blurred

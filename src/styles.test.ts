@@ -37,9 +37,6 @@ describe("global styles", () => {
     expect(lightRoot).toContain("--portfolio-header-cloud-size: cover;");
     expect(lightRoot).toContain('--portfolio-page-atmosphere-image: url("/page-atmosphere.avif");');
     expect(lightRoot).toContain("--portfolio-page-atmosphere-size: 180% auto;");
-    expect(lightRoot).toContain(
-      "--portfolio-safe-area-fade-height: max(8rem, calc(env(safe-area-inset-bottom) + 7rem));",
-    );
     expect(darkClass).toContain("--portfolio-app-chrome-color: #43c3ec;");
     expect(darkMedia).toContain("--portfolio-app-chrome-color: #43c3ec;");
     expect(styles).not.toContain("--portfolio-hero-gradient-height");
@@ -138,7 +135,7 @@ describe("global styles", () => {
     const imageLayerStart = styles.indexOf("body::before");
     const imageLayerEnd = styles.indexOf("body::after", imageLayerStart);
     const atmosphereLayerStart = styles.indexOf("body::after");
-    const atmosphereLayerEnd = styles.indexOf("main::after", atmosphereLayerStart);
+    const atmosphereLayerEnd = styles.indexOf("code {", atmosphereLayerStart);
     const imageLayer = styles.slice(imageLayerStart, imageLayerEnd);
     const atmosphereLayer = styles.slice(atmosphereLayerStart, atmosphereLayerEnd);
 
@@ -173,21 +170,12 @@ describe("global styles", () => {
     expect(styles).not.toContain("--portfolio-hero-mesh");
   });
 
-  it("fades the bottom safe area back to the chrome color", () => {
+  it("does not add a bottom safe-area fade layer", () => {
     const styles = readFileSync("src/styles.css", "utf8");
-    const fadeLayerStart = styles.indexOf("main::after");
-    const fadeLayerEnd = styles.indexOf("code {", fadeLayerStart);
-    const fadeLayer = styles.slice(fadeLayerStart, fadeLayerEnd);
 
-    expect(fadeLayerStart).toBeGreaterThan(-1);
-    expect(fadeLayer).toContain("position: fixed;");
-    expect(fadeLayer).toContain("inset: auto 0 0;");
-    expect(fadeLayer).toContain("z-index: -1;");
-    expect(fadeLayer).toContain("height: var(--portfolio-safe-area-fade-height);");
-    expect(fadeLayer).toContain("pointer-events: none;");
-    expect(fadeLayer).toContain("linear-gradient(");
-    expect(fadeLayer).toContain("transparent 0%");
-    expect(fadeLayer).toContain("var(--portfolio-app-chrome-color) 100%");
+    expect(styles).not.toContain("--portfolio-safe-area-fade-height");
+    expect(styles).not.toContain("main::after");
+    expect(styles).not.toContain("var(--portfolio-app-chrome-color) 100%");
   });
 
   it("does not style project logo panels with standalone mesh backgrounds", () => {

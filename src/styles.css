@@ -97,7 +97,6 @@
   --portfolio-page-atmosphere-opacity: 0.72;
   --portfolio-page-atmosphere-position: center top;
   --portfolio-page-atmosphere-size: 180% auto;
-  --portfolio-safe-area-fade-height: max(8rem, calc(env(safe-area-inset-bottom) + 7rem));
 }
 
 .dark {
@@ -252,21 +251,6 @@
     background-repeat: repeat-y;
     background-size: var(--portfolio-page-atmosphere-size);
     opacity: var(--portfolio-page-atmosphere-opacity);
-  }
-
-  main::after {
-    content: "";
-    position: fixed;
-    inset: auto 0 0;
-    z-index: -1;
-    height: var(--portfolio-safe-area-fade-height);
-    pointer-events: none;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      color-mix(in oklab, var(--portfolio-app-chrome-color) 88%, transparent) 58%,
-      var(--portfolio-app-chrome-color) 100%
-    );
   }
 
   code {
