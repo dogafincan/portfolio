@@ -131,7 +131,8 @@ Design principles that should remain visible in day-to-day work:
   primitives, and rounded muted workbench.
 - Treat `DESIGN.md`'s `Header Section / Cloud Image Background` as the source
   of truth for safe areas, theme color, manifest color, visible page background,
-  header identity colors, and decorative background policy.
+  header identity colors, cloud-free identity clearance, side-cloud visibility,
+  dark cloud assets, and decorative background policy.
 - Keep project cards scannable, responsive, and backed by structured content.
 - Explain what projects do before naming libraries or infrastructure.
 - Avoid generic hero filler, decorative principles sections, fake metrics, and

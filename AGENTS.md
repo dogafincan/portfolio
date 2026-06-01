@@ -62,7 +62,8 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   `src/routes/-__root.test.ts`, and any checked-in cloud assets together. Follow
   `DESIGN.md`'s `Header Section / Cloud Image Background` for browser
   safe-area, shared `theme-color`, root/body backgrounds, visible page chrome,
-  and decorative background policy. Do this without changing workbench or card
+  cloud-free identity clearance, side-cloud visibility, dark cloud assets, and
+  decorative background policy. Do this without changing workbench or card
   surface tokens.
 - When work is product-scope driven, inspect the `PRD.md` implementation
   progress table first and update it precisely with `Done`/`Pending` status.

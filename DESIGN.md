@@ -127,16 +127,24 @@ layout.
   background.
 - Header title, subtitle, and profile/social icons should use solid white
   without opacity, text shadows, drop shadows, or text strokes.
-- The app's primary background color and theme color should be a bright, clean
-  light blue: primary light blue `#43C3EC`. Use this for the page background,
-  browser safe-area/chrome color, root `html` and `body` backgrounds, and
-  `theme-color` meta entries unless a project records a specific install-color
-  exception.
+- The light-mode app chrome color should be bright, clean light blue `#43C3EC`.
+  Use it for the page background, browser safe-area/chrome color, root `html`
+  and `body` backgrounds, and light `theme-color` meta entries unless a project
+  records a specific install-color exception.
+- Dark mode should use a separate, slightly deeper blue app chrome color
+  (`#2FA9D1` in the current shared implementation) for the same safe-area,
+  page-background, and `theme-color` surfaces. This keeps the blue chrome close
+  to the dark workbench without turning the page into a dark gradient.
 - Treat the cloud field as app identity. Prefer dedicated decorative image
   assets when matching the shared Sui Swap cloud treatment or another exact
   visual reference. Use `header-clouds.avif` for the top cloud field and
   `page-atmosphere.avif` for repeatable page atmosphere unless a repo documents
   project-specific equivalent asset names.
+- Use separate dark-mode cloud assets, such as `header-clouds-dark.png` and
+  `page-atmosphere-dark.png`, instead of tinting CSS gradients. Dark assets
+  should preserve the same project-specific cloud type, composition, and
+  sparseness as light mode while using less bright blue, purple, lavender, and
+  pale-blue colors.
 - Treat the header cloud asset as the primary identity graphic. It should span
   the viewport horizontally and cover roughly the upper 80% of the initial
   viewport, leaving the bottom portion to return toward the base blue. Mobile
@@ -145,13 +153,18 @@ layout.
   so long pages do not fall back to plain blue around the workbench. It should
   repeat vertically, stay sparse, and feel like a natural continuation of the
   header clouds rather than a symmetrical side frame.
-- Use the same cloud images in light mode and dark mode. Dark mode changes only
-  the workbench/card/form/item surfaces; it must not swap in separate dark
-  background images or a separate dark header palette.
-- Keep the header cloud image behind the header identity stack and around the
-  upper sides of the workbench. The strongest color should sit behind the logo,
-  title, subtitle, and upper card edges. The repeatable atmosphere can add lower
-  density wisps around the workbench sides on both desktop and mobile.
+- Keep the logo, header title, subtitle, and social/profile buttons on a
+  cloud-free center area in every viewport and color scheme. Clouds may and
+  should remain visible to the left, right, or both sides of the identity stack,
+  including on mobile, but must not sit behind the title or social buttons.
+- At least one cloud or partial cloud should be visible in the header on desktop
+  and mobile in light and dark mode. If clearance is added behind the identity
+  stack, it should blend into the base chrome color and avoid a symmetrical
+  circular or halo-shaped hole; the composition should feel like clouds
+  naturally passing around the identity, with small side clouds close enough to
+  the logo/title to keep the header alive.
+- The repeatable atmosphere can add lower density wisps around the workbench
+  sides on both desktop and mobile.
 - Both cloud images should preserve `#43C3EC` at their top and bottom edges so
   the UI does not become a full multicolor gradient and the repeated atmosphere
   layer does not show obvious seams. The blue remains the base canvas.
@@ -174,14 +187,19 @@ layout.
 Implementation guidance:
 
 - Set `html` and `body` backgrounds to `#43C3EC`.
-- Keep `theme-color` and install background colors on `#43C3EC`.
+- Keep light `theme-color` and install background colors on `#43C3EC`; add a
+  dark `theme-color` matching `#2FA9D1` or the repo's documented dark chrome
+  blue so mobile safe areas match the dark cloud base.
 - Render the header cloud image and repeatable page-atmosphere image as
   decorative non-interactive layers. A CSS `body::before` image layer is
   acceptable for `url("/header-clouds.avif")`, and a lower `body::after` layer is
   acceptable for `url("/page-atmosphere.avif")`.
-- Size the header image as a full-bleed field with responsive center cropping on
-  mobile. In CSS, `background-size: cover` on a roughly `80svh` decorative layer
-  is the intended baseline.
+- Size and position the header image as a full-bleed field with responsive
+  cropping. In CSS, `background-size: cover` on a roughly `80svh` decorative
+  layer is the desktop baseline. Mobile may use a larger background size,
+  different background position, or dedicated mobile assets when needed to keep
+  side clouds visible without placing clouds under the identity or social
+  controls.
 - Size the page-atmosphere image so it remains visible in desktop gutters and in
   the narrow mobile strips beside the workbench. It may use a larger
   `background-size` on mobile and `repeat-y` for long pages.
@@ -190,6 +208,9 @@ Implementation guidance:
   viewport edge use the base chrome color directly.
 - Use `pointer-events: none` on decorative layers and keep page content above
   them.
+- When enforcing header readability, prefer image positioning and a
+  chrome-color clearance layer over changing the logo, title, social buttons, or
+  workbench. Verify the result in desktop and mobile, light and dark mode.
 - Do not recreate or extend the cloud shapes with CSS radial gradients, blurred
   blobs, or code-generated mesh layers. Use raster image assets as the
   atmospheric sources.
