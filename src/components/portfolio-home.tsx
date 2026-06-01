@@ -129,12 +129,6 @@ export function PortfolioHome() {
             <h1 className="text-balance text-4xl leading-tight font-bold tracking-tight text-white">
               Doga Fincan
             </h1>
-            <p className="max-w-[40rem] text-balance text-lg font-medium text-white md:max-w-full">
-              <span className="block">I'm into learning languages,</span>{" "}
-              <span className="block">nutrition and exercise, and building</span>{" "}
-              <span className="block">cool things. Reach out if you're</span>{" "}
-              <span className="block">building something interesting.</span>
-            </p>
           </div>
           <nav
             aria-label="Doga Fincan social profiles"

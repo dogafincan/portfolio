@@ -21,7 +21,6 @@ describe("PortfolioHome", () => {
     const appTitleBlock = title.parentElement;
     const appSubtitle = appTitleBlock?.querySelector("p");
     const socialLinks = container.querySelector('[data-slot="profile-links"]');
-    const appSubtitleLines = Array.from(appSubtitle?.querySelectorAll("span") ?? []);
     const xLink = screen.getByRole("link", { name: "Open Doga Fincan on X" });
     const githubLink = screen.getByRole("link", { name: "Open Doga Fincan on GitHub" });
     const workbench = container.querySelector('[data-slot="portfolio-workbench"]');
@@ -37,27 +36,8 @@ describe("PortfolioHome", () => {
     expect(title.className).toBe(
       "text-balance text-4xl leading-tight font-bold tracking-tight text-white",
     );
-    expect(appSubtitle?.className).toBe(
-      "max-w-[40rem] text-balance text-lg font-medium text-white md:max-w-full",
-    );
-    expect(appSubtitle?.textContent).toBe(
-      "I'm into learning languages, nutrition and exercise, and building cool things. Reach out if you're building something interesting.",
-    );
-    expect(appSubtitle?.querySelector("span:first-child")?.textContent).toBe(
-      "I'm into learning languages,",
-    );
-    expect(appSubtitleLines.map((line) => line.textContent)).toEqual([
-      "I'm into learning languages,",
-      "nutrition and exercise, and building",
-      "cool things. Reach out if you're",
-      "building something interesting.",
-    ]);
-    expect(appSubtitleLines.map((line) => line.className)).toEqual([
-      "block",
-      "block",
-      "block",
-      "block",
-    ]);
+    expect(appSubtitle).toBeNull();
+    expect(appHeader?.textContent).not.toContain("I'm into learning languages");
     expect(socialLinks?.className).toBe("flex items-center justify-center gap-2 text-white");
     expect(socialLinks?.previousElementSibling).toBe(appTitleBlock);
     expect(socialLinks?.parentElement).toBe(appHeader);
