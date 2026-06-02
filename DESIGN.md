@@ -93,6 +93,10 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Every alert needs a semantic Lucide icon on the left, vertically centered with
   the text block, using the shared default `size-5` treatment and normal stroke
   weight.
+- Future action-triggered alerts should render below the complete action cluster
+  that owns them. If multiple sibling buttons share one workflow, do not insert
+  related alerts between adjacent buttons. Single-input validation can still sit
+  directly below the field.
 - Keep alert, validation, progress, and error copy understandable to
   non-technical visitors. Say what happened and what the visitor can do next. Do
   not expose backend internals, transaction digests, chunks, batches, raw units,
