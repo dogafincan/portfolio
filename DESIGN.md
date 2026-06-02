@@ -72,6 +72,10 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Keep every clickable button target at least `44px` tall across variants.
   Touch comfort wins over compact density for primary actions and utility
   controls.
+- Keep editable input fields at the same `44px` control height if a future
+  portfolio form or search surface is introduced. Search or selector inputs
+  should preserve horizontal room for leading icons and dropdown affordances
+  when those controls exist.
 - Keep keyboard focus visible on every profile and live-project action. These
   links should stay in natural DOM order and share the same compact focus ring
   recipe so the currently selected item is easy to identify without making the
