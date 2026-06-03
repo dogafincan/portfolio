@@ -18,7 +18,7 @@ treated as complete.
 | Done    | Header social profile links          | 7, 8.1, 8.3, 9.1    | -         | Adds compact X and GitHub icon links between the header subtitle and project workbench.                 |
 | Done    | Keyboard-visible action focus        | 8.1, 9.4, 13        | -         | Keeps profile and live app links in DOM tab order with the same visible focus ring treatment.           |
 | Done    | Desktop viewport vertical centering  | 8.1, 9.1, 13        | -         | Centers the header and workbench on desktop when the first viewport has spare space below the cards.    |
-| Done    | Unified page chrome background       | 9.5, 9.7, 13        | -         | Aligns safe areas, page background, theme color, dark cloud chrome, and header identity clearance.      |
+| Done    | Unified page chrome background       | 9.5, 9.7, 13        | -         | Aligns safe areas, page background, muted theme colors, and the atmosphere-to-page transition.          |
 | Pending | Project case-study pages             | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                       |
 | Pending | Production smoke scripts and runbook | 12, 15              | -         | Add portfolio-specific release gates when deploys need the same production-hardening depth as siblings. |
 | Pending | Contact action beyond profile links  | 7, 8.3, 9.9         | -         | Add only when the portfolio needs a direct contact workflow beyond simple profile links.                |
@@ -154,7 +154,7 @@ The current product includes:
 4. Project cards with app icon, name, short subtitle, and live app link.
 5. Live project links when available.
 6. App logo, favicon, install icons, manifest, and social preview image.
-7. Responsive shared light/dark cloud page chrome with cloud-free header identity clearance.
+7. Responsive shared light/dark atmosphere-to-page chrome with `viewport-fit=cover` safe-area coverage.
 8. Regression tests for shared conventions.
 
 Future scope may include:
@@ -246,7 +246,9 @@ abuse is handled, and what privacy or retention policy applies.
 
 - Root document should include manifest links, app icons, font preload ordering,
   and theme-color metadata.
-- Manifest colors should match the page chrome top color exactly.
+- Manifest colors should stay on the muted blue page chrome color, while the
+  root viewport keeps `viewport-fit=cover` so iOS safe areas can use that
+  chrome instead of default white or black strips.
 - Header logo images should define `width`, `height`, `sizes`, and `srcset`,
   and the header logo wrapper should preserve the logo's rounded-square shape
   while showing a visible border.

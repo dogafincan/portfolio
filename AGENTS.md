@@ -59,12 +59,12 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   that guidance here.
 - For page-background transition changes, inspect `src/styles.css`,
   `src/routes/__root.tsx`, `public/manifest.json`, `src/styles.test.ts`,
-  `src/routes/-__root.test.ts`, and any checked-in cloud assets together. Follow
+  `src/routes/-__root.test.ts`, and any checked-in page-atmosphere assets together. Follow
   `DESIGN.md`'s `Header Section / Atmosphere-to-Page Background` for browser
-  safe-area, shared `theme-color`, root/body backgrounds, visible page chrome,
-  cloud-free identity clearance, side-cloud visibility, dark cloud assets, and
-  decorative background policy. Do this without changing workbench or card
-  surface tokens.
+  safe-area coverage, `viewport-fit=cover`, shared `theme-color`, root/body
+  backgrounds, visible page chrome, fixed-length top atmosphere fade,
+  light/dark page-atmosphere assets, and OG/social image generation. Do this
+  without changing workbench or card surface tokens.
 - When work is product-scope driven, inspect the `PRD.md` implementation
   progress table first and update it precisely with `Done`/`Pending` status.
 - Do not add Sui wallet flows, transaction signing, Mysten SDK dependencies,

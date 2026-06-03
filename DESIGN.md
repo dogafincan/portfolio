@@ -137,6 +137,9 @@ workbench areas across projects. Treat these rules as reusable system policy.
   layers. Crop it with fixed CSS background positioning and sizing rather than
   adding a positioned pseudo-element or another header-specific app background
   asset. The background treatment must not increase document scroll height.
+- Once the fade completes, keep the gutters around the workbench and every
+  long-scroll continuation on solid system page background rather than
+  continuing atmospheric artwork down the page.
 - Fade the header artwork slowly into the normal page background. The color
   should first become visibly lighter or darker at `37.5rem` / 600px from
   the top. Preserve the existing ramp spacing by moving the transparent lead-in
@@ -168,7 +171,8 @@ workbench areas across projects. Treat these rules as reusable system policy.
   transition does not accidentally change social images. Do not retain cloud
   artwork source assets unless a rendered surface references them.
 - Verify desktop and mobile, light and dark mode whenever the page-background
-  transition, theme colors, or header identity classes change.
+  transition, root viewport metadata, theme colors, or header identity classes
+  change.
 
 ## Portfolio Product Shape
 
