@@ -2,6 +2,27 @@ import { readFileSync } from "node:fs";
 
 import { describe, expect, it } from "vite-plus/test";
 
+const ATMOSPHERE_ASSET_SIZE = { width: 864, height: 720 };
+const ATMOSPHERE_ASSETS = ["public/page-atmosphere.avif", "public/page-atmosphere-dark.avif"];
+
+function readAvifIntrinsicSize(assetPath: string) {
+  const image = readFileSync(assetPath);
+  let offset = image.indexOf("ispe", 0, "ascii");
+
+  while (offset !== -1) {
+    if (offset >= 4 && offset + 16 <= image.length && image.readUInt32BE(offset - 4) >= 20) {
+      return {
+        width: image.readUInt32BE(offset + 8),
+        height: image.readUInt32BE(offset + 12),
+      };
+    }
+
+    offset = image.indexOf("ispe", offset + 4, "ascii");
+  }
+
+  throw new Error(`Missing AVIF ispe size box in ${assetPath}.`);
+}
+
 describe("global styles", () => {
   it("uses the system color scheme for dark mode", () => {
     const styles = readFileSync("src/styles.css", "utf8");
@@ -69,6 +90,12 @@ describe("global styles", () => {
     );
     expect(styles).not.toContain("--portfolio-header-cloud-image");
     expect(styles).not.toContain('url("/header-clouds');
+  });
+
+  it("keeps atmosphere artwork top-cropped so it cannot repaint lower mobile gutters", () => {
+    for (const assetPath of ATMOSPHERE_ASSETS) {
+      expect(readAvifIntrinsicSize(assetPath)).toEqual(ATMOSPHERE_ASSET_SIZE);
+    }
   });
 
   it("keeps the atmosphere on body backgrounds so it cannot add scroll height", () => {

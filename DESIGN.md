@@ -130,9 +130,11 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 This section documents the shared page-background treatment for app header and
 workbench areas across projects. Treat these rules as reusable system policy.
 
-- Use the top portion of the existing pattern artwork as the only app page
+- Use the shortened, top-cropped `864x720` pattern artwork as the only app page
   graphic: `page-atmosphere.avif` in light mode and
-  `page-atmosphere-dark.avif` in dark mode.
+  `page-atmosphere-dark.avif` in dark mode. The artwork itself must fade to
+  transparent before the lower workbench gutters can expose another band of
+  blue.
 - Attach that pattern artwork and its fade directly to `body` background
   layers. Crop it with fixed CSS background positioning and sizing rather than
   adding a positioned pseudo-element or another header-specific app background
@@ -145,10 +147,11 @@ workbench areas across projects. Treat these rules as reusable system policy.
   the top. Preserve the existing ramp spacing by moving the transparent lead-in
   and later stops 300px earlier: `18.75rem` transparent lead-in, `37.5rem`
   first visible 12% mix, `59.25rem` strong mix, and `77.25rem` full page
-  background. Use fixed CSS lengths for the atmosphere height and staged
-  translucent gradient stops rather than viewport-relative units or percentage
-  stops, so changing viewport height only crops the same gradient and the color
-  shift stays predictable. The lower
+  background. Keep those CSS stops fixed; shorten the graphic instead when the
+  artwork reaches too far down the page. Use fixed CSS lengths for the
+  atmosphere height and staged translucent gradient stops rather than
+  viewport-relative units or percentage stops, so changing viewport height only
+  crops the same gradient and the color shift stays predictable. The lower
   page, root safe areas, and long-scroll canvas should use
   `--portfolio-page-background: var(--background)`, which resolves to white in
   light mode and near-black in dark mode.
@@ -176,7 +179,7 @@ workbench areas across projects. Treat these rules as reusable system policy.
   CMS, or Sui utility runtime.
 - Preserve the single-route structure until a project genuinely needs its own
   case-study page: header, rounded muted project workbench, and project cards.
-- Use the top-cropped page-atmosphere artwork so Portfolio follows
+- Use the shortened, top-cropped page-atmosphere artwork so Portfolio follows
   the shared atmosphere-to-page transition without a separate app header
   graphic.
 - Do not list the portfolio website as one of its own project cards; visitors
