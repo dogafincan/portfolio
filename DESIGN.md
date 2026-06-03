@@ -153,6 +153,9 @@ workbench areas across projects. Treat these rules as reusable system policy.
   (`#58BAD9` and `#428FA8`) because the top safe area still starts on the
   blue artwork. Do not change manifest colors or `theme-color` metadata for
   this transition treatment.
+- Keep the root viewport meta on `viewport-fit=cover` so iOS Safari allows the
+  page chrome to extend into the device safe-area instead of showing default
+  white or black browser strips above the app.
 - Do not render a `body::before` atmosphere layer, a repeating `body::after`
   atmosphere layer, a separate cloud layer, fixed bottom fades, generated
   mesh continuations, or a `main.app-shell::before` clearance halo for app page
