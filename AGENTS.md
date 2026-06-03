@@ -61,7 +61,7 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   `src/routes/__root.tsx`, `public/manifest.json`, `src/styles.test.ts`,
   `src/routes/-__root.test.ts`, and any checked-in page-atmosphere assets together. Follow
   `DESIGN.md`'s `Header Section / Atmosphere-to-Page Background` for browser
-  safe-area coverage, `viewport-fit=cover`, shared `theme-color`, root/body
+  browser/mobile safe-area color handling, shared `theme-color`, root/body
   backgrounds, visible page chrome, fixed-length top atmosphere fade,
   light/dark page-atmosphere assets, and OG/social image generation. Do this
   without changing workbench or card surface tokens.

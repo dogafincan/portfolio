@@ -154,7 +154,7 @@ The current product includes:
 4. Project cards with app icon, name, short subtitle, and live app link.
 5. Live project links when available.
 6. App logo, favicon, install icons, manifest, and social preview image.
-7. Responsive shared light/dark atmosphere-to-page chrome with `viewport-fit=cover` safe-area coverage.
+7. Responsive shared light/dark atmosphere-to-page chrome with muted blue browser chrome.
 8. Regression tests for shared conventions.
 
 Future scope may include:
@@ -246,9 +246,7 @@ abuse is handled, and what privacy or retention policy applies.
 
 - Root document should include manifest links, app icons, font preload ordering,
   and theme-color metadata.
-- Manifest colors should stay on the muted blue page chrome color, while the
-  root viewport keeps `viewport-fit=cover` so iOS safe areas can use that
-  chrome instead of default white or black strips.
+- Manifest colors should stay on the muted blue page chrome color.
 - Header logo images should define `width`, `height`, `sizes`, and `srcset`,
   and the header logo wrapper should preserve the logo's rounded-square shape
   while showing a visible border.

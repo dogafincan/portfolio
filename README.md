@@ -130,7 +130,7 @@ Design principles that should remain visible in day-to-day work:
   treatment, app logo system, Inter preload, Lucide icons, shadcn/Base UI
   primitives, and rounded muted workbench.
 - Treat `DESIGN.md`'s `Header Section / Atmosphere-to-Page Background` as the source
-  of truth for `viewport-fit=cover` safe-area coverage, muted theme colors,
+  of truth for browser/mobile safe-area color handling, muted theme colors,
   manifest color, visible page background, header identity colors, fixed-length
   top atmosphere fade, light/dark page-atmosphere assets, and OG/social image
   generation.
