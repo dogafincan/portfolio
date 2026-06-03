@@ -57,10 +57,10 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
 - Use `DESIGN.md` as the source of truth for UI, copy, icon, layout, alert,
   social-preview, responsive, and loading-state rules instead of duplicating
   that guidance here.
-- For page chrome or cloud-background changes, inspect `src/styles.css`,
+- For page-background transition changes, inspect `src/styles.css`,
   `src/routes/__root.tsx`, `public/manifest.json`, `src/styles.test.ts`,
   `src/routes/-__root.test.ts`, and any checked-in cloud assets together. Follow
-  `DESIGN.md`'s `Header Section / Cloud Image Background` for browser
+  `DESIGN.md`'s `Header Section / Atmosphere-to-Page Background` for browser
   safe-area, shared `theme-color`, root/body backgrounds, visible page chrome,
   cloud-free identity clearance, side-cloud visibility, dark cloud assets, and
   decorative background policy. Do this without changing workbench or card

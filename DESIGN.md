@@ -125,116 +125,47 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   ranking, review, and moderation surfaces, and `portfolio` owns project
   showcase content.
 
-## Header Section / Cloud Image Background
+## Header Section / Atmosphere-to-Page Background
 
-This section documents the shared visual treatment for app header areas across
-projects. Treat these rules as a reusable visual system, not an app-specific
-layout.
+This section documents the shared page-background treatment for app header and
+workbench areas across projects. Treat these rules as reusable system policy.
 
-- Use one identity color treatment in both light mode and dark mode. The app
-  logo, header title, and header subtitle should render in white (`#FFFFFF`) in
-  all themes so the app identity stays consistent and readable against the blue
-  background.
-- Header title, subtitle, and profile/social icons should use solid white
-  without opacity, text shadows, drop shadows, or text strokes.
-- The light-mode app chrome color should be muted, clean light blue `#58BAD9`.
-  Use it for the page background, browser safe-area/chrome color, root `html`
-  and `body` backgrounds, and light `theme-color` meta entries unless a project
-  records a specific install-color exception.
-- Dark mode should use a separate, muted, slightly deeper blue app chrome color
-  (`#428FA8` in the current shared implementation) for the same safe-area,
-  page-background, and `theme-color` surfaces. This keeps the blue chrome close
-  to the dark workbench without turning the page into a dark gradient.
-- Treat the cloud field as app identity. Prefer dedicated decorative image
-  assets when matching the shared Sui Swap cloud treatment or another exact
-  visual reference. Use `header-clouds.avif` for the desktop top cloud field
-  and `page-atmosphere.avif` for repeatable page atmosphere unless a repo
-  documents project-specific equivalent asset names. On mobile, use only the
-  page-atmosphere image for both the header area and the rest of the page so the
-  cloud treatment stays continuous in the narrow viewport.
-- Use separate dark-mode cloud assets, such as `header-clouds-dark.avif` and
-  `page-atmosphere-dark.avif`, instead of tinting CSS gradients. Dark assets
-  should preserve the same project-specific cloud type, composition, and
-  sparseness as light mode while using less bright blue, purple, lavender, and
-  pale-blue colors.
-- The checked-in cloud assets should carry the muted treatment directly. Avoid
-  adding CSS saturation, brightness, or opacity filters as the primary way to
-  dim the artwork; regenerate the raster assets and keep the CSS layers neutral.
-- Treat the header cloud asset as the primary desktop identity graphic. It
-  should span the viewport horizontally and cover roughly the upper 80% of the
-  initial viewport, leaving the bottom portion to return toward the base blue.
-  On mobile, do not render a separate header-cloud layer; let the
-  page-atmosphere image carry the header and page background together.
-- Use the repeatable page-atmosphere asset below and behind the desktop header
-  graphic so long pages do not fall back to plain blue around the workbench. On
-  mobile, it is the only atmospheric image for both the header and page body. It
-  should repeat vertically, stay sparse, and feel like a natural continuation of
-  the header clouds rather than a symmetrical side frame.
-- Keep the logo, header title, subtitle, and social/profile buttons on a
-  cloud-free center area in every viewport and color scheme. Clouds may and
-  should remain visible to the left, right, or both sides of the identity stack
-  on desktop, and mobile page-atmosphere wisps may appear around the header, but
-  clouds must not sit behind the title or social buttons.
-- At least one cloud or partial cloud should be visible in the header on desktop
-  in light and dark mode. On mobile, the page-atmosphere image should still add
-  subtle cloud texture around the header without requiring a separate
-  header-cloud layer. If clearance is added behind the identity stack on
-  desktop, it should use the same muted chrome token as the page background and
-  avoid an undimmed circular or halo-shaped hole; the composition should feel
-  like clouds naturally passing around the identity, with small side clouds close
-  enough to the logo/title to keep the header alive.
-- The repeatable atmosphere can add lower density wisps around the workbench
-  sides on both desktop and mobile.
-- Both cloud images should preserve `#58BAD9` at their top and bottom edges so
-  the UI does not become a full multicolor gradient and the repeated atmosphere
-  layer does not show obvious seams. The blue remains the base canvas.
-- The top 5% of the initial viewport should read as clear blue with little or no
-  cloud texture. The bottom 20% should also return clearly to `#58BAD9`. Cloud
-  density should decrease toward the bottom of the image.
-- Decorative cloud images should stay soft, abstract, airy, and non-literal.
-  Suitable inspirations include cirrus, altocumulus, stratocumulus, lenticular,
-  and soft vapor-like blobs. The repeatable page-atmosphere image should keep a
-  similar sparsity to the header graphic and avoid mirrored, symmetrical, or
-  border-like placement.
-- Keep cloud accents within soft lavender `#CDBBFF`, periwinkle violet
-  `#9F8CFF`, pale icy blue `#BDEEFF`, soft pink-lilac `#F0B7FF`, and light
-  violet-blue `#7FA8FF`.
-- Avoid the greenish tint from the references. Do not introduce mint, lime, or
-  greenish-cyan accent clouds. The base blue may remain cyan-blue.
-- The composition should read as a centered identity stack above the primary
-  workbench: app logo, app title, subtitle, then the rounded muted workbench.
-
-Implementation guidance:
-
-- Set `html` and `body` backgrounds to `#58BAD9`.
-- Keep light `theme-color` and install background colors on `#58BAD9`; add a
-  dark `theme-color` matching `#428FA8` or the repo's documented dark chrome
-  blue so mobile safe areas match the dark cloud base.
-- Render the desktop header cloud image and repeatable page-atmosphere image as
-  decorative non-interactive layers. A CSS `body::before` image layer is
-  acceptable for `url("/header-clouds.avif")` on desktop, and a lower
-  `body::after` layer is acceptable for `url("/page-atmosphere.avif")`.
-- Size and position the desktop header image as a full-bleed field with
-  responsive cropping. In CSS, `background-size: cover` on a roughly `80svh`
-  decorative layer is the desktop baseline. Below the `sm` breakpoint, hide the
-  separate header-cloud and identity-clearance layers and point the header cloud
-  token at the page-atmosphere image so only one atmospheric graphic renders.
-- Size the page-atmosphere image so it remains visible in desktop gutters and in
-  the narrow mobile strips beside the workbench. It may use a larger
-  `background-size` on mobile and `repeat-y` for long pages.
-- Do not add a fixed bottom fade above the repeatable atmosphere layer. Keep the
-  root and page backgrounds on `#58BAD9` so browser safe areas and the lower
-  viewport edge use the base chrome color directly.
-- Use `pointer-events: none` on decorative layers and keep page content above
-  them.
-- When enforcing header readability, prefer image positioning and a
-  muted chrome-color clearance layer over changing the logo, title, social
-  buttons, or workbench. Verify the result in desktop and mobile, light and dark mode.
-- Do not recreate or extend the cloud shapes with CSS radial gradients, blurred
-  blobs, or code-generated mesh layers. Use raster image assets as the
-  atmospheric sources.
-- Keep the page background behind the images as `#58BAD9`, and fade/mask the
-  header image edges if needed to avoid visible seams.
+- Use the top portion of the existing pattern artwork as the only app page
+  graphic: `page-atmosphere.avif` in light mode and
+  `page-atmosphere-dark.avif` in dark mode.
+- Attach that pattern artwork and its fade directly to `body` background
+  layers. Crop it with fixed CSS background positioning and sizing rather than
+  adding a positioned pseudo-element or another header-specific app background
+  asset. The background treatment must not increase document scroll height.
+- Fade the header artwork slowly into the normal page background. The color
+  should first become visibly lighter or darker at `37.5rem` / 600px from
+  the top. Preserve the existing ramp spacing by moving the transparent lead-in
+  and later stops 300px earlier: `18.75rem` transparent lead-in, `37.5rem`
+  first visible 12% mix, `59.25rem` strong mix, and `77.25rem` full page
+  background. Use fixed CSS lengths for the atmosphere height and staged
+  translucent gradient stops rather than viewport-relative units or percentage
+  stops, so changing viewport height only crops the same gradient and the color
+  shift stays predictable. The lower
+  page, root safe areas, and long-scroll canvas should use
+  `--portfolio-page-background: var(--background)`, which resolves to white in
+  light mode and near-black in dark mode.
+- Keep the existing light and dark browser/mobile chrome colors
+  (`#58BAD9` and `#428FA8`) because the top safe area still starts on the
+  blue artwork. Do not change manifest colors or `theme-color` metadata for
+  this transition treatment.
+- Do not render a `body::before` atmosphere layer, a repeating `body::after`
+  atmosphere layer, a separate cloud layer, fixed bottom fades, generated
+  mesh continuations, or a `main.app-shell::before` clearance halo for app page
+  chrome.
+- Header title, subtitle, and profile/social icons should remain solid white so
+  the app identity stays readable over the blue header artwork.
+- Generate OG/social images from the top-cropped `page-atmosphere.avif`
+  artwork over the app chrome color. Keep OG preview generation decoupled from
+  page-background variables and the app fade gradient so changing the page
+  transition does not accidentally change social images. Do not retain cloud
+  artwork source assets unless a rendered surface references them.
+- Verify desktop and mobile, light and dark mode whenever the page-background
+  transition, theme colors, or header identity classes change.
 
 ## Portfolio Product Shape
 
@@ -242,9 +173,9 @@ Implementation guidance:
   CMS, or Sui utility runtime.
 - Preserve the single-route structure until a project genuinely needs its own
   case-study page: header, rounded muted project workbench, and project cards.
-- Use lenticular-cloud-inspired `header-clouds.avif` and `page-atmosphere.avif`
-  assets so Portfolio follows the shared cloud image system without duplicating
-  the exact cloud shape language from sibling apps.
+- Use the top-cropped page-atmosphere artwork so Portfolio follows
+  the shared atmosphere-to-page transition without a separate app header
+  graphic.
 - Do not list the portfolio website as one of its own project cards; visitors
   are already viewing that surface.
 - The primary visitor flow is: land on the page, identify the person and project

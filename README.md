@@ -126,10 +126,10 @@ adapting the pattern to a project showcase instead of a workflow utility.
 Design principles that should remain visible in day-to-day work:
 
 - Show real project content early.
-- Use the shared `DESIGN.md` `Header Section / Cloud Image Background`
+- Use the shared `DESIGN.md` `Header Section / Atmosphere-to-Page Background`
   treatment, app logo system, Inter preload, Lucide icons, shadcn/Base UI
   primitives, and rounded muted workbench.
-- Treat `DESIGN.md`'s `Header Section / Cloud Image Background` as the source
+- Treat `DESIGN.md`'s `Header Section / Atmosphere-to-Page Background` as the source
   of truth for safe areas, theme color, manifest color, visible page background,
   header identity colors, cloud-free identity clearance, side-cloud visibility,
   dark cloud assets, and decorative background policy.

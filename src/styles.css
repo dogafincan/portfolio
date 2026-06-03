@@ -88,21 +88,15 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --portfolio-app-chrome-color: #58bad9;
-  --portfolio-page-background: var(--portfolio-app-chrome-color);
-  --portfolio-header-clearance-color: var(--portfolio-app-chrome-color);
-  --portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);
-  --portfolio-header-cloud-height: 80svh;
-  --portfolio-header-cloud-position-x: center;
-  --portfolio-header-cloud-position-y: -5rem;
-  --portfolio-header-cloud-size: 240% auto;
-  --portfolio-page-atmosphere-image: url("/page-atmosphere.avif");
-  --portfolio-page-atmosphere-opacity: 1;
-  --portfolio-page-atmosphere-position: center top;
-  --portfolio-page-atmosphere-size: 180% auto;
-  --portfolio-header-clearance-width: 28rem;
-  --portfolio-header-clearance-height: 14rem;
-  --portfolio-header-clearance-top: 2rem;
-  --portfolio-header-clearance-feather: 2.75rem;
+  --portfolio-page-background: var(--background);
+  --portfolio-header-atmosphere-image: url("/page-atmosphere.avif");
+  --portfolio-header-atmosphere-height: 96rem;
+  --portfolio-header-atmosphere-position: center top;
+  --portfolio-header-atmosphere-size: 180% auto;
+  --portfolio-header-atmosphere-fade-start: 18.75rem;
+  --portfolio-header-atmosphere-fade-soft: 37.5rem;
+  --portfolio-header-atmosphere-fade-strong: 59.25rem;
+  --portfolio-header-atmosphere-fade-end: 77.25rem;
 }
 
 .dark {
@@ -146,11 +140,8 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
   --portfolio-app-chrome-color: #428fa8;
-  --portfolio-page-background: var(--portfolio-app-chrome-color);
-  --portfolio-header-clearance-color: var(--portfolio-app-chrome-color);
-  --portfolio-page-atmosphere-image: url("/page-atmosphere-dark.avif");
-  --portfolio-page-atmosphere-opacity: 1;
-  --portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);
+  --portfolio-page-background: var(--background);
+  --portfolio-header-atmosphere-image: url("/page-atmosphere-dark.avif");
 }
 
 @media (prefers-color-scheme: dark) {
@@ -195,34 +186,14 @@
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
     --portfolio-app-chrome-color: #428fa8;
-    --portfolio-page-background: var(--portfolio-app-chrome-color);
-    --portfolio-header-clearance-color: var(--portfolio-app-chrome-color);
-    --portfolio-page-atmosphere-image: url("/page-atmosphere-dark.avif");
-    --portfolio-page-atmosphere-opacity: 1;
-    --portfolio-header-cloud-image: var(--portfolio-page-atmosphere-image);
+    --portfolio-page-background: var(--background);
+    --portfolio-header-atmosphere-image: url("/page-atmosphere-dark.avif");
   }
 }
 
 @media (min-width: 640px) {
   :root {
-    --portfolio-header-cloud-image: url("/header-clouds.avif");
-    --portfolio-header-cloud-height: 80svh;
-    --portfolio-header-cloud-position-x: center;
-    --portfolio-header-cloud-position-y: -6rem;
-    --portfolio-header-cloud-size: cover;
-    --portfolio-page-atmosphere-opacity: 1;
-    --portfolio-page-atmosphere-size: 100% auto;
-  }
-  .dark {
-    --portfolio-header-cloud-image: url("/header-clouds-dark.avif");
-    --portfolio-page-atmosphere-opacity: 1;
-  }
-}
-
-@media (prefers-color-scheme: dark) and (min-width: 640px) {
-  :root {
-    --portfolio-header-cloud-image: url("/header-clouds-dark.avif");
-    --portfolio-page-atmosphere-opacity: 1;
+    --portfolio-header-atmosphere-size: 100% auto;
   }
 }
 
@@ -234,83 +205,35 @@
   html {
     @apply font-sans;
     min-height: 100%;
-    background: var(--portfolio-app-chrome-color);
+    background: var(--portfolio-page-background);
   }
 
   body {
     @apply min-h-screen antialiased bg-background text-foreground;
-    position: relative;
-    isolation: isolate;
     overflow-x: hidden;
-    background: var(--portfolio-page-background);
-  }
-
-  body::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto;
-    z-index: 1;
-    display: none;
-    height: var(--portfolio-header-cloud-height);
-    pointer-events: none;
-    background-image: var(--portfolio-header-cloud-image);
-    background-position: var(--portfolio-header-cloud-position-x)
-      var(--portfolio-header-cloud-position-y);
-    background-repeat: no-repeat;
-    background-size: var(--portfolio-header-cloud-size);
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      black 6%,
-      black 84%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 84%, transparent 100%);
-  }
-
-  body::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    min-height: 100%;
-    pointer-events: none;
-    background-image: var(--portfolio-page-atmosphere-image);
-    background-position: var(--portfolio-page-atmosphere-position);
-    background-repeat: repeat-y;
-    background-size: var(--portfolio-page-atmosphere-size);
-    opacity: var(--portfolio-page-atmosphere-opacity);
-  }
-
-  main.app-shell {
-    position: relative;
-  }
-
-  main.app-shell::before {
-    content: "";
-    position: absolute;
-    top: var(--portfolio-header-clearance-top);
-    left: 50%;
-    z-index: -1;
-    display: none;
-    width: min(var(--portfolio-header-clearance-width), 74vw);
-    height: var(--portfolio-header-clearance-height);
-    transform: translateX(-50%);
-    border-radius: 999px;
-    pointer-events: none;
-    background: var(--portfolio-header-clearance-color);
-    box-shadow: 0 0 var(--portfolio-header-clearance-feather)
-      var(--portfolio-header-clearance-feather) var(--portfolio-header-clearance-color);
+    background-color: var(--portfolio-page-background);
+    background-image:
+      linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent var(--portfolio-header-atmosphere-fade-start),
+        color-mix(in oklab, var(--portfolio-page-background) 12%, transparent)
+          var(--portfolio-header-atmosphere-fade-soft),
+        color-mix(in oklab, var(--portfolio-page-background) 56%, transparent)
+          var(--portfolio-header-atmosphere-fade-strong),
+        var(--portfolio-page-background) var(--portfolio-header-atmosphere-fade-end)
+      ),
+      var(--portfolio-header-atmosphere-image);
+    background-position:
+      center top,
+      var(--portfolio-header-atmosphere-position);
+    background-repeat: no-repeat, no-repeat;
+    background-size:
+      100% var(--portfolio-header-atmosphere-height),
+      var(--portfolio-header-atmosphere-size);
   }
 
   code {
     @apply font-mono;
-  }
-
-  @media (min-width: 640px) {
-    body::before,
-    main.app-shell::before {
-      display: block;
-    }
   }
 }
