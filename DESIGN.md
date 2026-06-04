@@ -213,9 +213,7 @@ workbench areas across projects. Treat these rules as reusable system policy.
   the project workbench. The links should inherit the header color, render as
   `55px` square targets with `25px` brand marks, open in a new tab, and use
   accessible labels that name the destination. Keep their keyboard focus ring
-  aligned with the project live app actions. Keep the visible icon marks exactly
-  centered between the subtitle and the top edge of the workbench, with matching
-  vertical space above and below the social icon marks.
+  aligned with the project live app actions.
 - Use inline SVG brand marks for the X and GitHub profile links because they
   are exact profile-brand marks, not new product UI icon-family dependencies.
   They should use `currentColor` so they stay aligned with the header title and

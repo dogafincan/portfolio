@@ -105,21 +105,11 @@ function ProjectCard({
 export function PortfolioHome() {
   return (
     <main className={PORTFOLIO_MAIN_CLASS_NAME}>
-      <AppHeader
-        title="Doga Fincan"
-        subtitle={
-          <>
-            <span className="block">I'm into learning languages,</span>{" "}
-            <span className="block">nutrition and exercise, and building</span>{" "}
-            <span className="block">cool things. Reach out if you're</span>{" "}
-            <span className="block">building something interesting.</span>
-          </>
-        }
-      >
+      <AppHeader title="Doga Fincan">
         <nav
           aria-label="Doga Fincan social profiles"
           data-slot="profile-links"
-          className="flex -mt-2 -mb-6 items-center justify-center gap-2 text-white"
+          className="flex -mt-[0.9375rem] -mb-[0.9375rem] items-center justify-center gap-2 text-white"
         >
           <a
             className={cn(PROFILE_LINK_CLASS_NAME, KEYBOARD_ACTION_FOCUS_CLASS_NAME)}
