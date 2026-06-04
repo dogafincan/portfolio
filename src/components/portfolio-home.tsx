@@ -8,7 +8,7 @@ import { portfolioProjects, type PortfolioProject } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
 const PORTFOLIO_MAIN_CLASS_NAME =
-  "app-shell relative z-10 flex min-h-screen flex-col px-4 py-6 text-foreground sm:px-6 lg:justify-center lg:px-8";
+  "app-shell relative z-10 mx-auto flex min-h-screen w-full min-w-0 max-w-full flex-col gap-8 px-3 py-10 text-foreground sm:max-w-6xl sm:px-6 lg:px-8";
 const WORKBENCH_CONTAINER_CLASS_NAME =
   "grid w-full min-w-0 max-w-full flex-1 grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background";
 const PROJECT_SUMMARY_ITEM_CLASS_NAME = "min-h-32 flex-nowrap overflow-hidden sm:min-h-36";
@@ -105,53 +105,51 @@ function ProjectCard({
 export function PortfolioHome() {
   return (
     <main className={PORTFOLIO_MAIN_CLASS_NAME}>
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 py-8 sm:py-10">
-        <AppHeader title="Doga Fincan">
-          <nav
-            aria-label="Doga Fincan social profiles"
-            data-slot="profile-links"
-            className="flex -mt-[0.9375rem] -mb-[0.9375rem] items-center justify-center gap-2 text-white"
-          >
-            <a
-              className={cn(PROFILE_LINK_CLASS_NAME, KEYBOARD_ACTION_FOCUS_CLASS_NAME)}
-              href="https://x.com/dogafincan"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Open Doga Fincan on X"
-              title="X"
-            >
-              <XLogoIcon />
-            </a>
-            <a
-              className={cn(PROFILE_LINK_CLASS_NAME, KEYBOARD_ACTION_FOCUS_CLASS_NAME)}
-              href="https://github.com/dogafincan"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Open Doga Fincan on GitHub"
-              title="GitHub"
-            >
-              <GitHubLogoIcon />
-            </a>
-          </nav>
-        </AppHeader>
-
-        <section
-          id="projects"
-          data-slot="portfolio-workbench"
-          aria-label="Projects"
-          className={WORKBENCH_CONTAINER_CLASS_NAME}
+      <AppHeader title="Doga Fincan">
+        <nav
+          aria-label="Doga Fincan social profiles"
+          data-slot="profile-links"
+          className="flex -mt-[0.9375rem] -mb-[0.9375rem] items-center justify-center gap-2 text-white"
         >
-          <div className="grid gap-4 lg:col-span-2 lg:grid-cols-2">
-            {portfolioProjects.map((project, index) => (
-              <ProjectCard
-                key={project.slug}
-                project={project}
-                loading={index === 0 ? "eager" : "lazy"}
-              />
-            ))}
-          </div>
-        </section>
-      </div>
+          <a
+            className={cn(PROFILE_LINK_CLASS_NAME, KEYBOARD_ACTION_FOCUS_CLASS_NAME)}
+            href="https://x.com/dogafincan"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Open Doga Fincan on X"
+            title="X"
+          >
+            <XLogoIcon />
+          </a>
+          <a
+            className={cn(PROFILE_LINK_CLASS_NAME, KEYBOARD_ACTION_FOCUS_CLASS_NAME)}
+            href="https://github.com/dogafincan"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Open Doga Fincan on GitHub"
+            title="GitHub"
+          >
+            <GitHubLogoIcon />
+          </a>
+        </nav>
+      </AppHeader>
+
+      <section
+        id="projects"
+        data-slot="portfolio-workbench"
+        aria-label="Projects"
+        className={WORKBENCH_CONTAINER_CLASS_NAME}
+      >
+        <div className="grid gap-4 lg:col-span-2 lg:grid-cols-2">
+          {portfolioProjects.map((project, index) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
