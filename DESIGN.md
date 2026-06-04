@@ -43,6 +43,11 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   wrapper colors (`border-neutral-200 bg-white`) so the logo and border look the
   same in light and dark mode. Do not change the logo asset or border treatment
   when changing the header cloud treatment.
+- Keep the first-viewport identity placement consistent across `sui-snapshot`,
+  `sui-airdrop`, `sui-swap`, `portfolio`, and `memedex`: the app logo should
+  start from the same top-aligned app-shell rhythm on mobile and desktop. Do not
+  add project-specific top padding, desktop vertical centering, or extra outer
+  wrappers that lower the logo or the rest of the content relative to siblings.
 - Keep OG and social images as generated checked-in 1200x630 PNGs. They should
   use the restrained light-mode header composition only: centered logo and site
   title. Generate them from the React/Tailwind `/og-preview` route with
