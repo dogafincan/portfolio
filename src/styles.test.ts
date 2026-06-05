@@ -127,10 +127,27 @@ describe("global styles", () => {
     expect(bodyBlock).toContain("var(--portfolio-header-atmosphere-size);");
     expect(bodyBlock).not.toContain("height: var(--portfolio-header-atmosphere-height);");
     expect(bodyBlock).not.toContain("position: absolute;");
-    expect(styles).not.toContain("body::before");
+    expect(styles).toContain("body::before");
     expect(styles).not.toContain("body::after");
     expect(styles).not.toContain("main.app-shell::before");
     expect(styles).not.toContain("--portfolio-header-clearance");
+  });
+
+  it("uses a top-only iOS tint strip for Safari safe-area sampling", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const beforeStart = styles.indexOf("body::before {");
+    const beforeEnd = styles.indexOf("\n      }\n", beforeStart);
+    const beforeBlock = styles.slice(beforeStart, beforeEnd);
+
+    expect(styles).toContain("@supports (-webkit-touch-callout: none)");
+    expect(styles).toContain("@media (hover: none) and (pointer: coarse)");
+    expect(beforeBlock).toContain('content: "";');
+    expect(beforeBlock).toContain("position: fixed;");
+    expect(beforeBlock).toContain("inset: 0 0 auto;");
+    expect(beforeBlock).toContain("height: max(0.25rem, env(safe-area-inset-top, 0px));");
+    expect(beforeBlock).toContain("background-color: var(--portfolio-app-chrome-color);");
+    expect(beforeBlock).toContain("pointer-events: none;");
+    expect(beforeBlock).toContain("z-index: 0;");
   });
 
   it("uses the lower page background token for root safe areas and body color", () => {

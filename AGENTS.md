@@ -62,9 +62,10 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   `src/routes/-__root.test.ts`, and any checked-in page-atmosphere assets together. Follow
   `DESIGN.md`'s `Header Section / Atmosphere-to-Page Background` for browser
   browser/mobile safe-area color handling, edge-to-edge viewport meta, shared
-  `theme-color`, root/body backgrounds, visible page chrome, fixed-length top
-  atmosphere fade, light/dark page-atmosphere assets, and OG/social image
-  generation. Do this without changing workbench or card surface tokens.
+  `theme-color`, iOS top-edge tint sampling, root/body backgrounds, visible page
+  chrome, fixed-length top atmosphere fade, light/dark page-atmosphere assets,
+  and OG/social image generation. Do this without changing workbench or card
+  surface tokens.
 - When work is product-scope driven, inspect the `PRD.md` implementation
   progress table first and update it precisely with `Done`/`Pending` status.
 - Do not add Sui wallet flows, transaction signing, Mysten SDK dependencies,
