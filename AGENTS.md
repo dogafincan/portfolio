@@ -62,9 +62,9 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   `src/routes/-__root.test.ts`, and any checked-in page-atmosphere assets together. Follow
   `DESIGN.md`'s `Header Section / Atmosphere-to-Page Background` for browser
   browser/mobile safe-area color handling, shared `theme-color`, root/body
-  backgrounds, visible page chrome, fixed-length top atmosphere fade,
-  light/dark page-atmosphere assets, and OG/social image generation. Do this
-  without changing workbench or card surface tokens.
+  backgrounds, generated top/repeating page-atmosphere assets, visible page
+  chrome, fixed-length atmosphere transition, and OG/social image generation.
+  Do this without changing workbench or card surface tokens.
 - When work is product-scope driven, inspect the `PRD.md` implementation
   progress table first and update it precisely with `Done`/`Pending` status.
 - Do not add Sui wallet flows, transaction signing, Mysten SDK dependencies,
@@ -202,6 +202,10 @@ The current implementation follows the sibling conventions. Important files:
 - `public/app-logo-120.png`, `public/apple-touch-icon.png`,
   `public/android-chrome-*.png`, `public/favicon.ico`, `public/favicon-*`, and
   `public/og.png`: portfolio-owned app and social assets
+- `public/page-atmosphere*.avif`: generated top and repeat page-atmosphere
+  assets
+- `scripts/generate-page-atmosphere.mjs` and `scripts/assets/*`: source and
+  generator for page-atmosphere assets
 - `public/projects/*-icon.avif`: local app icons copied from shipped sibling apps
 - `vite.config.ts`: Vite+ and TanStack configuration
 - `wrangler.jsonc`: Cloudflare Worker configuration
@@ -219,6 +223,7 @@ Prefer the sibling command pattern:
 - `npx vp test`
 - `npx vp build`
 - `npx vp preview --host 127.0.0.1`
+- `npx vp run generate:atmosphere`
 - `npx vp run deploy`
 - `npx vp run cf-typegen`
 

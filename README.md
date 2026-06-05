@@ -130,10 +130,10 @@ Design principles that should remain visible in day-to-day work:
   treatment, app logo system, Inter preload, Lucide icons, shadcn/Base UI
   primitives, and rounded muted workbench.
 - Treat `DESIGN.md`'s `Header Section / Atmosphere-to-Page Background` as the source
-  of truth for browser/mobile safe-area color handling, muted theme colors,
-  manifest color, visible page background, header identity colors, fixed-length
-  top atmosphere fade, light/dark page-atmosphere assets, and OG/social image
-  generation.
+  of truth for browser/mobile safe-area color handling, sampled blue theme and
+  manifest colors, generated top/repeating page-atmosphere assets, visible page
+  background, header identity colors, fixed-length atmosphere transition, and
+  OG/social image generation.
 - Keep project cards scannable, responsive, and backed by structured content.
 - Explain what projects do before naming libraries or infrastructure.
 - Avoid generic hero filler, decorative principles sections, fake metrics, and
@@ -181,6 +181,10 @@ The imported sibling organization now used here:
 - `public/app-logo-120.png`, `public/apple-touch-icon.png`,
   `public/android-chrome-*.png`, `public/favicon.ico`, `public/favicon-*`, and
   `public/og.png`: portfolio-owned logo and social assets.
+- `public/page-atmosphere*.avif`: generated top and repeat page-atmosphere
+  assets.
+- `scripts/generate-page-atmosphere.mjs` and `scripts/assets/*`: source and
+  generator for page-atmosphere assets.
 - `public/projects/*-icon.avif`: local app icons copied from the shipped sibling
   apps.
 
@@ -195,6 +199,7 @@ Use the sibling command style:
 - `npx vp test`
 - `npx vp build`
 - `npx vp preview --host 127.0.0.1`
+- `npx vp run generate:atmosphere`
 - `npx vp run deploy`
 - `npx vp run cf-typegen`
 

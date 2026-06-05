@@ -137,47 +137,39 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 This section documents the shared page-background treatment for app header and
 workbench areas across projects. Treat these rules as reusable system policy.
 
-- Use the shortened, top-cropped `864x720` pattern artwork as the only app page
-  graphic: `page-atmosphere.avif` in light mode and
-  `page-atmosphere-dark.avif` in dark mode. The artwork itself must fade to
-  transparent before the lower workbench gutters can expose another band of
-  blue.
-- Attach that pattern artwork and its fade directly to `body` background
-  layers. Crop it with fixed CSS background positioning and sizing rather than
-  adding a positioned pseudo-element or another header-specific app background
-  asset. The background treatment must not increase document scroll height.
-- Once the fade completes, keep the gutters around the workbench and every
-  long-scroll continuation on solid system page background rather than
-  continuing atmospheric artwork down the page.
-- Fade the header artwork slowly into the normal page background. The color
-  should first become visibly lighter or darker at `37.5rem` / 600px from
-  the top. Preserve the existing ramp spacing by moving the transparent lead-in
-  and later stops 300px earlier: `18.75rem` transparent lead-in, `37.5rem`
-  first visible 12% mix, `59.25rem` strong mix, and `77.25rem` full page
-  background. Keep those CSS stops fixed; shorten the graphic instead when the
-  artwork reaches too far down the page. Use fixed CSS lengths for the
-  atmosphere height and staged translucent gradient stops rather than
-  viewport-relative units or percentage stops, so changing viewport height only
-  crops the same gradient and the color shift stays predictable. The lower
-  page, root safe areas, and long-scroll canvas should use
-  `--portfolio-page-background: var(--background)`, which resolves to white in
-  light mode and near-black in dark mode.
-- Keep the existing light and dark browser/mobile chrome colors
-  (`#58BAD9` and `#428FA8`) because the top safe area still starts on the
-  blue artwork. Do not change manifest colors or `theme-color` metadata for
-  this transition treatment.
-- Do not render a `body::before` atmosphere layer, a repeating `body::after`
-  atmosphere layer, a separate cloud layer, fixed bottom fades, generated
-  mesh continuations, or a `main.app-shell::before` clearance halo for app page
-  chrome.
+- Use generated page-atmosphere assets as the only app page graphics:
+  `page-atmosphere.avif` plus `page-atmosphere-repeat.avif` in light mode, and
+  `page-atmosphere-dark.avif` plus `page-atmosphere-repeat-dark.avif` in dark
+  mode. Generate them with `npm run generate:atmosphere` from the source assets
+  in `scripts/assets/`.
+- Keep the root/page safe-area background on the sampled top artwork colors:
+  `#5AB6DC` in light mode and `#428CA9` in dark mode. `theme-color`, manifest
+  colors, `--portfolio-app-chrome-color`, and `--portfolio-page-background`
+  should stay aligned to those colors.
+- The generated top atmosphere assets are `864x1536`. They bake in the old
+  transition timing so the page first becomes visibly lighter or darker at
+  `37.5rem` / 600px from the top, strengthens at `59.25rem` / 948px, and
+  reaches the full white or near-black lower page color at `77.25rem` / 1236px.
+  Keep those pixel stops in `scripts/generate-page-atmosphere.mjs`.
+- The generated repeat assets are `864x512` seamless lower-page continuations:
+  white in light mode and near-black in dark mode. Start them at the fixed
+  `96rem` top atmosphere height so long scrolls continue on the lower-page
+  color without repainting another blue header band.
+- Attach the generated top and repeat assets directly to `body` background
+  layers. Crop them with fixed CSS background positioning and sizing rather
+  than adding positioned pseudo-elements or separate header-specific background
+  assets. The background treatment must not increase document scroll height.
+- Do not render CSS gradient fade layers, a `body::before` atmosphere layer, a
+  repeating `body::after` atmosphere layer, a separate cloud layer, fixed bottom
+  fades, generated mesh continuations, or a `main.app-shell::before` clearance
+  halo for app page chrome.
 - Header title, subtitle, and profile/social icons should remain solid white so
   the app identity stays readable over the blue header artwork. The main header
   title should use `drop-shadow-xl` to match the logo depth.
-- Generate OG/social images from the top-cropped `page-atmosphere.avif`
-  artwork over the app chrome color. Keep OG preview generation decoupled from
-  page-background variables and the app fade gradient so changing the page
-  transition does not accidentally change social images. Do not retain cloud
-  artwork source assets unless a rendered surface references them.
+- Generate OG/social images from the generated `page-atmosphere.avif` artwork
+  over the app chrome color. Keep OG preview generation decoupled from
+  page-background variables so changing the page transition does not
+  accidentally change social images.
 - Verify desktop and mobile, light and dark mode whenever the page-background
   transition, theme colors, or header identity classes change.
 

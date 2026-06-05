@@ -4,7 +4,7 @@ const PAGE_TITLE = "Doga Fincan";
 const PAGE_DESCRIPTION =
   "I'm into learning languages, nutrition and exercise, and building cool things. Reach out if you're building something interesting.";
 const SITE_URL = "https://dogafincan.com";
-const SOCIAL_IMAGE = `${SITE_URL}/og.png?v=2026060303`;
+const SOCIAL_IMAGE = `${SITE_URL}/og.png?v=2026060501`;
 
 export const Route = createFileRoute("/")({
   head: () => ({

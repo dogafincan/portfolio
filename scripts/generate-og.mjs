@@ -17,7 +17,7 @@ const scriptsDirectory = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(scriptsDirectory, "..");
 const packageJson = JSON.parse(readFileSync(resolve(repoRoot, "package.json"), "utf8"));
 const outputPath = resolve(repoRoot, "public/og.png");
-const seed = process.env.OG_SEED?.trim() || `${packageJson.name}:2026060303`;
+const seed = process.env.OG_SEED?.trim() || `${packageJson.name}:2026060501`;
 const externalBaseUrl = process.env.OG_PREVIEW_BASE_URL?.replace(/\/$/, "");
 const startPort =
   Number.parseInt(process.env.OG_PREVIEW_PORT ?? "", 10) ||

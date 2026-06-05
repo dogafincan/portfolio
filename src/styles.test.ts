@@ -2,8 +2,18 @@ import { readFileSync } from "node:fs";
 
 import { describe, expect, it } from "vite-plus/test";
 
-const ATMOSPHERE_ASSET_SIZE = { width: 864, height: 720 };
-const ATMOSPHERE_ASSETS = ["public/page-atmosphere.avif", "public/page-atmosphere-dark.avif"];
+const ATMOSPHERE_SOURCE_ASSET_SIZE = { width: 864, height: 720 };
+const ATMOSPHERE_TOP_ASSET_SIZE = { width: 864, height: 1536 };
+const ATMOSPHERE_REPEAT_ASSET_SIZE = { width: 864, height: 512 };
+const ATMOSPHERE_SOURCE_ASSETS = [
+  "scripts/assets/page-atmosphere-source.avif",
+  "scripts/assets/page-atmosphere-dark-source.avif",
+];
+const ATMOSPHERE_TOP_ASSETS = ["public/page-atmosphere.avif", "public/page-atmosphere-dark.avif"];
+const ATMOSPHERE_REPEAT_ASSETS = [
+  "public/page-atmosphere-repeat.avif",
+  "public/page-atmosphere-repeat-dark.avif",
+];
 
 function readAvifIntrinsicSize(assetPath: string) {
   const image = readFileSync(assetPath);
@@ -31,12 +41,14 @@ describe("global styles", () => {
     expect(styles).toContain("color-scheme: light;");
     expect(styles).toContain("color-scheme: dark;");
     expect(styles.match(/--background: oklch\(0.145 0 0\);/g)).toHaveLength(2);
-    expect(styles.match(/--portfolio-page-background: var\(--background\);/g)).toHaveLength(3);
-    expect(styles).not.toContain("--portfolio-page-background: var(--portfolio-app-chrome-color);");
+    expect(
+      styles.match(/--portfolio-page-background: var\(--portfolio-app-chrome-color\);/g),
+    ).toHaveLength(3);
+    expect(styles).not.toContain("--portfolio-page-background: var(--background);");
     expect(styles).not.toContain("@custom-variant dark (&:is(.dark *));");
   });
 
-  it("keeps mobile chrome colors while letting the lower page resolve to white or dark background", () => {
+  it("uses sampled blue app chrome colors as the root page background", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const rootStart = styles.indexOf(":root {");
     const rootEnd = styles.indexOf("\n}\n\n.dark", rootStart);
@@ -48,15 +60,15 @@ describe("global styles", () => {
     const darkMedia = styles.slice(darkMediaStart, styles.indexOf("\n}\n\n@media", darkMediaStart));
 
     expect(styles.match(/--portfolio-app-chrome-color:/g)).toHaveLength(3);
-    expect(lightRoot).toContain("--portfolio-app-chrome-color: #58bad9;");
-    expect(darkClass).toContain("--portfolio-app-chrome-color: #428fa8;");
-    expect(darkMedia).toContain("--portfolio-app-chrome-color: #428fa8;");
-    expect(lightRoot).toContain("--portfolio-page-background: var(--background);");
-    expect(darkClass).toContain("--portfolio-page-background: var(--background);");
-    expect(darkMedia).toContain("--portfolio-page-background: var(--background);");
+    expect(lightRoot).toContain("--portfolio-app-chrome-color: #5ab6dc;");
+    expect(darkClass).toContain("--portfolio-app-chrome-color: #428ca9;");
+    expect(darkMedia).toContain("--portfolio-app-chrome-color: #428ca9;");
+    expect(lightRoot).toContain("--portfolio-page-background: var(--portfolio-app-chrome-color);");
+    expect(darkClass).toContain("--portfolio-page-background: var(--portfolio-app-chrome-color);");
+    expect(darkMedia).toContain("--portfolio-page-background: var(--portfolio-app-chrome-color);");
   });
 
-  it("uses the pattern artwork as fixed-length body background layers that fade into the page background", () => {
+  it("uses generated top and repeat artwork instead of CSS gradient fades", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const rootStart = styles.indexOf(":root {");
     const rootEnd = styles.indexOf("\n}\n\n.dark", rootStart);
@@ -76,29 +88,45 @@ describe("global styles", () => {
     expect(darkMedia).toContain(
       '--portfolio-header-atmosphere-image: url("/page-atmosphere-dark.avif");',
     );
+    expect(lightRoot).toContain(
+      '--portfolio-page-repeat-image: url("/page-atmosphere-repeat.avif");',
+    );
+    expect(darkClass).toContain(
+      '--portfolio-page-repeat-image: url("/page-atmosphere-repeat-dark.avif");',
+    );
+    expect(darkMedia).toContain(
+      '--portfolio-page-repeat-image: url("/page-atmosphere-repeat-dark.avif");',
+    );
     expect(styles).toContain("--portfolio-header-atmosphere-height: 96rem;");
-    expect(styles).toContain("--portfolio-header-atmosphere-size: 180% auto;");
-    expect(styles).toContain("--portfolio-header-atmosphere-fade-start: 18.75rem;");
-    // The first visible page-background mix lands at 37.5rem / 600px.
-    // The first visible page-background mix lands at 37.5rem / 600px.
-    expect(styles).toContain("--portfolio-header-atmosphere-fade-soft: 37.5rem;");
-    expect(styles).toContain("--portfolio-header-atmosphere-fade-strong: 59.25rem;");
-    expect(styles).toContain("--portfolio-header-atmosphere-fade-end: 77.25rem;");
-    expect(styles.match(/--portfolio-header-atmosphere-fade-start:/g)).toHaveLength(1);
+    expect(styles).toContain("--portfolio-header-atmosphere-width: 180%;");
+    expect(styles).toContain(
+      "--portfolio-header-atmosphere-repeat-start: var(--portfolio-header-atmosphere-height);",
+    );
+    expect(styles).toContain("--portfolio-header-atmosphere-width: 100%;");
+    expect(styles).not.toContain("--portfolio-header-atmosphere-fade-");
+    expect(styles).not.toContain("linear-gradient(");
     expect(styles).not.toMatch(
-      /--portfolio-header-atmosphere-(?:height|fade-[^:]+): [^;]*(?:svh|vh|dvh|lvh|%)/,
+      /--portfolio-header-atmosphere-(?:height|repeat-start): [^;]*(?:svh|vh|dvh|lvh|%)/,
     );
     expect(styles).not.toContain("--portfolio-header-cloud-image");
     expect(styles).not.toContain('url("/header-clouds');
   });
 
-  it("keeps atmosphere artwork top-cropped so it cannot repaint lower mobile gutters", () => {
-    for (const assetPath of ATMOSPHERE_ASSETS) {
-      expect(readAvifIntrinsicSize(assetPath)).toEqual(ATMOSPHERE_ASSET_SIZE);
+  it("keeps source, generated top, and repeat atmosphere assets at their contract sizes", () => {
+    for (const assetPath of ATMOSPHERE_SOURCE_ASSETS) {
+      expect(readAvifIntrinsicSize(assetPath)).toEqual(ATMOSPHERE_SOURCE_ASSET_SIZE);
+    }
+
+    for (const assetPath of ATMOSPHERE_TOP_ASSETS) {
+      expect(readAvifIntrinsicSize(assetPath)).toEqual(ATMOSPHERE_TOP_ASSET_SIZE);
+    }
+
+    for (const assetPath of ATMOSPHERE_REPEAT_ASSETS) {
+      expect(readAvifIntrinsicSize(assetPath)).toEqual(ATMOSPHERE_REPEAT_ASSET_SIZE);
     }
   });
 
-  it("keeps the atmosphere on body backgrounds so it cannot add scroll height", () => {
+  it("keeps generated atmosphere artwork on body backgrounds so it cannot add scroll height", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const htmlStart = styles.indexOf("html {");
     const htmlEnd = styles.indexOf("\n  }\n", htmlStart);
@@ -110,21 +138,15 @@ describe("global styles", () => {
     expect(htmlBlock).toContain("background: var(--portfolio-page-background);");
     expect(bodyBlock).toContain("background-color: var(--portfolio-page-background);");
     expect(bodyBlock).toContain("background-image:");
-    expect(bodyBlock).toContain("linear-gradient(");
-    expect(bodyBlock).toContain("transparent var(--portfolio-header-atmosphere-fade-start),");
-    expect(bodyBlock).toContain(
-      "color-mix(in oklab, var(--portfolio-page-background) 12%, transparent)",
-    );
-    expect(bodyBlock).toContain(
-      "color-mix(in oklab, var(--portfolio-page-background) 56%, transparent)",
-    );
-    expect(bodyBlock).toContain(
-      "var(--portfolio-page-background) var(--portfolio-header-atmosphere-fade-end)",
-    );
     expect(bodyBlock).toContain("var(--portfolio-header-atmosphere-image)");
-    expect(bodyBlock).toContain("background-repeat: no-repeat, no-repeat;");
-    expect(bodyBlock).toContain("100% var(--portfolio-header-atmosphere-height)");
-    expect(bodyBlock).toContain("var(--portfolio-header-atmosphere-size);");
+    expect(bodyBlock).toContain("var(--portfolio-page-repeat-image)");
+    expect(bodyBlock).toContain("center var(--portfolio-header-atmosphere-repeat-start);");
+    expect(bodyBlock).toContain("background-repeat: no-repeat, repeat-y;");
+    expect(bodyBlock).toContain(
+      "var(--portfolio-header-atmosphere-width) var(--portfolio-header-atmosphere-height)",
+    );
+    expect(bodyBlock).toContain("var(--portfolio-header-atmosphere-width) auto;");
+    expect(bodyBlock).not.toContain("linear-gradient(");
     expect(bodyBlock).not.toContain("height: var(--portfolio-header-atmosphere-height);");
     expect(bodyBlock).not.toContain("position: absolute;");
     expect(styles).not.toContain("body::before");
@@ -133,7 +155,7 @@ describe("global styles", () => {
     expect(styles).not.toContain("--portfolio-header-clearance");
   });
 
-  it("uses the lower page background token for root safe areas and body color", () => {
+  it("uses the blue page background token for root safe areas and body color", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const htmlStart = styles.indexOf("html {");
     const htmlEnd = styles.indexOf("\n  }\n", htmlStart);
@@ -144,8 +166,8 @@ describe("global styles", () => {
 
     expect(htmlBlock).toContain("background: var(--portfolio-page-background);");
     expect(bodyBlock).toContain("background-color: var(--portfolio-page-background);");
-    expect(htmlBlock).not.toContain("background: var(--portfolio-app-chrome-color);");
-    expect(bodyBlock).not.toContain("background-color: var(--portfolio-app-chrome-color);");
+    expect(styles).toContain("--portfolio-page-background: var(--portfolio-app-chrome-color);");
+    expect(styles).not.toContain("--portfolio-page-background: var(--background);");
   });
 
   it("does not use global styles to swap the header logo by theme", () => {

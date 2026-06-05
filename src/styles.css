@@ -87,16 +87,14 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --portfolio-app-chrome-color: #58bad9;
-  --portfolio-page-background: var(--background);
+  --portfolio-app-chrome-color: #5ab6dc;
+  --portfolio-page-background: var(--portfolio-app-chrome-color);
   --portfolio-header-atmosphere-image: url("/page-atmosphere.avif");
+  --portfolio-page-repeat-image: url("/page-atmosphere-repeat.avif");
   --portfolio-header-atmosphere-height: 96rem;
+  --portfolio-header-atmosphere-width: 180%;
   --portfolio-header-atmosphere-position: center top;
-  --portfolio-header-atmosphere-size: 180% auto;
-  --portfolio-header-atmosphere-fade-start: 18.75rem;
-  --portfolio-header-atmosphere-fade-soft: 37.5rem;
-  --portfolio-header-atmosphere-fade-strong: 59.25rem;
-  --portfolio-header-atmosphere-fade-end: 77.25rem;
+  --portfolio-header-atmosphere-repeat-start: var(--portfolio-header-atmosphere-height);
 }
 
 .dark {
@@ -139,9 +137,10 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --portfolio-app-chrome-color: #428fa8;
-  --portfolio-page-background: var(--background);
+  --portfolio-app-chrome-color: #428ca9;
+  --portfolio-page-background: var(--portfolio-app-chrome-color);
   --portfolio-header-atmosphere-image: url("/page-atmosphere-dark.avif");
+  --portfolio-page-repeat-image: url("/page-atmosphere-repeat-dark.avif");
 }
 
 @media (prefers-color-scheme: dark) {
@@ -185,15 +184,16 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
-    --portfolio-app-chrome-color: #428fa8;
-    --portfolio-page-background: var(--background);
+    --portfolio-app-chrome-color: #428ca9;
+    --portfolio-page-background: var(--portfolio-app-chrome-color);
     --portfolio-header-atmosphere-image: url("/page-atmosphere-dark.avif");
+    --portfolio-page-repeat-image: url("/page-atmosphere-repeat-dark.avif");
   }
 }
 
 @media (min-width: 640px) {
   :root {
-    --portfolio-header-atmosphere-size: 100% auto;
+    --portfolio-header-atmosphere-width: 100%;
   }
 }
 
@@ -212,25 +212,14 @@
     @apply min-h-screen antialiased bg-background text-foreground;
     overflow-x: hidden;
     background-color: var(--portfolio-page-background);
-    background-image:
-      linear-gradient(
-        to bottom,
-        transparent 0,
-        transparent var(--portfolio-header-atmosphere-fade-start),
-        color-mix(in oklab, var(--portfolio-page-background) 12%, transparent)
-          var(--portfolio-header-atmosphere-fade-soft),
-        color-mix(in oklab, var(--portfolio-page-background) 56%, transparent)
-          var(--portfolio-header-atmosphere-fade-strong),
-        var(--portfolio-page-background) var(--portfolio-header-atmosphere-fade-end)
-      ),
-      var(--portfolio-header-atmosphere-image);
+    background-image: var(--portfolio-header-atmosphere-image), var(--portfolio-page-repeat-image);
     background-position:
       center top,
-      var(--portfolio-header-atmosphere-position);
-    background-repeat: no-repeat, no-repeat;
+      center var(--portfolio-header-atmosphere-repeat-start);
+    background-repeat: no-repeat, repeat-y;
     background-size:
-      100% var(--portfolio-header-atmosphere-height),
-      var(--portfolio-header-atmosphere-size);
+      var(--portfolio-header-atmosphere-width) var(--portfolio-header-atmosphere-height),
+      var(--portfolio-header-atmosphere-width) auto;
   }
 
   code {
