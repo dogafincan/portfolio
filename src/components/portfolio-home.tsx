@@ -8,7 +8,7 @@ import { portfolioProjects, type PortfolioProject } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
 const PORTFOLIO_MAIN_CLASS_NAME =
-  "app-shell relative z-10 mx-auto flex min-h-screen w-full min-w-0 max-w-full flex-col gap-8 px-3 pt-[calc(2.5rem+env(safe-area-inset-top,0px))] pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))] text-foreground sm:max-w-6xl sm:px-6 lg:px-8";
+  "app-shell relative z-10 mx-auto flex min-h-screen w-full min-w-0 max-w-full flex-col gap-8 px-3 py-10 text-foreground sm:max-w-6xl sm:px-6 lg:px-8";
 const WORKBENCH_CONTAINER_CLASS_NAME =
   "grid w-full min-w-0 max-w-full flex-1 grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background";
 const PROJECT_SUMMARY_ITEM_CLASS_NAME = "min-h-32 flex-nowrap overflow-hidden sm:min-h-36";

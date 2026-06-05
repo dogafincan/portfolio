@@ -233,19 +233,6 @@
       var(--portfolio-header-atmosphere-size);
   }
 
-  @supports (-webkit-touch-callout: none) {
-    @media (hover: none) and (pointer: coarse) {
-      [data-ios-safari-top-tint] {
-        position: fixed;
-        inset: 0 0 auto;
-        height: max(7rem, env(safe-area-inset-top, 0px));
-        background-color: var(--portfolio-app-chrome-color);
-        pointer-events: none;
-        z-index: 0;
-      }
-    }
-  }
-
   code {
     @apply font-mono;
   }

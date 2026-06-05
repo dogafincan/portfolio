@@ -133,23 +133,6 @@ describe("global styles", () => {
     expect(styles).not.toContain("--portfolio-header-clearance");
   });
 
-  it("styles the root top-edge iOS tint sentinel for Safari safe-area sampling", () => {
-    const styles = readFileSync("src/styles.css", "utf8");
-    const sentinelStart = styles.indexOf("[data-ios-safari-top-tint] {");
-    const sentinelEnd = styles.indexOf("\n      }\n", sentinelStart);
-    const sentinelBlock = styles.slice(sentinelStart, sentinelEnd);
-
-    expect(styles).toContain("@supports (-webkit-touch-callout: none)");
-    expect(styles).toContain("@media (hover: none) and (pointer: coarse)");
-    expect(styles).toContain("[data-ios-safari-top-tint]");
-    expect(sentinelBlock).toContain("position: fixed;");
-    expect(sentinelBlock).toContain("inset: 0 0 auto;");
-    expect(sentinelBlock).toContain("height: max(7rem, env(safe-area-inset-top, 0px));");
-    expect(sentinelBlock).toContain("background-color: var(--portfolio-app-chrome-color);");
-    expect(sentinelBlock).toContain("pointer-events: none;");
-    expect(sentinelBlock).toContain("z-index: 0;");
-  });
-
   it("uses the lower page background token for root safe areas and body color", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const htmlStart = styles.indexOf("html {");

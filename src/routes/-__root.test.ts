@@ -20,7 +20,7 @@ describe("RootDocument head", () => {
 
     expect(source).toContain('const APP_CHROME_COLOR = "#58BAD9";');
     expect(source).toContain('const APP_CHROME_COLOR_DARK = "#428FA8";');
-    expect(source).toContain('content: "width=device-width, initial-scale=1, viewport-fit=cover"');
+    expect(source).toContain('content: "width=device-width, initial-scale=1"');
     expect(source).toContain(
       'import interLatinWghtNormal from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";',
     );
@@ -33,7 +33,6 @@ describe("RootDocument head", () => {
     expect(source).toContain("content={APP_CHROME_COLOR_DARK}");
     expect(source).toContain('media="(prefers-color-scheme: dark)"');
     expect(source).toContain("<body>");
-    expect(source).toContain('<div aria-hidden="true" data-ios-safari-top-tint="" />');
     expect(source).not.toContain('<body className="bg-background">');
     expect(source).toContain('rel: "manifest"');
     expect(source).toContain('href: "/manifest.json"');

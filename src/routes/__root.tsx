@@ -15,7 +15,7 @@ export const Route = createRootRoute({
       },
       {
         name: "viewport",
-        content: "width=device-width, initial-scale=1, viewport-fit=cover",
+        content: "width=device-width, initial-scale=1",
       },
       {
         title: "Portfolio",
@@ -77,7 +77,6 @@ function RootDocument({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <div aria-hidden="true" data-ios-safari-top-tint="" />
         {children}
         <Scripts />
       </body>
