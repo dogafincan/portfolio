@@ -27,7 +27,7 @@ export function AppHeaderIdentity({ title }: { title: string }) {
     <>
       <div
         data-slot="app-logo"
-        className="relative size-15 shrink-0 overflow-hidden rounded-xl border border-neutral-200 bg-white"
+        className="relative size-15 shrink-0 overflow-hidden rounded-xl border border-neutral-200 bg-white drop-shadow-xl"
         aria-hidden="true"
       >
         <img
@@ -44,7 +44,7 @@ export function AppHeaderIdentity({ title }: { title: string }) {
         />
       </div>
       <div className="flex min-w-0 flex-col gap-2">
-        <h1 className="text-balance text-4xl leading-tight font-bold tracking-tight text-white">
+        <h1 className="text-balance text-4xl leading-tight font-bold tracking-tight text-white drop-shadow-xl">
           {title}
         </h1>
       </div>

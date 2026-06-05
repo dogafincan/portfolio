@@ -40,9 +40,10 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   generated social image. Header logos must render with explicit
   `width`, `height`, `sizes`, `srcset`, and a visible border wrapper that
   preserves the app logo's rounded-square shape. Use theme-invariant light-mode
-  wrapper colors (`border-neutral-200 bg-white`) so the logo and border look the
-  same in light and dark mode. Do not change the logo asset or border treatment
-  when changing the header cloud treatment.
+  wrapper colors (`border-neutral-200 bg-white`) plus `drop-shadow-xl` so the
+  logo, border, and depth read the same in light and dark mode. Do not change
+  the logo asset, border treatment, or shadow treatment when changing the
+  header cloud treatment.
 - Keep the first-viewport identity placement consistent across `sui-snapshot`,
   `sui-airdrop`, `sui-swap`, `portfolio`, and `memedex`: the app logo should
   start from the same top-aligned app-shell rhythm on mobile and desktop. Do not
@@ -169,7 +170,8 @@ workbench areas across projects. Treat these rules as reusable system policy.
   mesh continuations, or a `main.app-shell::before` clearance halo for app page
   chrome.
 - Header title, subtitle, and profile/social icons should remain solid white so
-  the app identity stays readable over the blue header artwork.
+  the app identity stays readable over the blue header artwork. The main header
+  title should use `drop-shadow-xl` to match the logo depth.
 - Generate OG/social images from the top-cropped `page-atmosphere.avif`
   artwork over the app chrome color. Keep OG preview generation decoupled from
   page-background variables and the app fade gradient so changing the page
@@ -217,9 +219,10 @@ workbench areas across projects. Treat these rules as reusable system policy.
 - Use inline SVG brand marks for the X and GitHub profile links because they
   are exact profile-brand marks, not new product UI icon-family dependencies.
   They should use `currentColor` so they stay aligned with the header title and
-  subtitle color treatment.
+  subtitle color treatment, and `drop-shadow-xl` so they share the header
+  identity depth.
 - The title class currently matches the sibling apps:
-  `text-balance text-4xl leading-tight font-bold tracking-tight text-white`.
+  `text-balance text-4xl leading-tight font-bold tracking-tight text-white drop-shadow-xl`.
 - The subtitle class currently matches the snapshot header width treatment:
   `max-w-[40rem] text-balance text-lg font-medium text-white md:max-w-full`.
 - Keep `Reach out if you're building something interesting.` in a second

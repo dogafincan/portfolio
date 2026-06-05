@@ -33,7 +33,7 @@ describe("PortfolioHome", () => {
     expect(appHeader?.className).toBe("flex flex-col items-center gap-4 text-center text-white");
     expect(appTitleBlock?.className).toBe("flex min-w-0 flex-col gap-2");
     expect(title.className).toBe(
-      "text-balance text-4xl leading-tight font-bold tracking-tight text-white",
+      "text-balance text-4xl leading-tight font-bold tracking-tight text-white drop-shadow-xl",
     );
     expect(appSubtitle).toBeNull();
     expect(appHeader?.textContent).not.toContain("I'm into learning languages");
@@ -56,10 +56,10 @@ describe("PortfolioHome", () => {
     }
     expect(socialLinks?.querySelectorAll("svg").length).toBe(2);
     for (const icon of socialLinks?.querySelectorAll("svg") ?? []) {
-      expect(icon.className.baseVal).toBe("size-[1.5625rem]");
+      expect(icon.className.baseVal).toBe("size-[1.5625rem] drop-shadow-xl");
     }
     expect(appLogo?.className).toBe(
-      "relative size-15 shrink-0 overflow-hidden rounded-xl border border-neutral-200 bg-white",
+      "relative size-15 shrink-0 overflow-hidden rounded-xl border border-neutral-200 bg-white drop-shadow-xl",
     );
     expect(appLogo?.className).not.toContain("rounded-full");
     expect(appLogoImage?.getAttribute("src")).toBe("/app-logo-120.png");
