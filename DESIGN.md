@@ -39,11 +39,12 @@ recognizably consistent unless the portfolio intentionally needs an exception.
 - Use checked-in PNG/ICO assets for favicon, install icons, header logo, and
   generated social image. Header logos must render with explicit
   `width`, `height`, `sizes`, `srcset`, and a visible border wrapper that
-  preserves the app logo's rounded-square shape. Use theme-invariant light-mode
-  wrapper colors (`border-neutral-200 bg-white`) plus `drop-shadow-xl` so the
-  logo, border, and depth read the same in light and dark mode. Do not change
-  the logo asset, border treatment, or shadow treatment when changing the
-  header cloud treatment.
+  preserves the app logo's rounded-square shape. Use an outer logo shell with
+  `drop-shadow-xl`, then an inner rounded frame with theme-invariant light-mode
+  colors (`border-neutral-200 bg-white`) and `overflow-hidden`, so the shadow
+  does not get clipped into square lower corners. Do not change the logo asset,
+  border treatment, or shadow treatment when changing the header cloud
+  treatment.
 - Keep the first-viewport identity placement consistent across `sui-snapshot`,
   `sui-airdrop`, `sui-swap`, `portfolio`, and `memedex`: the app logo should
   start from the same top-aligned app-shell rhythm on mobile and desktop. Do not

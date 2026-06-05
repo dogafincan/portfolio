@@ -27,21 +27,26 @@ export function AppHeaderIdentity({ title }: { title: string }) {
     <>
       <div
         data-slot="app-logo"
-        className="relative size-15 shrink-0 overflow-hidden rounded-xl border border-neutral-200 bg-white drop-shadow-xl"
+        className="relative size-15 shrink-0 drop-shadow-xl"
         aria-hidden="true"
       >
-        <img
-          data-slot="app-logo-image"
-          src={HEADER_LOGO}
-          srcSet={HEADER_LOGO_SRCSET}
-          sizes="60px"
-          width="60"
-          height="60"
-          loading="eager"
-          decoding="async"
-          alt=""
-          className="size-full"
-        />
+        <div
+          data-slot="app-logo-frame"
+          className="size-full overflow-hidden rounded-xl border border-neutral-200 bg-white"
+        >
+          <img
+            data-slot="app-logo-image"
+            src={HEADER_LOGO}
+            srcSet={HEADER_LOGO_SRCSET}
+            sizes="60px"
+            width="60"
+            height="60"
+            loading="eager"
+            decoding="async"
+            alt=""
+            className="size-full"
+          />
+        </div>
       </div>
       <div className="flex min-w-0 flex-col gap-2">
         <h1 className="text-balance text-4xl leading-tight font-bold tracking-tight text-white drop-shadow-xl">

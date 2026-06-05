@@ -17,6 +17,7 @@ describe("PortfolioHome", () => {
     const main = container.querySelector("main");
     const appHeader = title.closest("header");
     const appLogo = container.querySelector('[data-slot="app-logo"]');
+    const appLogoFrame = appLogo?.querySelector('[data-slot="app-logo-frame"]');
     const appLogoImage = container.querySelector('[data-slot="app-logo-image"]');
     const appTitleBlock = title.parentElement;
     const appSubtitle = appTitleBlock?.querySelector("p");
@@ -58,10 +59,12 @@ describe("PortfolioHome", () => {
     for (const icon of socialLinks?.querySelectorAll("svg") ?? []) {
       expect(icon.className.baseVal).toBe("size-[1.5625rem] drop-shadow-xl");
     }
-    expect(appLogo?.className).toBe(
-      "relative size-15 shrink-0 overflow-hidden rounded-xl border border-neutral-200 bg-white drop-shadow-xl",
-    );
+    expect(appLogo?.className).toBe("relative size-15 shrink-0 drop-shadow-xl");
     expect(appLogo?.className).not.toContain("rounded-full");
+    expect(appLogoFrame?.className).toBe(
+      "size-full overflow-hidden rounded-xl border border-neutral-200 bg-white",
+    );
+    expect(appLogoFrame?.firstElementChild).toBe(appLogoImage);
     expect(appLogoImage?.getAttribute("src")).toBe("/app-logo-120.png");
     expect(appLogoImage?.getAttribute("srcset")).toBe(
       "/app-logo-120.png 120w, /apple-touch-icon.png 180w",
