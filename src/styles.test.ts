@@ -155,6 +155,25 @@ describe("global styles", () => {
     expect(styles).not.toContain("--portfolio-header-clearance");
   });
 
+  it("uses viewport safe-area insets only on the content shell", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const appShellStart = styles.indexOf(".app-shell {");
+    const appShellEnd = styles.indexOf("\n}", appShellStart);
+    const appShellBlock = styles.slice(appShellStart, appShellEnd);
+
+    expect(styles).toContain("--portfolio-app-shell-padding-block: 2.5rem;");
+    expect(styles).toContain("--portfolio-app-shell-padding-inline: 0.75rem;");
+    expect(styles).toContain("--portfolio-app-shell-padding-inline: 1.5rem;");
+    expect(styles).toContain("--portfolio-app-shell-padding-inline: 2rem;");
+    expect(appShellBlock).toContain("env(safe-area-inset-top, 0px)");
+    expect(appShellBlock).toContain("env(safe-area-inset-right, 0px)");
+    expect(appShellBlock).toContain("env(safe-area-inset-bottom, 0px)");
+    expect(appShellBlock).toContain("env(safe-area-inset-left, 0px)");
+    expect(appShellBlock).toContain("var(--portfolio-app-shell-padding-block)");
+    expect(appShellBlock).toContain("var(--portfolio-app-shell-padding-inline)");
+    expect(styles).not.toMatch(/body[^}]*env\(safe-area-inset-/);
+  });
+
   it("uses the blue page background token for root safe areas and body color", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const htmlStart = styles.indexOf("html {");

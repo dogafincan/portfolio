@@ -18,7 +18,7 @@ treated as complete.
 | Done    | Header social profile links          | 7, 8.1, 8.3, 9.1    | -         | Adds compact X and GitHub icon links between the header subtitle and project workbench.                 |
 | Done    | Keyboard-visible action focus        | 8.1, 9.4, 13        | -         | Keeps profile and live app links in DOM tab order with the same visible focus ring treatment.           |
 | Done    | Desktop viewport vertical centering  | 8.1, 9.1, 13        | -         | Centers the header and workbench on desktop when the first viewport has spare space below the cards.    |
-| Done    | Unified page chrome background       | 9.5, 9.7, 13        | -         | Aligns safe areas, page background, muted theme colors, and the atmosphere-to-page transition.          |
+| Done    | Unified page chrome background       | 9.5, 9.7, 13        | -         | Aligns safe areas, page background, shell insets, theme colors, and the atmosphere-to-page transition.  |
 | Pending | Project case-study pages             | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                       |
 | Pending | Production smoke scripts and runbook | 12, 15              | -         | Add portfolio-specific release gates when deploys need the same production-hardening depth as siblings. |
 | Pending | Contact action beyond profile links  | 7, 8.3, 9.9         | -         | Add only when the portfolio needs a direct contact workflow beyond simple profile links.                |
@@ -246,6 +246,9 @@ abuse is handled, and what privacy or retention policy applies.
 
 - Root document should include manifest links, app icons, font preload ordering,
   and theme-color metadata.
+- Root viewport metadata should use `viewport-fit=cover`, with generated page
+  artwork spanning safe areas and `.app-shell` padding adding
+  `env(safe-area-inset-top/right/bottom/left)` around content.
 - Manifest colors should stay on the sampled blue page chrome color used by
   the generated top atmosphere artwork.
 - Header logo images should define `width`, `height`, `sizes`, and `srcset`,

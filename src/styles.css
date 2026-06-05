@@ -95,6 +95,8 @@
   --portfolio-header-atmosphere-width: 180%;
   --portfolio-header-atmosphere-position: center top;
   --portfolio-header-atmosphere-repeat-start: var(--portfolio-header-atmosphere-height);
+  --portfolio-app-shell-padding-block: 2.5rem;
+  --portfolio-app-shell-padding-inline: 0.75rem;
 }
 
 .dark {
@@ -194,6 +196,13 @@
 @media (min-width: 640px) {
   :root {
     --portfolio-header-atmosphere-width: 100%;
+    --portfolio-app-shell-padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --portfolio-app-shell-padding-inline: 2rem;
   }
 }
 
@@ -225,4 +234,11 @@
   code {
     @apply font-mono;
   }
+}
+
+.app-shell {
+  padding-top: calc(var(--portfolio-app-shell-padding-block) + env(safe-area-inset-top, 0px));
+  padding-right: calc(var(--portfolio-app-shell-padding-inline) + env(safe-area-inset-right, 0px));
+  padding-bottom: calc(var(--portfolio-app-shell-padding-block) + env(safe-area-inset-bottom, 0px));
+  padding-left: calc(var(--portfolio-app-shell-padding-inline) + env(safe-area-inset-left, 0px));
 }

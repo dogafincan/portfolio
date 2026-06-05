@@ -146,6 +146,10 @@ workbench areas across projects. Treat these rules as reusable system policy.
   `#5AB6DC` in light mode and `#428CA9` in dark mode. `theme-color`, manifest
   colors, `--portfolio-app-chrome-color`, and `--portfolio-page-background`
   should stay aligned to those colors.
+- Use `viewport-fit=cover` so the generated `body` background can extend into
+  iOS safe areas. Keep the header, workbench, and other app content out of
+  unsafe areas with `.app-shell` padding that adds
+  `env(safe-area-inset-top/right/bottom/left)` to the normal shell spacing.
 - The generated top atmosphere assets are `864x1536`. They bake in the old
   transition timing so the page first becomes visibly lighter or darker at
   `37.5rem` / 600px from the top, strengthens at `59.25rem` / 948px, and
