@@ -147,7 +147,7 @@ describe("global styles", () => {
     expect(sentinelBlock).toContain("height: max(7rem, env(safe-area-inset-top, 0px));");
     expect(sentinelBlock).toContain("background-color: var(--portfolio-app-chrome-color);");
     expect(sentinelBlock).toContain("pointer-events: none;");
-    expect(sentinelBlock).toContain("z-index: 2147483647;");
+    expect(sentinelBlock).toContain("z-index: 0;");
   });
 
   it("uses the lower page background token for root safe areas and body color", () => {
