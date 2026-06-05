@@ -238,7 +238,7 @@
       [data-ios-safari-top-tint] {
         position: fixed;
         inset: 0 0 auto;
-        height: max(0.25rem, env(safe-area-inset-top, 0px));
+        height: max(7rem, env(safe-area-inset-top, 0px));
         background-color: var(--portfolio-app-chrome-color);
         pointer-events: none;
         z-index: 2147483647;

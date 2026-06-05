@@ -144,7 +144,7 @@ describe("global styles", () => {
     expect(styles).toContain("[data-ios-safari-top-tint]");
     expect(sentinelBlock).toContain("position: fixed;");
     expect(sentinelBlock).toContain("inset: 0 0 auto;");
-    expect(sentinelBlock).toContain("height: max(0.25rem, env(safe-area-inset-top, 0px));");
+    expect(sentinelBlock).toContain("height: max(7rem, env(safe-area-inset-top, 0px));");
     expect(sentinelBlock).toContain("background-color: var(--portfolio-app-chrome-color);");
     expect(sentinelBlock).toContain("pointer-events: none;");
     expect(sentinelBlock).toContain("z-index: 2147483647;");
