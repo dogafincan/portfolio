@@ -171,13 +171,13 @@ workbench areas across projects. Treat these rules as reusable system policy.
   white in light mode and near-black in dark mode.
 - Keep app-shell top and bottom padding safe-area aware with
   `env(safe-area-inset-*)` while preserving the normal `2.5rem` page rhythm.
-- The only allowed `body::before` page-chrome layer is a top-only iOS Safari
-  tint strip using `--portfolio-app-chrome-color`; it exists to give newer
-  Safari versions a fixed, solid top-edge color to sample. Do not use
-  `body::before` for atmosphere artwork, and do not add a repeating
-  `body::after` atmosphere layer, a separate cloud layer, fixed bottom fades,
-  generated mesh continuations, or a `main.app-shell::before` clearance halo
-  for app page chrome.
+- Render the root `[data-ios-safari-top-tint]` sentinel as a real top-only iOS
+  Safari tint strip using `--portfolio-app-chrome-color`; it exists to give
+  newer Safari versions a fixed, solid top-edge element to sample. Do not use
+  `body::before` for atmosphere artwork or tint sampling, and do not add a
+  repeating `body::after` atmosphere layer, a separate cloud layer, fixed bottom
+  fades, generated mesh continuations, or a `main.app-shell::before` clearance
+  halo for app page chrome.
 - Header title, subtitle, and profile/social icons should remain solid white so
   the app identity stays readable over the blue header artwork. The main header
   title should use `drop-shadow-xl` to match the logo depth.

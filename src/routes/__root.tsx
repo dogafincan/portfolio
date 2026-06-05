@@ -77,6 +77,7 @@ function RootDocument({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <div aria-hidden="true" data-ios-safari-top-tint="" />
         {children}
         <Scripts />
       </body>
