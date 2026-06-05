@@ -130,10 +130,10 @@ Design principles that should remain visible in day-to-day work:
   treatment, app logo system, Inter preload, Lucide icons, shadcn/Base UI
   primitives, and rounded muted workbench.
 - Treat `DESIGN.md`'s `Header Section / Atmosphere-to-Page Background` as the source
-  of truth for browser/mobile safe-area color handling, muted theme colors,
-  manifest color, visible page background, header identity colors, fixed-length
-  top atmosphere fade, light/dark page-atmosphere assets, and OG/social image
-  generation.
+  of truth for browser/mobile safe-area color handling, edge-to-edge viewport
+  meta, muted theme colors, manifest color, visible page background, header
+  identity colors, fixed-length top atmosphere fade, light/dark page-atmosphere
+  assets, and OG/social image generation.
 - Keep project cards scannable, responsive, and backed by structured content.
 - Explain what projects do before naming libraries or infrastructure.
 - Avoid generic hero filler, decorative principles sections, fake metrics, and

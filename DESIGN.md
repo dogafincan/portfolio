@@ -166,6 +166,9 @@ workbench areas across projects. Treat these rules as reusable system policy.
   (`#58BAD9` and `#428FA8`) because the top safe area still starts on the
   blue artwork. Do not change manifest colors or `theme-color` metadata for
   this transition treatment.
+- Keep `viewport-fit=cover` in the root viewport meta so Safari can extend the
+  page paint into the iPhone safe areas while the lower page background remains
+  white in light mode and near-black in dark mode.
 - Do not render a `body::before` atmosphere layer, a repeating `body::after`
   atmosphere layer, a separate cloud layer, fixed bottom fades, generated
   mesh continuations, or a `main.app-shell::before` clearance halo for app page

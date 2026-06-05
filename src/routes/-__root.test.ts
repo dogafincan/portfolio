@@ -20,7 +20,7 @@ describe("RootDocument head", () => {
 
     expect(source).toContain('const APP_CHROME_COLOR = "#58BAD9";');
     expect(source).toContain('const APP_CHROME_COLOR_DARK = "#428FA8";');
-    expect(source).toContain('content: "width=device-width, initial-scale=1"');
+    expect(source).toContain('content: "width=device-width, initial-scale=1, viewport-fit=cover"');
     expect(source).toContain(
       'import interLatinWghtNormal from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";',
     );
