@@ -19,7 +19,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     name: "Sui Airdrop",
     slug: "sui-airdrop",
-    subtitle: "Create a fixed-amount token airdrop from a Sui Snapshot CSV.",
+    subtitle: "Create a fixed-amount coin airdrop from a Sui Snapshot CSV.",
     icon: "/projects/sui-airdrop-icon.avif",
     iconAlt: "Sui Airdrop app icon.",
     liveUrl: "https://sui-airdrop.dogafincan.workers.dev",

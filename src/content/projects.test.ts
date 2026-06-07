@@ -19,7 +19,7 @@ describe("portfolioProjects", () => {
       {
         slug: "sui-airdrop",
         name: "Sui Airdrop",
-        subtitle: "Create a fixed-amount token airdrop from a Sui Snapshot CSV.",
+        subtitle: "Create a fixed-amount coin airdrop from a Sui Snapshot CSV.",
       },
       {
         slug: "sui-snapshot",
