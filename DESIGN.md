@@ -66,6 +66,15 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   needed, use `Item`.
 - Give each project card a concise title and description. Put implementation
   details after the plain-language explanation of what the project does.
+- Keep each project card to one visible title/subtitle pattern. If the muted
+  project summary `Item` carries the title and subtitle, do not add another card
+  header that repeats the same context.
+- Keep spacing rhythm consistent. Sibling cards inside the same workbench should
+  use the same card-to-card gap on mobile and desktop; compact stacks inside one
+  card or component should use an 8px vertical gap between related items,
+  actions, and their owned alerts.
+- Keep product or app names in compact helper links non-wrapping when a line
+  break would split the linked name and make the copy harder to scan.
 - Keep actions in the card that owns their state. Project live actions belong in
   the project card. Future contact or case-study actions should live near the
   content they operate on.
