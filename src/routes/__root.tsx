@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 
+import { AppErrorBoundary, AppRecovery } from "../components/app-recovery";
 import interLatinWghtNormal from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import appCss from "../styles.css?url";
 
@@ -77,7 +78,8 @@ function RootDocument({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <AppErrorBoundary>{children}</AppErrorBoundary>
+        <AppRecovery />
         <Scripts />
       </body>
     </html>

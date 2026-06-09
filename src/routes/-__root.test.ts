@@ -59,4 +59,20 @@ describe("RootDocument head", () => {
       height: 512,
     });
   });
+
+  it("mounts restore recovery and a visible root error fallback", () => {
+    const source = readFileSync(new URL("./__root.tsx", import.meta.url), "utf8");
+
+    expect(source).toContain('from "../components/app-recovery"');
+    expect(source).toMatch(
+      /<body>[\s\S]*<AppErrorBoundary>[\s\S]*\{children\}[\s\S]*<\/AppErrorBoundary>[\s\S]*<AppRecovery \/>[\s\S]*<Scripts \/>[\s\S]*<\/body>/,
+    );
+  });
+
+  it("serves fingerprinted build assets with immutable browser caching", () => {
+    const headers = readFileSync(new URL("../../public/_headers", import.meta.url), "utf8");
+
+    expect(headers).toContain("/assets/*");
+    expect(headers).toContain("Cache-Control: public, max-age=31536000, immutable");
+  });
 });
