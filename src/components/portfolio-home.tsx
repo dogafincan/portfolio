@@ -55,7 +55,7 @@ function ProjectCard({
   loading?: "eager" | "lazy";
 }) {
   return (
-    <Card className="min-w-0">
+    <Card className="min-w-0 gap-2">
       <CardHeader className="gap-4">
         <Item
           variant="muted"
