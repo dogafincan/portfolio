@@ -137,8 +137,9 @@ describe("PortfolioHome", () => {
     }
     expect(projectsSection.getAttribute("data-slot")).toBe("portfolio-workbench");
     expect(projectsSection.className).toBe(
-      "grid w-full min-w-0 max-w-full flex-1 grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background",
+      "grid w-full min-w-0 max-w-full grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background",
     );
+    expect(projectsSection.className).not.toContain("flex-1");
     expect(projectsSection.firstElementChild?.className).toBe(
       "grid gap-4 lg:col-span-2 lg:grid-cols-2",
     );

@@ -17,7 +17,7 @@ treated as complete.
 | Done    | Remove footer/profile content        | 6, 8.1, 8.3, 13     | `96a0bc7` | Removes the visible content below the project workbench so the route ends on project cards.             |
 | Done    | Header social profile links          | 7, 8.1, 8.3, 9.1    | -         | Adds compact X and GitHub icon links between the header subtitle and project workbench.                 |
 | Done    | Keyboard-visible action focus        | 8.1, 9.4, 13        | -         | Keeps profile and live app links in DOM tab order with the same visible focus ring treatment.           |
-| Done    | Desktop viewport vertical centering  | 8.1, 9.1, 13        | -         | Centers the header and workbench on desktop when the first viewport has spare space below the cards.    |
+| Done    | Natural-height project workbench     | 8.1, 9.1, 13        | -         | Lets the workbench size to its project-card content instead of filling spare first-viewport height.     |
 | Done    | Unified page chrome background       | 9.5, 9.7, 13        | -         | Aligns safe areas, page background, shell insets, theme colors, and the atmosphere-to-page transition.  |
 | Pending | Project case-study pages             | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                       |
 | Pending | Production smoke scripts and runbook | 12, 15              | -         | Add portfolio-specific release gates when deploys need the same production-hardening depth as siblings. |
