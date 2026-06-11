@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 
+import sharp from "sharp";
 import { describe, expect, it } from "vite-plus/test";
 
 const ATMOSPHERE_SOURCE_ASSET_SIZE = { width: 864, height: 720 };
@@ -33,6 +34,28 @@ function readAvifIntrinsicSize(assetPath: string) {
   throw new Error(`Missing AVIF ispe size box in ${assetPath}.`);
 }
 
+async function readAvifPixel(assetPath: string, x: number, y: number) {
+  const { data, info } = await sharp(assetPath).ensureAlpha().raw().toBuffer({
+    resolveWithObject: true,
+  });
+  const offset = (y * info.width + x) * info.channels;
+
+  return {
+    r: data[offset],
+    g: data[offset + 1],
+    b: data[offset + 2],
+  };
+}
+
+function expectRgbClose(
+  actual: Awaited<ReturnType<typeof readAvifPixel>>,
+  expected: { r: number; g: number; b: number },
+) {
+  expect(Math.abs(actual.r - expected.r)).toBeLessThanOrEqual(1);
+  expect(Math.abs(actual.g - expected.g)).toBeLessThanOrEqual(1);
+  expect(Math.abs(actual.b - expected.b)).toBeLessThanOrEqual(1);
+}
+
 describe("global styles", () => {
   it("uses the system color scheme for dark mode", () => {
     const styles = readFileSync("src/styles.css", "utf8");
@@ -60,9 +83,9 @@ describe("global styles", () => {
     const darkMedia = styles.slice(darkMediaStart, styles.indexOf("\n}\n\n@media", darkMediaStart));
 
     expect(styles.match(/--portfolio-app-chrome-color:/g)).toHaveLength(3);
-    expect(lightRoot).toContain("--portfolio-app-chrome-color: #5ab6dc;");
-    expect(darkClass).toContain("--portfolio-app-chrome-color: #428ca9;");
-    expect(darkMedia).toContain("--portfolio-app-chrome-color: #428ca9;");
+    expect(lightRoot).toContain("--portfolio-app-chrome-color: #58bad9;");
+    expect(darkClass).toContain("--portfolio-app-chrome-color: #428fa8;");
+    expect(darkMedia).toContain("--portfolio-app-chrome-color: #428fa8;");
     expect(lightRoot).toContain("--portfolio-page-background: var(--portfolio-app-chrome-color);");
     expect(darkClass).toContain("--portfolio-page-background: var(--portfolio-app-chrome-color);");
     expect(darkMedia).toContain("--portfolio-page-background: var(--portfolio-app-chrome-color);");
@@ -104,7 +127,6 @@ describe("global styles", () => {
     );
     expect(styles).toContain("--portfolio-header-atmosphere-width: 100%;");
     expect(styles).not.toContain("--portfolio-header-atmosphere-fade-");
-    expect(styles).not.toContain("linear-gradient(");
     expect(styles).not.toMatch(
       /--portfolio-header-atmosphere-(?:height|repeat-start): [^;]*(?:svh|vh|dvh|lvh|%)/,
     );
@@ -123,6 +145,25 @@ describe("global styles", () => {
 
     for (const assetPath of ATMOSPHERE_REPEAT_ASSETS) {
       expect(readAvifIntrinsicSize(assetPath)).toEqual(ATMOSPHERE_REPEAT_ASSET_SIZE);
+    }
+  });
+
+  it("keeps Portfolio atmosphere artwork aligned with the shared chrome colors", async () => {
+    const lightChrome = { r: 0x58, g: 0xba, b: 0xd9 };
+    const darkChrome = { r: 0x42, g: 0x8f, b: 0xa8 };
+
+    for (const assetPath of [
+      "scripts/assets/page-atmosphere-source.avif",
+      "public/page-atmosphere.avif",
+    ]) {
+      expectRgbClose(await readAvifPixel(assetPath, 432, 0), lightChrome);
+    }
+
+    for (const assetPath of [
+      "scripts/assets/page-atmosphere-dark-source.avif",
+      "public/page-atmosphere-dark.avif",
+    ]) {
+      expectRgbClose(await readAvifPixel(assetPath, 432, 0), darkChrome);
     }
   });
 
@@ -150,9 +191,48 @@ describe("global styles", () => {
     expect(bodyBlock).not.toContain("height: var(--portfolio-header-atmosphere-height);");
     expect(bodyBlock).not.toContain("position: absolute;");
     expect(styles).not.toContain("body::before");
-    expect(styles).not.toContain("body::after");
     expect(styles).not.toContain("main.app-shell::before");
     expect(styles).not.toContain("--portfolio-header-clearance");
+  });
+
+  it("keeps the bottom chrome tail anchored at the document bottom behind app content", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const bodyStart = styles.indexOf("body {");
+    const bodyEnd = styles.indexOf("\n  }\n", bodyStart);
+    const bodyBlock = styles.slice(bodyStart, bodyEnd);
+    const bodyAfterStart = styles.indexOf("body::after {");
+    const bodyAfterEnd = styles.indexOf("\n  }\n", bodyAfterStart);
+    const bodyAfterBlock = styles.slice(bodyAfterStart, bodyAfterEnd);
+    const appShellStart = styles.indexOf(".app-shell {");
+    const appShellEnd = styles.indexOf("\n}", appShellStart);
+    const appShellBlock = styles.slice(appShellStart, appShellEnd);
+
+    expect(bodyAfterStart).toBeGreaterThan(-1);
+    expect(styles).toContain(
+      "--portfolio-bottom-chrome-tail-height: calc(10rem + env(safe-area-inset-bottom, 0px));",
+    );
+    expect(bodyBlock).toContain("position: relative;");
+    expect(bodyAfterBlock).toContain('content: "";');
+    expect(bodyAfterBlock).toContain("position: absolute;");
+    expect(bodyAfterBlock).not.toContain("position: fixed;");
+    expect(bodyAfterBlock).toContain("inset: auto 0 0;");
+    expect(bodyAfterBlock).toContain("height: var(--portfolio-bottom-chrome-tail-height);");
+    expect(bodyAfterBlock).toContain("pointer-events: none;");
+    expect(bodyAfterBlock).toContain("z-index: 0;");
+    expect(bodyAfterBlock).toContain("linear-gradient(");
+    expect(bodyAfterBlock).toContain("transparent 0%");
+    expect(bodyAfterBlock).toContain(
+      "color-mix(in oklab, var(--portfolio-app-chrome-color) 32%, transparent) 62%",
+    );
+    expect(bodyAfterBlock).toContain(
+      "color-mix(in oklab, var(--portfolio-app-chrome-color) 72%, transparent) 80%",
+    );
+    expect(bodyAfterBlock).toContain("var(--portfolio-app-chrome-color) 100%");
+    expect(bodyAfterBlock).toContain("radial-gradient(");
+    expect(bodyAfterBlock).toContain("var(--portfolio-bottom-chrome-cloud-color)");
+    expect(appShellBlock).toContain("position: relative;");
+    expect(appShellBlock).toContain("z-index: 1;");
+    expect(styles).not.toContain("main.app-shell::before");
   });
 
   it("uses viewport safe-area insets only on the content shell", () => {

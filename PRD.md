@@ -154,7 +154,7 @@ The current product includes:
 4. Project cards with app icon, name, short subtitle, and live app link.
 5. Live project links when available.
 6. App logo, favicon, install icons, manifest, and social preview image.
-7. Responsive shared light/dark atmosphere-to-page chrome with muted blue browser chrome.
+7. Responsive shared light/dark atmosphere-to-page chrome with muted blue browser chrome and document-bottom chrome tail.
 8. Regression tests for shared conventions.
 
 Future scope may include:
@@ -249,8 +249,8 @@ abuse is handled, and what privacy or retention policy applies.
 - Root viewport metadata should use `viewport-fit=cover`, with generated page
   artwork spanning safe areas and `.app-shell` padding adding
   `env(safe-area-inset-top/right/bottom/left)` around content.
-- Manifest colors should stay on the sampled blue page chrome color used by
-  the generated top atmosphere artwork.
+- Manifest colors should stay on the shared blue page chrome color used by
+  the generated top atmosphere artwork and document-bottom chrome tail.
 - Header logo images should define `width`, `height`, `sizes`, and `srcset`,
   and the header logo wrapper should preserve the logo's rounded-square shape
   while showing a visible border.

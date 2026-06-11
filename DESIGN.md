@@ -151,8 +151,8 @@ workbench areas across projects. Treat these rules as reusable system policy.
   `page-atmosphere-dark.avif` plus `page-atmosphere-repeat-dark.avif` in dark
   mode. Generate them with `npm run generate:atmosphere` from the source assets
   in `scripts/assets/`.
-- Keep the root/page safe-area background on the sampled top artwork colors:
-  `#5AB6DC` in light mode and `#428CA9` in dark mode. `theme-color`, manifest
+- Keep the root/page safe-area background on the shared app chrome colors:
+  `#58BAD9` in light mode and `#428FA8` in dark mode. `theme-color`, manifest
   colors, `--portfolio-app-chrome-color`, and `--portfolio-page-background`
   should stay aligned to those colors.
 - Use `viewport-fit=cover` so the generated `body` background can extend into
@@ -170,12 +170,18 @@ workbench areas across projects. Treat these rules as reusable system policy.
   color without repainting another blue header band.
 - Attach the generated top and repeat assets directly to `body` background
   layers. Crop them with fixed CSS background positioning and sizing rather
-  than adding positioned pseudo-elements or separate header-specific background
-  assets. The background treatment must not increase document scroll height.
-- Do not render CSS gradient fade layers, a `body::before` atmosphere layer, a
-  repeating `body::after` atmosphere layer, a separate cloud layer, fixed bottom
-  fades, generated mesh continuations, or a `main.app-shell::before` clearance
-  halo for app page chrome.
+  than adding positioned pseudo-elements for the header/top atmosphere or
+  separate header-specific background assets. The top/repeat background
+  treatment must not increase document scroll height.
+- Use a document-anchored `body::after` bottom chrome tail for end-of-page
+  browser chrome continuity. It must sit behind `.app-shell`, use
+  `pointer-events: none`, avoid adding scroll height, remain transparent at the
+  top, may include subtle lilac cloud texture above the final strip, and end in
+  the shared app chrome color at the absolute document bottom.
+- Do not render a `body::before` atmosphere layer, repeating `body::after`
+  atmosphere layer, fixed viewport-bottom fade, separate cloud layer, generated
+  mesh continuation, or `main.app-shell::before` clearance halo for app page
+  chrome.
 - Header title, subtitle, and profile/social icons should remain solid white so
   the app identity stays readable over the blue header artwork. The main header
   title should use `drop-shadow-xl` to match the logo depth.

@@ -5,8 +5,8 @@ import { AppErrorBoundary, AppRecovery } from "../components/app-recovery";
 import interLatinWghtNormal from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import appCss from "../styles.css?url";
 
-const APP_CHROME_COLOR = "#5AB6DC";
-const APP_CHROME_COLOR_DARK = "#428CA9";
+const APP_CHROME_COLOR = "#58BAD9";
+const APP_CHROME_COLOR_DARK = "#428FA8";
 
 export const Route = createRootRoute({
   head: () => ({
