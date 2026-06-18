@@ -9,6 +9,14 @@ export type PortfolioProject = {
 
 export const portfolioProjects: PortfolioProject[] = [
   {
+    name: "Memerank",
+    slug: "memerank",
+    subtitle: "A snapshot of the projects on Sui with the highest memetic value.",
+    icon: "/projects/memerank-icon.avif",
+    iconAlt: "Memerank app icon.",
+    liveUrl: "https://memerank.xyz",
+  },
+  {
     name: "Sui Swap",
     slug: "sui-swap",
     subtitle: "Swap between Sui assets in a focused, simple flow.",

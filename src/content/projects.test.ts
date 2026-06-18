@@ -12,6 +12,11 @@ describe("portfolioProjects", () => {
       })),
     ).toEqual([
       {
+        slug: "memerank",
+        name: "Memerank",
+        subtitle: "A snapshot of the projects on Sui with the highest memetic value.",
+      },
+      {
         slug: "sui-swap",
         name: "Sui Swap",
         subtitle: "Swap between Sui assets in a focused, simple flow.",

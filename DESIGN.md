@@ -257,7 +257,11 @@ workbench areas across projects. Treat these rules as reusable system policy.
 - Project data lives in `src/content/projects.ts`. Extend that structured data
   before creating one-off project markup.
 - Each card should show only the product-owned app icon, the app's exact title,
-  the app's exact subtitle, and a live app link.
+  approved portfolio card subtitle copy, and a live app link.
+- Keep the current four-card order in `src/content/projects.ts`: Memerank first
+  for the upper-left desktop slot, Sui Swap second for the upper-right slot, Sui
+  Airdrop third for the bottom-left slot, and Sui Snapshot fourth for the
+  bottom-right slot.
 - Place each product icon, project title, and project subtitle together inside
   one full-width shadcn `Item` using the muted variant. Keep the icon on the
   left, vertically centered, with the title and subtitle stacked to the right.
@@ -279,8 +283,9 @@ workbench areas across projects. Treat these rules as reusable system policy.
 - Explain what the project does before naming libraries or infrastructure.
 - Keep copy concrete and phase-accurate. Do not imply projects are live,
   production-ready, or complete unless the project record and links support it.
-- Keep project-card subtitles matched to the apps themselves. Save
-  implementation detail for future case-study pages.
+- Keep project-card subtitles matched to approved portfolio card copy. When a
+  project has no specifically approved card description, mirror the app's
+  concise subtitle. Save implementation detail for future case-study pages.
 - Avoid decorative product principles, generic claims, and repeated manifesto
   copy that delays access to the project list.
 - Technical depth belongs in future case-study pages when a project needs that

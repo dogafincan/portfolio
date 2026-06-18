@@ -72,13 +72,14 @@ describe("PortfolioHome", () => {
     expect(screen.queryByText("hello world")).toBeNull();
     expect(portfolioProjects.map((project) => project.slug)).not.toContain("portfolio");
     expect(portfolioProjects.map((project) => project.slug)).toEqual([
+      "memerank",
       "sui-swap",
       "sui-airdrop",
       "sui-snapshot",
     ]);
     expect(
       screen.getAllByRole("heading", { level: 3 }).map((heading) => heading.textContent),
-    ).toEqual(["Sui Swap", "Sui Airdrop", "Sui Snapshot"]);
+    ).toEqual(["Memerank", "Sui Swap", "Sui Airdrop", "Sui Snapshot"]);
     expect(screen.queryByRole("heading", { level: 3, name: "Portfolio" })).toBeNull();
 
     for (const project of portfolioProjects) {
@@ -156,6 +157,7 @@ describe("PortfolioHome", () => {
     expect(screen.queryByLabelText("View Sui Airdrop source")).toBeNull();
     expect(screen.queryByLabelText("View Sui Snapshot source")).toBeNull();
     expect(screen.queryByLabelText("View Sui Swap source")).toBeNull();
+    expect(screen.queryByLabelText("View Memerank source")).toBeNull();
     expect(screen.queryByText("Source")).toBeNull();
     expect(screen.queryByText("Live utility")).toBeNull();
     expect(screen.queryByText("Stack")).toBeNull();

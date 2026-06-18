@@ -19,6 +19,7 @@ treated as complete.
 | Done    | Keyboard-visible action focus        | 8.1, 9.4, 13        | -         | Keeps profile and live app links in DOM tab order with the same visible focus ring treatment.           |
 | Done    | Natural-height project workbench     | 8.1, 9.1, 13        | -         | Lets the workbench size to its project-card content instead of filling spare first-viewport height.     |
 | Done    | Unified page chrome background       | 9.5, 9.7, 13        | -         | Aligns safe areas, page background, shell insets, theme colors, and the atmosphere-to-page transition.  |
+| Done    | Memerank project card                | 7, 8.1, 9.2-9.4     | -         | Adds Memerank to the four-card project grid with the requested card copy and live app link.             |
 | Pending | Project case-study pages             | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                       |
 | Pending | Production smoke scripts and runbook | 12, 15              | -         | Add portfolio-specific release gates when deploys need the same production-hardening depth as siblings. |
 | Pending | Contact action beyond profile links  | 7, 8.3, 9.9         | -         | Add only when the portfolio needs a direct contact workflow beyond simple profile links.                |
@@ -214,8 +215,12 @@ abuse is handled, and what privacy or retention policy applies.
 
 - Project content lives in `src/content/projects.ts`.
 - Each project record includes name, slug, subtitle, icon, iconAlt, and liveUrl.
-- Project names and subtitles should exactly match the corresponding app's
-  current title and subtitle.
+- Project names should match the corresponding app's current title. Project
+  subtitles should use approved portfolio card copy; when no specific card copy
+  is specified, mirror the corresponding app's concise subtitle.
+- Current project-card order is Memerank, Sui Swap, Sui Airdrop, and Sui
+  Snapshot, which maps to upper-left, upper-right, bottom-left, and bottom-right
+  in the two-column desktop grid.
 - Do not list the portfolio website as one of its own projects.
 - `liveUrl` should only point to a useful public app surface.
 
