@@ -14,7 +14,7 @@ describe("portfolioProjects", () => {
       {
         slug: "memerank",
         name: "Memerank",
-        subtitle: "A snapshot of the projects on Sui with the highest memetic value.",
+        subtitle: "Find the Sui projects with the loudest signal.",
       },
       {
         slug: "sui-swap",

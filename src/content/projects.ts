@@ -11,7 +11,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     name: "Memerank",
     slug: "memerank",
-    subtitle: "A snapshot of the projects on Sui with the highest memetic value.",
+    subtitle: "Find the Sui projects with the loudest signal.",
     icon: "/projects/memerank-icon.avif",
     iconAlt: "Memerank app icon.",
     liveUrl: "https://memerank.xyz",
