@@ -15,7 +15,7 @@ The portfolio should reuse the proven stack and design direction from:
 - `~/Documents/memedex`
 
 Those sibling apps are the reference for TanStack Start, Vite+, Cloudflare
-Workers, shadcn/ui, Tailwind CSS v4, Inter, Lucide icons, shared page chrome,
+Workers, shadcn/ui, Tailwind CSS v4, Geist, Lucide icons, shared page chrome,
 and repo workflow conventions. The portfolio should keep the same general system
 while avoiding Sui-specific runtime dependencies unless they are explicitly
 needed.
@@ -132,7 +132,7 @@ Use this as the current stack:
 - shadcn/ui on Base UI primitives
 - shadcn `base-luma` style or preset
 - Tailwind CSS v4
-- Inter variable font via Fontsource
+- Geist variable font via Fontsource
 - Lucide for product UI icons
 - Cloudflare Workers deployment
 - Node.js `24.14.0` pinned through `.node-version` for local and Cloudflare
@@ -196,7 +196,7 @@ The current implementation follows the sibling conventions. Important files:
   portfolio surface
 - `src/lib/utils.ts`: shadcn `cn` helper
 - `src/routes/-__root.test.ts`: regression guard for manifest links, app logo
-  assets, Inter font preload ordering, and theme-color metadata
+  assets, Geist font preload ordering, and theme-color metadata
 - `src/routes/-index.test.ts`: regression guard for canonical and social
   preview metadata
 - `public/manifest.json`: PWA manifest colors and icons

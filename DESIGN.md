@@ -24,12 +24,12 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   surfaces, readable type, direct actions, and plain copy instead of promotional
   language.
 - Use the same app stack for product UI: shadcn components on Base UI
-  primitives, the `base-luma` style or preset, Tailwind CSS v4 tokens, Inter,
+  primitives, the `base-luma` style or preset, Tailwind CSS v4 tokens, Geist,
   and `lucide-react` for product icons.
 - Do not add another product UI icon family. New shadcn component generation,
   `components.json`, package dependencies, and regression tests should stay
   aligned with Lucide.
-- Preload the concrete Fontsource Inter latin `woff2` asset from the root
+- Preload the concrete Fontsource Geist latin `woff2` asset from the root
   document before the stylesheet link. Keep the preload order covered by the
   root head regression test.
 - Keep the shared chrome color separate from workbench, card, and form surface

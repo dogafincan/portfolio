@@ -5,7 +5,7 @@ Personal portfolio website for showcasing projects built by Doga Fincan.
 This repo started documentation-first and now renders a real portfolio index.
 The first implemented surface showcases built projects, links to live targets
 when available, and carries over the shared TanStack Start, shadcn/ui, Tailwind,
-Inter, Lucide, shared page chrome, social-preview, and verification conventions
+Geist, Lucide, shared page chrome, social-preview, and verification conventions
 from the sibling apps in `~/Documents/sui-swap`,
 `~/Documents/sui-snapshot`, `~/Documents/sui-airdrop`, and
 `~/Documents/memedex`.
@@ -88,7 +88,7 @@ with the same frontend baseline as `memedex`, trimmed for a portfolio site:
 - shadcn/ui on Base UI primitives
 - shadcn `base-luma` style or preset
 - Tailwind CSS v4
-- Inter variable font through Fontsource
+- Geist variable font through Fontsource
 - Lucide for product UI icons
 - Cloudflare Workers for deployment
 - Node.js `24.14.0` pinned through `.node-version` for local and Cloudflare
@@ -127,7 +127,7 @@ Design principles that should remain visible in day-to-day work:
 
 - Show real project content early.
 - Use the shared `DESIGN.md` `Header Section / Atmosphere-to-Page Background`
-  treatment, app logo system, Inter preload, Lucide icons, shadcn/Base UI
+  treatment, app logo system, Geist preload, Lucide icons, shadcn/Base UI
   primitives, and rounded muted workbench.
 - Treat `DESIGN.md`'s `Header Section / Atmosphere-to-Page Background` as the source
   of truth for browser/mobile safe-area color handling, shared blue theme and
@@ -173,7 +173,7 @@ The imported sibling organization now used here:
   `separator.tsx`: the portable shadcn/Base UI primitives copied from the
   sibling apps.
 - `src/routes/-__root.test.ts`: regression guard for app chrome, manifest
-  links, Inter preload ordering, and icon metadata.
+  links, Geist preload ordering, and icon metadata.
 - `src/routes/-index.test.ts`: regression guard for canonical URL and
   Open Graph/X metadata.
 - `src/styles.test.ts`: regression guard for the shared page chrome CSS.

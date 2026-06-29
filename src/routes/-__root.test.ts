@@ -22,10 +22,10 @@ describe("RootDocument head", () => {
     expect(source).toContain('const APP_CHROME_COLOR_DARK = "#428FA8";');
     expect(source).toContain('content: "width=device-width, initial-scale=1, viewport-fit=cover"');
     expect(source).toContain(
-      'import interLatinWghtNormal from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";',
+      'import geistLatinWghtNormal from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url";',
     );
     expect(source).toMatch(
-      /rel: "preload"[\s\S]*href: interLatinWghtNormal[\s\S]*as: "font"[\s\S]*type: "font\/woff2"[\s\S]*crossOrigin: "anonymous"[\s\S]*rel: "stylesheet"[\s\S]*href: appCss/,
+      /rel: "preload"[\s\S]*href: geistLatinWghtNormal[\s\S]*as: "font"[\s\S]*type: "font\/woff2"[\s\S]*crossOrigin: "anonymous"[\s\S]*rel: "stylesheet"[\s\S]*href: appCss/,
     );
     expect(source).toContain('name="theme-color"');
     expect(source).toContain("content={APP_CHROME_COLOR}");

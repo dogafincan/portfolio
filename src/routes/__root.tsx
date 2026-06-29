@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 
 import { AppErrorBoundary, AppRecovery } from "../components/app-recovery";
-import interLatinWghtNormal from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+import geistLatinWghtNormal from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url";
 import appCss from "../styles.css?url";
 
 const APP_CHROME_COLOR = "#58BAD9";
@@ -25,7 +25,7 @@ export const Route = createRootRoute({
     links: [
       {
         rel: "preload",
-        href: interLatinWghtNormal,
+        href: geistLatinWghtNormal,
         as: "font",
         type: "font/woff2",
         crossOrigin: "anonymous",

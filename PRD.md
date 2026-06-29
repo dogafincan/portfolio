@@ -359,7 +359,7 @@ The product is ready for the current portfolio scope when:
    and live app link.
 3. Live links open in a new browser tab.
 4. Project data is structured in `src/content/projects.ts`.
-5. The app uses the shared page chrome, logo assets, Inter preload, and manifest
+5. The app uses the shared page chrome, logo assets, Geist preload, and manifest
    conventions.
 6. Product UI icons use Lucide.
 7. Social metadata uses an absolute HTTPS image URL.
@@ -375,7 +375,7 @@ The product is ready for the current portfolio scope when:
 ## 16. One-paragraph product definition
 
 The product is a focused personal portfolio built on the same TanStack Start,
-Vite+, shadcn/Base UI, Tailwind, Inter, Lucide, and Cloudflare Workers system as
+Vite+, shadcn/Base UI, Tailwind, Geist, Lucide, and Cloudflare Workers system as
 the sibling Sui utility apps. It shows real projects first, using structured
 project records, product-owned app icons, concise plain-language subtitles, and
 live app links. It deliberately avoids listing itself as a project, source links
