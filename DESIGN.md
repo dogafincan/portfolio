@@ -64,6 +64,8 @@ recognizably consistent unless the portfolio intentionally needs an exception.
   shadcn `Item` surfaces instead of card-within-card layouts.
 - Do not place card containers inside app cards. If a compact nested surface is
   needed, use `Item`.
+- Cards and card-like `bg-card` panels should not use box shadows. Use borders,
+  rings, spacing, and muted surfaces for separation instead.
 - Give each project card a concise title and description. Put implementation
   details after the plain-language explanation of what the project does.
 - Keep each project card to one visible title/subtitle pattern. If the muted
