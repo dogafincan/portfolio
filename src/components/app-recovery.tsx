@@ -137,7 +137,7 @@ export class AppErrorBoundary extends Component<{ children: ReactNode }, AppErro
     if (this.state.hasError) {
       return (
         <main className="app-shell relative z-10 mx-auto flex min-h-screen w-full min-w-0 max-w-full flex-col justify-center text-foreground sm:max-w-3xl">
-          <section className="flex flex-col gap-6 rounded-3xl border bg-card p-6 text-card-foreground shadow-sm sm:p-8">
+          <section className="flex flex-col gap-6 rounded-3xl border bg-card p-6 text-card-foreground sm:p-8">
             <div className="flex flex-col gap-2">
               <h1 className="font-heading text-2xl font-semibold">The app needs a refresh</h1>
               <p className="text-base text-muted-foreground">
