@@ -65,7 +65,7 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-content"
       className={cn(
-        "flex flex-col gap-(--ds-surface-stack-gap) px-(--ds-surface-inset) [&>[data-slot=field-group]]:gap-(--ds-surface-stack-gap)",
+        "flex min-h-0 flex-1 flex-col gap-(--ds-surface-stack-gap) px-(--ds-surface-inset) [&>[data-slot=field-group]]:gap-(--ds-surface-stack-gap)",
         className,
       )}
       {...props}

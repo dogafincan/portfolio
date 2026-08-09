@@ -48,6 +48,8 @@ describe("Card", () => {
     expect(card?.className).toContain("gap-(--ds-surface-section-gap)");
     expect(card?.className).toContain("py-(--ds-surface-inset)");
     expect(content?.className).toContain("flex");
+    expect(content?.className).toContain("min-h-0");
+    expect(content?.className).toContain("flex-1");
     expect(content?.className).toContain("flex-col");
     expect(content?.className).toContain("gap-(--ds-surface-stack-gap)");
     expect(content?.className).toContain("px-(--ds-surface-inset)");

@@ -110,8 +110,13 @@ describe("PortfolioHome", () => {
     const cards = Array.from(projects.querySelectorAll('[data-slot="card"]'));
 
     expect(projects.className).toContain("lg:grid-cols-2");
+    expect(projects.className).toContain("items-stretch");
     expect(projects.className).not.toContain("bg-muted");
     expect(cards).toHaveLength(portfolioProjects.length);
+    for (const card of cards) {
+      expect(card.className).toContain("h-full");
+      expect(card.querySelector('[data-slot="card-content"]')?.className).toContain("flex-1");
+    }
 
     for (const project of portfolioProjects) {
       const item = projects.querySelector(`[data-project="${project.slug}"]`);

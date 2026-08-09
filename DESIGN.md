@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `dd65c985c9aa2da0e3fcb454f329a9894dd7d429` (committed draft; release tag pending)
+Doji Design System source revision: `4ef6777aacd43a3a5d847d200644ffc314d22f93` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -18,11 +18,13 @@ and footer section at every size. Sibling items in `CardContent` and
 `CardFooter` use 12px (`gap-3`); a direct `FieldGroup` in Card content must
 use that same stack instead of its stock `gap-7`.
 
-A Card stretched by a shared row or column must not expose a blank main area.
-When it has no task content after its header, use a growing `CardContent` with
-one dashed `Empty` that fills the remaining vertical space. Cards with real
-content, loading structure, feedback, or actions do not receive decorative
-Empty states.
+At the large breakpoint, page-level peer Cards use equal fractional columns and
+stretch to the tallest Card in their shared row. Their shrink-safe
+`CardContent` grows through the remaining main area; a nested `Empty` therefore
+fills a shorter Card instead of leaving detached whitespace. Stacked narrow
+Cards keep natural height, and a follow-on Card spans the full grid instead of
+being compared with a neighboring Card stack. Cards with real content, loading
+structure, feedback, or actions do not receive decorative Empty states.
 
 For UI work, apply the current product request first, this local contract
 second, and the canonical skill third. Canonical changes are synchronized by a
@@ -204,7 +206,10 @@ runtime package and no automated cross-repository mutation.
   focus rings. The shared wallet/submission action group remains immediately
   after the subtitle, before these product-specific profile links.
 - Project records render as a responsive one/two-column grid of standard
-  `Card` surfaces. Do not wrap the grid in a second card-like workbench.
+  `Card` surfaces. Each two-column row uses equal fractional tracks, and every
+  Card stretches to the tallest peer while its growing main area keeps each
+  footer action aligned at the bottom. Do not wrap the grid in a second
+  card-like workbench.
 - Each project card contains one 48px product icon, one title, one concise
   description, and—when a live URL exists—a full-width text-only
   **Open app** footer action.
