@@ -104,7 +104,7 @@ describe("PortfolioHome", () => {
     ).toEqual(["Memerank", "Sui Swap", "Sui Airdrop", "Sui Snapshot"]);
   });
 
-  it("keeps each project card to a semantic Item and a text-only primary action", () => {
+  it("keeps each project card content natural-height before its text-only primary action", () => {
     const { container } = renderPortfolioHome();
     const projects = screen.getByRole("region", { name: "Projects" });
     const cards = Array.from(projects.querySelectorAll('[data-slot="card"]'));
@@ -115,7 +115,10 @@ describe("PortfolioHome", () => {
     expect(cards).toHaveLength(portfolioProjects.length);
     for (const card of cards) {
       expect(card.className).toContain("h-full");
-      expect(card.querySelector('[data-slot="card-content"]')?.className).toContain("flex-1");
+      expect(
+        card.querySelector('[data-slot="card-content"]')?.className.split(/\s+/),
+      ).not.toContain("flex-1");
+      expect(card.querySelector('[data-slot="card-footer"]')).toBeTruthy();
     }
 
     for (const project of portfolioProjects) {
