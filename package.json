@@ -13,7 +13,8 @@
     "generate:identity": "node scripts/generate-identity-assets.mjs",
     "generate:og": "node scripts/generate-og.mjs",
     "test": "vp test",
-    "deploy": "vp build && wrangler deploy",
+    "deploy": "vp build && wrangler deploy --config wrangler.assets.jsonc",
+    "deploy:dry-run": "vp build && wrangler deploy --dry-run --config wrangler.assets.jsonc --env-file /dev/null",
     "cf-typegen": "node scripts/generate-worker-types.mjs"
   },
   "dependencies": {

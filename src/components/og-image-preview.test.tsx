@@ -22,6 +22,7 @@ describe("OgImagePreview", () => {
     const title = safeRegion?.querySelector('[data-slot="app-header-title"]');
     const accent = safeRegion?.querySelector('[data-slot="app-header-title-accent"]');
     const subtitle = safeRegion?.querySelector('[data-slot="app-header-subtitle"]');
+    const discovery = safeRegion?.querySelector('[data-slot="badge"]');
 
     expect(preview?.getAttribute("style")).toContain("color-scheme: dark");
     expect(preview?.className).toContain("h-[630px]");
@@ -55,5 +56,7 @@ describe("OgImagePreview", () => {
     expect(subtitle?.textContent).toBe(PORTFOLIO_PAGE_SUBTITLE);
     expect(subtitle?.className).toContain(dojiTypography.socialSubtitle);
     expect(subtitle?.className).toContain("max-w-[860px]");
+    expect(discovery?.textContent).toContain("Create CSV in DojiSnap");
+    expect(discovery?.className).toContain("h-14");
   });
 });

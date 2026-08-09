@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `7f5718e29bf7da92f9fb7b5c1c10fec5ffcdf19f` (committed draft; release tag pending)
+Doji Design System source revision: `dd65c985c9aa2da0e3fcb454f329a9894dd7d429` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -61,6 +61,10 @@ runtime package and no automated cross-repository mutation.
   rate limiting, service bindings, external providers, or mutations. Existing
   envelope, gateway, wallet, payment, and recovery implementation remains
   preserved behind this temporary boundary.
+- Production deploys `wrangler.assets.jsonc`, which has no Worker script or
+  runtime binding. Dynamic URLs receive the static 404 boundary without paid
+  Worker execution. The retained server boundary keeps the migration 503 as
+  defense in depth for deliberate backend tests or later deployment.
 
 ## Product Character
 
@@ -155,6 +159,11 @@ runtime package and no automated cross-repository mutation.
   `npx vp run generate:identity` regenerates the complete public identity family
   from `scripts/assets/app-logo-source.png`. The centered shared source geometry
   keeps the navbar subject's visible bottom aligned with the initial `D`.
+- The page navbar is an explicit 56px border box with a full-height content
+  rail and a 20px brand inset. Every primary page header places the compact
+  **Create CSV in DojiSnap** header-information badge above its title, linking
+  to `https://dojisnap.xyz` in a new tab with a 44px hit area around its 24px
+  visual.
 - The navbar contains identity and genuine navigation only. Primary page-header
   actions always read **Connect wallet** / **Disconnect wallet** and
   **Submit project** immediately below the subtitle. They stack in one bounded

@@ -91,8 +91,10 @@ The `/submit` feature retains Mysten dApp Kit and the Sui SDK behind the
 interaction boundary for later migration work. During the temporary
 Sui-to-Robinhood Chain lockout, the app does not mount that wallet runtime even
 after **Connect wallet** is activated. Anonymous portfolio and form loads remain
-prerendered static assets. The public Worker owns no storage or Sui provider
-binding. Its preserved dynamic surface is a same-origin, rate-limited,
+prerendered static assets. Production uses `wrangler.assets.jsonc`, which has no
+Worker script or runtime binding; dynamic URLs receive the static 404 boundary
+without paid Worker execution. The preserved backend Worker owns no storage or
+Sui provider binding. Its dormant dynamic surface is a same-origin, rate-limited,
 three-route proxy to the central Registry service, currently preceded by one
 temporary fail-closed migration response.
 
@@ -129,9 +131,9 @@ the repository for later migration rather than being deleted.
 - Portfolio has no project or asset selector trigger, so a selector migration
   Drawer is not applicable. A future locked selector would explain the migration
   only in its Empty surface, without an Alert below its trigger.
-- Every public dynamic API and broad server-function entry point returns the
+- Retained public dynamic API and broad server-function handlers return the
   same no-store JSON `503` migration response before envelope processing, rate
-  limits, service bindings, providers, or mutations.
+  limits, service bindings, providers, or mutations when tested or deliberately deployed.
 
 ## Product Constraints
 

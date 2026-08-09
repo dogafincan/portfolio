@@ -36,7 +36,7 @@ npx vp test
 npx vp run generate:og
 npx vp build
 npx vp run cf-typegen
-npx wrangler deploy --dry-run --config dist/server/wrangler.json
+npm run deploy:dry-run
 npm audit
 git diff --check
 ```

@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
+import { ArrowUpRight } from "lucide-react";
 
+import { Badge } from "@/components/ui/badge";
 import { WalletControl } from "@/components/wallet-control";
 import { buttonVariants } from "@/components/ui/button";
 import { dojiTypography } from "@/lib/doji-ui";
@@ -10,6 +12,7 @@ const HEADER_LOGO_DARK = "/app-logo-120-navbar-dark.png";
 const HEADER_LOGO_LIGHT_SRCSET = "/app-logo-120-navbar-light.png 120w";
 
 export const PORTFOLIO_APP_NAME = "Doga Fincan";
+export const DOJISNAP_URL = "https://dojisnap.xyz";
 export const PORTFOLIO_MAIN_CLASS_NAME =
   "app-shell mx-auto flex w-full min-w-0 max-w-full flex-1 flex-col gap-8 sm:max-w-6xl lg:gap-12";
 
@@ -80,12 +83,12 @@ export function PortfolioNavbar({ variant = "app" }: { variant?: "app" | "social
     >
       <nav
         aria-label={`${PORTFOLIO_APP_NAME} navigation`}
-        className="app-chrome-content mx-auto flex min-h-14 w-full max-w-6xl items-center py-2 sm:py-0"
+        className="app-chrome-content mx-auto flex h-full w-full max-w-6xl items-center"
         data-slot="app-navbar-content-rail"
       >
         <a
           aria-label={`${PORTFOLIO_APP_NAME} home`}
-          className="control-target flex h-11 min-w-0 items-center gap-0.5 rounded-xl text-card-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-focus-ring"
+          className="control-target ml-5 flex h-11 min-w-0 items-center gap-0.5 rounded-xl text-card-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-focus-ring"
           data-slot="app-navbar-brand"
           href="/"
         >
@@ -161,6 +164,25 @@ export function PortfolioPageHeader({
           social ? "contents" : "w-full gap-2 px-6 xl:gap-4",
         )}
       >
+        <Badge
+          className={
+            social
+              ? "h-14 gap-2.5 px-[30px] text-[30px] leading-[38px] has-data-[icon=inline-end]:pr-[26px] [&>svg]:size-[30px]!"
+              : "expanded-control-target relative overflow-visible"
+          }
+          variant="header-info"
+          render={
+            <a
+              href={DOJISNAP_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Create CSV in DojiSnap (opens in a new tab)"
+            />
+          }
+        >
+          Create CSV in DojiSnap
+          <ArrowUpRight data-icon="inline-end" data-lucide="dojisnap-link" aria-hidden="true" />
+        </Badge>
         <h1
           className={cn(
             social ? "max-w-[900px]" : "max-w-4xl",

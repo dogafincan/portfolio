@@ -71,10 +71,11 @@ Keep the site simple, fast, and consistent with the sibling apps.
 | Migration state | Sui-dependent frontend and server flows temporarily fail closed      |
 | Analytics       | Not specified                                                        |
 
-TanStack Start prerenders ordinary routes. Cloudflare Static Assets serves
-anonymous pages and the Doji 404 without invoking the Worker. Only three exact
-same-origin project-submission paths run the public Worker and forward through a
-narrow Registry service binding.
+TanStack Start prerenders ordinary routes. During the migration lock,
+`wrangler.assets.jsonc` serves anonymous pages and the Doji 404 without a
+Worker script or runtime binding. Three exact same-origin project-submission
+paths remain in the dormant backend contract and later forward through a narrow
+Registry service binding.
 
 ## 3. Problem statement
 
@@ -357,8 +358,9 @@ destination, abuse prevention, privacy, and retention.
 - Do not place a migration Alert below **Connect wallet**, a project/asset
   selector trigger, or a shared action cluster containing either control. Those
   controls explain the migration only inside the Empty surface they open.
-- Return one canonical no-store JSON `503` response from all public dynamic API
-  and broad server-function entry points before envelope processing, limiters,
+- Production dynamic URLs receive the static 404 boundary without paid Worker
+  execution. Retained dynamic API and broad server-function handlers return one
+  canonical no-store JSON `503` response before envelope processing, limiters,
   service bindings, providers, or mutations.
 - Preserve the existing Sui frontend and backend implementation for the later
   Robinhood Chain migration; this slice does not remove or rewrite it.

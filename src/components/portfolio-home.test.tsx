@@ -34,6 +34,7 @@ describe("PortfolioHome", () => {
     );
     const main = container.querySelector("main");
     const navbar = container.querySelector('[data-slot="app-navbar"]');
+    const navbarContent = container.querySelector('[data-slot="app-navbar-content-rail"]');
     const headerActions = container.querySelector('[data-slot="app-header-actions"]');
     const brand = screen.getByRole("link", { name: "Doga Fincan home" });
     const logo = brand.querySelector("img");
@@ -53,6 +54,7 @@ describe("PortfolioHome", () => {
     expect(subtitle.className).toContain("sm:text-lg");
     expect(navbar?.className).toContain("sticky");
     expect(navbar?.className).toContain("bg-card");
+    expect(navbarContent?.className).toContain("h-full");
     expect(navbar?.querySelector('[data-slot="app-header-actions"]')).toBeNull();
     expect(headerActions?.className).toContain("flex-col");
     expect(headerActions?.className).toContain("sm:flex-row");
@@ -63,6 +65,7 @@ describe("PortfolioHome", () => {
     ).toBeTruthy();
     expect(brand.className).toContain("control-target");
     expect(brand.className).toContain("gap-0.5");
+    expect(brand.className).toContain("ml-5");
     expect(brand.textContent).toContain("Doga Fincan");
     expect(logo?.className).toContain("translate-y-px");
     expect(logo?.className).not.toContain("rounded");
@@ -81,6 +84,12 @@ describe("PortfolioHome", () => {
       "/submit",
     );
     expect(headerActions?.parentElement?.querySelector("[data-chain-migration-alert]")).toBeNull();
+    const discovery = screen.getByRole("link", {
+      name: "Create CSV in DojiSnap (opens in a new tab)",
+    });
+    expect(discovery.getAttribute("href")).toBe("https://dojisnap.xyz");
+    expect(discovery.getAttribute("target")).toBe("_blank");
+    expect(discovery.className).toContain("expanded-control-target");
     expect(footer?.className).toContain("bg-card");
     expect(footer?.textContent).toContain("Copyright Doga Fincan");
 

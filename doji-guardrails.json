@@ -1,6 +1,11 @@
 {
-  "contractVersion": 1,
+  "contractVersion": 2,
   "application": "portfolio",
+  "publicDeliveryHardening": {
+    "classification": "assets-only",
+    "configEvidence": ["wrangler.assets.jsonc"],
+    "testEvidence": ["src/lib/public-delivery.test.ts"]
+  },
   "costAbuseHardening": {
     "classification": "dynamic",
     "rateLimitEvidence": ["wrangler.jsonc", "src/lib/dynamic-api-guard.server.ts"],

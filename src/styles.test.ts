@@ -391,7 +391,7 @@ describe("global styles", () => {
     expect(appShellBlock).toContain("var(--portfolio-app-shell-padding-block-start)");
     expect(appShellBlock).toContain("var(--portfolio-app-shell-padding-block-end)");
     expect(appShellBlock).toContain("var(--portfolio-app-shell-padding-inline)");
-    expect(navbarBlock).toContain("min-height: calc(3.5rem + env(safe-area-inset-top, 0px));");
+    expect(navbarBlock).toContain("height: calc(3.5rem + env(safe-area-inset-top, 0px));");
     expect(navbarBlock).toContain("padding-top: env(safe-area-inset-top, 0px);");
     expect(footerBlock).toContain("min-height: calc(3.5rem + env(safe-area-inset-bottom, 0px));");
     expect(footerBlock).toContain("padding-bottom: env(safe-area-inset-bottom, 0px);");

@@ -64,6 +64,10 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
 - Keep wallet and Sui code out of the initial static route chunk. Load it only
   after an explicit wallet interaction. Do not add Sui providers, storage,
   Durable Objects, KV, D1, R2, queues, or signing keys to the public Worker.
+- While the migration lock is active, production deploys the assets-only
+  `wrangler.assets.jsonc`, with no Worker entrypoint or runtime binding.
+  Retained backend handlers remain testable as defense in depth, but public
+  deploys and dry-runs must not use `dist/server/wrangler.json`.
 - Project fields and images remain in page memory until the fixed Registry
   payment succeeds. Do not persist drafts or make validation/prefill API calls.
 - A payment challenge is allowed only after a digest exists and must bind the

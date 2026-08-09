@@ -413,7 +413,7 @@
 }
 
 .app-navbar {
-  min-height: calc(3.5rem + env(safe-area-inset-top, 0px));
+  height: calc(3.5rem + env(safe-area-inset-top, 0px));
   padding-top: env(safe-area-inset-top, 0px);
 }
 
