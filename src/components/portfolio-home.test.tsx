@@ -3,74 +3,87 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vite-plus/test";
 
+import { AppProviders } from "@/components/app-providers";
 import { PortfolioHome } from "@/components/portfolio-home";
 import { portfolioProjects } from "@/content/projects";
+import {
+  PORTFOLIO_PAGE_SUBTITLE,
+  PORTFOLIO_PAGE_TITLE,
+  PORTFOLIO_PAGE_TITLE_ACCENT,
+} from "@/lib/portfolio-page-copy";
+
+function renderPortfolioHome() {
+  return render(
+    <AppProviders>
+      <PortfolioHome />
+    </AppProviders>,
+  );
+}
 
 describe("PortfolioHome", () => {
-  afterEach(() => {
-    cleanup();
-  });
+  afterEach(cleanup);
 
-  it("renders the portfolio header and real project cards", () => {
-    const { container } = render(<PortfolioHome />);
-    const title = screen.getByRole("heading", { level: 1, name: "Doga Fincan" });
+  it("renders the canonical page identity, app chrome, and real project cards", () => {
+    const { container } = renderPortfolioHome();
+    const title = screen.getByRole("heading", {
+      level: 1,
+      name: PORTFOLIO_PAGE_TITLE,
+    });
+    const subtitle = screen.getByText(
+      /I’m Doga Fincan, a developer interested in language learning/,
+    );
     const main = container.querySelector("main");
-    const appHeader = title.closest("header");
-    const appLogo = container.querySelector('[data-slot="app-logo"]');
-    const appLogoFrame = appLogo?.querySelector('[data-slot="app-logo-frame"]');
-    const appLogoImage = container.querySelector('[data-slot="app-logo-image"]');
-    const appTitleBlock = title.parentElement;
-    const appSubtitle = appTitleBlock?.querySelector("p");
-    const socialLinks = container.querySelector('[data-slot="profile-links"]');
-    const xLink = screen.getByRole("link", { name: "Open Doga Fincan on X" });
-    const githubLink = screen.getByRole("link", { name: "Open Doga Fincan on GitHub" });
-    const workbench = container.querySelector('[data-slot="portfolio-workbench"]');
+    const navbar = container.querySelector('[data-slot="app-navbar"]');
+    const headerActions = container.querySelector('[data-slot="app-header-actions"]');
+    const brand = screen.getByRole("link", { name: "Doga Fincan home" });
+    const logo = brand.querySelector("img");
+    const footer = container.querySelector("footer");
 
-    expect(main?.className).toBe(
-      "app-shell relative z-10 mx-auto flex min-h-screen w-full min-w-0 max-w-full flex-col gap-8 text-foreground sm:max-w-6xl",
+    expect(main?.className).toContain("app-shell");
+    expect(main?.className).toContain("gap-8");
+    expect(title.className).toContain("text-3xl");
+    expect(title.className).toContain("xl:text-5xl");
+    expect(Array.from(PORTFOLIO_PAGE_TITLE)).toHaveLength(40);
+    expect(Array.from(PORTFOLIO_PAGE_SUBTITLE)).toHaveLength(155);
+    expect(title.querySelector(".text-page-title-accent")?.textContent).toBe(
+      PORTFOLIO_PAGE_TITLE_ACCENT,
     );
-    expect(main?.firstElementChild).toBe(appHeader);
-    expect(appHeader?.parentElement).toBe(main);
-    expect(appHeader?.className).toBe("flex flex-col items-center gap-4 text-center text-white");
-    expect(appTitleBlock?.className).toBe("flex min-w-0 flex-col gap-2");
-    expect(title.className).toBe(
-      "text-balance text-4xl leading-tight font-bold tracking-tight text-white drop-shadow-xl",
+    expect(PORTFOLIO_PAGE_TITLE.endsWith(PORTFOLIO_PAGE_TITLE_ACCENT)).toBe(true);
+    expect(subtitle.className).toContain("text-base");
+    expect(subtitle.className).toContain("sm:text-lg");
+    expect(navbar?.className).toContain("sticky");
+    expect(navbar?.className).toContain("bg-card");
+    expect(navbar?.querySelector('[data-slot="app-header-actions"]')).toBeNull();
+    expect(headerActions?.className).toContain("flex-col");
+    expect(headerActions?.className).toContain("sm:flex-row");
+    expect(headerActions?.className).toContain("sm:[&>*]:px-6");
+    expect(headerActions?.className).toContain("xl:mt-2");
+    expect(
+      headerActions?.previousElementSibling?.querySelector('[data-slot="page-subtitle"]'),
+    ).toBeTruthy();
+    expect(brand.className).toContain("control-target");
+    expect(brand.className).toContain("gap-0.5");
+    expect(brand.textContent).toContain("Doga Fincan");
+    expect(logo?.className).toContain("translate-y-px");
+    expect(logo?.className).not.toContain("rounded");
+    expect(logo?.parentElement?.className).not.toContain("overflow-hidden");
+    expect(logo?.getAttribute("src")).toBe("/app-logo-120-navbar-light.png");
+    expect(logo?.getAttribute("srcset")).toBe("/app-logo-120-navbar-light.png 120w");
+    expect(logo?.previousElementSibling?.getAttribute("srcset")).toBe(
+      "/app-logo-120-navbar-dark.png",
     );
-    expect(appSubtitle).toBeNull();
-    expect(appHeader?.textContent).not.toContain("I'm into learning languages");
-    expect(socialLinks?.className).toBe(
-      "flex -mt-[0.9375rem] -mb-[0.9375rem] items-center justify-center gap-2 text-white",
+    expect(logo?.getAttribute("sizes")).toBe("32px");
+    expect(logo?.getAttribute("width")).toBe("32");
+    expect(logo?.getAttribute("height")).toBe("32");
+    const connectWallet = screen.getByRole("button", { name: "Connect wallet" });
+    expect(connectWallet.hasAttribute("disabled")).toBe(false);
+    expect(screen.getByRole("link", { name: "Submit project" }).getAttribute("href")).toBe(
+      "/submit",
     );
-    expect(socialLinks?.previousElementSibling).toBe(appTitleBlock);
-    expect(socialLinks?.parentElement).toBe(appHeader);
-    expect(workbench?.previousElementSibling).toBe(appHeader);
-    expect(xLink.getAttribute("href")).toBe("https://x.com/dogafincan");
-    expect(xLink.getAttribute("target")).toBe("_blank");
-    expect(xLink.getAttribute("rel")).toBe("noreferrer");
-    expect(githubLink.getAttribute("href")).toBe("https://github.com/dogafincan");
-    expect(githubLink.getAttribute("target")).toBe("_blank");
-    expect(githubLink.getAttribute("rel")).toBe("noreferrer");
-    for (const link of [xLink, githubLink]) {
-      expect(link.className).toBe(
-        "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-white hover:bg-white/12 transition-colors focus-visible:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-white/45",
-      );
-    }
-    expect(socialLinks?.querySelectorAll("svg").length).toBe(2);
-    for (const icon of socialLinks?.querySelectorAll("svg") ?? []) {
-      expect(icon.className.baseVal).toBe("size-[1.5625rem] drop-shadow-xl");
-    }
-    expect(appLogo?.className).toBe("relative size-15 shrink-0 drop-shadow-xl");
-    expect(appLogo?.className).not.toContain("rounded-full");
-    expect(appLogoFrame?.className).toBe(
-      "size-full overflow-hidden rounded-xl border border-neutral-200 bg-white",
-    );
-    expect(appLogoFrame?.firstElementChild).toBe(appLogoImage);
-    expect(appLogoImage?.getAttribute("src")).toBe("/app-logo-120.png");
-    expect(appLogoImage?.getAttribute("srcset")).toBe(
-      "/app-logo-120.png 120w, /apple-touch-icon.png 180w",
-    );
-    expect(screen.queryByText("hello world")).toBeNull();
-    expect(portfolioProjects.map((project) => project.slug)).not.toContain("portfolio");
+    expect(headerActions?.parentElement?.querySelector("[data-chain-migration-alert]")).toBeNull();
+    expect(footer?.className).toContain("bg-card");
+    expect(footer?.textContent).toContain("Copyright Doga Fincan");
+
     expect(portfolioProjects.map((project) => project.slug)).toEqual([
       "memerank",
       "sui-swap",
@@ -78,147 +91,68 @@ describe("PortfolioHome", () => {
       "sui-snapshot",
     ]);
     expect(
-      screen.getAllByRole("heading", { level: 3 }).map((heading) => heading.textContent),
+      screen.getAllByRole("heading", { level: 2 }).map((heading) => heading.textContent),
     ).toEqual(["Memerank", "Sui Swap", "Sui Airdrop", "Sui Snapshot"]);
-    expect(screen.queryByRole("heading", { level: 3, name: "Portfolio" })).toBeNull();
+  });
+
+  it("keeps each project card to a semantic Item and a text-only primary action", () => {
+    const { container } = renderPortfolioHome();
+    const projects = screen.getByRole("region", { name: "Projects" });
+    const cards = Array.from(projects.querySelectorAll('[data-slot="card"]'));
+
+    expect(projects.className).toContain("lg:grid-cols-2");
+    expect(projects.className).not.toContain("bg-muted");
+    expect(cards).toHaveLength(portfolioProjects.length);
 
     for (const project of portfolioProjects) {
-      expect(screen.getByRole("heading", { level: 3, name: project.name })).toBeTruthy();
-      expect(screen.getByText(project.subtitle)).toBeTruthy();
-      expect(screen.queryByLabelText(`View ${project.name} source`)).toBeNull();
+      const item = projects.querySelector(`[data-project="${project.slug}"]`);
+      const image = screen.getByAltText(project.iconAlt);
+      const action = screen.getByRole("link", { name: `Open ${project.name} app` });
 
-      const summaryItem = container.querySelector(
-        `[data-slot="project-summary-item"][data-project="${project.slug}"]`,
+      expect(item?.getAttribute("data-variant")).toBe("muted");
+      expect(item?.className).toContain("bg-muted");
+      expect(item?.className).not.toContain("bg-muted/50");
+      expect(item?.querySelector('[data-slot="item-title"] h2')?.textContent).toBe(project.name);
+      expect(item?.querySelector('[data-slot="item-description"]')?.textContent).toBe(
+        project.subtitle,
       );
-      const icon = screen.getByAltText(project.iconAlt);
-      const iconMedia = summaryItem?.querySelector('[data-slot="item-media"]');
-      const itemContent = summaryItem?.querySelector('[data-slot="item-content"]');
-      const itemTitle = summaryItem?.querySelector('[data-slot="item-title"]');
-      const itemDescription = summaryItem?.querySelector('[data-slot="item-description"]');
-      expect(summaryItem?.className).toBe(
-        "group/item flex w-full items-center rounded-2xl border text-sm transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 [a]:transition-colors [a]:hover:bg-muted border-transparent bg-muted/50 gap-3.5 px-4 py-3.5 min-h-32 flex-nowrap overflow-hidden sm:min-h-36",
-      );
-      expect(iconMedia?.className).toBe(
-        "flex shrink-0 items-center justify-center gap-2 self-center [&_svg]:pointer-events-none [&_svg]:text-current size-[2.8125rem] overflow-hidden rounded-[0.875rem] border border-border bg-background",
-      );
-      expect(summaryItem?.firstElementChild).toBe(iconMedia);
-      expect(iconMedia?.firstElementChild).toBe(icon);
-      expect(iconMedia?.nextElementSibling).toBe(itemContent);
-      expect(itemContent?.contains(itemTitle ?? null)).toBe(true);
-      expect(itemContent?.contains(itemDescription ?? null)).toBe(true);
-      expect(itemTitle?.querySelector("h3")?.textContent).toBe(project.name);
-      expect(itemDescription?.textContent).toBe(project.subtitle);
-      expect(summaryItem?.querySelector('[data-slot="card-title"]')).toBeNull();
-      expect(summaryItem?.querySelector('[data-slot="card-description"]')).toBeNull();
-      expect(icon.getAttribute("data-slot")).toBe("project-icon");
-      expect(icon.getAttribute("src")).toBe(project.icon);
-      expect(icon.getAttribute("width")).toBe("45");
-      expect(icon.getAttribute("height")).toBe("45");
-      expect(icon.className).toBe("size-full object-cover");
-
-      expect(screen.getByLabelText(`Open ${project.name} app`).getAttribute("href")).toBe(
-        project.liveUrl,
-      );
-      expect(screen.getByLabelText(`Open ${project.name} app`).getAttribute("target")).toBe(
-        "_blank",
-      );
+      expect(image.getAttribute("src")).toBe(project.icon);
+      expect(image.getAttribute("width")).toBe("48");
+      expect(image.getAttribute("height")).toBe("48");
+      expect(action.getAttribute("href")).toBe(project.liveUrl);
+      expect(action.getAttribute("target")).toBe("_blank");
+      expect(action.className).toContain("control-target");
+      expect(action.className).toContain("w-full");
+      expect(action.querySelector("svg")).toBeNull();
+      expect(action.textContent).toBe("Open app");
     }
+
+    expect(container.innerHTML).not.toContain("gradient");
+    expect(container.innerHTML).not.toContain("drop-shadow");
+    expect(container.innerHTML).not.toContain("page-atmosphere");
   });
 
-  it("keeps project cards limited to icon, title, subtitle, and app link", () => {
-    const { container } = render(<PortfolioHome />);
-    const projectsSection = screen.getByRole("region", { name: "Projects" });
-    const projectCards = Array.from(projectsSection.querySelectorAll('[data-slot="card"]'));
+  it("keeps profile and project actions keyboard reachable with canonical focus and target geometry", () => {
+    renderPortfolioHome();
 
-    expect(projectCards.length).toBe(portfolioProjects.length);
-    for (const card of projectCards) {
-      expect(card.className).toBe(
-        "group/card flex flex-col overflow-hidden rounded-4xl bg-card py-6 text-sm text-card-foreground ring-1 ring-foreground/5 has-[>img:first-child]:pt-0 data-[size=sm]:gap-4 data-[size=sm]:py-4 dark:ring-foreground/10 *:[img:first-child]:rounded-t-4xl *:[img:last-child]:rounded-b-4xl min-w-0 gap-6",
-      );
-    }
-    expect(projectsSection.getAttribute("data-slot")).toBe("portfolio-workbench");
-    expect(projectsSection.className).toBe(
-      "grid w-full min-w-0 max-w-full grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background",
-    );
-    expect(projectsSection.className).not.toContain("flex-1");
-    expect(projectsSection.firstElementChild?.className).toBe(
-      "grid gap-4 lg:col-span-2 lg:grid-cols-2",
-    );
-    expect(screen.queryByRole("heading", { level: 2, name: "Projects" })).toBeNull();
-    expect(screen.queryByRole("heading", { level: 2, name: "Build Principles" })).toBeNull();
-    expect(
-      screen.queryByText("Real project surfaces come first here:", { exact: false }),
-    ).toBeNull();
-    expect(container.querySelector("#principles")).toBeNull();
-    expect(projectsSection.nextElementSibling).toBeNull();
-    expect(
-      screen.queryByText("Built with the same TanStack Start, Vite+", { exact: false }),
-    ).toBeNull();
-    expect(screen.queryByLabelText("View Sui Airdrop source")).toBeNull();
-    expect(screen.queryByLabelText("View Sui Snapshot source")).toBeNull();
-    expect(screen.queryByLabelText("View Sui Swap source")).toBeNull();
-    expect(screen.queryByLabelText("View Memerank source")).toBeNull();
-    expect(screen.queryByText("Source")).toBeNull();
-    expect(screen.queryByText("Live utility")).toBeNull();
-    expect(screen.queryByText("Stack")).toBeNull();
-    expect(screen.queryByText("Product design,", { exact: false })).toBeNull();
-    expect(screen.queryByText("TanStack Start", { exact: false })).toBeNull();
-    expect(screen.queryByText("CSV cleanup before", { exact: false })).toBeNull();
-    expect(screen.queryByText("Worker-safe snapshot", { exact: false })).toBeNull();
-    expect(container.querySelectorAll('[data-slot="project-icon"]').length).toBe(
-      portfolioProjects.length,
-    );
-    expect(container.querySelectorAll('[data-slot="project-summary-item"]').length).toBe(
-      portfolioProjects.length,
-    );
-    expect(container.querySelector('[data-slot="project-summary-item"][style]')).toBeNull();
-    expect(
-      container.querySelector('[data-slot="project-summary-item"].bg-muted\\/50'),
-    ).toBeTruthy();
-    expect(
-      container.querySelector(
-        '[data-slot="item-media"].shadow-\\[0_1rem_2\\.5rem_rgb\\(15_23_42\\/0\\.14\\)\\]',
-      ),
-    ).toBeNull();
-    expect(container.querySelectorAll('[data-slot="card-title"]').length).toBe(0);
-    expect(container.querySelectorAll('[data-slot="card-description"]').length).toBe(0);
-    expect(screen.getAllByRole("link", { name: /Open .* app/ }).length).toBe(
-      portfolioProjects.length,
-    );
-    expect(container.querySelectorAll('[data-icon="inline-start"]').length).toBe(
-      portfolioProjects.length,
-    );
-  });
-
-  it("keeps profile and app actions in the keyboard tab order", () => {
-    render(<PortfolioHome />);
-
-    const expectedKeyboardTargets = [
-      "Open Doga Fincan on X",
-      "Open Doga Fincan on GitHub",
-      ...portfolioProjects.map((project) => `Open ${project.name} app`),
+    const profileLinks = [
+      screen.getByRole("link", { name: "Open Doga Fincan on X" }),
+      screen.getByRole("link", { name: "Open Doga Fincan on GitHub" }),
     ];
-
-    const keyboardTargets = screen.getAllByRole("link").filter((link) => {
-      const label = link.getAttribute("aria-label");
-      return label !== null && expectedKeyboardTargets.includes(label);
-    });
-
-    expect(keyboardTargets.map((link) => link.getAttribute("aria-label"))).toEqual(
-      expectedKeyboardTargets,
+    const projectLinks = portfolioProjects.map((project) =>
+      screen.getByRole("link", { name: `Open ${project.name} app` }),
     );
 
-    for (const target of keyboardTargets) {
+    for (const target of [...profileLinks, ...projectLinks]) {
       expect(target.tabIndex).toBe(0);
-      expect(target.className).toContain("transition-colors");
-      expect(target.className).toContain("focus-visible:transition-none");
-      expect(target.className).toContain("focus-visible:outline-none");
-      expect(target.className).toContain("focus-visible:ring-2");
-      expect(target.className).toContain("focus-visible:ring-slate-950/40");
-      expect(target.className).toContain("focus-visible:ring-offset-2");
-      expect(target.className).toContain("focus-visible:ring-offset-background");
-      expect(target.className).not.toContain("focus-visible:outline-4");
-      expect(target.className).not.toContain("focus-visible:outline-sky-700");
+      expect(target.className).toContain("control-target");
+      expect(target.className).toContain("focus-visible:ring-3");
+      expect(target.className).toContain("focus-visible:ring-focus-ring");
+    }
+    for (const link of profileLinks) {
+      expect(link.className).toContain("size-11");
+      expect(link.className).toContain("bg-control-info");
+      expect(link.querySelector("svg")?.getAttribute("class")).toBe("size-5");
     }
   });
 });

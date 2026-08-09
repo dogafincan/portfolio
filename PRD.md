@@ -6,23 +6,27 @@ This table tracks implementation slices for future chats. `Done` rows are
 already implemented. `Pending` rows are planned work only and should not be
 treated as complete.
 
-| Status  | Slice                                | PRD coverage        | Commit    | Notes                                                                                                   |
-| ------- | ------------------------------------ | ------------------- | --------- | ------------------------------------------------------------------------------------------------------- |
-| Done    | Project showcase surface             | 1, 7, 8, 9, 10      | `e221b4d` | Replaces the starter page with a real portfolio route, structured sibling-project records and cards.    |
-| Done    | Shared app chrome and metadata       | 9.5-9.7, 12, 13, 15 | `e221b4d` | Adds logo assets, page chrome, root metadata, social preview assets, and regression coverage.           |
-| Done    | Remove project-section intro copy    | 8.1, 9.1, 13        | `3b6d334` | Removes the visible `Projects` heading/subtitle so the project cards lead the workbench.                |
-| Done    | Align project workbench container    | 8.1, 9.1, 13        | `05aff21` | Matches the portfolio workbench container to the sibling Snapshot/Airdrop workbench treatment.          |
-| Done    | Remove build-principles section      | 6, 8.1, 9.1         | `ad7c462` | Removes the extra principles section and keeps the route focused on project cards.                      |
-| Done    | Align header typography              | 8.1, 9.1, 13        | `88a46d0` | Matches the portfolio title/subtitle sizing, weight, tracking, and foreground color to sibling apps.    |
-| Done    | Remove footer/profile content        | 6, 8.1, 8.3, 13     | `96a0bc7` | Removes the visible content below the project workbench so the route ends on project cards.             |
-| Done    | Header social profile links          | 7, 8.1, 8.3, 9.1    | -         | Adds compact X and GitHub icon links between the header subtitle and project workbench.                 |
-| Done    | Keyboard-visible action focus        | 8.1, 9.4, 13        | -         | Keeps profile and live app links in DOM tab order with the same visible focus ring treatment.           |
-| Done    | Natural-height project workbench     | 8.1, 9.1, 13        | -         | Lets the workbench size to its project-card content instead of filling spare first-viewport height.     |
-| Done    | Unified page chrome background       | 9.5, 9.7, 13        | -         | Aligns safe areas, page background, shell insets, theme colors, and the atmosphere-to-page transition.  |
-| Done    | Memerank project card                | 7, 8.1, 9.2-9.4     | -         | Adds Memerank to the four-card project grid with the requested card copy and live app link.             |
-| Pending | Project case-study pages             | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                       |
-| Pending | Production smoke scripts and runbook | 12, 15              | -         | Add portfolio-specific release gates when deploys need the same production-hardening depth as siblings. |
-| Pending | Contact action beyond profile links  | 7, 8.3, 9.9         | -         | Add only when the portfolio needs a direct contact workflow beyond simple profile links.                |
+| Status      | Slice                               | PRD coverage        | Commit    | Notes                                                                                                                                                                                                                                                                                       |
+| ----------- | ----------------------------------- | ------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Done        | Project showcase surface            | 1, 7, 8, 9, 10      | `e221b4d` | Replaces the starter page with a real portfolio route, structured sibling-project records and cards.                                                                                                                                                                                        |
+| Done        | Shared app chrome and metadata      | 9.5-9.7, 12, 13, 15 | `e221b4d` | Adds logo assets, page chrome, root metadata, social preview assets, and regression coverage.                                                                                                                                                                                               |
+| Done        | Remove project-section intro copy   | 8.1, 9.1, 13        | `3b6d334` | Removes the visible `Projects` heading/subtitle so the project cards lead the workbench.                                                                                                                                                                                                    |
+| Done        | Align project workbench container   | 8.1, 9.1, 13        | `05aff21` | Matches the portfolio workbench container to the sibling Snapshot/Airdrop workbench treatment.                                                                                                                                                                                              |
+| Done        | Remove build-principles section     | 6, 8.1, 9.1         | `ad7c462` | Removes the extra principles section and keeps the route focused on project cards.                                                                                                                                                                                                          |
+| Done        | Align header typography             | 8.1, 9.1, 13        | `88a46d0` | Matches the portfolio title/subtitle sizing, weight, tracking, and foreground color to sibling apps.                                                                                                                                                                                        |
+| Done        | Remove footer/profile content       | 6, 8.1, 8.3, 13     | `96a0bc7` | Removes the visible content below the project workbench so the route ends on project cards.                                                                                                                                                                                                 |
+| Done        | Header social profile links         | 7, 8.1, 8.3, 9.1    | -         | Adds compact X and GitHub icon links between the header subtitle and project workbench.                                                                                                                                                                                                     |
+| Done        | Keyboard-visible action focus       | 8.1, 9.4, 13        | -         | Keeps profile and live app links in DOM tab order with the same visible focus ring treatment.                                                                                                                                                                                               |
+| Done        | Natural-height project workbench    | 8.1, 9.1, 13        | -         | Lets the workbench size to its project-card content instead of filling spare first-viewport height.                                                                                                                                                                                         |
+| Done        | Unified page chrome background      | 9.5, 9.7, 13        | -         | Aligns safe areas, page background, shell insets, and theme colors. The later Doji Design System 1.0 migration supersedes its original atmosphere treatment.                                                                                                                                |
+| Done        | Memerank project card               | 7, 8.1, 9.2-9.4     | -         | Adds Memerank to the four-card project grid with the requested card copy and live app link.                                                                                                                                                                                                 |
+| Done        | Central Registry project submission | 2, 5, 7, 8.4, 12-15 | -         | Static form, lazy wallet, generated contract, digest-bound recovery wire, static 404, narrow gateway, environment-isolated Worker type generation, and audited build dependencies are implemented. Activation remains fail closed until wallet publication.                                 |
+| Done        | Temporary chain migration lockout   | 2, 7, 8.5, 9.10, 12 | -         | Preserves the Sui implementation while making wallet, payment, recovery, submission, and public dynamic entry points inaccessible during the Robinhood Chain migration. Static portfolio content remains available.                                                                         |
+| Done        | Doji Design System 1.0 migration    | 8-9, 13, 15         | -         | Replaces legacy atmosphere and showcase exceptions with the canonical neutral canvas, raised chrome, standard Cards, text-only actions, static 404, and forced-dark social composition. Immutable source revision `5df1b9c102d9a28abc5437ed70b22fcba3b74c93` remains the released baseline. |
+| In progress | Design-system draft migration       | 8-9, 13, 15         | -         | Adopts the Doji Design System `1.0.1-draft`: semantic descriptions render in full, Alert/Item copy targets one or two lines when possible, and the primary header follows the shared shadcn-scale copy target. Adoption remains `migrating` until release and proof gates pass.             |
+| Pending     | Project case-study pages            | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                                                                                                                                                                                                           |
+| In progress | Production release operations       | 12, 15              | -         | A portfolio-specific runbook now records release gates, static/network proof, binding-operation budgets, and rollback. A repeatable browser smoke script remains pending.                                                                                                                   |
+| Pending     | Contact action beyond profile links | 7, 8.3, 9.9         | -         | Add only when the portfolio needs a direct contact workflow beyond simple profile links.                                                                                                                                                                                                    |
 
 ---
 
@@ -44,32 +48,33 @@ Keep the site simple, fast, and consistent with the sibling apps.
 
 ## 2. Product decisions already made
 
-| Area            | Decision                                                           |
-| --------------- | ------------------------------------------------------------------ |
-| App surface     | Single `/` route until case-study pages are justified              |
-| Primary content | Structured project records in `src/content/projects.ts`            |
-| Current visuals | Product-owned app icons in compact project cards                   |
-| Frontend        | React 19                                                           |
-| App framework   | TanStack Start and TanStack Router                                 |
-| Toolchain       | Vite+                                                              |
-| Hosting         | Cloudflare Workers                                                 |
-| UI components   | See `DESIGN.md`                                                    |
-| Design language | See `DESIGN.md`                                                    |
-| Styling         | See `DESIGN.md`                                                    |
-| Icons           | Lucide only for product UI                                         |
-| Design source   | `DESIGN.md` owns UI, copy, layout, icons, and social preview rules |
-| Human docs      | `README.md` explains product, workflow, commands, and deployment   |
-| Agent docs      | `AGENTS.md` explains repo rules, verification, and work habits     |
-| Sui runtime     | Not included unless a future portfolio feature explicitly needs it |
-| Content backend | None; repo-owned structured content is the current source of truth |
-| Auth            | None                                                               |
-| Wallet flows    | None                                                               |
-| Analytics       | Not specified                                                      |
+| Area            | Decision                                                             |
+| --------------- | -------------------------------------------------------------------- |
+| App surface     | Static `/` showcase plus shared `/submit` project flow               |
+| Primary content | Structured project records in `src/content/projects.ts`              |
+| Current visuals | Product-owned app icons in compact project cards                     |
+| Frontend        | React 19                                                             |
+| App framework   | TanStack Start and TanStack Router                                   |
+| Toolchain       | Vite+                                                                |
+| Hosting         | Cloudflare Workers                                                   |
+| UI components   | See `DESIGN.md`                                                      |
+| Design language | See `DESIGN.md`                                                      |
+| Styling         | See `DESIGN.md`                                                      |
+| Icons           | Lucide only for product UI                                           |
+| Design source   | `DESIGN.md` owns UI, copy, layout, icons, and social preview rules   |
+| Human docs      | `README.md` explains product, workflow, commands, and deployment     |
+| Agent docs      | `AGENTS.md` explains repo rules, verification, and work habits       |
+| Sui runtime     | Interaction-gated wallet/payment code; absent from anonymous payload |
+| Content backend | Showcase stays repo-owned; submissions go to the central Registry    |
+| Auth            | No account auth; paying wallet proves paid submission/recovery       |
+| Wallet flows    | Connect/disconnect, fixed 10 SUI payment, digest recovery            |
+| Migration state | Sui-dependent frontend and server flows temporarily fail closed      |
+| Analytics       | Not specified                                                        |
 
-TanStack Start is used here because it matches the sibling workspace stack and
-can support future case-study routes or server-rendered metadata without adding a
-larger framework boundary. Product backend behavior should remain absent unless
-a future portfolio feature needs it.
+TanStack Start prerenders ordinary routes. Cloudflare Static Assets serves
+anonymous pages and the Doji 404 without invoking the Worker. Only three exact
+same-origin project-submission paths run the public Worker and forward through a
+narrow Registry service binding.
 
 ## 3. Problem statement
 
@@ -124,8 +129,18 @@ The system should:
 3. Preserve regression coverage for root metadata, social preview, icon usage,
    page chrome, and the portfolio route.
 4. Keep UI changes grounded in `DESIGN.md`.
-5. Avoid Sui-specific runtime dependencies until product scope changes.
-6. Prefer static structured content over CMS or backend state.
+5. Keep wallet/Sui code interaction-gated and absent from anonymous route
+   payloads.
+6. Keep portfolio content static and centralize only shared Doji submissions in
+   Registry.
+7. Reject malformed dynamic envelopes before rate limiting, service binding,
+   storage, or provider work.
+8. Generate Worker bindings from the committed Wrangler configuration without
+   loading developer-local environment files, and keep the installed
+   production and build dependency graph free of known npm advisories.
+9. Reject request content encodings and require a canonical bounded
+   `Content-Length` for multipart uploads before public rate limits or Registry
+   forwarding, while preserving Registry's decoded image and field limits.
 
 ## 6. Non-goals
 
@@ -134,14 +149,14 @@ The product will not include by default:
 1. A marketing landing page before the project showcase.
 2. Fake metrics, testimonials, or vague claims.
 3. Blog, newsletter, or CMS behavior.
-4. App-level auth.
+4. App-level accounts or sessions.
 5. Contact form or message storage.
-6. Wallet connection.
-7. Sui transaction signing.
-8. Mysten dApp Kit or Mysten Sui SDK runtime dependencies.
-9. Turnstile, rate limiting, Durable Objects, KV, D1, R2, queues, or backend
-   state.
-10. Sui CSV parsing or snapshot/airdrop workflow code.
+6. Wallet use outside the shared project-submission flow.
+7. Sui transaction signing outside the fixed 10 SUI Registry payment.
+8. Sui providers, signing keys, storage, Durable Objects, KV, D1, R2, or queues
+   in the public Portfolio Worker.
+9. Turnstile.
+10. Sui CSV, snapshot, airdrop, or swap workflow code.
 11. Manual theme switch.
 12. Product analytics unless explicitly scoped later.
 
@@ -155,8 +170,16 @@ The current product includes:
 4. Project cards with app icon, name, short subtitle, and live app link.
 5. Live project links when available.
 6. App logo, favicon, install icons, manifest, and social preview image.
-7. Responsive shared light/dark atmosphere-to-page chrome with muted blue browser chrome and document-bottom chrome tail.
+7. Responsive shared light/dark neutral page canvas, raised browser chrome, and
+   safe-area/overscroll handling from the canonical Doji Design System.
 8. Regression tests for shared conventions.
+9. Raised Doji navbar with Portfolio identity and genuine navigation only, plus
+   primary page-header **Connect wallet** / **Disconnect wallet** and
+   **Submit project** actions immediately below the subtitle at every width.
+10. Static `/submit` form with manual coin type, project metadata, one local
+    image, fixed 10 SUI payment, and paid-digest recovery.
+11. Static, zero-JavaScript Doji 404 document.
+12. Exact three-path, same-origin, rate-limited Registry gateway.
 
 Future scope may include:
 
@@ -199,6 +222,38 @@ header between the subtitle and project workbench. No separate footer/profile
 surface is currently shown below the workbench. Add a contact form, profile
 block, or dedicated contact route only after deciding where messages go, how
 abuse is handled, and what privacy or retention policy applies.
+
+### 8.4 Project submission
+
+The static `/submit` page accepts one manually entered Sui Move type, project
+name, short description, optional ticker and social links, and one required
+static profile image. The browser validates bounded text, public HTTPS links,
+the image bytes, dimensions, and animation status locally. Public website
+validation must reject local and private IP destinations without mistaking
+ordinary DNS hostnames for IPv6 ranges. These checks improve feedback and bound
+the client payload; Registry remains authoritative.
+
+The project details and image remain in page memory only. A new submission can
+reach the Registry only after the connected wallet completes the fixed 10 SUI
+payment. A user may instead provide a prior payment digest and sign the
+digest-bound Registry recovery challenge. The form never performs coin search,
+prefill, validation RPC, or wallet auto-connection.
+
+### 8.5 Temporary chain migration experience
+
+During the Sui-to-Robinhood Chain migration, static showcase content and routes
+stay available while every chain-dependent action fails closed. Header actions
+retain their normal labels, enabled presentation, focus behavior, and 44px
+geometry without a migration Alert below either action or their shared cluster.
+**Connect wallet** opens the normal Drawer, but its body contains only an Empty
+migration explanation and **Close**; the wallet runtime is not loaded.
+
+The submission form preserves its existing implementation, but **Pay 10 SUI**
+and **Recover payment** are inert, are not marked disabled, and own one
+persistent informational Alert after their complete action cluster. Portfolio
+has no project or asset selector trigger, so a selector migration Drawer is not
+applicable. Any future locked selector would likewise explain the migration only
+inside its Empty surface, not in an Alert below its trigger.
 
 ## 9. Functional requirements
 
@@ -251,11 +306,11 @@ abuse is handled, and what privacy or retention policy applies.
 
 - Root document should include manifest links, app icons, font preload ordering,
   and theme-color metadata.
-- Root viewport metadata should use `viewport-fit=cover`, with generated page
-  artwork spanning safe areas and `.app-shell` padding adding
-  `env(safe-area-inset-top/right/bottom/left)` around content.
-- Manifest colors should stay on the shared blue page chrome color used by
-  the generated top atmosphere artwork and document-bottom chrome tail.
+- Root viewport metadata should use `viewport-fit=cover`, with the raised
+  chrome color spanning safe areas and responsive insets on `.app-navbar` and
+  `.app-shell`.
+- Manifest and theme colors stay aligned to the neutral chrome:
+  `#FFFFFF` light, `#090909` dark, and `#FCFCFC` manifest background.
 - Header logo images should define `width`, `height`, `sizes`, and `srcset`,
   and the header logo wrapper should preserve the logo's rounded-square shape
   while showing a visible border.
@@ -266,13 +321,14 @@ abuse is handled, and what privacy or retention policy applies.
 - The social image must be a generated checked-in `public/og.png` with a
   cache-busting query in `src/routes/index.tsx`.
 - Generate the social image from the React/Tailwind `/og-preview` route with
-  `npm run generate:og`. Do not add a social SVG source or dynamic request-time
+  `npx vp run generate:og`. Do not add a social SVG source or dynamic request-time
   image endpoint.
 
 ### 9.7 Shared UI conventions
 
-- Use `DESIGN.md` as the source of truth for visual, layout, icon, loading,
-  alert, empty-state, responsive, and copy contracts.
+- Use the canonical Doji Design System skill plus `DESIGN.md` as the source of
+  truth for visual, layout, icon, loading, alert, empty-state, responsive, and
+  copy contracts.
 - Product UI icons should remain on Lucide.
 - Button targets should remain at least `44px` tall.
 - The app should respect system dark mode.
@@ -287,6 +343,25 @@ project index.
 
 Pending. A contact feature needs a separate product decision covering form
 destination, abuse prevention, privacy, and retention.
+
+### 9.10 Temporary chain migration lockout
+
+- Do not mount, import, connect, or expose wallet choices from the user-reachable
+  migration Drawer.
+- Do not let a locked frontend action validate, open payment recovery, call an
+  API, sign, pay, upload, or otherwise begin chain-dependent work.
+- Locked ordinary actions retain their normal label and enabled appearance and
+  do not use the `disabled` attribute.
+- Place one persistent informational Doji Alert immediately after each complete
+  locked action cluster.
+- Do not place a migration Alert below **Connect wallet**, a project/asset
+  selector trigger, or a shared action cluster containing either control. Those
+  controls explain the migration only inside the Empty surface they open.
+- Return one canonical no-store JSON `503` response from all public dynamic API
+  and broad server-function entry points before envelope processing, limiters,
+  service bindings, providers, or mutations.
+- Preserve the existing Sui frontend and backend implementation for the later
+  Robinhood Chain migration; this slice does not remove or rewrite it.
 
 ## 10. Information architecture
 
@@ -324,13 +399,67 @@ When adding a project:
 - The app is a TanStack Start app served on Cloudflare Workers.
 - `.node-version` pins Node.js `24.14.0` to match the sibling Workers Builds
   setup.
-- `wrangler.jsonc` currently declares no storage bindings, Durable Objects,
-  queues, or secrets.
+- `wrangler.jsonc` declares Static Assets, four rate-limit bindings, and one
+  narrow `REGISTRY_PUBLIC_GATEWAY` service binding. It declares no product
+  storage, Durable Objects, queues, Sui provider, signing key, or wallet secret.
+- Static Assets serves `/`, `/submit`, `/og-preview`, and unknown routes.
+  Unknown routes use the generated zero-JavaScript `404.html`.
+- Only `/api/v1/payment/challenge`,
+  `/api/v1/payment/redeem-project-submission`, and `/api/v1/submissions` run the
+  Worker. Queries, wrong methods/origins/media types, and oversized declared
+  bodies are rejected before limiter or binding access.
 - Deployment uses `npx vp run deploy`, which builds the app and deploys with
   Wrangler.
-- Worker type generation uses `npx vp run cf-typegen`.
-- No production smoke scripts or production runbook are currently specified for
-  this repo. Add those as a separate slice if deploy operations need them.
+- Worker type generation uses `npx vp run cf-typegen`; the wrapper isolates
+  Wrangler from developer-local env files and normalizes only whitespace-only
+  generated-line noise.
+- `docs/production-runbook.md` defines release, browser-network, abuse, and
+  rollback checks. A repeatable production smoke script remains a separate
+  pending slice.
+
+### 12.1 Payment and recovery boundary
+
+- The checked-in Registry publication is runtime-validated with the exact
+  generated JSON Schema validator. Until Registry publishes an enabled
+  submission configuration and treasury address, new payments are unavailable.
+- A new project payment is exactly `10000000000` MIST. Every customer amount at
+  the client contract is a canonical positive decimal string no greater than
+  Sui `u64`.
+- Project payment terms bind the static configuration revision and its
+  `validFrom` timestamp as `executionValidFromMs`. An optional valid-until must
+  be on or after valid-from.
+- No challenge request exists before a payment digest. The challenge body is
+  exactly `{digest,walletAddress}`, so its displayed message is bound to the
+  specific payment and paying wallet.
+- A new payment performs one wallet transaction, then one challenge, one
+  redemption, and at most one image upload. Portfolio never calls
+  `waitForTransaction`, polls Sui, races providers, or owns a Sui RPC binding.
+- Recovery reuses the original digest, requires a fresh digest-bound wallet
+  signature, and may omit the current configuration revision so Registry can
+  resolve the server-known reservation. If the prior upload already completed,
+  redemption returns the immutable accepted receipt without a second upload.
+- Registry—not Portfolio—owns transaction observation and replay accounting.
+  Only `transaction_failed` and `payment_too_old` are safe digest-global
+  negative facts; wallet, marker, sender, recipient, amount, and revision
+  mismatches remain claim-specific.
+
+### 12.2 Provider and binding-operation budget
+
+- Static pages, form edits, local image validation, wallet connection, and
+  status display make zero Portfolio-originated Sui or application API calls.
+- Payment execution uses dApp Kit's wallet-standard sign-and-execute action.
+  The SDK may use the configured Sui client while constructing transaction
+  bytes, but Portfolio makes no separate direct execution request.
+- Portfolio never observes the transaction itself. Registry owns one admitted
+  digest observation, historical-term validation, and replay accounting.
+- Challenge forwarding uses at most two rate-limit operations and one service
+  binding. Redemption and upload use at most four rate-limit operations and one
+  service binding because both use the tighter paid lane.
+- Invalid envelopes are rejected before a limiter or service binding.
+
+Do not add a Portfolio Sui provider binding, request-held polling, parallel
+provider racing, browser-selected endpoints, or a second post-payment
+observation.
 
 ## 13. Design requirements
 
@@ -341,14 +470,16 @@ rules here.
 
 ## 14. Risks and mitigations
 
-| Risk                                     | Mitigation                                                                   |
-| ---------------------------------------- | ---------------------------------------------------------------------------- |
-| Portfolio becomes generic marketing page | Keep real project cards on the first screen and avoid filler sections.       |
-| Docs drift from implementation           | Update `README.md`, `AGENTS.md`, `PRD.md`, and `DESIGN.md` by ownership.     |
-| Sui runtime complexity leaks into app    | Keep Sui-specific workflows in sibling repos unless portfolio scope changes. |
-| Social preview cache becomes stale       | Update image cache-busting query and metadata tests with image changes.      |
-| Case-study scope grows too broad         | Add project-specific pages only when card content is not enough.             |
-| Deployment confidence lags siblings      | Add smoke scripts/runbook as a separate pending production-hardening slice.  |
+| Risk                                     | Mitigation                                                                        |
+| ---------------------------------------- | --------------------------------------------------------------------------------- |
+| Portfolio becomes generic marketing page | Keep real project cards on the first screen and avoid filler sections.            |
+| Docs drift from implementation           | Update `README.md`, `AGENTS.md`, `PRD.md`, and `DESIGN.md` by ownership.          |
+| Sui runtime increases anonymous cost     | Lazy-load wallet code only after Connect wallet; prerender ordinary routes.       |
+| Unpaid abuse reaches Registry            | Exact paths, cheap envelope rejection, same-origin checks, client/location fuses. |
+| Wallet configuration is missing          | Publish a generated Registry contract; keep new payments fail closed until then.  |
+| Social preview cache becomes stale       | Update image cache-busting query and metadata tests with image changes.           |
+| Case-study scope grows too broad         | Add project-specific pages only when card content is not enough.                  |
+| Deployment confidence lags siblings      | Follow the runbook; add a repeatable browser smoke script as a later slice.       |
 
 ## 15. Acceptance criteria
 
@@ -364,13 +495,29 @@ The product is ready for the current portfolio scope when:
 6. Product UI icons use Lucide.
 7. Social metadata uses an absolute HTTPS image URL.
 8. Header X and GitHub profile links open in a new browser tab.
-9. The page has no visible generic project intro, build-principles filler
-   section, or footer/profile content below the workbench.
+9. The page has no generic project intro, build-principles filler, decorative
+   workbench wrapper, or redundant profile section. It ends with the canonical
+   legal footer.
 10. The layout has no horizontal overflow at mobile and desktop widths.
 11. `npx vp check`, `npx vp test`, and `npx vp build` pass before production
     readiness is claimed.
 12. `README.md`, `AGENTS.md`, `PRD.md`, and `DESIGN.md` each document their
     owned part of the project without duplicating broad policy.
+13. The header keeps full wallet and submit labels at every width, stacks them
+    on narrow screens, and never displays the connected address.
+14. Form editing, image preview, and wallet connection make no Portfolio API or
+    Sui RPC calls; the first dynamic submission work follows a completed
+    payment or a user-entered recovery digest.
+15. Wallet/Sui code is isolated from initial static HTML and initial executable
+    payloads and loads only after explicit wallet interaction.
+16. Payment amounts are canonical positive decimal MIST no greater than Sui
+    `u64`, and a new payment is exactly `10000000000` MIST.
+17. Unknown routes are served by the Doji static 404 without Worker invocation.
+18. The solid neutral page, raised navbar/footer, Cards, controls, status
+    surfaces, responsive behavior, and social image conform to the canonical
+    Doji Design System with only the exceptions documented in `DESIGN.md`.
+19. The provider and binding-operation budgets in section 12.2 pass the
+    runbook's build and browser-network checks.
 
 ## 16. One-paragraph product definition
 
@@ -378,10 +525,10 @@ The product is a focused personal portfolio built on the same TanStack Start,
 Vite+, shadcn/Base UI, Tailwind, Geist, Lucide, and Cloudflare Workers system as
 the sibling Sui utility apps. It shows real projects first, using structured
 project records, product-owned app icons, concise plain-language subtitles, and
-live app links. It deliberately avoids listing itself as a project, source links
-for private repositories, wallet flows, Sui transaction logic, storage bindings,
-and backend state unless a
-future portfolio feature needs them.
+live app links. It also offers the same paid project-submission flow as every
+Doji app while keeping ordinary pages static: form data stays local until a
+fixed 10 SUI payment, wallet/Sui code loads only after interaction, and the
+public Worker can only proxy three exact routes to the central Registry.
 
 ## 17. Reference links
 

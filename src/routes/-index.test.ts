@@ -32,7 +32,7 @@ describe("index route head", () => {
     expect(source).toContain('const PAGE_TITLE = "Doga Fincan";');
     expect(source).not.toContain('const PAGE_TITLE = "Doga Fincan Portfolio";');
     expect(source).toContain(
-      "I'm into learning languages, nutrition and exercise, and building cool things. Reach out if you're building something interesting.",
+      "Developer interested in language learning, nutrition, exercise, and building useful products. Reach out if you're building something interesting.",
     );
     expect(source).not.toContain(
       "Focused web utilities and product systems built with React, Cloudflare, and careful user-facing workflows.",
@@ -45,7 +45,10 @@ describe("index route head", () => {
     expect(siteUrlMatch?.[1]).toBe("https://dogafincan.com");
     expect(socialImageMatch?.[1]).toMatch(/^\/og\.png\?v=\d+$/);
     expect(new URL(`${siteUrlMatch?.[1]}${socialImageMatch?.[1]}`).href).toBe(
-      "https://dogafincan.com/og.png?v=2026060501",
+      "https://dogafincan.com/og.png?v=2026080901",
+    );
+    expect(source).toContain(
+      "Dark Doji Portfolio preview with the Doga Fincan navbar and the title Explore the useful products I’m building.",
     );
     expect(source).not.toContain("portfolio.dogafincan.workers.dev");
     expect(source).not.toContain('const SOCIAL_IMAGE = "/og.png";');

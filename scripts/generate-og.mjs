@@ -1,46 +1,54 @@
 import { spawn } from "node:child_process";
 import { once } from "node:events";
 import { existsSync, readFileSync } from "node:fs";
-import { mkdir } from "node:fs/promises";
+import { mkdir, rename, unlink, writeFile } from "node:fs/promises";
 import { createServer } from "node:net";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { chromium } from "playwright";
+import sharp from "sharp";
 
 const OG_WIDTH = 1200;
 const OG_HEIGHT = 630;
+const OG_SAFE_INSET = 64;
+const OG_REFERENCE_SCALE = 0.5;
 const SERVER_HOST = "127.0.0.1";
 const DEFAULT_START_PORT = 4173;
 
 const scriptsDirectory = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(scriptsDirectory, "..");
 const packageJson = JSON.parse(readFileSync(resolve(repoRoot, "package.json"), "utf8"));
-const outputPath = resolve(repoRoot, "public/og.png");
-const seed = process.env.OG_SEED?.trim() || `${packageJson.name}:2026060501`;
+const outputPath = resolve(repoRoot, process.env.OG_OUTPUT_PATH?.trim() || "public/og.png");
+const temporaryOutputPath = `${outputPath}.${process.pid}.tmp`;
+const seed = process.env.OG_SEED?.trim() || `${packageJson.name}:2026080201`;
 const externalBaseUrl = process.env.OG_PREVIEW_BASE_URL?.replace(/\/$/, "");
 const startPort =
   Number.parseInt(process.env.OG_PREVIEW_PORT ?? "", 10) ||
   DEFAULT_START_PORT + getPortOffset(packageJson.name);
 
 let devServer = null;
+let browser = null;
 let serverLogs = "";
 
 try {
   const baseUrl = externalBaseUrl ?? (await startDevServer());
   const previewUrl = `${baseUrl}/og-preview?seed=${encodeURIComponent(seed)}`;
 
-  const browser = await chromium.launch();
+  browser = await chromium.launch();
   const page = await browser.newPage({
     deviceScaleFactor: 1,
     viewport: { width: OG_WIDTH, height: OG_HEIGHT },
   });
 
-  await page.emulateMedia({ colorScheme: "light", reducedMotion: "reduce" });
+  await page.emulateMedia({ colorScheme: "dark", reducedMotion: "reduce" });
   await page.goto(previewUrl, { waitUntil: "networkidle" });
 
   const preview = page.locator("[data-og-preview]");
   await preview.waitFor({ state: "visible" });
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+  });
 
   const box = await preview.boundingBox();
   if (!box || Math.round(box.width) !== OG_WIDTH || Math.round(box.height) !== OG_HEIGHT) {
@@ -51,15 +59,116 @@ try {
     );
   }
 
-  await mkdir(dirname(outputPath), { recursive: true });
-  await preview.screenshot({ animations: "disabled", path: outputPath, type: "png" });
-  await browser.close();
+  const layout = await readPreviewLayout(page);
+  assertPreviewLayout(layout);
 
-  assertPngSize(outputPath);
+  await mkdir(dirname(outputPath), { recursive: true });
+  await preview.screenshot({ animations: "disabled", path: temporaryOutputPath, type: "png" });
+  await optimizePng(temporaryOutputPath);
+  await browser.close();
+  browser = null;
+
+  assertPngSize(temporaryOutputPath);
+  await rename(temporaryOutputPath, outputPath);
   console.log(`Generated public/og.png (${OG_WIDTH}x${OG_HEIGHT}) from ${previewUrl}`);
   console.log(`OG seed: ${seed}`);
+  console.log(
+    `OG reference type: ${(layout.title.fontSize * OG_REFERENCE_SCALE).toFixed(1)}px title, ${(layout.subtitle.fontSize * OG_REFERENCE_SCALE).toFixed(1)}px subtitle`,
+  );
 } finally {
-  await stopDevServer();
+  await browser?.close().catch(() => undefined);
+  try {
+    await unlink(temporaryOutputPath).catch((error) => {
+      if (error.code !== "ENOENT") {
+        throw error;
+      }
+    });
+  } finally {
+    await stopDevServer();
+  }
+}
+
+async function readPreviewLayout(page) {
+  return page.evaluate(() => {
+    const element = (selector) => {
+      const value = document.querySelector(selector);
+      if (!(value instanceof HTMLElement)) {
+        throw new Error(`Missing OG preview element: ${selector}`);
+      }
+      return value;
+    };
+    const rect = (value) => {
+      const bounds = value.getBoundingClientRect();
+      return {
+        bottom: bounds.bottom,
+        left: bounds.left,
+        right: bounds.right,
+        top: bounds.top,
+      };
+    };
+    const text = (selector) => {
+      const value = element(selector);
+      return {
+        ...rect(value),
+        fontSize: Number.parseFloat(getComputedStyle(value).fontSize),
+      };
+    };
+    const preview = element("[data-og-preview]");
+    return {
+      brand: rect(element('[data-slot="app-navbar-brand"]')),
+      preview: {
+        ...rect(preview),
+        scrollHeight: preview.scrollHeight,
+        scrollWidth: preview.scrollWidth,
+      },
+      safeRegion: rect(element('[data-slot="og-preview-safe-region"]')),
+      subtitle: text('[data-slot="app-header-subtitle"]'),
+      title: text('[data-slot="app-header-title"]'),
+    };
+  });
+}
+
+function assertPreviewLayout(layout) {
+  if (layout.preview.scrollWidth > OG_WIDTH || layout.preview.scrollHeight > OG_HEIGHT) {
+    throw new Error("OG preview content overflows its 1200x630 canvas.");
+  }
+  const leftInset = layout.safeRegion.left - layout.preview.left;
+  const rightInset = layout.preview.right - layout.safeRegion.right;
+  if (Math.round(leftInset) !== OG_SAFE_INSET || Math.round(rightInset) !== OG_SAFE_INSET) {
+    throw new Error(`OG safe region must keep ${OG_SAFE_INSET}px horizontal insets.`);
+  }
+  for (const [name, bounds] of [
+    ["title", layout.title],
+    ["subtitle", layout.subtitle],
+  ]) {
+    if (
+      bounds.left < layout.safeRegion.left ||
+      bounds.right > layout.safeRegion.right ||
+      bounds.top < layout.safeRegion.top ||
+      bounds.bottom > layout.safeRegion.bottom
+    ) {
+      throw new Error(`OG ${name} escapes the documented safe region.`);
+    }
+  }
+  if (
+    layout.brand.left < layout.preview.left + OG_SAFE_INSET ||
+    layout.brand.right > layout.preview.right - OG_SAFE_INSET
+  ) {
+    throw new Error("OG navbar brand escapes the 64px horizontal safe area.");
+  }
+  if (layout.title.fontSize * OG_REFERENCE_SCALE < 38) {
+    throw new Error("OG title is too small at the 600x315 reference size.");
+  }
+  if (layout.subtitle.fontSize * OG_REFERENCE_SCALE < 16) {
+    throw new Error("OG subtitle is too small at the 600x315 reference size.");
+  }
+}
+
+async function optimizePng(path) {
+  const optimized = await sharp(path)
+    .png({ compressionLevel: 9, adaptiveFiltering: true, effort: 10 })
+    .toBuffer();
+  await writeFile(path, optimized);
 }
 
 async function startDevServer() {

@@ -8,17 +8,11 @@ real project showcase with structured project data, sibling-derived UI
 primitives, logo/social assets, and regression coverage for shared web-app
 conventions.
 
-The portfolio should reuse the proven stack and design direction from:
-
-- `~/Documents/sui-snapshot`
-- `~/Documents/sui-airdrop`
-- `~/Documents/memedex`
-
-Those sibling apps are the reference for TanStack Start, Vite+, Cloudflare
-Workers, shadcn/ui, Tailwind CSS v4, Geist, Lucide icons, shared page chrome,
-and repo workflow conventions. The portfolio should keep the same general system
-while avoiding Sui-specific runtime dependencies unless they are explicitly
-needed.
+The canonical UI source is the versioned `doji-design-system` Codex skill in
+the separate Doji design-system repository. Runtime components remain local;
+after an accepted canonical change, the owner manually invokes the skill to
+audit and synchronize each Doji app. There is no shared runtime package or
+automatic cross-repository mutation.
 
 ## Documentation Boundaries
 
@@ -30,6 +24,8 @@ needed.
   decisions, acceptance criteria, and pending slices.
 - `DESIGN.md`: source of truth for visual system, layout, copy, icons, social
   preview, responsive behavior, loading states, and portfolio UI contracts.
+- `docs/production-runbook.md`: release, static-boundary, and network-call
+  checks.
 
 Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
 `PRD.md` and `DESIGN.md` aligned when product or UI decisions change.
@@ -39,9 +35,10 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
 - Ground answers and changes in the current checkout. For this repo, first check
   `README.md`, `AGENTS.md`, `PRD.md`, `DESIGN.md`, git state, and any
   source/config files that exist.
-- When borrowing a pattern from `sui-snapshot`, `sui-airdrop`, or `memedex`,
-  inspect the sibling docs or source first. Do not rely on memory alone for
-  current behavior.
+- Before UI, copy, layout, icon, responsive, state, 404, or social-preview
+  work, read the canonical design-system skill completely and then
+  `DESIGN.md`. Product behavior remains local; shared visual policy comes from
+  the skill rather than an arbitrary sibling snapshot.
 - Keep work to one coherent slice. Commit finished slices locally. Push only
   when the user explicitly asks.
 - Keep durable docs aligned when a project rule changes: `README.md` owns
@@ -57,21 +54,46 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
 - Use `DESIGN.md` as the source of truth for UI, copy, icon, layout, alert,
   social-preview, responsive, and loading-state rules instead of duplicating
   that guidance here.
-- For page-background transition changes, inspect `src/styles.css`,
-  `src/routes/__root.tsx`, `public/manifest.json`, `src/styles.test.ts`,
-  `src/routes/-__root.test.ts`, and any checked-in page-atmosphere assets together. Follow
-  `DESIGN.md`'s `Header Section / Atmosphere-to-Page Background` for
-  browser/mobile safe-area color handling, shared `theme-color`, root/body
-  backgrounds, generated top/repeating page-atmosphere assets, visible page
-  chrome, `viewport-fit=cover` plus app-shell safe-area padding, fixed-length
-  atmosphere transition, and OG/social image generation.
-  Do this without changing workbench or card surface tokens.
+- For page/chrome changes, inspect `src/styles.css`,
+  `src/styles/geist-colors.css`, `src/routes/__root.tsx`,
+  `public/manifest.json`, and their tests together. Preserve the canonical
+  solid neutral canvas, raised chrome, safe-area, and overscroll contract. Do
+  not reintroduce atmosphere or decorative page backgrounds.
 - When work is product-scope driven, inspect the `PRD.md` implementation
   progress table first and update it precisely with `Done`/`Pending` status.
-- Do not add Sui wallet flows, transaction signing, Mysten SDK dependencies,
-  Turnstile, rate limiting, Durable Objects, KV, D1, R2, queues, or backend
-  state just because the sibling apps use them. A portfolio website should stay
-  simpler unless a concrete feature requires that complexity.
+- Keep wallet and Sui code out of the initial static route chunk. Load it only
+  after an explicit wallet interaction. Do not add Sui providers, storage,
+  Durable Objects, KV, D1, R2, queues, or signing keys to the public Worker.
+- Project fields and images remain in page memory until the fixed Registry
+  payment succeeds. Do not persist drafts or make validation/prefill API calls.
+- A payment challenge is allowed only after a digest exists and must bind the
+  exact digest and paying wallet. Do not add pre-payment intent calls,
+  `waitForTransaction`, Sui polling, or browser-selected RPC endpoints.
+- Static load, form edit, image validation, wallet connection, and status
+  display make zero Portfolio-originated Sui requests. Keep payment execution
+  on dApp Kit's wallet-standard action; Portfolio must not add a direct
+  transaction-execution call.
+- Registry-generated files under `src/generated/` are canonical handoff
+  artifacts. Update them byte-for-byte from Registry; do not hand-edit local
+  variants.
+- The public gateway exposes only the three exact Registry submission paths.
+  Preserve the pre-router envelope guard, same-origin enforcement, rate-limit
+  fuses, and narrow service binding. Reject every non-empty
+  `Content-Encoding`, and require a canonical declared length for multipart
+  uploads before a limiter or binding.
+- Keep challenge traffic on the public limiter lane and redemption/upload on
+  both the public and tighter paid lanes. The conservative binding-operation
+  ceilings are three for challenge and five for redemption or upload.
+- During the temporary Sui-to-Robinhood Chain migration lockout, preserve the
+  existing Sui implementation but keep it unreachable. Do not mount the wallet
+  runtime; keep locked ordinary actions visually enabled and inert with an
+  informational Alert after each complete action cluster; and return the
+  canonical migration `503` before every public dynamic entry point reaches an
+  envelope guard, limiter, service binding, provider, or mutation.
+- Do not place a migration Alert below **Connect wallet**, a project/asset
+  selector trigger, or a shared cluster containing either. Their enabled-looking
+  trigger opens the existing surface, whose Empty state alone explains the
+  migration.
 - Do not add Memedex voting, ranking, moderation, submission, or discovery-board
   flows to the portfolio. The portfolio may link to Memedex as a project, but
   its own route stays a project showcase.
@@ -88,18 +110,16 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
 - Keep implementation work to one coherent slice. When work is PRD-driven,
   inspect the top `PRD.md` implementation-progress table first, use it as the
   slice boundary, and update it without claiming broad PRD sections are complete.
-- If a sibling repo already fixed the same issue, inspect that implementation
-  before designing a new one. Reuse the pattern only where it fits this repo's
-  portfolio scope; do not import snapshot holder-query behavior, airdrop
-  funding, transfer signing, Turnstile, Durable Objects, wallet flows, or
-  Memedex voting/ranking behavior.
+- If another Doji repo already implements a canonical recipe, it may be used as
+  implementation evidence after reading the skill. Reuse it only where it fits
+  Portfolio's scope; do not import snapshot, airdrop, swap, or ranking behavior.
 - Durable workflow, product, and UI rules belong in docs when they repeat. Keep
   `README.md`, `AGENTS.md`, `PRD.md`, and `DESIGN.md` aligned by ownership.
 - For browser, deploy, auth/config, provider, dynamic-content, or other
   third-party recoverable errors that become visitor-facing or docs-facing,
   follow `DESIGN.md`'s reusable third-party error pattern instead of inventing
-  one-off failure copy. This repo currently has no wallet-specific
-  implementation.
+  one-off failure copy. Paid submission recovery must tell the user not to pay
+  again once a digest exists.
 - For deploy, runtime, Cloudflare, or performance incidents, diagnose the failing
   layer before editing source. If local checks passed and the failure is in
   deploy validation, auth/config, dashboard setup, or provider response, verify
@@ -118,7 +138,7 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   and must point to `public/og.png` with a cache-busting query. If
   `public/og.png` changes, update `SITE_URL`, the `SOCIAL_IMAGE`
   cache-busting query, and `src/routes/-index.test.ts` together. Regenerate the
-  image with `npm run generate:og`; do not add a social SVG source or dynamic
+  image with `npx vp run generate:og`; do not add a social SVG source or dynamic
   request-time image endpoint.
 
 ## Current Stack
@@ -139,16 +159,18 @@ Use this as the current stack:
   Workers Builds
 - npm package manager
 
-Expected portfolio omissions unless explicitly justified:
+The retained, temporarily unreachable Sui runtime is limited to:
 
-- Mysten dApp Kit
-- Mysten Sui SDK
-- wallet connection
-- transaction signing
+- interaction-gated Mysten dApp Kit and Sui SDK
+- wallet connection and a fixed 10 SUI Registry payment on `/submit`
+- a fresh personal-message proof for paid submission/recovery
+
+Expected portfolio omissions:
+
 - Cloudflare Durable Objects
 - Cloudflare storage bindings
-- public abuse-control gates
-- Sui-specific validation or CSV processing
+- Sui provider or signing-key bindings in the public Worker
+- Sui CSV, snapshot, airdrop, or swap processing
 
 ## Product Guidance
 
@@ -166,11 +188,11 @@ Expected portfolio omissions unless explicitly justified:
 
 ## Shared Design System
 
-Follow `DESIGN.md` for visual, layout, copy, icon, social-preview, responsive,
-and interaction rules. The short version: keep real project content first, use
-the shared sibling UI system, keep the rounded muted workbench and project cards
-scannable, avoid decorative filler, and do not import Sui-specific workflow UI
-unless the portfolio scope deliberately changes.
+Follow the canonical design-system skill and `DESIGN.md` for visual, layout,
+copy, icon, social-preview, responsive, and interaction rules. Keep real
+project content first, use standard Cards directly on the neutral page canvas,
+avoid decorative filler and nested card-like workbenches, and keep the shared
+paid-submission workflow consistent across Doji apps.
 
 ## Important Files
 
@@ -185,6 +207,7 @@ The current implementation follows the sibling conventions. Important files:
 - `src/routes/index.lazy.tsx`: visible portfolio route component attachment
 - `src/styles.css`: global Tailwind v4 tokens, page chrome, and chrome color
   variables
+- `src/styles/geist-colors.css`: byte-identical canonical Geist palette
 - `src/styles.test.ts`: regression guard for the shared page chrome CSS
 - `src/components/portfolio-home.tsx`: portfolio header and project grid
 - `src/components/portfolio-home.test.tsx`: rendering and structure coverage for
@@ -195,6 +218,12 @@ The current implementation follows the sibling conventions. Important files:
 - `src/components/ui/*`: imported shadcn/Base UI primitives used by the
   portfolio surface
 - `src/lib/utils.ts`: shadcn `cn` helper
+- `src/lib/submission-api.ts`: exact bounded client for paid Registry submission
+  and digest recovery
+- `src/lib/chain-migration.ts` and `src/lib/chain-migration.server.ts`:
+  temporary shared frontend copy and fail-closed server response
+- `src/generated/*`: canonical Registry-generated types and validators
+- `src/start.ts`: pre-router API envelope guard and broad server-function block
 - `src/routes/-__root.test.ts`: regression guard for manifest links, app logo
   assets, Geist font preload ordering, and theme-color metadata
 - `src/routes/-index.test.ts`: regression guard for canonical and social
@@ -203,10 +232,6 @@ The current implementation follows the sibling conventions. Important files:
 - `public/app-logo-120.png`, `public/apple-touch-icon.png`,
   `public/android-chrome-*.png`, `public/favicon.ico`, `public/favicon-*`, and
   `public/og.png`: portfolio-owned app and social assets
-- `public/page-atmosphere*.avif`: generated top and repeat page-atmosphere
-  assets
-- `scripts/generate-page-atmosphere.mjs` and `scripts/assets/*`: source and
-  generator for page-atmosphere assets
 - `public/projects/*-icon.avif`: local app icons copied from shipped sibling apps
 - `vite.config.ts`: Vite+ and TanStack configuration
 - `wrangler.jsonc`: Cloudflare Worker configuration
@@ -224,9 +249,14 @@ Prefer the sibling command pattern:
 - `npx vp test`
 - `npx vp build`
 - `npx vp preview --host 127.0.0.1`
-- `npx vp run generate:atmosphere`
+- `npx vp run generate:identity`
+- `npx vp run generate:og`
 - `npx vp run deploy`
 - `npx vp run cf-typegen`
+
+The type-generation wrapper always uses the exact `wrangler.jsonc`
+configuration with `/dev/null` as its env file and strips only whitespace-only
+generated-line noise before the diff gate.
 
 Invoke Vite+ through `npx vp ...` so the repo-local CLI is used even when `vp`
 is not on the shell `PATH`.

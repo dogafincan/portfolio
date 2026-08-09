@@ -1,272 +1,403 @@
 import { readFileSync } from "node:fs";
 
-import sharp from "sharp";
 import { describe, expect, it } from "vite-plus/test";
 
-const ATMOSPHERE_SOURCE_ASSET_SIZE = { width: 864, height: 720 };
-const ATMOSPHERE_TOP_ASSET_SIZE = { width: 864, height: 1536 };
-const ATMOSPHERE_REPEAT_ASSET_SIZE = { width: 864, height: 512 };
-const ATMOSPHERE_SOURCE_ASSETS = [
-  "scripts/assets/page-atmosphere-source.avif",
-  "scripts/assets/page-atmosphere-dark-source.avif",
+const GEIST_STEPS = Array.from({ length: 10 }, (_, index) => (index + 1) * 100);
+const GEIST_FAMILIES = [
+  "gray",
+  "gray-alpha",
+  "blue",
+  "red",
+  "amber",
+  "green",
+  "teal",
+  "purple",
+  "pink",
+] as const;
+const GEIST_TOKENS = [
+  "background-100",
+  "background-200",
+  ...GEIST_FAMILIES.flatMap((family) => GEIST_STEPS.map((step) => `${family}-${step}`)),
 ];
-const ATMOSPHERE_TOP_ASSETS = ["public/page-atmosphere.avif", "public/page-atmosphere-dark.avif"];
-const ATMOSPHERE_REPEAT_ASSETS = [
-  "public/page-atmosphere-repeat.avif",
-  "public/page-atmosphere-repeat-dark.avif",
-];
 
-function readAvifIntrinsicSize(assetPath: string) {
-  const image = readFileSync(assetPath);
-  let offset = image.indexOf("ispe", 0, "ascii");
+function getBlock(styles: string, selector: string) {
+  const start = styles.indexOf(`${selector} {`);
+  const end = styles.indexOf("\n}", start);
 
-  while (offset !== -1) {
-    if (offset >= 4 && offset + 16 <= image.length && image.readUInt32BE(offset - 4) >= 20) {
-      return {
-        width: image.readUInt32BE(offset + 8),
-        height: image.readUInt32BE(offset + 12),
-      };
-    }
+  expect(start).toBeGreaterThan(-1);
+  expect(end).toBeGreaterThan(start);
 
-    offset = image.indexOf("ispe", offset + 4, "ascii");
-  }
-
-  throw new Error(`Missing AVIF ispe size box in ${assetPath}.`);
-}
-
-async function readAvifPixel(assetPath: string, x: number, y: number) {
-  const { data, info } = await sharp(assetPath).ensureAlpha().raw().toBuffer({
-    resolveWithObject: true,
-  });
-  const offset = (y * info.width + x) * info.channels;
-
-  return {
-    r: data[offset],
-    g: data[offset + 1],
-    b: data[offset + 2],
-  };
-}
-
-function expectRgbClose(
-  actual: Awaited<ReturnType<typeof readAvifPixel>>,
-  expected: { r: number; g: number; b: number },
-) {
-  expect(Math.abs(actual.r - expected.r)).toBeLessThanOrEqual(1);
-  expect(Math.abs(actual.g - expected.g)).toBeLessThanOrEqual(1);
-  expect(Math.abs(actual.b - expected.b)).toBeLessThanOrEqual(1);
+  return styles.slice(start, end);
 }
 
 describe("global styles", () => {
-  it("uses the system color scheme for dark mode", () => {
+  it("imports the standalone Geist palette and exposes every Tailwind alias", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const paletteImport = '@import "./styles/geist-colors.css";';
+
+    expect(styles).toContain(paletteImport);
+    expect(styles.indexOf(paletteImport)).toBeGreaterThan(
+      styles.indexOf('@import "@fontsource-variable/geist";'),
+    );
+    expect(styles.indexOf(paletteImport)).toBeLessThan(styles.indexOf("@custom-variant dark"));
+    for (const token of GEIST_TOKENS) {
+      expect(styles).toContain(`--color-ds-${token}: var(--ds-${token});`);
+    }
+    expect(styles.match(/--color-ds-[a-z-]+-\d+:/g)).toHaveLength(92);
+  });
+
+  it("maps shadcn semantics to Geist roles with the documented app-owned surfaces", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const mappings = {
+      foreground: "gray-1000",
+      "card-foreground": "gray-1000",
+      "popover-foreground": "gray-1000",
+      "secondary-foreground": "gray-1000",
+      skeleton: "gray-300",
+      accent: "gray-200",
+      "accent-foreground": "gray-1000",
+      destructive: "red-900",
+      input: "gray-alpha-400",
+    } as const;
+
+    for (const [semantic, geist] of Object.entries(mappings)) {
+      expect(styles).toContain(`--${semantic}: var(--ds-${geist});`);
+    }
+
+    expect(styles).toContain("--muted-foreground: light-dark(oklch(31% 0 0), oklch(83% 0 0));");
+    expect(styles).toContain("--color-page-title-accent: var(--page-title-accent);");
+    expect(styles).toContain("--page-title-accent: var(--info-foreground);");
+    expect(styles).toContain(
+      "--primary: light-dark(oklch(0.6 0.2508 258.230011), var(--ds-blue-700));",
+    );
+    expect(styles).toContain("--color-quiet-foreground: var(--quiet-foreground);");
+    expect(styles).toContain("--quiet-foreground: var(--ds-gray-900);");
+    expect(styles).toContain("--color-skeleton: var(--skeleton);");
+    expect(styles).toContain("--contrast-foreground: oklch(100% 0 0);");
+    expect(styles).toContain("--primary-foreground: var(--contrast-foreground);");
+    expect(styles).toContain(
+      "--background: light-dark(oklch(99.11% 0 0), var(--ds-background-200));",
+    );
+    expect(styles).toContain("--card: light-dark(var(--ds-background-100), oklch(0.14 0 0));");
+    expect(styles).toContain("--popover: light-dark(var(--ds-background-100), oklch(0.14 0 0));");
+    expect(styles).toContain(
+      "--border: light-dark(oklch(0 0 0 / 0.075), oklch(100% 0 0 / 10.1961%));",
+    );
+    expect(styles).toContain("--ring: light-dark(var(--ds-blue-700), var(--ds-blue-900));");
+    expect(styles).not.toMatch(/#[\da-fA-F]{3,8}\b|\b(?:hsl|hsla|rgb|rgba|lab)\(/);
+  });
+
+  it("defines exact Geist interaction state aliases", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const mappings = {
+      "focus-ring": "blue-400",
+    } as const;
+
+    for (const [semantic, geist] of Object.entries(mappings)) {
+      expect(styles).toContain(`--color-${semantic}: var(--${semantic});`);
+      expect(styles).toContain(`--${semantic}: var(--ds-${geist});`);
+    }
+
+    expect(styles).toContain(
+      "--control-hover: light-dark(var(--ds-gray-100), var(--ds-gray-200));",
+    );
+    expect(styles).toContain(
+      "--control-active: light-dark(var(--ds-gray-200), var(--ds-gray-300));",
+    );
+    expect(styles).toContain("--color-secondary-hover: var(--secondary-hover);");
+    expect(styles).toContain("--secondary-hover: var(--control-hover);");
+    expect(styles).toContain("--color-destructive-hover: var(--destructive-hover);");
+    expect(styles).toContain(
+      "--destructive-hover: light-dark(var(--ds-red-200), var(--control-hover));",
+    );
+    expect(styles).toContain(
+      "--primary-hover: light-dark(var(--ds-blue-700), var(--ds-blue-800));",
+    );
+    expect(styles).toContain(
+      "--primary-active: light-dark(oklch(55% 0.245 258.04), var(--ds-blue-800));",
+    );
+    for (const semantic of ["control-hover", "control-active", "primary-hover", "primary-active"]) {
+      expect(styles).toContain(`--color-${semantic}: var(--${semantic});`);
+    }
+
+    expect(styles).toContain("--color-control: var(--control);");
+    expect(styles).toContain("--control: var(--muted);");
+    expect(styles).toContain("@apply border-border outline-focus-ring;");
+    expect(styles).not.toContain("outline-ring/50");
+  });
+
+  it("sets one global Lucide stroke metric without component-local styling", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const lucideBlock = getBlock(styles, "svg.lucide");
+
+    expect(styles).toContain("--lucide-stroke-width: 2.2;");
+    expect(lucideBlock).toContain("stroke-width: var(--lucide-stroke-width);");
+  });
+
+  it("uses one light and dark muted surface for neutral states and inputs", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+
+    expect(styles).toContain("--muted: light-dark(oklab(0.98 0 0), oklch(0.17 0 0));");
+    expect(styles).toContain("--control: var(--muted);");
+    expect(styles).toContain("--secondary: var(--muted);");
+    expect(styles).not.toContain("color-mix(");
+    expect(styles).not.toContain("--muted: var(--ds-gray-100);");
+  });
+
+  it("maps light alerts to tone surfaces and dark alerts to the muted surface", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+
+    expect(styles).toContain("--color-status-surface: var(--status-surface);");
+    expect(styles).toContain("--status-surface: var(--muted);");
+    expect(styles).toContain("--info: light-dark(var(--ds-blue-100), var(--muted));");
+    expect(styles).toContain("--info-border: var(--ds-blue-400);");
+    expect(styles).toContain(
+      "--info-foreground: light-dark(oklch(63% 0.24 256.99), var(--ds-blue-900));",
+    );
+    expect(styles).toContain("--success: light-dark(var(--ds-green-100), var(--muted));");
+    expect(styles).toContain("--success-border: var(--ds-green-400);");
+    expect(styles).toContain(
+      "--success-foreground: light-dark(oklch(0.7 0.214 145.179993), var(--ds-green-900));",
+    );
+    expect(styles).toContain("--warning: light-dark(var(--ds-amber-100), var(--muted));");
+    expect(styles).toContain("--warning-border: var(--ds-amber-400);");
+    expect(styles).toContain(
+      "--warning-foreground: light-dark(oklch(0.7 0.1991 64.279999), oklch(0.72 0.1991 64.28));",
+    );
+    expect(styles).toContain("--color-info: var(--info);");
+    expect(styles).toContain("--color-info-border: var(--info-border);");
+    expect(styles).toContain("--color-success: var(--success);");
+    expect(styles).toContain("--color-success-border: var(--success-border);");
+    expect(styles).toContain("--color-warning: var(--warning);");
+    expect(styles).toContain("--color-warning-border: var(--warning-border);");
+    expect(styles).toContain("--destructive-surface: light-dark(var(--ds-red-100), var(--muted));");
+    expect(styles).toContain("--destructive-border: var(--ds-red-400);");
+    expect(styles).toContain(
+      "--destructive-foreground: light-dark(var(--ds-red-700), var(--ds-red-900));",
+    );
+    expect(styles).toContain("--color-destructive-foreground: var(--destructive-foreground);");
+  });
+
+  it("defines blue chart and sidebar semantics", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+
+    expect(styles).toContain("--chart-1: var(--ds-blue-700);");
+    expect(styles).toContain("--chart-2: var(--ds-blue-900);");
+    expect(styles).toContain("--chart-3: var(--ds-blue-600);");
+    expect(styles).toContain("--chart-4: var(--ds-blue-800);");
+    expect(styles).toContain("--chart-5: var(--ds-blue-1000);");
+    expect(styles).toContain("--sidebar: var(--ds-background-100);");
+    expect(styles).toContain("--sidebar-border: var(--ds-gray-alpha-400);");
+  });
+
+  it("maps colored badges to light tones and dark neutral surfaces", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const foregroundMappings = {
+      "badge-neutral-foreground": "gray-1000",
+    } as const;
+
+    for (const [semantic, geist] of Object.entries(foregroundMappings)) {
+      expect(styles).toContain(`--color-${semantic}: var(--${semantic});`);
+      expect(styles).toContain(`--${semantic}: var(--ds-${geist});`);
+    }
+
+    expect(styles).toContain("--badge-info-foreground: var(--info-foreground);");
+    expect(styles).toContain("--badge-success-foreground: var(--success-foreground);");
+    expect(styles).toContain("--badge-warning-foreground: var(--warning-foreground);");
+    expect(styles).toContain("--badge-destructive-foreground: var(--destructive-foreground);");
+
+    for (const semantic of [
+      "badge-neutral",
+      "badge-neutral-strong",
+      "badge-info-strong",
+      "badge-success-strong",
+      "badge-warning-strong",
+      "badge-destructive-strong",
+    ]) {
+      expect(styles).toContain(`--${semantic}: var(--status-surface);`);
+    }
+
+    expect(styles).toContain("--badge-info: light-dark(var(--ds-blue-100), var(--muted));");
+    expect(styles).toContain("--badge-success: light-dark(var(--ds-green-100), var(--muted));");
+    expect(styles).toContain("--badge-warning: light-dark(var(--ds-amber-100), var(--muted));");
+    expect(styles).toContain("--badge-destructive: light-dark(var(--ds-red-100), var(--muted));");
+    expect(styles).toContain("--color-badge-info-active: var(--badge-info-active);");
+    expect(styles).toContain(
+      "--badge-info-hover: light-dark(var(--ds-blue-200), var(--control-hover));",
+    );
+    expect(styles).toContain(
+      "--badge-info-active: light-dark(var(--ds-blue-300), var(--control-active));",
+    );
+    expect(styles).toContain(
+      "--badge-header-info: light-dark(var(--ds-blue-100), oklch(0.19 0 0));",
+    );
+    expect(styles).toContain(
+      "--badge-header-info-hover: light-dark(var(--ds-blue-200), var(--control-hover));",
+    );
+    expect(styles).toContain(
+      "--badge-header-info-active: light-dark(var(--ds-blue-300), var(--control-active));",
+    );
+    expect(styles).toContain(
+      "--badge-success-hover: light-dark(var(--ds-green-200), var(--control-hover));",
+    );
+    expect(styles).toContain(
+      "--badge-success-active: light-dark(var(--ds-green-300), var(--control-active));",
+    );
+    expect(styles).toContain(
+      "--badge-warning-hover: light-dark(var(--ds-amber-200), var(--control-hover));",
+    );
+    expect(styles).toContain(
+      "--badge-warning-active: light-dark(var(--ds-amber-300), var(--control-active));",
+    );
+    expect(styles).toContain(
+      "--badge-destructive-hover: light-dark(var(--ds-red-200), var(--control-hover));",
+    );
+    expect(styles).toContain(
+      "--badge-destructive-active: light-dark(var(--ds-red-300), var(--control-active));",
+    );
+  });
+
+  it("maps information controls to light blue and dark neutral surfaces", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+
+    for (const semantic of [
+      "control-info",
+      "control-info-foreground",
+      "control-info-hover",
+      "control-info-active",
+    ]) {
+      expect(styles).toContain(`--color-${semantic}: var(--${semantic});`);
+    }
+
+    expect(styles).toContain("--control-info: light-dark(var(--ds-blue-100), var(--muted));");
+    expect(styles).toContain("--control-info-foreground: var(--badge-info-foreground);");
+    expect(styles).toContain(
+      "--control-info-hover: light-dark(var(--ds-blue-200), var(--control-hover));",
+    );
+    expect(styles).toContain(
+      "--control-info-active: light-dark(var(--ds-blue-300), var(--control-active));",
+    );
+  });
+
+  it("uses one semantic map with system and explicit theme resolution", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
     expect(styles).toContain("@media (prefers-color-scheme: dark)");
-    expect(styles).toContain("color-scheme: light;");
-    expect(styles).toContain("color-scheme: dark;");
-    expect(styles.match(/--background: oklch\(0.145 0 0\);/g)).toHaveLength(2);
+    expect(styles).toContain(":root:not(.light) {");
+    expect(styles).toContain(".light {");
+    expect(styles).toContain(".dark {");
     expect(
-      styles.match(/--portfolio-page-background: var\(--portfolio-app-chrome-color\);/g),
-    ).toHaveLength(3);
-    expect(styles).not.toContain("--portfolio-page-background: var(--background);");
-    expect(styles).not.toContain("@custom-variant dark (&:is(.dark *));");
+      styles.match(
+        /--background: light-dark\(oklch\(99\.11% 0 0\), var\(--ds-background-200\)\);/g,
+      ),
+    ).toHaveLength(1);
+    expect(styles.match(/--portfolio-app-chrome-color: var\(--card\);/g)).toHaveLength(1);
+    expect(styles.match(/--portfolio-page-background: var\(--background\);/g)).toHaveLength(1);
+    expect(styles).toContain("@custom-variant dark (&:is(.dark *));");
   });
 
-  it("uses sampled blue app chrome colors as the root page background", () => {
+  it("uses coordinated app-owned page, raised-surface, and chrome colors", () => {
     const styles = readFileSync("src/styles.css", "utf8");
-    const rootStart = styles.indexOf(":root {");
-    const rootEnd = styles.indexOf("\n}\n\n.dark", rootStart);
-    const lightRoot = styles.slice(rootStart, rootEnd);
-    const darkClassStart = styles.indexOf(".dark {");
-    const darkClassEnd = styles.indexOf("\n}\n\n@media", darkClassStart);
-    const darkClass = styles.slice(darkClassStart, darkClassEnd);
-    const darkMediaStart = styles.indexOf("@media (prefers-color-scheme: dark)");
-    const darkMedia = styles.slice(darkMediaStart, styles.indexOf("\n}\n\n@media", darkMediaStart));
 
-    expect(styles.match(/--portfolio-app-chrome-color:/g)).toHaveLength(3);
-    expect(lightRoot).toContain("--portfolio-app-chrome-color: #58bad9;");
-    expect(darkClass).toContain("--portfolio-app-chrome-color: #428fa8;");
-    expect(darkMedia).toContain("--portfolio-app-chrome-color: #428fa8;");
-    expect(lightRoot).toContain("--portfolio-page-background: var(--portfolio-app-chrome-color);");
-    expect(darkClass).toContain("--portfolio-page-background: var(--portfolio-app-chrome-color);");
-    expect(darkMedia).toContain("--portfolio-page-background: var(--portfolio-app-chrome-color);");
-  });
-
-  it("uses generated top and repeat artwork instead of CSS gradient fades", () => {
-    const styles = readFileSync("src/styles.css", "utf8");
-    const rootStart = styles.indexOf(":root {");
-    const rootEnd = styles.indexOf("\n}\n\n.dark", rootStart);
-    const lightRoot = styles.slice(rootStart, rootEnd);
-    const darkClassStart = styles.indexOf(".dark {");
-    const darkClassEnd = styles.indexOf("\n}\n\n@media", darkClassStart);
-    const darkClass = styles.slice(darkClassStart, darkClassEnd);
-    const darkMediaStart = styles.indexOf("@media (prefers-color-scheme: dark)");
-    const darkMedia = styles.slice(darkMediaStart, styles.indexOf("\n}\n\n@media", darkMediaStart));
-
-    expect(lightRoot).toContain(
-      '--portfolio-header-atmosphere-image: url("/page-atmosphere.avif");',
-    );
-    expect(darkClass).toContain(
-      '--portfolio-header-atmosphere-image: url("/page-atmosphere-dark.avif");',
-    );
-    expect(darkMedia).toContain(
-      '--portfolio-header-atmosphere-image: url("/page-atmosphere-dark.avif");',
-    );
-    expect(lightRoot).toContain(
-      '--portfolio-page-repeat-image: url("/page-atmosphere-repeat.avif");',
-    );
-    expect(darkClass).toContain(
-      '--portfolio-page-repeat-image: url("/page-atmosphere-repeat-dark.avif");',
-    );
-    expect(darkMedia).toContain(
-      '--portfolio-page-repeat-image: url("/page-atmosphere-repeat-dark.avif");',
-    );
-    expect(styles).toContain("--portfolio-header-atmosphere-height: 96rem;");
-    expect(styles).toContain("--portfolio-header-atmosphere-width: 180%;");
     expect(styles).toContain(
-      "--portfolio-header-atmosphere-repeat-start: var(--portfolio-header-atmosphere-height);",
+      "--background: light-dark(oklch(99.11% 0 0), var(--ds-background-200));",
     );
-    expect(styles).toContain("--portfolio-header-atmosphere-width: 100%;");
-    expect(styles).not.toContain("--portfolio-header-atmosphere-fade-");
-    expect(styles).not.toMatch(
-      /--portfolio-header-atmosphere-(?:height|repeat-start): [^;]*(?:svh|vh|dvh|lvh|%)/,
-    );
-    expect(styles).not.toContain("--portfolio-header-cloud-image");
-    expect(styles).not.toContain('url("/header-clouds');
+    expect(styles).toContain("--card: light-dark(var(--ds-background-100), oklch(0.14 0 0));");
+    expect(styles).toContain("--popover: light-dark(var(--ds-background-100), oklch(0.14 0 0));");
+    expect(styles).toContain("--portfolio-app-chrome-color: var(--card);");
+    expect(styles).toContain("--portfolio-page-background: var(--background);");
   });
 
-  it("keeps source, generated top, and repeat atmosphere assets at their contract sizes", () => {
-    for (const assetPath of ATMOSPHERE_SOURCE_ASSETS) {
-      expect(readAvifIntrinsicSize(assetPath)).toEqual(ATMOSPHERE_SOURCE_ASSET_SIZE);
-    }
-
-    for (const assetPath of ATMOSPHERE_TOP_ASSETS) {
-      expect(readAvifIntrinsicSize(assetPath)).toEqual(ATMOSPHERE_TOP_ASSET_SIZE);
-    }
-
-    for (const assetPath of ATMOSPHERE_REPEAT_ASSETS) {
-      expect(readAvifIntrinsicSize(assetPath)).toEqual(ATMOSPHERE_REPEAT_ASSET_SIZE);
-    }
-  });
-
-  it("keeps Portfolio atmosphere artwork aligned with the shared chrome colors", async () => {
-    const lightChrome = { r: 0x58, g: 0xba, b: 0xd9 };
-    const darkChrome = { r: 0x42, g: 0x8f, b: 0xa8 };
-
-    for (const assetPath of [
-      "scripts/assets/page-atmosphere-source.avif",
-      "public/page-atmosphere.avif",
-    ]) {
-      expectRgbClose(await readAvifPixel(assetPath, 432, 0), lightChrome);
-    }
-
-    for (const assetPath of [
-      "scripts/assets/page-atmosphere-dark-source.avif",
-      "public/page-atmosphere-dark.avif",
-    ]) {
-      expectRgbClose(await readAvifPixel(assetPath, 432, 0), darkChrome);
-    }
-  });
-
-  it("keeps generated atmosphere artwork on body backgrounds so it cannot add scroll height", () => {
+  it("defines shared surface, overlay, and motion roles for component recipes", () => {
     const styles = readFileSync("src/styles.css", "utf8");
-    const htmlStart = styles.indexOf("html {");
-    const htmlEnd = styles.indexOf("\n  }\n", htmlStart);
-    const bodyStart = styles.indexOf("body {", htmlEnd);
-    const bodyEnd = styles.indexOf("\n  }\n", bodyStart);
-    const htmlBlock = styles.slice(htmlStart, htmlEnd);
-    const bodyBlock = styles.slice(bodyStart, bodyEnd);
 
-    expect(htmlBlock).toContain("background: var(--portfolio-page-background);");
-    expect(bodyBlock).toContain("background-color: var(--portfolio-page-background);");
-    expect(bodyBlock).toContain("background-image:");
-    expect(bodyBlock).toContain("var(--portfolio-header-atmosphere-image)");
-    expect(bodyBlock).toContain("var(--portfolio-page-repeat-image)");
-    expect(bodyBlock).toContain("center var(--portfolio-header-atmosphere-repeat-start);");
-    expect(bodyBlock).toContain("background-repeat: no-repeat, repeat-y;");
-    expect(bodyBlock).toContain(
-      "var(--portfolio-header-atmosphere-width) var(--portfolio-header-atmosphere-height)",
-    );
-    expect(bodyBlock).toContain("var(--portfolio-header-atmosphere-width) auto;");
+    expect(styles).toContain("--ds-surface-inset: 1.5rem;");
+    expect(styles).toContain("--ds-surface-section-gap: 1.5rem;");
+    expect(styles).toContain("--ds-surface-stack-gap: 0.75rem;");
+    expect(styles).toContain("--ds-control-height: 2.75rem;");
+    expect(styles).toContain("--color-overlay-scrim: var(--overlay-scrim);");
+    expect(styles).toContain("--overlay-scrim: oklch(0% 0 0 / 30%);");
+    expect(styles).toContain("--ds-motion-duration-fast: 150ms;");
+    expect(styles).toContain("--ds-motion-duration-medium: 300ms;");
+    expect(styles).toContain("--ds-motion-duration-drawer: 450ms;");
+    expect(styles).toContain("--ds-motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);");
+    expect(styles).toContain("--ds-motion-ease-drawer: cubic-bezier(0.22, 1, 0.36, 1);");
+  });
+
+  it("keeps standard controls at 44px while supporting safe compact affordances", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+
+    expect(styles).toContain(".control-target {");
+    expect(styles).toContain("min-width: var(--ds-control-height);");
+    expect(styles).toContain("min-height: var(--ds-control-height);");
+    expect(styles).toContain(".compact-control-target {");
+    expect(styles).toContain("min-width: 2rem;");
+    expect(styles).toContain("min-height: 2rem;");
+    expect(getBlock(styles, ".expanded-control-target")).not.toContain("position:");
+    expect(styles).toContain(".expanded-control-target::after {");
+    expect(styles).toContain("width: max(100%, var(--ds-control-height));");
+    expect(styles).toContain("height: max(100%, var(--ds-control-height));");
+    expect(styles).not.toContain("@media (any-pointer: coarse)");
+  });
+
+  it("uses solid root chrome backgrounds instead of cloud or atmosphere artwork", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const htmlBlock = getBlock(styles, "html");
+    const bodyBlock = getBlock(styles, "body");
+
+    expect(htmlBlock).toContain("background: var(--portfolio-app-chrome-color);");
+    expect(bodyBlock).toContain("background-color: var(--portfolio-app-chrome-color);");
+    expect(bodyBlock).not.toContain("background-image");
     expect(bodyBlock).not.toContain("linear-gradient(");
-    expect(bodyBlock).not.toContain("height: var(--portfolio-header-atmosphere-height);");
-    expect(bodyBlock).not.toContain("position: absolute;");
+    expect(styles).not.toContain("--snapshot-header-atmosphere");
+    expect(styles).not.toContain("--snapshot-page-repeat-image");
+    expect(styles).not.toContain("--snapshot-bottom-chrome");
+    expect(styles).not.toContain("page-atmosphere");
+    expect(styles).not.toContain("header-clouds");
     expect(styles).not.toContain("body::before");
-    expect(styles).not.toContain("main.app-shell::before");
-    expect(styles).not.toContain("--portfolio-header-clearance");
-  });
-
-  it("keeps the bottom chrome tail anchored at the document bottom behind app content", () => {
-    const styles = readFileSync("src/styles.css", "utf8");
-    const bodyStart = styles.indexOf("body {");
-    const bodyEnd = styles.indexOf("\n  }\n", bodyStart);
-    const bodyBlock = styles.slice(bodyStart, bodyEnd);
-    const bodyAfterStart = styles.indexOf("body::after {");
-    const bodyAfterEnd = styles.indexOf("\n  }\n", bodyAfterStart);
-    const bodyAfterBlock = styles.slice(bodyAfterStart, bodyAfterEnd);
-    const appShellStart = styles.indexOf(".app-shell {");
-    const appShellEnd = styles.indexOf("\n}", appShellStart);
-    const appShellBlock = styles.slice(appShellStart, appShellEnd);
-
-    expect(bodyAfterStart).toBeGreaterThan(-1);
-    expect(styles).toContain(
-      "--portfolio-bottom-chrome-tail-height: calc(10rem + env(safe-area-inset-bottom, 0px));",
-    );
-    expect(bodyBlock).toContain("position: relative;");
-    expect(bodyAfterBlock).toContain('content: "";');
-    expect(bodyAfterBlock).toContain("position: absolute;");
-    expect(bodyAfterBlock).not.toContain("position: fixed;");
-    expect(bodyAfterBlock).toContain("inset: auto 0 0;");
-    expect(bodyAfterBlock).toContain("height: var(--portfolio-bottom-chrome-tail-height);");
-    expect(bodyAfterBlock).toContain("pointer-events: none;");
-    expect(bodyAfterBlock).toContain("z-index: 0;");
-    expect(bodyAfterBlock).toContain("linear-gradient(");
-    expect(bodyAfterBlock).toContain("transparent 0%");
-    expect(bodyAfterBlock).toContain(
-      "color-mix(in oklab, var(--portfolio-app-chrome-color) 32%, transparent) 62%",
-    );
-    expect(bodyAfterBlock).toContain(
-      "color-mix(in oklab, var(--portfolio-app-chrome-color) 72%, transparent) 80%",
-    );
-    expect(bodyAfterBlock).toContain("var(--portfolio-app-chrome-color) 100%");
-    expect(bodyAfterBlock).toContain("radial-gradient(");
-    expect(bodyAfterBlock).toContain("var(--portfolio-bottom-chrome-cloud-color)");
-    expect(appShellBlock).toContain("position: relative;");
-    expect(appShellBlock).toContain("z-index: 1;");
+    expect(styles).not.toContain("body::after");
     expect(styles).not.toContain("main.app-shell::before");
   });
 
-  it("uses viewport safe-area insets only on the content shell", () => {
+  it("keeps viewport overscroll on the root layers without making the body a scroll container", () => {
     const styles = readFileSync("src/styles.css", "utf8");
-    const appShellStart = styles.indexOf(".app-shell {");
-    const appShellEnd = styles.indexOf("\n}", appShellStart);
-    const appShellBlock = styles.slice(appShellStart, appShellEnd);
+    const htmlBlock = getBlock(styles, "html");
+    const bodyBlock = getBlock(styles, "body");
 
-    expect(styles).toContain("--portfolio-app-shell-padding-block: 2.5rem;");
+    expect(htmlBlock).toContain("@apply overscroll-y-none font-sans;");
+    expect(bodyBlock).toContain("overflow-x: clip;");
+    expect(bodyBlock).not.toContain("overflow-x: hidden;");
+    expect(bodyBlock).not.toContain("overflow-y:");
+  });
+
+  it("assigns vertical safe areas to app chrome and horizontal insets to content", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+    const appShellBlock = getBlock(styles, ".app-shell");
+    const navbarBlock = getBlock(styles, ".app-navbar");
+    const footerBlock = getBlock(styles, ".app-footer");
+    const chromeContentBlock = getBlock(styles, ".app-chrome-content");
+
+    expect(styles).toContain("--portfolio-app-shell-padding-block-start: 2rem;");
+    expect(styles.match(/--portfolio-app-shell-padding-block-start: 4rem;/g)).toHaveLength(2);
+    expect(styles).not.toContain("--portfolio-app-shell-padding-block-start: 5rem;");
+    expect(styles).toContain("--portfolio-app-shell-padding-block-end: 3rem;");
     expect(styles).toContain("--portfolio-app-shell-padding-inline: 0.75rem;");
     expect(styles).toContain("--portfolio-app-shell-padding-inline: 1.5rem;");
     expect(styles).toContain("--portfolio-app-shell-padding-inline: 2rem;");
-    expect(appShellBlock).toContain("env(safe-area-inset-top, 0px)");
     expect(appShellBlock).toContain("env(safe-area-inset-right, 0px)");
-    expect(appShellBlock).toContain("env(safe-area-inset-bottom, 0px)");
     expect(appShellBlock).toContain("env(safe-area-inset-left, 0px)");
-    expect(appShellBlock).toContain("var(--portfolio-app-shell-padding-block)");
+    expect(appShellBlock).not.toContain("env(safe-area-inset-top, 0px)");
+    expect(appShellBlock).not.toContain("env(safe-area-inset-bottom, 0px)");
+    expect(appShellBlock).toContain("var(--portfolio-app-shell-padding-block-start)");
+    expect(appShellBlock).toContain("var(--portfolio-app-shell-padding-block-end)");
     expect(appShellBlock).toContain("var(--portfolio-app-shell-padding-inline)");
+    expect(navbarBlock).toContain("min-height: calc(3.5rem + env(safe-area-inset-top, 0px));");
+    expect(navbarBlock).toContain("padding-top: env(safe-area-inset-top, 0px);");
+    expect(footerBlock).toContain("min-height: calc(3.5rem + env(safe-area-inset-bottom, 0px));");
+    expect(footerBlock).toContain("padding-bottom: env(safe-area-inset-bottom, 0px);");
+    expect(chromeContentBlock).toContain("env(safe-area-inset-right, 0px)");
+    expect(chromeContentBlock).toContain("env(safe-area-inset-left, 0px)");
     expect(styles).not.toMatch(/body[^}]*env\(safe-area-inset-/);
-  });
-
-  it("uses the blue page background token for root safe areas and body color", () => {
-    const styles = readFileSync("src/styles.css", "utf8");
-    const htmlStart = styles.indexOf("html {");
-    const htmlEnd = styles.indexOf("\n  }\n", htmlStart);
-    const bodyStart = styles.indexOf("body {", htmlEnd);
-    const bodyEnd = styles.indexOf("\n  }\n", bodyStart);
-    const htmlBlock = styles.slice(htmlStart, htmlEnd);
-    const bodyBlock = styles.slice(bodyStart, bodyEnd);
-
-    expect(htmlBlock).toContain("background: var(--portfolio-page-background);");
-    expect(bodyBlock).toContain("background-color: var(--portfolio-page-background);");
-    expect(styles).toContain("--portfolio-page-background: var(--portfolio-app-chrome-color);");
-    expect(styles).not.toContain("--portfolio-page-background: var(--background);");
   });
 
   it("does not use global styles to swap the header logo by theme", () => {
@@ -276,48 +407,23 @@ describe("global styles", () => {
     expect(styles).not.toContain('[data-slot="app-logo-for-dark-mode"]');
   });
 
-  it("defines softened iMessage-blue primary button colors for light and dark schemes", () => {
+  it("does not keep app-specific primary button color tokens outside the preset", () => {
     const styles = readFileSync("src/styles.css", "utf8");
-    const rootStart = styles.indexOf(":root {");
-    const rootEnd = styles.indexOf("\n}\n\n.dark", rootStart);
-    const lightRoot = styles.slice(rootStart, rootEnd);
-    const darkClassStart = styles.indexOf(".dark {");
-    const darkClassEnd = styles.indexOf("\n}\n\n@media", darkClassStart);
-    const darkClass = styles.slice(darkClassStart, darkClassEnd);
-    const darkMediaStart = styles.indexOf("@media (prefers-color-scheme: dark)");
-    const darkMedia = styles.slice(darkMediaStart, styles.indexOf("\n}\n\n@media", darkMediaStart));
 
-    expect(styles.match(/--button-primary:/g)).toHaveLength(3);
-    expect(lightRoot).toContain("--button-primary: color-mix(in oklab, #007aff 90%, #ffffff);");
-    expect(lightRoot).toContain(
-      "--button-primary-hover: color-mix(in oklab, #0071eb 90%, #ffffff);",
+    expect(styles).not.toContain("--button-primary");
+  });
+
+  it("uses pointer cursors for links and enabled button controls", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+
+    expect(styles).toContain(
+      [
+        "a[href],",
+        "  button:not(:disabled),",
+        '  [role="button"]:not(:disabled) {',
+        "    cursor: pointer;",
+        "  }",
+      ].join("\n"),
     );
-    expect(lightRoot).toContain(
-      "--button-primary-active: color-mix(in oklab, #0067d6 90%, #ffffff);",
-    );
-    expect(lightRoot).toContain("--button-primary-disabled: #9ed2ff;");
-    expect(lightRoot).toContain("--button-primary-foreground: #ffffff;");
-    expect(lightRoot).toContain(
-      "--button-primary-disabled-foreground: color-mix(in oklab, #ffffff 82%, transparent);",
-    );
-    expect(lightRoot).toContain(
-      "--button-primary-ring: color-mix(in oklab, var(--button-primary) 40%, transparent);",
-    );
-    expect(darkClass).toContain("--button-primary: color-mix(in oklab, #0a84ff 90%, var(--card));");
-    expect(darkClass).toContain(
-      "--button-primary-hover: color-mix(in oklab, #007aff 90%, var(--card));",
-    );
-    expect(darkClass).toContain(
-      "--button-primary-active: color-mix(in oklab, #006ed6 90%, var(--card));",
-    );
-    expect(darkClass).toContain("--button-primary-disabled: #1b5f9e;");
-    expect(darkClass).toContain("--button-primary-foreground: #ffffff;");
-    expect(darkClass).toContain(
-      "--button-primary-disabled-foreground: color-mix(in oklab, #ffffff 70%, transparent);",
-    );
-    expect(darkClass).toContain(
-      "--button-primary-ring: color-mix(in oklab, var(--button-primary) 50%, transparent);",
-    );
-    expect(darkMedia).toContain("--button-primary: color-mix(in oklab, #0a84ff 90%, var(--card));");
   });
 });

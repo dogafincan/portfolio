@@ -1,0 +1,24 @@
+{
+  "contractVersion": 1,
+  "application": "portfolio",
+  "costAbuseHardening": {
+    "classification": "dynamic",
+    "rateLimitEvidence": ["wrangler.jsonc", "src/lib/dynamic-api-guard.server.ts"],
+    "workBudgetEvidence": ["wrangler.jsonc", "src/lib/submission-api.ts"],
+    "testEvidence": ["src/lib/dynamic-api-guard.server.test.ts", "src/lib/submission-api.test.ts"]
+  },
+  "suiDataAccessEfficiency": {
+    "classification": "wallet-only",
+    "rationale": "Portfolio builds wallet-signed transactions but owns no direct Sui network read path.",
+    "testEvidence": [
+      "src/components/wallet-control.test.tsx",
+      "src/routes/-static-boundaries.test.ts"
+    ]
+  },
+  "boundedDataLifecycle": {
+    "classification": "none",
+    "rationale": "Portfolio owns no durable application store; paid submission state is delegated to the Registry service.",
+    "testEvidence": ["src/routes/-static-boundaries.test.ts", "src/lib/submission-api.test.ts"]
+  },
+  "exceptions": []
+}

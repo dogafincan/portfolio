@@ -1,314 +1,324 @@
-# Design
+# Portfolio Design Contract
 
-This file is the design source of truth for the portfolio app. It covers visual
-system, layout, interaction, copy, social preview, and portfolio-specific UI
-contracts. `README.md` explains the product and workflow. `AGENTS.md` explains
-agent rules and verification. `PRD.md` tracks product scope and implementation
-slices.
+Doji Design System version: 1.0.1-draft
+Doji Design System source revision: `7f5718e29bf7da92f9fb7b5c1c10fec5ffcdf19f` (committed draft; release tag pending)
+Doji Design System adoption: migrating
 
-Before changing UI, copy, layout, icons, loading states, empty states, social
-images, or responsive behavior, read this file and compare the current sibling
-`sui-swap`, `sui-snapshot`, `sui-airdrop`, and `memedex` design files for
-general principles.
+This file is Portfolio's local UI contract. The canonical shared source is the
+versioned `doji-design-system` Codex skill in the separate design-system
+repository. Runtime components remain local to this repository. The released
+baseline remains immutable `v1.0.0`; the active manual `1.0.1-draft` run adds
+complete description rendering, a concise Alert/Item description target,
+progressive informational-Item disclosure, and the connect-wallet Drawer
+contract, and remains `migrating` until an immutable
+source revision and local proof exist.
 
-## Shared Workspace Design System
+Every local Card keeps 24px (`gap-6`) between each present header, content,
+and footer section at every size. Sibling items in `CardContent` and
+`CardFooter` use 12px (`gap-3`); a direct `FieldGroup` in Card content must
+use that same stack instead of its stock `gap-7`.
 
-Keep this section aligned in principle with the sibling `DESIGN.md` files.
-Product-specific sections may differ, but the shared system should stay
-recognizably consistent unless the portfolio intentionally needs an exception.
+A Card stretched by a shared row or column must not expose a blank main area.
+When it has no task content after its header, use a growing `CardContent` with
+one dashed `Empty` that fills the remaining vertical space. Cards with real
+content, loading structure, feedback, or actions do not receive decorative
+Empty states.
 
-- Put the actual product surface on the first screen. For the portfolio, that
-  means real project content and clear project links, not a marketing landing
-  page, generic hero filler, or decorative explainer section.
-- Keep the product feel calm, scannable, and trustworthy. Use restrained
-  surfaces, readable type, direct actions, and plain copy instead of promotional
-  language.
-- Use the same app stack for product UI: shadcn components on Base UI
-  primitives, the `base-luma` style or preset, Tailwind CSS v4 tokens, Geist,
-  and `lucide-react` for product icons.
-- Do not add another product UI icon family. New shadcn component generation,
-  `components.json`, package dependencies, and regression tests should stay
-  aligned with Lucide.
-- Preload the concrete Fontsource Geist latin `woff2` asset from the root
-  document before the stylesheet link. Keep the preload order covered by the
-  root head regression test.
-- Keep the shared chrome color separate from workbench, card, and form surface
-  tokens so those surfaces continue to follow system color mode.
-- Respect system dark mode. Do not add a manual theme switch unless the product
-  explicitly needs one.
-- Use checked-in PNG/ICO assets for favicon, install icons, header logo, and
-  generated social image. Header logos must render with explicit
-  `width`, `height`, `sizes`, `srcset`, and a visible border wrapper that
-  preserves the app logo's rounded-square shape. Use an outer logo shell with
-  `drop-shadow-xl`, then an inner rounded frame with theme-invariant light-mode
-  colors (`border-neutral-200 bg-white`) and `overflow-hidden`, so the shadow
-  does not get clipped into square lower corners. Do not change the logo asset,
-  border treatment, or shadow treatment when changing the header cloud
-  treatment.
-- Keep the first-viewport identity placement consistent across `sui-snapshot`,
-  `sui-airdrop`, `sui-swap`, `portfolio`, and `memedex`: the app logo should
-  start from the same top-aligned app-shell rhythm on mobile and desktop. Do not
-  add project-specific top padding, desktop vertical centering, or extra outer
-  wrappers that lower the logo or the rest of the content relative to siblings.
-- Keep OG and social images as generated checked-in 1200x630 PNGs. They should
-  use the restrained light-mode header composition only: centered logo and site
-  title. Generate them from the React/Tailwind `/og-preview` route with
-  `npm run generate:og`; do not add social SVG sources, dynamic request-time
-  image endpoints, project cards, workbench controls, marketing sections, or
-  decorative mockups.
-- Use a rounded muted workbench as the main app surface. It should contain the
-  project cards, preserve enough padding for nested depth, and keep outer radius,
-  inner card radius, and spacing visually related at every breakpoint.
-- Prefer stock shadcn components before custom primitives. Repeated project
-  surfaces use cards. Compact nested summaries and metadata rows use muted
-  shadcn `Item` surfaces instead of card-within-card layouts.
-- Do not place card containers inside app cards. If a compact nested surface is
-  needed, use `Item`.
-- Cards and card-like `bg-card` panels should not use box shadows. Use borders,
-  rings, spacing, and muted surfaces for separation instead.
-- Give each project card a concise title and description. Put implementation
-  details after the plain-language explanation of what the project does.
-- Keep each project card to one visible title/subtitle pattern. If the muted
-  project summary `Item` carries the title and subtitle, do not add another card
-  header that repeats the same context.
-- Keep spacing rhythm consistent. Sibling cards inside the same workbench should
-  use the same card-to-card gap on mobile and desktop; compact stacks inside one
-  card or component should use an 8px vertical gap between related items,
-  actions, and their owned alerts.
-- Keep product or app names in compact helper links non-wrapping when a line
-  break would split the linked name and make the copy harder to scan.
-- Keep actions in the card that owns their state. Project live actions belong in
-  the project card. Future contact or case-study actions should live near the
-  content they operate on.
-- The default `Button` variant is the primary button treatment. Keep it on a
-  softened Apple iMessage-style blue with fully opaque white text:
-  `color-mix(in oklab, #007aff 90%, #ffffff)` in light mode and
-  `color-mix(in oklab, #0a84ff 90%, var(--card))` in dark mode, plus matching
-  hover, active, expanded, focus, and disabled state colors. Keep this button
-  color separate from the global `--primary` token so badges, links, progress,
-  and other non-button surfaces do not inherit the action blue by accident.
-- Keep every clickable button target at least `44px` tall across variants.
-  Touch comfort wins over compact density for primary actions and utility
-  controls.
-- Keep editable input fields at the same `44px` control height if a future
-  portfolio form or search surface is introduced. Search or selector inputs
-  should preserve horizontal room for leading icons and dropdown affordances
-  when those controls exist.
-- Keep keyboard focus visible on every profile and live-project action. These
-  links should stay in natural DOM order and share the same compact focus ring
-  recipe so the currently selected item is easy to identify without making the
-  social icon state feel oversized. Keep the ring non-animated on focus and use
-  a small offset so the ring stays visible around dark project buttons.
-- Add semantic leading Lucide icons to text buttons for concrete actions such as
-  opening a project, navigating to a case study, or contacting.
-  Loading states should swap the icon for a spinner without shifting the label.
-- Labels, card titles, and item titles should be readable base-size or larger
-  semibold type; descriptions should remain base-size normal weight.
-- Use shadcn `Alert` for future inline validation, warning, info, success, and
-  failure states. Alerts are tonal surfaces, not bordered cards: pale backgrounds
-  with darker text and icons in light mode, dark tonal backgrounds with white
-  text and icons in dark mode, and no visible border line.
-- Every alert needs a semantic Lucide icon on the left, vertically centered with
-  the text block, using the shared default `size-5` treatment and normal stroke
-  weight.
-- Future action-triggered alerts should render below the complete action cluster
-  that owns them. If multiple sibling buttons share one workflow, do not insert
-  related alerts between adjacent buttons. Single-input validation can still sit
-  directly below the field.
-- Keep alert, validation, progress, and error copy understandable to
-  non-technical visitors. Say what happened and what the visitor can do next. Do
-  not expose backend internals, transaction digests, chunks, batches, raw units,
-  proof data, stack names, runtime names, or provider implementation details in
-  visitor-facing copy unless the page is explicitly a technical case study.
-- For recoverable errors that originate in a third-party product, API, or
-  browser capability, classify the failure by the portfolio-owned action first,
-  then name the outside service when known and show safe, human-readable outside
-  guidance by default. Use the pattern `[Service] says: [message]` only after
-  trimming whitespace, redacting long identifiers, capping length, and rejecting
-  stack traces, JSON, signatures, raw payloads, route IDs, base64 blobs, debug
-  dumps, and other internal details. If the outside message is missing or
-  unsafe, hide it and show a generic next step the visitor can act on. This repo
-  currently has no wallet, auth, transaction, or provider-mediated app workflow,
-  so the rule is for future dynamic content, embeds, contact actions, browser
-  capabilities, and deployment/provider incident copy.
-- Model async states explicitly if the portfolio adds dynamic content. Loading
-  skeletons should mirror the final card structure, and failure states should
-  have deliberate button and alert states.
-- Design for all viewport widths. On narrow screens, preserve workbench and card
-  borders and prevent text, project metadata, buttons, or images from escaping
-  their containers.
-- When syncing design between sibling apps, copy general principles, not
-  product-specific behavior. `sui-snapshot` owns snapshot export, `sui-airdrop`
-  owns wallet funding and airdrop execution, `memedex` owns discovery, voting,
-  ranking, review, and moderation surfaces, and `portfolio` owns project
-  showcase content.
+For UI work, apply the current product request first, this local contract
+second, and the canonical skill third. Canonical changes are synchronized by a
+manual skill run after each accepted design-system change; there is no shared
+runtime package and no automated cross-repository mutation.
 
-## Header Section / Atmosphere-to-Page Background
+## Temporary Chain Migration Lockout
 
-This section documents the shared page-background treatment for app header and
-workbench areas across projects. Treat these rules as reusable system policy.
+- Portfolio's Sui-dependent wallet, payment, recovery, submission, and public
+  dynamic API behavior is temporarily unavailable while Doji migrates from Sui
+  to Robinhood Chain. This is a reversible access lock; keep the existing Sui
+  implementation intact for the later chain migration.
+- Keep genuinely static routes, portfolio content, profile links, and live app
+  links available.
+- The normal **Connect wallet** and **Submit project** header actions retain
+  their labels, enabled appearance, 44px geometry, pointer and keyboard access,
+  and focus treatment. Do not render a migration Alert below either action or
+  the shared header-action cluster.
+- **Connect wallet** opens the existing responsive-center Drawer without
+  mounting or importing the wallet runtime. Its body contains one stretching
+  `Empty` that explains the migration, no wallet choices or active chain
+  controls, and the normal single **Close** footer action. Drawer dismissal
+  restores focus to **Connect wallet**.
+- The ordinary **Pay 10 SUI** and **Recover payment** form actions retain their
+  labels and enabled visual/focus behavior without the `disabled` attribute.
+  They are inert during the lockout, never validate, open recovery, connect,
+  sign, request, or mutate, and own one persistent informational Doji Alert
+  immediately after their complete action cluster.
+- Portfolio has no project or asset selector trigger; its manual asset-type
+  input is not a selector, so the migration selector-Drawer requirement is not
+  applicable here. If a selector is added during this lockout, its migration
+  explanation belongs only in its Empty surface, never in an Alert below the
+  trigger.
+- Every public chain-dependent API path and broad server-function path returns
+  the same no-store JSON `503` migration response before request-body work,
+  rate limiting, service bindings, external providers, or mutations. Existing
+  envelope, gateway, wallet, payment, and recovery implementation remains
+  preserved behind this temporary boundary.
 
-- Use generated page-atmosphere assets as the only app page graphics:
-  `page-atmosphere.avif` plus `page-atmosphere-repeat.avif` in light mode, and
-  `page-atmosphere-dark.avif` plus `page-atmosphere-repeat-dark.avif` in dark
-  mode. Generate them with `npm run generate:atmosphere` from the source assets
-  in `scripts/assets/`.
-- Keep the root/page safe-area background on the shared app chrome colors:
-  `#58BAD9` in light mode and `#428FA8` in dark mode. `theme-color`, manifest
-  colors, `--portfolio-app-chrome-color`, and `--portfolio-page-background`
-  should stay aligned to those colors.
-- Use `viewport-fit=cover` so the generated `body` background can extend into
-  iOS safe areas. Keep the header, workbench, and other app content out of
-  unsafe areas with `.app-shell` padding that adds
-  `env(safe-area-inset-top/right/bottom/left)` to the normal shell spacing.
-- The generated top atmosphere assets are `864x1536`. They bake in the old
-  transition timing so the page first becomes visibly lighter or darker at
-  `37.5rem` / 600px from the top, strengthens at `59.25rem` / 948px, and
-  reaches the full white or near-black lower page color at `77.25rem` / 1236px.
-  Keep those pixel stops in `scripts/generate-page-atmosphere.mjs`.
-- The generated repeat assets are `864x512` seamless lower-page continuations:
-  white in light mode and near-black in dark mode. Start them at the fixed
-  `96rem` top atmosphere height so long scrolls continue on the lower-page
-  color without repainting another blue header band.
-- Attach the generated top and repeat assets directly to `body` background
-  layers. Crop them with fixed CSS background positioning and sizing rather
-  than adding positioned pseudo-elements for the header/top atmosphere or
-  separate header-specific background assets. The top/repeat background
-  treatment must not increase document scroll height.
-- Use a document-anchored `body::after` bottom chrome tail for end-of-page
-  browser chrome continuity. It must sit behind `.app-shell`, use
-  `pointer-events: none`, avoid adding scroll height, remain transparent at the
-  top, may include subtle lilac cloud texture above the final strip, and end in
-  the shared app chrome color at the absolute document bottom.
-- Do not render a `body::before` atmosphere layer, repeating `body::after`
-  atmosphere layer, fixed viewport-bottom fade, separate cloud layer, generated
-  mesh continuation, or `main.app-shell::before` clearance halo for app page
-  chrome.
-- Header title, subtitle, and profile/social icons should remain solid white so
-  the app identity stays readable over the blue header artwork. The main header
-  title should use `drop-shadow-xl` to match the logo depth.
-- Generate OG/social images from the generated `page-atmosphere.avif` artwork
-  over the app chrome color. Keep OG preview generation decoupled from
-  page-background variables so changing the page transition does not
-  accidentally change social images.
-- Verify desktop and mobile, light and dark mode whenever the page-background
-  transition, theme colors, or header identity classes change.
+## Product Character
 
-## Portfolio Product Shape
+- Portfolio is a focused public project showcase with one shared paid Registry
+  submission workflow. It is not a dashboard, CMS, blog, or Sui utility.
+- Lead with real identity and project content. Do not add marketing filler,
+  decorative metrics, vague claims, or sections without visitor value.
+- Keep the interface calm, direct, readable, and trustworthy.
+- Explain what a project does before naming implementation details.
+- Keep showcase data in `src/content/projects.ts` until case studies or a CMS
+  have a demonstrated need.
 
-- Keep the portfolio a focused public project showcase, not a blog, dashboard,
-  CMS, or Sui utility runtime.
-- Preserve the single-route structure until a project genuinely needs its own
-  case-study page: header, rounded muted project workbench, and project cards.
-- Use the shortened, top-cropped page-atmosphere artwork so Portfolio follows
-  the shared atmosphere-to-page transition without a separate app header
-  graphic.
-- Do not list the portfolio website as one of its own project cards; visitors
-  are already viewing that surface.
-- The primary visitor flow is: land on the page, identify the person and project
-  focus, scan real project cards, and open a live project when one is available.
-- Do not place visible footer/profile content below the project workbench unless
-  a future product decision gives that surface concrete visitor value.
-- Do not add wallet connection, transaction signing, Mysten SDK dependencies,
-  Turnstile, rate limiting, Durable Objects, KV, D1, R2, queues, or backend state
-  just because the sibling apps use them.
-- The portfolio may describe Sui projects, but Sui-specific workflows stay in
-  the sibling apps.
-- The portfolio may list or link to Memedex, but memecoin discovery, voting,
-  ranking, review, and moderation workflows stay in Memedex.
+## Foundations
 
-## Header And Project Workbench
+- Use Geist from the checked-in Fontsource variable font and preload the
+  concrete Latin `woff2` before the stylesheet.
+- Use the complete shared Geist OKLCH palette in
+  `src/styles/geist-colors.css` without local edits.
+- Browser-rendered colors resolve through semantic aliases in `src/styles.css`.
+  Do not use raw palette utilities, component-local color literals,
+  `color-mix()`, or painted opacity suffixes.
+- Neutral muted surfaces, editable controls, and secondary actions use
+  `oklab(0.98 0 0)` in light mode and `oklch(0.17 0 0)` in dark mode. Colored
+  statuses keep their tone surfaces in light mode and use the muted surface
+  behind colored foregrounds in dark mode. The single `--warning-foreground`
+  role owns warning alerts, amber badges, warning buttons and controls, and all
+  other amber status text. It resolves to `oklch(0.7 0.1991 64.279999)` in
+  light mode and `oklch(0.72 0.1991 64.28)` in dark mode.
+- Respect system light and dark modes. Do not add a theme switch without a
+  separate product decision.
+- Use the solid neutral page field and raised app chrome. Do not add page
+  atmosphere, clouds, mesh, gradients, or decorative background images.
+- Paint `html`, `body`, navbar, footer, and safe areas with the raised chrome
+  role. Paint the page canvas with the page-background role.
+- Keep platform metadata aligned to the neutral chrome:
+  `#FFFFFF` in light mode and `#090909` in dark mode; the manifest background
+  is `#FCFCFC`.
+- The document uses `viewport-fit=cover`, `html` uses `overscroll-y-none`, the
+  body and complete page shell use `overscroll-none`, and body horizontal
+  overflow is clipped rather than hidden.
+- Global Lucide stroke width is `2.2`. Lucide is the only product UI icon
+  family. Exact X and GitHub brand SVGs are the documented brand-mark
+  exception.
 
-- Keep the header visually aligned with the sibling app headers: app logo,
-  title, concise subtitle, centered text, and foreground text color by
-  inheritance.
-- The header subtitle should feel informal and personal: language learning,
-  nutrition and exercise, building things, and inviting interesting builder
-  conversations are part of the positioning.
-- Place X and GitHub icon-only links after the title/subtitle block and before
-  the project workbench. The links should inherit the header color, render as
-  `55px` square targets with `25px` brand marks, open in a new tab, and use
-  accessible labels that name the destination. Keep their keyboard focus ring
-  aligned with the project live app actions.
-- Use inline SVG brand marks for the X and GitHub profile links because they
-  are exact profile-brand marks, not new product UI icon-family dependencies.
-  They should use `currentColor` so they stay aligned with the header title and
-  subtitle color treatment, and `drop-shadow-xl` so they share the header
-  identity depth.
-- The title class currently matches the sibling apps:
-  `text-balance text-4xl leading-tight font-bold tracking-tight text-white drop-shadow-xl`.
-- The subtitle class currently matches the snapshot header width treatment:
-  `max-w-[40rem] text-balance text-lg font-medium text-white md:max-w-full`.
-- Keep `Reach out if you're building something interesting.` in a second
-  subtitle sentence span with `md:block` so larger screens do not flatten the
-  full subtitle into one long line.
-- Keep the header, profile links, and project workbench in the normal top-first
-  app-shell flow on desktop and mobile. The project workbench should size to its
-  project-card content and must not grow just to fill spare first-viewport
-  height.
-- Keep the project workbench class aligned with the sibling workbench container
-  until there is a deliberate portfolio-specific exception:
-  `grid w-full min-w-0 max-w-full grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background`.
-- Do not put a visible `Projects` title/subtitle above the cards unless the
-  page gains enough surrounding structure to need that label.
-- Do not add a separate build-principles section below the project cards unless
-  it carries concrete visitor value that cannot fit in project content.
+## Typography
 
-## Project Cards
+- Page titles use the shared responsive page-title recipe and one short
+  semantic blue accent span. Primary product headers aim for the shadcn-scale
+  35-40 title characters and 140-155 subtitle characters, including spaces and
+  punctuation, while accurate and natural copy remains the higher priority.
+- Page subtitles use the shared page-subtitle recipe and foreground color.
+- Card, item, field, alert, and supporting text use shared typography helpers
+  from `src/lib/doji-ui.ts`.
+- Do not shrink important content to create density. `text-sm` is reserved for
+  compact metadata, helper labels, and badges.
+- Keep visible copy in sentence case. Button labels are direct and concise.
+- Every semantic description renders in full. Let the owning surface grow to
+  the description's natural height; never use a line clamp, truncation,
+  ellipsis, `overflow-hidden`, or fixed-height clipping on description text or
+  its descendants.
+- Author Alert and Item descriptions for one or two rendered lines at their
+  normal target width whenever complete meaning fits. Remove title repetition
+  and nonessential detail first; keep the shortest complete safety, deadline,
+  technical, or recovery wording when it still needs more space, and let it
+  wrap without smaller type or cutoff utilities.
+- Minimize simultaneous informational Items as a flexible composition rule.
+  Consolidate related required disclosures and progressively reveal
+  state-specific information, while keeping material terms visible before an
+  action. Project cards, controls, previews, summaries, and data/status rows may
+  use the Items their task requires.
 
-- Project data lives in `src/content/projects.ts`. Extend that structured data
-  before creating one-off project markup.
-- Each card should show only the product-owned app icon, the app's exact title,
-  approved portfolio card subtitle copy, and a live app link.
-- Keep the current four-card order in `src/content/projects.ts`: Memerank first
-  for the upper-left desktop slot, Sui Swap second for the upper-right slot, Sui
-  Airdrop third for the bottom-left slot, and Sui Snapshot fourth for the
-  bottom-right slot.
-- Place each product icon, project title, and project subtitle together inside
-  one full-width shadcn `Item` using the muted variant. Keep the icon on the
-  left, vertically centered, with the title and subtitle stacked to the right.
-  Logos should render as a 45px rounded square, about 75% of the original 60px
-  size, with a neutral gray border and no drop shadow. The live app button stays
-  outside the `Item` in the card footer.
-- Do not show status badges, role text, stack metadata, implementation
-  highlights, source links, or large preview images in project cards for now.
-  Move that depth into future case-study pages if needed.
-- Use primary treatment for live project actions. Do not show source actions for
-  private project repositories.
-- Keep the live app action as a normal external link in the card footer, in
-  project order, with the shared keyboard focus ring.
-- Keep icons, button rows, subtitles, and long project names responsive without
-  overflow.
+## Chrome And Layout
 
-## Portfolio Copy
+- The sticky navbar is a full-width raised surface with one lower border and no
+  shadow, outer radius, or decorative fill.
+- Navbar identity uses the 32px Portfolio logo and full `Doga Fincan` label.
+  This owner-approved personal identity is the naming exception to the
+  `Doji…` product-name rule. Its 2px gap, `text-xl`/`leading-7` name, shared 1px
+  optical offset, and transparent artwork wrapper still match DojiSnap. The
+  complete app-owned identity uses the approved full-color memoji behind the
+  laptop, never a substitute glyph or redrawn silhouette. Light artwork keeps
+  that subject on a full-bleed white square; dark artwork keeps the same subject
+  and geometry on a full-bleed black square. Every non-favicon identity asset,
+  including navbar and install exports, has no rounded tile, mask, transparent
+  corner, or rendered corner clipping. The favicon alone preserves the
+  full-color memoji and laptop on black with the standard rounded masked outer
+  corners, rather than substituting a separately authored monochrome icon.
+  Preserving this illustrative subject is the owner-approved Portfolio identity
+  exception to the canonical solid-white favicon-mark default; the black frame,
+  corner radius, transparent outer pixels, source ownership, and manifest sync
+  remain shared Doji rules.
+  `npx vp run generate:identity` regenerates the complete public identity family
+  from `scripts/assets/app-logo-source.png`. The centered shared source geometry
+  keeps the navbar subject's visible bottom aligned with the initial `D`.
+- The navbar contains identity and genuine navigation only. Primary page-header
+  actions always read **Connect wallet** / **Disconnect wallet** and
+  **Submit project** immediately below the subtitle. They stack in one bounded
+  full-width group on narrow screens and sit in a centered row from the small
+  breakpoint, with 24px of inline padding per action. Connected wallet uses the
+  outline variant; every page-header outline action rests on `bg-card` in both
+  schemes. Never show an address in the header.
+- Match the shadcn homepage's rendered subtitle-to-action rhythm: 16px below
+  the extra-large breakpoint and 24px from that breakpoint upward.
+- The wallet and Sui runtime must remain outside the initial static route chunk
+  and load only after explicit wallet interaction.
+- During the first activation, keep the stable pending wallet action while that
+  runtime loads, mount its Drawer root closed, and request the opening on the
+  next animation frame so the first opening uses the same stock transition as
+  every reopening.
+- The wallet chooser is the responsive-center Doji Drawer at every width. Keep
+  its visible swipe handle, surface-first focus, scrollable wallet or
+  whitespace-filling Empty body, and exactly one visible dismissal action: a
+  text-only full-width outline **Close** button in the footer. Never render an
+  automatic top-right close control. Backdrop, Escape, and downward-swipe
+  dismissal restore focus to the opening wallet action.
+- The page shell owns responsive content and safe-area insets. Use the shared
+  page rail and natural document height; do not vertically center the showcase
+  to fill a viewport.
+- The footer is a raised, bordered chrome surface with centered legal copy in
+  `quiet-foreground`.
 
-- Explain what the project does before naming libraries or infrastructure.
-- Keep copy concrete and phase-accurate. Do not imply projects are live,
-  production-ready, or complete unless the project record and links support it.
-- Keep project-card subtitles matched to approved portfolio card copy. When a
-  project has no specifically approved card description, mirror the app's
-  concise subtitle. Save implementation detail for future case-study pages.
-- Avoid decorative product principles, generic claims, and repeated manifesto
-  copy that delays access to the project list.
-- Technical depth belongs in future case-study pages when a project needs that
-  space.
+## Portfolio Home
+
+- The page title is **Explore the useful products I’m building** (40
+  characters), with its final two words, **I’m building**, accented.
+- The subtitle is:
+  **I’m Doga Fincan, a developer interested in language learning, nutrition,
+  exercise, and useful products. Reach out if you’re building something
+  interesting.** (155 characters).
+- X and GitHub follow the subtitle as 44px semantic info controls with exact
+  brand marks, accessible destination names, natural tab order, and visible
+  focus rings. The shared wallet/submission action group remains immediately
+  after the subtitle, before these product-specific profile links.
+- Project records render as a responsive one/two-column grid of standard
+  `Card` surfaces. Do not wrap the grid in a second card-like workbench.
+- Each project card contains one 48px product icon, one title, one concise
+  description, and—when a live URL exists—a full-width text-only
+  **Open app** footer action.
+- Cards have shared borders, radii, insets, section gaps, and no box shadows.
+  Do not place a Card inside another Card.
+- A project without a live URL omits the action instead of rendering a disabled
+  placeholder.
+- Product icons remain checked-in static assets under `public/projects/`.
+
+## Project Submission
+
+- `/submit` uses the canonical page header and one centered standard Card.
+- Fields and the selected image stay in page memory only until payment
+  succeeds. Do not persist drafts or perform pre-payment search, prefill,
+  validation, upload, or other backend work.
+- Use shared `Field`, `Input`, `Item`, `Badge`, `Alert`, `Dialog`, and `Button`
+  primitives. The form wraps the complete Card; inputs belong in
+  `CardContent`, actions and their feedback in `CardFooter`.
+- Keep the shared 24px card inset/section rhythm and 12px sibling rhythm.
+- Inputs and standard controls are at least 44px high. Labels are visible;
+  errors are field-local and programmatically associated.
+- Image input accepts static JPG, PNG, WebP, or AVIF up to 5,000,000 bytes and
+  40 million decoded pixels. Preview remains local and uses a muted Item.
+- **Remove image** may keep its Trash icon as the documented destructive
+  file-control exception. Ordinary text actions remain text-only.
+- One fee disclosure Item identifies a 10 SUI submission across every Doji app
+  and combines the seven-day redemption, 90-day recovery, expiry, and
+  rejection-refund terms. Payment and recovery actions stay together, with
+  action-owned feedback after the complete cluster.
+- Alerts use semantic surface, border, foreground, and icon pairings:
+  `Info`, `CircleCheck`, `TriangleAlert`, and `CircleAlert` as appropriate.
+- Once a digest exists, failure copy directs the user to recover the payment
+  and explicitly avoids prompting a second payment.
+
+## Components And Interaction
+
+- Prefer local shadcn/Base UI primitives before custom controls.
+- `Card` owns 24px inset, 24px section gap, and 12px content/footer stack gap.
+  Product components do not recreate those values with local padding.
+- Use `Item` for compact nested summaries; use `Alert` for status and
+  recoverable feedback; use `Empty` for empty states. Every Alert uses
+  `border-transparent`, and every Empty flexes and stretches to fill unused
+  space below its content when its owning layout has room.
+- Cards and card-like panels do not use box shadows. Modal overlays may use the
+  canonical component-owned scrim, blur, and transition.
+- Text-labeled buttons and button-styled links are text-only by default.
+  Component-owned icon controls and documented brand/file exceptions retain
+  accessible names.
+- Standard controls expose a real 44px minimum width and height.
+- All links and enabled button controls expose a pointer cursor.
+- Focus uses the shared three-pixel semantic ring and remains clearly visible
+  in both schemes.
+- Motion uses shared duration/easing roles and respects reduced motion. Loading
+  indicators may spin only while work is active.
+- Do not rely on color alone for status, selection, or validation.
+
+## Static 404
+
+- Unknown routes resolve to a real static `404.html` without Worker invocation.
+- The document uses the normal Portfolio navbar, page header, footer, and one
+  centered standard Card.
+- The Card owns **Page not found**, explanatory copy, and the full-width
+  text-only **Back to Portfolio** action.
+- The page uses the same solid neutral design at every viewport and color
+  scheme.
+- The generated static document contains no application JavaScript, wallet
+  runtime, or dynamic requests.
 
 ## Social Preview
 
-- Preserve the social preview contract in `src/routes/index.tsx`. Open Graph and
-  X/Twitter image tags must use absolute HTTPS URLs, not root-relative paths.
-- The canonical and social-preview base URL is `https://dogafincan.com`. The
-  `www.dogafincan.com` custom domain should render the same apex canonical,
-  `og:url`, `og:image`, `og:image:secure_url`, and `twitter:image` values.
-- The current social image points to the generated `public/og.png` with a
-  cache-busting query. If `public/og.png` changes, update `SITE_URL`, the
-  `SOCIAL_IMAGE` query, and `src/routes/-index.test.ts` together. Keep it a
-  checked-in 1200x630 PNG generated by `npm run generate:og`, with no separate
-  SVG source or dynamic request-time image endpoint.
+- `public/og.png` is a checked-in 1200×630 PNG generated from `/og-preview`.
+- The preview is forced dark and composed from the real social navbar and real
+  Portfolio page-header components.
+- Keep a 64px safe inset around the meaningful composition. Do not add
+  atmosphere, gradients, shadows, mockups, project cards, or request-time image
+  generation.
+- Use semantic social alt text. Metadata image URLs are absolute HTTPS URLs
+  with a cache-busting revision.
+- `scripts/generate-og.mjs` waits for fonts, uses reduced motion, verifies
+  dimensions/safe-region/type floors, optimizes through Sharp, and replaces the
+  checked-in PNG atomically.
 
-## Not Yet Implemented
+## Responsive And Accessibility
 
-- Project-specific case-study pages are not implemented. Add them only when a
-  project needs more space than the card can provide.
-- No contact form, newsletter, analytics, CMS, or backend content workflow is
-  specified. Add those to `PRD.md` before implementing them.
+- Preserve the same information order and action hierarchy at every width.
+- Stack header and form action groups where necessary; never abbreviate required
+  labels.
+- No horizontal page overflow is allowed at 320px or wider.
+- Images have meaningful alternative text unless decorative.
+- Icon-only controls and brand links have explicit accessible names.
+- Modal focus, dismissal, and focus restoration remain owned by Base UI.
+- Loading has one authoritative live region. Avoid duplicate announcements.
+- Touch and pointer targets meet the 44px contract except a documented
+  component-owned compact affordance.
+
+## Local Exceptions
+
+The current migration intentionally keeps only these product-owned exceptions:
+
+- exact inline X and GitHub brand SVGs;
+- checked-in project brand artwork;
+- the **Remove image** Trash icon;
+- the Portfolio-specific home copy and project-grid content.
+
+These exceptions do not authorize new icon families, raw component colors,
+decorative backgrounds, button-label icons, card shadows, or custom control
+metrics.
+
+## Adoption Proof
+
+Before changing the adoption state or claiming this migration complete, run:
+
+- `npx vp check`
+- `npx vp test`
+- `npx vp build`
+- Worker type generation and relevant Wrangler dry-runs
+- the canonical design-system adoption audit
+- repository security audit
+- rendered desktop/mobile light/dark checks for `/`, `/submit`, and
+  `/404.html`
+- static-404 no-JavaScript and no-dynamic-request checks
+- social-image generation and geometry checks
+- `git diff --check`
+
+Record an immutable canonical source revision before changing
+`Doji Design System adoption` from `migrating`.

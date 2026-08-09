@@ -24,13 +24,12 @@ describe("portfolioProjects", () => {
       {
         slug: "sui-airdrop",
         name: "Sui Airdrop",
-        subtitle: "Create a fixed-amount coin airdrop from a Sui Snapshot CSV.",
+        subtitle: "Airdrop coins from a Sui Snapshot CSV.",
       },
       {
         slug: "sui-snapshot",
         name: "Sui Snapshot",
-        subtitle:
-          "Generate a ranked holder list for a Sui coin or NFT collection and export it as CSV.",
+        subtitle: "Rank Sui coin or NFT holders and export a CSV.",
       },
     ]);
   });

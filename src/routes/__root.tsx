@@ -1,12 +1,20 @@
 import type { ReactNode } from "react";
-import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
+import { HeadContent, Scripts, createRootRoute, useRouterState } from "@tanstack/react-router";
 
 import { AppErrorBoundary, AppRecovery } from "../components/app-recovery";
+import { AppProviders } from "@/components/app-providers";
+import {
+  PortfolioPageHeader,
+  PortfolioPageShell,
+  PORTFOLIO_MAIN_CLASS_NAME,
+} from "@/components/app-header";
+import { buttonVariants } from "@/components/ui/button";
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import geistLatinWghtNormal from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url";
 import appCss from "../styles.css?url";
 
-const APP_CHROME_COLOR = "#58BAD9";
-const APP_CHROME_COLOR_DARK = "#428FA8";
+const APP_CHROME_COLOR = "#ffffff";
+const APP_CHROME_COLOR_DARK = "#090909";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -19,7 +27,7 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
       {
-        title: "Portfolio",
+        title: "Doga Fincan",
       },
     ],
     links: [
@@ -62,10 +70,15 @@ export const Route = createRootRoute({
       },
     ],
   }),
+  notFoundComponent: NotFoundPage,
   shellComponent: RootDocument,
 });
 
 function RootDocument({ children }: { children: ReactNode }) {
+  const isStaticNotFoundDocument = useRouterState({
+    select: (state) => state.location.pathname === "/404.html",
+  });
+
   return (
     <html lang="en">
       <head>
@@ -75,13 +88,81 @@ function RootDocument({ children }: { children: ReactNode }) {
           content={APP_CHROME_COLOR_DARK}
           media="(prefers-color-scheme: dark)"
         />
-        <HeadContent />
+        {isStaticNotFoundDocument ? <StaticNotFoundHead /> : <HeadContent />}
       </head>
       <body>
-        <AppErrorBoundary>{children}</AppErrorBoundary>
-        <AppRecovery />
-        <Scripts />
+        <AppErrorBoundary>
+          <AppProviders>{children}</AppProviders>
+        </AppErrorBoundary>
+        {isStaticNotFoundDocument ? null : (
+          <>
+            <AppRecovery />
+            <Scripts />
+          </>
+        )}
       </body>
     </html>
+  );
+}
+
+export function NotFoundPage() {
+  const staticNotFoundDocument = useRouterState({
+    select: (state) => state.location.pathname === "/404.html",
+  });
+
+  return (
+    <PortfolioPageShell>
+      <main className={PORTFOLIO_MAIN_CLASS_NAME}>
+        <PortfolioPageHeader
+          staticNotFoundDocument={staticNotFoundDocument}
+          title={
+            <>
+              This page isn’t in the <span className="text-page-title-accent">portfolio</span>
+            </>
+          }
+          subtitle="The requested address does not match a page in this portfolio. Return home to explore the current projects and live applications."
+        />
+
+        <Card className="mx-auto w-full min-w-0 max-w-[45rem]">
+          <CardHeader>
+            <CardTitle role="heading" aria-level={2}>
+              Page not found
+            </CardTitle>
+            <CardDescription>
+              Check the address, or return to the project showcase. No wallet, Registry, or project
+              data was requested for this page.
+            </CardDescription>
+          </CardHeader>
+          <CardFooter>
+            <a className={buttonVariants({ className: "w-full", size: "lg" })} href="/">
+              Back to Portfolio
+            </a>
+          </CardFooter>
+        </Card>
+      </main>
+    </PortfolioPageShell>
+  );
+}
+
+function StaticNotFoundHead() {
+  return (
+    <>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+      <meta name="application-name" content="Doga Fincan" />
+      <meta name="description" content="The requested page is not part of this portfolio." />
+      <meta name="robots" content="noindex, nofollow" />
+      <title>Page not found · Portfolio</title>
+      <link
+        rel="preload"
+        href={geistLatinWghtNormal}
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
+      <link rel="stylesheet" href={appCss} />
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      <link rel="manifest" href="/manifest.json" />
+    </>
   );
 }

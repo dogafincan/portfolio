@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { dojiTypography } from "@/lib/doji-ui";
 import { cn } from "@/lib/utils";
 
 function Card({
@@ -12,7 +13,7 @@ function Card({
       data-slot="card"
       data-size={size}
       className={cn(
-        "group/card flex flex-col gap-6 overflow-hidden rounded-4xl bg-card py-6 text-sm text-card-foreground ring-1 ring-foreground/5 has-[>img:first-child]:pt-0 data-[size=sm]:gap-4 data-[size=sm]:py-4 dark:ring-foreground/10 *:[img:first-child]:rounded-t-4xl *:[img:last-child]:rounded-b-4xl",
+        "group/card flex flex-col gap-(--ds-surface-section-gap) overflow-hidden rounded-4xl border border-border bg-card py-(--ds-surface-inset) text-base text-card-foreground has-[>img:first-child]:pt-0 data-[size=sm]:[--ds-surface-inset:--spacing(4)] *:[img:first-child]:rounded-t-4xl *:[img:last-child]:rounded-b-4xl",
         className,
       )}
       {...props}
@@ -25,7 +26,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-header"
       className={cn(
-        "group/card-header @container/card-header grid auto-rows-min items-start gap-1.5 rounded-t-4xl px-6 group-data-[size=sm]/card:px-4 has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-6 group-data-[size=sm]/card:[.border-b]:pb-4",
+        "group/card-header @container/card-header grid auto-rows-min items-start gap-1.5 rounded-t-4xl px-(--ds-surface-inset) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--ds-surface-inset)",
         className,
       )}
       {...props}
@@ -35,11 +36,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
 
 function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div
-      data-slot="card-title"
-      className={cn("font-heading text-lg leading-tight font-semibold tracking-tight", className)}
-      {...props}
-    />
+    <div data-slot="card-title" className={cn(dojiTypography.surfaceTitle, className)} {...props} />
   );
 }
 
@@ -47,7 +44,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-description"
-      className={cn("text-base leading-normal text-muted-foreground", className)}
+      className={cn(dojiTypography.supporting, "text-muted-foreground", className)}
       {...props}
     />
   );
@@ -67,7 +64,10 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-content"
-      className={cn("px-6 group-data-[size=sm]/card:px-4", className)}
+      className={cn(
+        "flex flex-col gap-(--ds-surface-stack-gap) px-(--ds-surface-inset) [&>[data-slot=field-group]]:gap-(--ds-surface-stack-gap)",
+        className,
+      )}
       {...props}
     />
   );
@@ -78,7 +78,7 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-footer"
       className={cn(
-        "flex items-center rounded-b-4xl px-6 group-data-[size=sm]/card:px-4 [.border-t]:pt-6 group-data-[size=sm]/card:[.border-t]:pt-4",
+        "flex items-center gap-(--ds-surface-stack-gap) rounded-b-4xl px-(--ds-surface-inset) [.border-t]:pt-(--ds-surface-inset)",
         className,
       )}
       {...props}

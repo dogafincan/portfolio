@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "revision": "development-unconfigured",
+  "publishedAt": "2026-07-29T00:00:00.000Z",
+  "network": "mainnet",
+  "submission": {
+    "enabled": false,
+    "configurationRevision": "registry-submission-unconfigured",
+    "feeMist": "10000000000",
+    "treasuryAddress": null,
+    "validFrom": "2026-07-29T00:00:00.000Z"
+  },
+  "products": {
+    "dojisnap": {
+      "enabled": false,
+      "treasuryRevision": "dojisnap-treasury-unconfigured",
+      "treasuryAddress": null,
+      "pricingFormula": {
+        "version": "dojisnap-holder-count-v1",
+        "baseMist": "250000000",
+        "perHolderMist": "10000"
+      }
+    }
+  },
+  "projects": []
+}

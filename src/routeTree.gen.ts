@@ -9,12 +9,27 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SubmitRouteImport } from './routes/submit'
 import { Route as OgPreviewRouteImport } from './routes/og-preview'
+import { Route as R404DothtmlRouteImport } from './routes/404[.]html'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiV1SubmissionsRouteImport } from './routes/api/v1/submissions'
+import { Route as ApiV1PaymentRedeemProjectSubmissionRouteImport } from './routes/api/v1/payment/redeem-project-submission'
+import { Route as ApiV1PaymentChallengeRouteImport } from './routes/api/v1/payment/challenge'
 
+const SubmitRoute = SubmitRouteImport.update({
+  id: '/submit',
+  path: '/submit',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/submit.lazy').then((d) => d.Route))
 const OgPreviewRoute = OgPreviewRouteImport.update({
   id: '/og-preview',
   path: '/og-preview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const R404DothtmlRoute = R404DothtmlRouteImport.update({
+  id: '/404.html',
+  path: '/404.html',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -22,40 +37,112 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+const ApiV1SubmissionsRoute = ApiV1SubmissionsRouteImport.update({
+  id: '/api/v1/submissions',
+  path: '/api/v1/submissions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1PaymentRedeemProjectSubmissionRoute =
+  ApiV1PaymentRedeemProjectSubmissionRouteImport.update({
+    id: '/api/v1/payment/redeem-project-submission',
+    path: '/api/v1/payment/redeem-project-submission',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiV1PaymentChallengeRoute = ApiV1PaymentChallengeRouteImport.update({
+  id: '/api/v1/payment/challenge',
+  path: '/api/v1/payment/challenge',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/404.html': typeof R404DothtmlRoute
   '/og-preview': typeof OgPreviewRoute
+  '/submit': typeof SubmitRoute
+  '/api/v1/submissions': typeof ApiV1SubmissionsRoute
+  '/api/v1/payment/challenge': typeof ApiV1PaymentChallengeRoute
+  '/api/v1/payment/redeem-project-submission': typeof ApiV1PaymentRedeemProjectSubmissionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/404.html': typeof R404DothtmlRoute
   '/og-preview': typeof OgPreviewRoute
+  '/submit': typeof SubmitRoute
+  '/api/v1/submissions': typeof ApiV1SubmissionsRoute
+  '/api/v1/payment/challenge': typeof ApiV1PaymentChallengeRoute
+  '/api/v1/payment/redeem-project-submission': typeof ApiV1PaymentRedeemProjectSubmissionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/404.html': typeof R404DothtmlRoute
   '/og-preview': typeof OgPreviewRoute
+  '/submit': typeof SubmitRoute
+  '/api/v1/submissions': typeof ApiV1SubmissionsRoute
+  '/api/v1/payment/challenge': typeof ApiV1PaymentChallengeRoute
+  '/api/v1/payment/redeem-project-submission': typeof ApiV1PaymentRedeemProjectSubmissionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/og-preview'
+  fullPaths:
+    | '/'
+    | '/404.html'
+    | '/og-preview'
+    | '/submit'
+    | '/api/v1/submissions'
+    | '/api/v1/payment/challenge'
+    | '/api/v1/payment/redeem-project-submission'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/og-preview'
-  id: '__root__' | '/' | '/og-preview'
+  to:
+    | '/'
+    | '/404.html'
+    | '/og-preview'
+    | '/submit'
+    | '/api/v1/submissions'
+    | '/api/v1/payment/challenge'
+    | '/api/v1/payment/redeem-project-submission'
+  id:
+    | '__root__'
+    | '/'
+    | '/404.html'
+    | '/og-preview'
+    | '/submit'
+    | '/api/v1/submissions'
+    | '/api/v1/payment/challenge'
+    | '/api/v1/payment/redeem-project-submission'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  R404DothtmlRoute: typeof R404DothtmlRoute
   OgPreviewRoute: typeof OgPreviewRoute
+  SubmitRoute: typeof SubmitRoute
+  ApiV1SubmissionsRoute: typeof ApiV1SubmissionsRoute
+  ApiV1PaymentChallengeRoute: typeof ApiV1PaymentChallengeRoute
+  ApiV1PaymentRedeemProjectSubmissionRoute: typeof ApiV1PaymentRedeemProjectSubmissionRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/submit': {
+      id: '/submit'
+      path: '/submit'
+      fullPath: '/submit'
+      preLoaderRoute: typeof SubmitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/og-preview': {
       id: '/og-preview'
       path: '/og-preview'
       fullPath: '/og-preview'
       preLoaderRoute: typeof OgPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/404.html': {
+      id: '/404.html'
+      path: '/404.html'
+      fullPath: '/404.html'
+      preLoaderRoute: typeof R404DothtmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -65,22 +152,50 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/submissions': {
+      id: '/api/v1/submissions'
+      path: '/api/v1/submissions'
+      fullPath: '/api/v1/submissions'
+      preLoaderRoute: typeof ApiV1SubmissionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/payment/redeem-project-submission': {
+      id: '/api/v1/payment/redeem-project-submission'
+      path: '/api/v1/payment/redeem-project-submission'
+      fullPath: '/api/v1/payment/redeem-project-submission'
+      preLoaderRoute: typeof ApiV1PaymentRedeemProjectSubmissionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/payment/challenge': {
+      id: '/api/v1/payment/challenge'
+      path: '/api/v1/payment/challenge'
+      fullPath: '/api/v1/payment/challenge'
+      preLoaderRoute: typeof ApiV1PaymentChallengeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  R404DothtmlRoute: R404DothtmlRoute,
   OgPreviewRoute: OgPreviewRoute,
+  SubmitRoute: SubmitRoute,
+  ApiV1SubmissionsRoute: ApiV1SubmissionsRoute,
+  ApiV1PaymentChallengeRoute: ApiV1PaymentChallengeRoute,
+  ApiV1PaymentRedeemProjectSubmissionRoute:
+    ApiV1PaymentRedeemProjectSubmissionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { startInstance } from './start.ts'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }

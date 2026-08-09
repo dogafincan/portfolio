@@ -1,32 +1,25 @@
-import { ArrowUpRight } from "lucide-react";
-
-import { AppHeader } from "@/components/app-header";
+import {
+  PortfolioPageHeader,
+  PortfolioPageShell,
+  PORTFOLIO_MAIN_CLASS_NAME,
+} from "@/components/app-header";
 import { buttonVariants } from "@/components/ui/button";
-import { Card, CardFooter, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { portfolioProjects, type PortfolioProject } from "@/content/projects";
-import { cn } from "@/lib/utils";
+import { PORTFOLIO_PAGE_SUBTITLE, PORTFOLIO_PAGE_TITLE_ACCENT } from "@/lib/portfolio-page-copy";
 
-const PORTFOLIO_MAIN_CLASS_NAME =
-  "app-shell relative z-10 mx-auto flex min-h-screen w-full min-w-0 max-w-full flex-col gap-8 text-foreground sm:max-w-6xl";
-const WORKBENCH_CONTAINER_CLASS_NAME =
-  "grid w-full min-w-0 max-w-full grid-cols-[minmax(0,1fr)] items-start gap-6 rounded-[2.75rem] border border-transparent bg-muted p-3 sm:rounded-[3rem] sm:p-6 lg:grid-cols-[22rem_minmax(0,1fr)] dark:border-border dark:bg-background";
-const PROJECT_SUMMARY_ITEM_CLASS_NAME = "min-h-32 flex-nowrap overflow-hidden sm:min-h-36";
-const PROJECT_ICON_MEDIA_CLASS_NAME =
-  "size-[2.8125rem] overflow-hidden rounded-[0.875rem] border border-border bg-background";
-const KEYBOARD_ACTION_FOCUS_CLASS_NAME =
-  "transition-colors focus-visible:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-white/45";
 const PROFILE_LINK_CLASS_NAME =
-  "inline-flex size-[3.4375rem] items-center justify-center rounded-full text-white transition-colors hover:bg-white/12";
+  "control-target inline-flex size-11 items-center justify-center rounded-full border border-transparent bg-control-info text-control-info-foreground outline-none transition-colors hover:bg-control-info-hover active:bg-control-info-active focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-focus-ring";
 
 function XLogoIcon() {
   return (
     <svg
       aria-hidden="true"
+      className="size-5"
+      fill="currentColor"
       focusable="false"
       viewBox="0 0 24 24"
-      className="size-[1.5625rem] drop-shadow-xl"
-      fill="currentColor"
     >
       <path d="M18.24 2.25h3.31l-7.23 8.26 8.51 11.24h-6.66l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z" />
     </svg>
@@ -37,10 +30,10 @@ function GitHubLogoIcon() {
   return (
     <svg
       aria-hidden="true"
+      className="size-5"
+      fill="currentColor"
       focusable="false"
       viewBox="0 0 24 24"
-      className="size-[1.5625rem] drop-shadow-xl"
-      fill="currentColor"
     >
       <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.96.1-.75.4-1.25.73-1.54-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.16 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.62 1.59.23 2.77.11 3.06.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.07.78 2.16v3.2c0 .31.21.67.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
     </svg>
@@ -55,46 +48,40 @@ function ProjectCard({
   loading?: "eager" | "lazy";
 }) {
   return (
-    <Card className="min-w-0 gap-6">
-      <CardHeader className="gap-4">
-        <Item
-          variant="muted"
-          data-slot="project-summary-item"
-          data-project={project.slug}
-          className={PROJECT_SUMMARY_ITEM_CLASS_NAME}
-        >
-          <ItemMedia className={PROJECT_ICON_MEDIA_CLASS_NAME}>
+    <Card className="min-w-0">
+      <CardContent>
+        <Item className="min-w-0 flex-nowrap" data-project={project.slug} variant="muted">
+          <ItemMedia
+            className="size-12 overflow-hidden rounded-xl border border-border bg-background"
+            variant="image"
+          >
             <img
-              data-slot="project-icon"
-              src={project.icon}
               alt={project.iconAlt}
-              width="45"
-              height="45"
-              loading={loading}
-              decoding="async"
               className="size-full object-cover"
+              data-slot="project-icon"
+              decoding="async"
+              height="48"
+              loading={loading}
+              src={project.icon}
+              width="48"
             />
           </ItemMedia>
           <ItemContent className="min-w-0">
-            <ItemTitle>
-              <h3 className="m-0">{project.name}</h3>
+            <ItemTitle className="line-clamp-none">
+              <h2>{project.name}</h2>
             </ItemTitle>
             <ItemDescription>{project.subtitle}</ItemDescription>
           </ItemContent>
         </Item>
-      </CardHeader>
-      <CardFooter className="mt-auto flex flex-wrap gap-2">
+      </CardContent>
+      <CardFooter>
         <a
-          className={cn(
-            buttonVariants({ variant: "default", size: "sm" }),
-            KEYBOARD_ACTION_FOCUS_CLASS_NAME,
-          )}
-          href={project.liveUrl}
-          target="_blank"
-          rel="noreferrer"
           aria-label={`Open ${project.name} app`}
+          className={buttonVariants({ className: "w-full" })}
+          href={project.liveUrl}
+          rel="noreferrer"
+          target="_blank"
         >
-          <ArrowUpRight aria-hidden="true" data-icon="inline-start" />
           Open app
         </a>
       </CardFooter>
@@ -104,52 +91,60 @@ function ProjectCard({
 
 export function PortfolioHome() {
   return (
-    <main className={PORTFOLIO_MAIN_CLASS_NAME}>
-      <AppHeader title="Doga Fincan">
-        <nav
-          aria-label="Doga Fincan social profiles"
-          data-slot="profile-links"
-          className="flex -mt-[0.9375rem] -mb-[0.9375rem] items-center justify-center gap-2 text-white"
+    <PortfolioPageShell>
+      <main className={PORTFOLIO_MAIN_CLASS_NAME}>
+        <PortfolioPageHeader
+          title={
+            <>
+              Explore the useful products{" "}
+              <span className="text-page-title-accent">{PORTFOLIO_PAGE_TITLE_ACCENT}</span>
+            </>
+          }
+          subtitle={PORTFOLIO_PAGE_SUBTITLE}
         >
-          <a
-            className={cn(PROFILE_LINK_CLASS_NAME, KEYBOARD_ACTION_FOCUS_CLASS_NAME)}
-            href="https://x.com/dogafincan"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Open Doga Fincan on X"
-            title="X"
+          <nav
+            aria-label="Doga Fincan social profiles"
+            className="mt-2 flex items-center justify-center gap-2"
+            data-slot="profile-links"
           >
-            <XLogoIcon />
-          </a>
-          <a
-            className={cn(PROFILE_LINK_CLASS_NAME, KEYBOARD_ACTION_FOCUS_CLASS_NAME)}
-            href="https://github.com/dogafincan"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Open Doga Fincan on GitHub"
-            title="GitHub"
-          >
-            <GitHubLogoIcon />
-          </a>
-        </nav>
-      </AppHeader>
+            <a
+              aria-label="Open Doga Fincan on X"
+              className={PROFILE_LINK_CLASS_NAME}
+              href="https://x.com/dogafincan"
+              rel="noreferrer"
+              target="_blank"
+              title="X"
+            >
+              <XLogoIcon />
+            </a>
+            <a
+              aria-label="Open Doga Fincan on GitHub"
+              className={PROFILE_LINK_CLASS_NAME}
+              href="https://github.com/dogafincan"
+              rel="noreferrer"
+              target="_blank"
+              title="GitHub"
+            >
+              <GitHubLogoIcon />
+            </a>
+          </nav>
+        </PortfolioPageHeader>
 
-      <section
-        id="projects"
-        data-slot="portfolio-workbench"
-        aria-label="Projects"
-        className={WORKBENCH_CONTAINER_CLASS_NAME}
-      >
-        <div className="grid gap-4 lg:col-span-2 lg:grid-cols-2">
+        <section
+          aria-label="Projects"
+          className="grid w-full min-w-0 gap-6 lg:grid-cols-2"
+          data-slot="portfolio-workbench"
+          id="projects"
+        >
           {portfolioProjects.map((project, index) => (
             <ProjectCard
               key={project.slug}
-              project={project}
               loading={index === 0 ? "eager" : "lazy"}
+              project={project}
             />
           ))}
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </PortfolioPageShell>
   );
 }

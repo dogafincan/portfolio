@@ -4,11 +4,9 @@ Personal portfolio website for showcasing projects built by Doga Fincan.
 
 This repo started documentation-first and now renders a real portfolio index.
 The first implemented surface showcases built projects, links to live targets
-when available, and carries over the shared TanStack Start, shadcn/ui, Tailwind,
-Geist, Lucide, shared page chrome, social-preview, and verification conventions
-from the sibling apps in `~/Documents/sui-swap`,
-`~/Documents/sui-snapshot`, `~/Documents/sui-airdrop`, and
-`~/Documents/memedex`.
+when available, and uses the shared TanStack Start, shadcn/ui, Tailwind, Geist,
+Lucide, neutral page chrome, social-preview, and verification conventions from
+the canonical Doji Design System.
 
 ## Documentation Map
 
@@ -47,16 +45,12 @@ structured module before scattering project data through components. A CMS,
 MDX, or separate case-study route should wait until the project list outgrows
 the current static content shape.
 
-## Reference Projects
+## Shared Project Conventions
 
-Use these sibling repos as the current source of truth for shared workspace
-patterns:
-
-- `~/Documents/sui-snapshot`
-- `~/Documents/sui-airdrop`
-- `~/Documents/memedex`
-
-Relevant shared guidance from those projects:
+The canonical visual source is the versioned `doji-design-system` Codex skill
+in the separate Doji design-system repository. Runtime components remain local
+and the owner manually runs the skill after each accepted canonical change.
+Relevant shared guidance:
 
 - `README.md` is for human-facing product, workflow, and operating guidance.
 - `AGENTS.md` is for repo-local agent rules, command conventions, and
@@ -66,20 +60,18 @@ Relevant shared guidance from those projects:
 - `DESIGN.md` is the durable source of truth for shared visual/layout/copy/icon
   guidance.
 - Keep changes to one coherent slice and commit finished slices locally.
-- Ground decisions in the current checkout and sibling source/docs before
-  relying on assumptions.
-- Reuse sibling patterns when they already solved the same design or workflow
-  problem, while keeping product boundaries explicit.
-- Import the portable UI layer from siblings before inventing new primitives:
-  shadcn `Button`, `Card`, `Badge`, `Item`, `Separator`, root-head metadata
-  tests, icon-system tests, and page-chrome tests fit this portfolio. Sui
-  wallet, CSV, Durable Object, Turnstile, transaction code, and Memedex voting
-  or ranking behavior does not.
+- Ground decisions in the current checkout and canonical skill before relying
+  on assumptions.
+- Reuse a sibling implementation only as evidence of the canonical pattern and
+  keep product boundaries explicit.
+- Prefer the local canonical primitives before inventing new ones.
+  The central Doji project-submission flow is the one deliberate Sui workflow
+  in this repo; snapshot, airdrop, swap, and Memerank-specific behavior remains
+  in the apps that own it.
 
 ## Current Stack
 
-The app uses the same core web stack as `sui-snapshot` and `sui-airdrop`,
-with the same frontend baseline as `memedex`, trimmed for a portfolio site:
+The app uses the shared Doji web stack, trimmed for a portfolio site:
 
 - Vite+
 - TanStack Start
@@ -95,46 +87,87 @@ with the same frontend baseline as `memedex`, trimmed for a portfolio site:
   Workers Builds
 - npm as the package manager
 
-Do not add Sui-specific libraries by default. The portfolio can link to and
-describe Sui projects, but it should not include Mysten dApp Kit, the Mysten Sui
-SDK, wallet connection, transaction signing, Turnstile, rate limiting, Durable
-Objects, KV, D1, R2, queues, or backend state unless a future portfolio feature
-clearly needs them.
+The `/submit` feature retains Mysten dApp Kit and the Sui SDK behind the
+interaction boundary for later migration work. During the temporary
+Sui-to-Robinhood Chain lockout, the app does not mount that wallet runtime even
+after **Connect wallet** is activated. Anonymous portfolio and form loads remain
+prerendered static assets. The public Worker owns no storage or Sui provider
+binding. Its preserved dynamic surface is a same-origin, rate-limited,
+three-route proxy to the central Registry service, currently preceded by one
+temporary fail-closed migration response.
+
+## Network and cost boundary
+
+Static page loads, form editing, local image validation, wallet connection, and
+status display make zero Portfolio-originated Sui or application API requests.
+The fixed-fee payment uses dApp Kit's wallet-standard sign-and-execute action;
+the SDK may use its configured client while preparing transaction bytes, but
+Portfolio makes no separate direct execution request and never polls Sui.
+Registry—not Portfolio—performs the single-digest payment observation behind
+the private service binding.
+
+The challenge route spends at most two Cloudflare rate-limit operations and one
+Registry service-binding operation. Redemption and the capability-authorized
+upload use both public and tighter paid client/location fuses, for at most four
+rate-limit operations and one service-binding operation. Invalid envelopes are
+rejected before any of them.
+
+## Temporary chain migration lockout
+
+Portfolio keeps static pages, project cards, profile links, and live app links
+available while Doji migrates from Sui to Robinhood Chain. The previous Sui
+wallet, payment, recovery, API, and Registry-gateway implementation remains in
+the repository for later migration rather than being deleted.
+
+- **Connect wallet** keeps its normal enabled appearance and opens the existing
+  Drawer. The Drawer shows an Empty migration explanation and **Close**, with no
+  wallet choices, chain controls, or wallet-runtime load. No migration Alert
+  appears below the trigger or its shared header-action cluster.
+- **Pay 10 SUI** and **Recover payment** retain their normal labels and focus
+  treatment. They are inert and their owning action cluster shows one persistent
+  informational Alert.
+- Portfolio has no project or asset selector trigger, so a selector migration
+  Drawer is not applicable. A future locked selector would explain the migration
+  only in its Empty surface, without an Alert below its trigger.
+- Every public dynamic API and broad server-function entry point returns the
+  same no-store JSON `503` migration response before envelope processing, rate
+  limits, service bindings, providers, or mutations.
 
 ## Product Constraints
 
 - Public portfolio website.
-- No app-level auth.
-- No wallet requirement.
-- No transaction signing.
+- No app-level account system.
+- The project showcase and form editing require no wallet.
+- Wallet connection and transaction signing happen only for the fixed 10 SUI
+  project-submission payment or paid-digest recovery proof.
 - No server-held secrets for normal portfolio content.
 - Prefer repo-owned structured content for project data before adding a CMS.
 - Keep the first route useful on its own: visitors should see real project
   content immediately.
 - Keep implementation smaller than the sibling utility apps unless a portfolio
   feature needs the extra complexity.
+- Keep the showcase repo-owned; central Registry data does not replace or
+  automatically populate the portfolio project cards.
+- Keep project fields and the image in page memory only until payment succeeds.
+- Keep the Registry treasury address deliberately unconfigured until the owner
+  supplies the first generated publication; new payments fail closed meanwhile.
 - Use product-owned app icons in project cards. Keep deeper visuals, stack
   details, and implementation notes for future case-study pages. The portfolio
   site should not list itself as one of its own products.
 
 ## Shared Web App Design System
 
-The full visual system lives in `DESIGN.md`. In short, the portfolio should feel
-like it belongs to the same family as `sui-snapshot` and `sui-airdrop`, while
-adapting the pattern to a project showcase instead of a workflow utility.
+The canonical visual system lives in the versioned Doji Design System skill;
+Portfolio's product-specific adoption contract lives in `DESIGN.md`.
 
 Design principles that should remain visible in day-to-day work:
 
 - Show real project content early.
-- Use the shared `DESIGN.md` `Header Section / Atmosphere-to-Page Background`
-  treatment, app logo system, Geist preload, Lucide icons, shadcn/Base UI
-  primitives, and rounded muted workbench.
-- Treat `DESIGN.md`'s `Header Section / Atmosphere-to-Page Background` as the source
-  of truth for browser/mobile safe-area color handling, shared blue theme and
-  manifest colors, generated top/repeating page-atmosphere assets, visible page
-  background, header identity colors, `viewport-fit=cover` plus app-shell
-  safe-area padding, fixed-length atmosphere transition, document-bottom chrome tail, and OG/social image
-  generation.
+- Use the solid neutral canvas, raised chrome, app logo system, Geist preload,
+  Lucide icons, and local shadcn/Base UI primitives.
+- Treat `DESIGN.md` as the source of truth for safe-area handling, neutral
+  platform metadata, overscroll, page-header identity, standard Cards, and
+  social-image generation. Do not add atmosphere or decorative backgrounds.
 - Keep project cards scannable, responsive, and backed by structured content.
 - Explain what projects do before naming libraries or infrastructure.
 - Avoid generic hero filler, decorative principles sections, fake metrics, and
@@ -145,7 +178,7 @@ Design principles that should remain visible in day-to-day work:
 The `/` route declares Open Graph and X/Twitter Card metadata in
 `src/routes/index.tsx`. The social image is `public/og.png`, a generated
 checked-in 1200x630 PNG from the React/Tailwind `/og-preview` route.
-Regenerate it with `npm run generate:og`; do not add a social SVG source or
+Regenerate it with `npx vp run generate:og`; do not add a social SVG source or
 dynamic request-time image endpoint.
 
 Keep social preview image URLs absolute HTTPS URLs. X may not render card
@@ -169,9 +202,21 @@ The imported sibling organization now used here:
 - `src/content/projects.ts`: structured project records for the portfolio grid.
 - `src/components/portfolio-home.tsx`: the `/` route surface, including the
   header and project card grid.
-- `src/components/ui/button.tsx`, `card.tsx`, `badge.tsx`, `item.tsx`, and
-  `separator.tsx`: the portable shadcn/Base UI primitives copied from the
-  sibling apps.
+- `src/components/project-submission-form.tsx`: local-only form, payment, and
+  paid-digest recovery UI for `/submit`.
+- `src/components/wallet-runtime.tsx`: interaction-gated Mysten wallet island.
+- `src/start.ts`: cheapest exact-path request envelope and broad server-function
+  rejection.
+- `src/lib/registry-submission-gateway.server.ts`: narrow abuse-controlled
+  Registry service-binding proxy.
+- `src/generated/*`: byte-identical Registry-generated manifest types and
+  runtime validators; never hand-edit them.
+- `src/config/development-publication.json`: checked-in fail-closed publication
+  used until the owner supplies production wallet addresses.
+- `src/lib/submission-api.ts`: bounded, exact-response client for the
+  digest-bound challenge, redemption, idempotent receipt, and one image upload.
+- `src/components/ui/*`: local shadcn/Base UI primitives synchronized through
+  the canonical design-system skill.
 - `src/routes/-__root.test.ts`: regression guard for app chrome, manifest
   links, Geist preload ordering, and icon metadata.
 - `src/routes/-index.test.ts`: regression guard for canonical URL and
@@ -182,10 +227,6 @@ The imported sibling organization now used here:
 - `public/app-logo-120.png`, `public/apple-touch-icon.png`,
   `public/android-chrome-*.png`, `public/favicon.ico`, `public/favicon-*`, and
   `public/og.png`: portfolio-owned logo and social assets.
-- `public/page-atmosphere*.avif`: generated top and repeat page-atmosphere
-  assets.
-- `scripts/generate-page-atmosphere.mjs` and `scripts/assets/*`: source and
-  generator for page-atmosphere assets.
 - `public/projects/*-icon.avif`: local app icons copied from the shipped sibling
   apps.
 
@@ -200,7 +241,8 @@ Use the sibling command style:
 - `npx vp test`
 - `npx vp build`
 - `npx vp preview --host 127.0.0.1`
-- `npx vp run generate:atmosphere`
+- `npx vp run generate:identity`
+- `npx vp run generate:og`
 - `npx vp run deploy`
 - `npx vp run cf-typegen`
 
@@ -223,10 +265,9 @@ deploy, or performance incidents.
 - Keep implementation work to one coherent slice. When `PRD.md` drives the work,
   use the implementation-progress table as the slice boundary and update it
   without overstating what shipped.
-- Reuse sibling repo patterns when the sibling already solved the same problem,
-  but keep repo boundaries explicit. `sui-snapshot` owns snapshot export,
-  `sui-airdrop` owns wallet funding and airdrop execution, and this repo owns
-  the portfolio showcase.
+- Use the canonical skill before borrowing a sibling implementation, and keep
+  repo boundaries explicit. Other apps own snapshot, airdrop, swap, and ranking
+  behavior; this repo owns the portfolio showcase.
 - If a durable rule repeats, document it in the right file: `README.md` for
   human-facing workflow/product guidance, `AGENTS.md` for agent rules,
   `PRD.md` for product scope/progress, and `DESIGN.md` for visual/copy rules.
@@ -247,11 +288,17 @@ deploy, or performance incidents.
    production deployability.
 4. Deploy with `npx vp run deploy`.
 5. Regenerate Worker types with `npx vp run cf-typegen` after Worker binding or
-   environment-shape changes.
+   environment-shape changes. The wrapper isolates Wrangler from local env files
+   and strips only whitespace-only noise from the generated declaration.
 
-The current Worker has no storage bindings, Durable Objects, queues, or secrets.
-Add those only after the feature is accepted in `PRD.md` and documented in
-`README.md` and `AGENTS.md`.
+The Worker has no storage bindings, Durable Objects, queues, Sui provider, or
+signing secrets. It has one narrow Registry service binding, four rate-limit
+bindings, and Static Assets. Wallet addresses remain intentionally blank until
+the owner supplies them; do not activate or deploy the paid flow before the
+generated Registry publication is present and all release checks pass.
+
+The complete pre-release and browser-network procedure is in
+`docs/production-runbook.md`.
 
 ## Verification
 

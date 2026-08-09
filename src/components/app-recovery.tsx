@@ -1,5 +1,8 @@
 import { Component, useEffect, type ErrorInfo, type ReactNode } from "react";
 
+import { Button } from "@/components/ui/button";
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+
 export const RECOVERY_RELOAD_STORAGE_KEY = "doji-app-shell-recovery:reload-attempted";
 
 type RecoveryStorage = Pick<Storage, "getItem" | "removeItem" | "setItem">;
@@ -136,24 +139,26 @@ export class AppErrorBoundary extends Component<{ children: ReactNode }, AppErro
   render() {
     if (this.state.hasError) {
       return (
-        <main className="app-shell relative z-10 mx-auto flex min-h-screen w-full min-w-0 max-w-full flex-col justify-center text-foreground sm:max-w-3xl">
-          <section className="flex flex-col gap-6 rounded-3xl border bg-card p-6 text-card-foreground sm:p-8">
-            <div className="flex flex-col gap-2">
-              <h1 className="font-heading text-2xl font-semibold">The app needs a refresh</h1>
-              <p className="text-base text-muted-foreground">
-                Safari kept the page open, but the app interface stopped running. Refresh to load
-                the current version.
-              </p>
-            </div>
-            <button
-              className="inline-flex h-11 w-fit shrink-0 items-center justify-center rounded-4xl bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/80 focus-visible:ring-3 focus-visible:ring-ring/30 focus-visible:outline-none"
-              onClick={() => window.location.reload()}
-              type="button"
-            >
-              Reload app
-            </button>
-          </section>
-        </main>
+        <div className="flex min-h-screen bg-background" data-slot="app-recovery-page">
+          <main className="app-shell relative z-10 mx-auto flex w-full min-w-0 max-w-full flex-1 flex-col justify-center text-foreground sm:max-w-3xl">
+            <Card>
+              <CardHeader>
+                <CardTitle role="heading" aria-level={1}>
+                  The app needs a refresh
+                </CardTitle>
+                <CardDescription>
+                  Safari kept the page open, but the app interface stopped running. Refresh to load
+                  the current version.
+                </CardDescription>
+              </CardHeader>
+              <CardFooter>
+                <Button className="w-fit" onClick={() => window.location.reload()} type="button">
+                  Reload app
+                </Button>
+              </CardFooter>
+            </Card>
+          </main>
+        </div>
       );
     }
 
