@@ -58,5 +58,8 @@ describe("OgImagePreview", () => {
     expect(subtitle?.className).toContain("max-w-[860px]");
     expect(discovery?.textContent).toContain("Create CSV in DojiSnap");
     expect(discovery?.className).toContain("h-14");
+    expect(container.querySelector('[data-slot="app-header-actions"]')).toBeNull();
+    expect(container.textContent).not.toContain("Connect wallet");
+    expect(container.textContent).not.toContain("Submit project");
   });
 });

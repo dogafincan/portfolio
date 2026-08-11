@@ -21,7 +21,7 @@ const repoRoot = resolve(scriptsDirectory, "..");
 const packageJson = JSON.parse(readFileSync(resolve(repoRoot, "package.json"), "utf8"));
 const outputPath = resolve(repoRoot, process.env.OG_OUTPUT_PATH?.trim() || "public/og.png");
 const temporaryOutputPath = `${outputPath}.${process.pid}.tmp`;
-const seed = process.env.OG_SEED?.trim() || `${packageJson.name}:2026080201`;
+const seed = process.env.OG_SEED?.trim() || `${packageJson.name}:2026081101`;
 const externalBaseUrl = process.env.OG_PREVIEW_BASE_URL?.replace(/\/$/, "");
 const startPort =
   Number.parseInt(process.env.OG_PREVIEW_PORT ?? "", 10) ||

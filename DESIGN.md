@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `c129cc73ce27b8f1456df383b58b1fa949003329` (committed draft; release tag pending)
+Doji Design System source revision: `0903d6e18b49cff878dd0f28cdec82d05b00712c` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -290,11 +290,16 @@ runtime package and no automated cross-repository mutation.
 - `public/og.png` is a checked-in 1200×630 PNG generated from `/og-preview`.
 - The preview is forced dark and composed from the real social navbar and real
   Portfolio page-header components.
+- Keep the **Create CSV in DojiSnap** discovery badge above the title and end
+  after the complete subtitle. Do not render Connect wallet, Submit project,
+  X, GitHub, or any other page-only action in the social composition.
 - Keep a 64px safe inset around the meaningful composition. Do not add
   atmosphere, gradients, shadows, mockups, project cards, or request-time image
   generation.
-- Use semantic social alt text. Metadata image URLs are absolute HTTPS URLs
-  with a cache-busting revision.
+- Use semantic social alt text. Metadata uses the exact absolute HTTPS URL
+  `https://dogafincan.com/og.png?v=2026081101` across Open Graph and Twitter.
+  Advance the version without reuse whenever the PNG bytes or composition
+  changes.
 - `scripts/generate-og.mjs` waits for fonts, uses reduced motion, verifies
   dimensions/safe-region/type floors, optimizes through Sharp, and replaces the
   checked-in PNG atomically.

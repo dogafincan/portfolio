@@ -4,9 +4,9 @@ const PAGE_TITLE = "Doga Fincan";
 const PAGE_DESCRIPTION =
   "Developer interested in language learning, nutrition, exercise, and building useful products. Reach out if you're building something interesting.";
 const SITE_URL = "https://dogafincan.com";
-const SOCIAL_IMAGE = `${SITE_URL}/og.png?v=2026080901`;
+const SOCIAL_IMAGE = `${SITE_URL}/og.png?v=2026081101`;
 const SOCIAL_IMAGE_ALT =
-  "Dark Doji Portfolio preview with the Doga Fincan navbar and the title Explore the useful products I’m building.";
+  "Doga Fincan social preview reading Explore the useful products I’m building, with I’m building highlighted in blue and a Create CSV in DojiSnap badge.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
