@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `03dff5b174bb96f08a25ba274c024f3ac433ef45` (committed draft; release tag pending)
+Doji Design System source revision: `36b65517e02d703ddf2d64ee7c198417262546a5` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -267,7 +267,10 @@ runtime package and no automated cross-repository mutation.
   Component-owned icon controls and documented brand/file exceptions retain
   accessible names.
 - Standard controls expose a real 44px minimum width and height.
-- All links and enabled button controls expose a pointer cursor.
+- The global Tailwind v4 `@layer base` rule gives `a[href]`, enabled native
+  buttons, and enabled `[role="button"]` controls a pointer cursor while leaving
+  native disabled buttons outside the selector. `src/styles.test.ts` and
+  fine-pointer computed-style proof protect the behavior.
 - Focus uses the shared three-pixel semantic ring and remains clearly visible
   in both schemes.
 - Motion uses shared duration/easing roles and respects reduced motion. Loading
