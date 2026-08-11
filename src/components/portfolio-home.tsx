@@ -74,7 +74,7 @@ function ProjectCard({
           </ItemContent>
         </Item>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="lg:mt-auto">
         <a
           aria-label={`Open ${project.name} app`}
           className={buttonVariants({ className: "w-full" })}

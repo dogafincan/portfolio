@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `7f09bbcb8b9ec3a402173bd54eeeaab9480e611e` (committed draft; release tag pending)
+Doji Design System source revision: `03dff5b174bb96f08a25ba274c024f3ac433ef45` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -15,19 +15,21 @@ source revision and local proof exist.
 
 Every local Card keeps 24px (`gap-6`) between each present header, content,
 and footer section at every size. `CardContent` is shrink-safe but natural-height
-by default, so a stretched Card keeps its footer 24px after content and leaves
-any remaining height below the footer. Sibling items in `CardContent` and
-`CardFooter` use 12px (`gap-3`); a direct `FieldGroup` in Card content must
-use that same stack instead of its stock `gap-7`.
+by default. At the large peer-column breakpoint, a stretched Card
+bottom-anchors its present footer while keeping the structural 24px gap as its
+minimum content separation and the normal bottom inset. Sibling items in
+`CardContent` and `CardFooter` use 12px (`gap-3`); a direct `FieldGroup` in
+Card content must use that same stack instead of its stock `gap-7`.
 
 At the large breakpoint, page-level peer Cards use equal fractional columns and
 stretch to the tallest Card in their shared row. The Card surface consumes any
 remainder without changing its internal section rhythm. Only a footerless,
 genuinely contentless Card explicitly grows `CardContent` so a nested `Empty`
-fills the remaining main area. Stacked narrow Cards keep natural height, and a
-follow-on Card spans the full grid instead of being compared with a neighboring
-Card stack. Cards with real content, loading structure, feedback, or actions do
-not receive decorative Empty states.
+fills the remaining main area; a genuine existing empty task region may absorb
+the same remainder. Stacked narrow Cards keep natural height. If the residual
+interval before a footer would dominate a Card or make the action area hard to
+find, reorganize the peer composition instead of stretching real content or
+adding a decorative Empty.
 
 For UI work, apply the current product request first, this local contract
 second, and the canonical skill third. Canonical changes are synchronized by a
@@ -211,8 +213,11 @@ runtime package and no automated cross-repository mutation.
 - Project records render as a responsive one/two-column grid of standard
   `Card` surfaces. Each two-column row uses equal fractional tracks, and every
   Card stretches to the tallest peer while its main content stays natural-height.
-  Each footer remains 24px after its content, with any stretch remainder left
-  below the footer. Do not wrap the grid in a second card-like workbench.
+  Each present footer rests at the Card's bottom inset from the large
+  breakpoint; the required 24px structural section gap remains its minimum
+  separation from content. Current descriptions keep any residual interval
+  modest; rebalance the row or copy if a future card would create dominant
+  whitespace. Do not wrap the grid in a second card-like workbench.
 - Each project card contains one 48px product icon, one title, one concise
   description, and—when a live URL exists—a full-width text-only
   **Open app** footer action.

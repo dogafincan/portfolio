@@ -104,7 +104,7 @@ describe("PortfolioHome", () => {
     ).toEqual(["Memerank", "Sui Swap", "Sui Airdrop", "Sui Snapshot"]);
   });
 
-  it("keeps each project card content natural-height before its text-only primary action", () => {
+  it("keeps project content natural-height and bottom-anchors actions in stretched rows", () => {
     const { container } = renderPortfolioHome();
     const projects = screen.getByRole("region", { name: "Projects" });
     const cards = Array.from(projects.querySelectorAll('[data-slot="card"]'));
@@ -118,7 +118,7 @@ describe("PortfolioHome", () => {
       expect(
         card.querySelector('[data-slot="card-content"]')?.className.split(/\s+/),
       ).not.toContain("flex-1");
-      expect(card.querySelector('[data-slot="card-footer"]')).toBeTruthy();
+      expect(card.querySelector('[data-slot="card-footer"]')?.className).toContain("lg:mt-auto");
     }
 
     for (const project of portfolioProjects) {
