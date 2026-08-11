@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `9605f9ebcc9cc211111ad66e7cf6f840b91fa9dd` (committed draft; release tag pending)
+Doji Design System source revision: `c129cc73ce27b8f1456df383b58b1fa949003329` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -48,6 +48,9 @@ runtime package and no automated cross-repository mutation.
   `Empty` that explains the migration, no wallet choices or active chain
   controls, and the normal single **Close** footer action. Drawer dismissal
   restores focus to **Connect wallet**.
+- `/submit` keeps the complete shared field order, local image selection,
+  validation and preview, and one fee-and-recovery Item usable without network
+  access. CardContent contains no migration Empty or Alert.
 - The ordinary **Pay 10 SUI** and **Recover payment** form actions retain their
   labels and enabled visual/focus behavior without the `disabled` attribute.
   They are inert during the lockout, never validate, open recovery, connect,

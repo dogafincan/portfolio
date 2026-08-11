@@ -123,8 +123,25 @@ describe("ProjectSubmissionFlow", () => {
     expect(screen.queryByRole("dialog")).toBeNull();
     expect(screen.getByText("Temporarily unavailable")).toBeTruthy();
 
-    const footer = container.querySelector('[data-slot="card-footer"]');
-    expect(footer?.lastElementChild?.hasAttribute("data-chain-migration-alert")).toBe(true);
+    const actions = container.querySelector('[data-slot="project-submission-actions"]');
+    const content = container.querySelector('[data-slot="card-content"]');
+    expect(actions?.className).toContain("gap-3");
+    expect(actions?.nextElementSibling?.hasAttribute("data-chain-migration-alert")).toBe(true);
+    expect(
+      Array.from(content?.querySelectorAll("label") ?? []).map((label) => label.textContent),
+    ).toEqual([
+      "Sui asset type",
+      "Project name",
+      "Short description",
+      "Ticker",
+      "Profile image",
+      "Website",
+      "X",
+      "Telegram",
+      "Discord",
+    ]);
+    expect(content?.querySelector('[data-slot="empty"]')).toBeNull();
+    expect(content?.querySelector('[data-slot="alert"]')).toBeNull();
   });
 
   it("documents the project and asset selector migration drawer as not applicable", () => {

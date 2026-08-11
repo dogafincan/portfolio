@@ -566,10 +566,17 @@ export function ProjectSubmissionForm({
           </CardContent>
 
           <CardFooter className="flex-col items-stretch">
-            {paidDigest && status !== "success" ? (
+            {migrationLocked ? (
+              <div className="flex flex-col gap-3" data-slot="project-submission-actions">
+                <Button type="submit">Pay 10 SUI</Button>
+                <Button type="button" variant="outline">
+                  Recover payment
+                </Button>
+              </div>
+            ) : paidDigest && status !== "success" ? (
               <Button
-                disabled={migrationLocked ? undefined : !recoveryEnabled}
-                onClick={migrationLocked ? undefined : () => setRecoveryOpen(true)}
+                disabled={!recoveryEnabled}
+                onClick={() => setRecoveryOpen(true)}
                 type="button"
               >
                 Recover payment
@@ -578,14 +585,14 @@ export function ProjectSubmissionForm({
               <>
                 <Button
                   aria-busy={status === "submitting" || undefined}
-                  disabled={migrationLocked ? undefined : !paymentEnabled}
+                  disabled={!paymentEnabled}
                   type="submit"
                 >
                   Pay 10 SUI
                 </Button>
                 <Button
-                  disabled={migrationLocked ? undefined : !recoveryEnabled}
-                  onClick={migrationLocked ? undefined : () => setRecoveryOpen(true)}
+                  disabled={!recoveryEnabled}
+                  onClick={() => setRecoveryOpen(true)}
                   type="button"
                   variant="outline"
                 >
