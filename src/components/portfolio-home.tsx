@@ -48,7 +48,7 @@ function ProjectCard({
   loading?: "eager" | "lazy";
 }) {
   return (
-    <Card className="h-full min-w-0">
+    <Card className="min-w-0">
       <CardContent>
         <Item className="min-w-0 flex-nowrap" data-project={project.slug} variant="muted">
           <ItemMedia
@@ -74,7 +74,7 @@ function ProjectCard({
           </ItemContent>
         </Item>
       </CardContent>
-      <CardFooter className="lg:mt-auto">
+      <CardFooter>
         <a
           aria-label={`Open ${project.name} app`}
           className={buttonVariants({ className: "w-full" })}
@@ -132,7 +132,7 @@ export function PortfolioHome() {
 
         <section
           aria-label="Projects"
-          className="grid w-full min-w-0 items-stretch gap-6 lg:grid-cols-2"
+          className="grid w-full min-w-0 items-start gap-6 lg:grid-cols-2"
           data-slot="portfolio-workbench"
           id="projects"
         >

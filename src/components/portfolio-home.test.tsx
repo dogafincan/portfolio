@@ -104,21 +104,23 @@ describe("PortfolioHome", () => {
     ).toEqual(["Memerank", "Sui Swap", "Sui Airdrop", "Sui Snapshot"]);
   });
 
-  it("keeps project content natural-height and bottom-anchors actions in stretched rows", () => {
+  it("keeps every project Card at its independent natural height", () => {
     const { container } = renderPortfolioHome();
     const projects = screen.getByRole("region", { name: "Projects" });
     const cards = Array.from(projects.querySelectorAll('[data-slot="card"]'));
 
     expect(projects.className).toContain("lg:grid-cols-2");
-    expect(projects.className).toContain("items-stretch");
+    expect(projects.className).toContain("items-start");
     expect(projects.className).not.toContain("bg-muted");
     expect(cards).toHaveLength(portfolioProjects.length);
     for (const card of cards) {
-      expect(card.className).toContain("h-full");
+      expect(card.className).not.toContain("h-full");
       expect(
         card.querySelector('[data-slot="card-content"]')?.className.split(/\s+/),
       ).not.toContain("flex-1");
-      expect(card.querySelector('[data-slot="card-footer"]')?.className).toContain("lg:mt-auto");
+      expect(card.querySelector('[data-slot="card-footer"]')?.className).not.toContain(
+        "lg:mt-auto",
+      );
     }
 
     for (const project of portfolioProjects) {
