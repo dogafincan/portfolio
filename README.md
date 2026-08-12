@@ -194,14 +194,6 @@ metadata changes, refresh with the X Card Validator when available, or share a
 fresh URL such as `/?card=YYYYMMDD` or a new short URL so X treats the card as a
 new fetch.
 
-Portfolio currently has an owner-approved X-only metadata experiment:
-`twitter:title` emits exactly U+2060 WORD JOINER to test whether X omits the
-title overlay. The normal document title and `og:title` remain **Doga Fincan**.
-The PNG and its cache-busting version stay unchanged because this experiment
-does not alter the image bytes or composition. X may sanitize the character,
-fall back to Open Graph metadata, or keep previously cached card metadata, so
-verify the result with a fresh share URL rather than assuming suppression.
-
 ## Code Organization
 
 The imported sibling organization now used here:

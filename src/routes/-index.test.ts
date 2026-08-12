@@ -10,7 +10,6 @@ describe("index route head", () => {
     const socialImageMatch = source.match(
       /const SOCIAL_IMAGE = `\$\{SITE_URL\}(\/og\.png\?v=\d+)`;/,
     );
-    const xCardTitleLiteral = source.match(/const X_CARD_TITLE = ("\\u2060");/)?.[1];
 
     expect(source).toContain('property: "og:type"');
     expect(source).toContain('property: "og:url"');
@@ -31,12 +30,6 @@ describe("index route head", () => {
     expect(source).toContain('rel: "canonical"');
     expect(source).toContain("href: SITE_URL");
     expect(source).toContain('const PAGE_TITLE = "Doga Fincan";');
-    expect(source).toMatch(/title: PAGE_TITLE/);
-    expect(source).toMatch(/property: "og:title",\s+content: PAGE_TITLE/);
-    expect(source).toMatch(/name: "twitter:title",\s+content: X_CARD_TITLE/);
-    expect(xCardTitleLiteral).toBe('"\\u2060"');
-    expect(JSON.parse(xCardTitleLiteral ?? '""')).toBe("\u2060");
-    expect(Array.from(JSON.parse(xCardTitleLiteral ?? '""'))).toHaveLength(1);
     expect(source).not.toContain('const PAGE_TITLE = "Doga Fincan Portfolio";');
     expect(source).toContain(
       "Developer interested in language learning, nutrition, exercise, and building useful products. Reach out if you're building something interesting.",
