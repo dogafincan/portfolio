@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 const PAGE_TITLE = "Doga Fincan";
+const X_CARD_TITLE = "\u2060";
 const PAGE_DESCRIPTION =
   "Developer interested in language learning, nutrition, exercise, and building useful products. Reach out if you're building something interesting.";
 const SITE_URL = "https://dogafincan.com";
@@ -68,7 +69,7 @@ export const Route = createFileRoute("/")({
       },
       {
         name: "twitter:title",
-        content: PAGE_TITLE,
+        content: X_CARD_TITLE,
       },
       {
         name: "twitter:description",

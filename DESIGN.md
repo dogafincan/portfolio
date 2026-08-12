@@ -300,6 +300,12 @@ runtime package and no automated cross-repository mutation.
   `https://dogafincan.com/og.png?v=2026081101` across Open Graph and Twitter.
   Advance the version without reuse whenever the PNG bytes or composition
   changes.
+- Portfolio has one owner-approved, X-only metadata experiment:
+  `twitter:title` contains exactly U+2060 WORD JOINER to test whether X omits
+  its title overlay. The document title and `og:title` remain **Doga Fincan**,
+  and the social PNG remains unchanged. Do not advance the image version for
+  this metadata-only change, and do not treat X cache behavior or fallback
+  parsing as guaranteed.
 - `scripts/generate-og.mjs` waits for fonts, uses reduced motion, verifies
   dimensions/safe-region/type floors, optimizes through Sharp, and replaces the
   checked-in PNG atomically.
@@ -324,6 +330,7 @@ The current migration intentionally keeps only these product-owned exceptions:
 - exact inline X and GitHub brand SVGs;
 - checked-in project brand artwork;
 - the **Remove image** Trash icon;
+- the U+2060 X-card-title suppression experiment documented above;
 - the Portfolio-specific home copy and project-grid content.
 
 These exceptions do not authorize new icon families, raw component colors,
