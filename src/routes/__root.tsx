@@ -106,15 +106,10 @@ function RootDocument({ children }: { children: ReactNode }) {
 }
 
 export function NotFoundPage() {
-  const staticNotFoundDocument = useRouterState({
-    select: (state) => state.location.pathname === "/404.html",
-  });
-
   return (
     <PortfolioPageShell>
       <main className={PORTFOLIO_MAIN_CLASS_NAME}>
         <PortfolioPageHeader
-          staticNotFoundDocument={staticNotFoundDocument}
           title={
             <>
               This page isn’t in the <span className="text-page-title-accent">portfolio</span>

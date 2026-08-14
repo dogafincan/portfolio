@@ -568,7 +568,9 @@ export function ProjectSubmissionForm({
           <CardFooter className="flex-col items-stretch">
             {migrationLocked ? (
               <div className="flex flex-col gap-3" data-slot="project-submission-actions">
-                <Button type="submit">Pay 10 SUI</Button>
+                <Button type="submit" variant="info">
+                  Pay 10 SUI
+                </Button>
                 <Button type="button" variant="outline">
                   Recover payment
                 </Button>

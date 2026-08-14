@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `0903d6e18b49cff878dd0f28cdec82d05b00712c` (committed draft; release tag pending)
+Doji Design System source revision: `b39a1ded59e5751e1ec7d92b7ac2f29bce693df0` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -39,15 +39,9 @@ runtime package and no automated cross-repository mutation.
   implementation intact for the later chain migration.
 - Keep genuinely static routes, portfolio content, profile links, and live app
   links available.
-- The normal **Connect wallet** and **Submit project** header actions retain
-  their labels, enabled appearance, 44px geometry, pointer and keyboard access,
-  and focus treatment. Do not render a migration Alert below either action or
-  the shared header-action cluster.
-- **Connect wallet** opens the existing responsive-center Drawer without
-  mounting or importing the wallet runtime. Its body contains one stretching
-  `Empty` that explains the migration, no wallet choices or active chain
-  controls, and the normal single **Close** footer action. Drawer dismissal
-  restores focus to **Connect wallet**.
+- Portfolio page headers intentionally expose neither **Connect wallet** nor
+  **Submit project**. The public showcase has no Doji utility-action group and
+  therefore owns no adjacent migration Alert or wallet Drawer trigger.
 - `/submit` keeps the complete shared field order, local image selection,
   validation and preview, and one fee-and-recovery Item usable without network
   access. CardContent contains no migration Empty or Alert.
@@ -107,12 +101,16 @@ runtime package and no automated cross-repository mutation.
 - Keep platform metadata aligned to the neutral chrome:
   `#FFFFFF` in light mode and `#090909` in dark mode; the manifest background
   is `#FCFCFC`.
+- Each active page or dialog exposes at most one enabled filled dominant
+  Button. An action that may become primary later uses muted-blue `info`; an
+  action that never will uses `outline`. Bright warning or destructive Buttons
+  own the same single dominant slot, while `warning-muted` and
+  `destructive-muted` support another primary decision.
 - The document uses `viewport-fit=cover`, `html` uses `overscroll-y-none`, the
   body and complete page shell use `overscroll-none`, and body horizontal
   overflow is clipped rather than hidden.
 - Global Lucide stroke width is `2.2`. Lucide is the only product UI icon
-  family. Exact X and GitHub brand SVGs are the documented brand-mark
-  exception.
+  family.
 
 ## Typography
 
@@ -166,30 +164,13 @@ runtime package and no automated cross-repository mutation.
   keeps the navbar subject's visible bottom aligned with the initial `D`.
 - The page navbar is an explicit 56px border box with a full-height content
   rail and a 20px brand inset. Every primary page header places the compact
-  **Create CSV in DojiSnap** header-information badge above its title, linking
-  to `https://dojisnap.xyz` in a new tab with a 44px hit area around its 24px
-  visual.
-- The navbar contains identity and genuine navigation only. Primary page-header
-  actions always read **Connect wallet** / **Disconnect wallet** and
-  **Submit project** immediately below the subtitle. They stack in one bounded
-  full-width group on narrow screens and sit in a centered row from the small
-  breakpoint, with 24px of inline padding per action. Connected wallet uses the
-  outline variant; every page-header outline action rests on `bg-card` in both
-  schemes. Never show an address in the header.
-- Match the shadcn homepage's rendered subtitle-to-action rhythm: 16px below
-  the extra-large breakpoint and 24px from that breakpoint upward.
-- The wallet and Sui runtime must remain outside the initial static route chunk
-  and load only after explicit wallet interaction.
-- During the first activation, keep the stable pending wallet action while that
-  runtime loads, mount its Drawer root closed, and request the opening on the
-  next animation frame so the first opening uses the same stock transition as
-  every reopening.
-- The wallet chooser is the responsive-center Doji Drawer at every width. Keep
-  its visible swipe handle, surface-first focus, scrollable wallet or
-  whitespace-filling Empty body, and exactly one visible dismissal action: a
-  text-only full-width outline **Close** button in the footer. Never render an
-  automatic top-right close control. Backdrop, Escape, and downward-swipe
-  dismissal restore focus to the opening wallet action.
+  **Follow Doga Fincan on X** header-information badge above its title. It
+  links to `https://x.com/dogafincan` in a new tab with a 44px hit area around
+  its 24px visual and a trailing `ArrowUpRight`.
+- The navbar contains identity and genuine navigation only. Portfolio's page
+  header ends after its subtitle: it has no Connect wallet, Submit project,
+  DojiSnap, GitHub, X-icon, or other secondary action row. The single X-profile
+  badge above the title owns the contextual profile link.
 - The page shell owns responsive content and safe-area insets. Use the shared
   page rail and natural document height; do not vertically center the showcase
   to fill a viewport.
@@ -204,10 +185,8 @@ runtime package and no automated cross-repository mutation.
   **I’m Doga Fincan, a developer interested in language learning, nutrition,
   exercise, and useful products. Reach out if you’re building something
   interesting.** (155 characters).
-- X and GitHub follow the subtitle as 44px semantic info controls with exact
-  brand marks, accessible destination names, natural tab order, and visible
-  focus rings. The shared wallet/submission action group remains immediately
-  after the subtitle, before these product-specific profile links.
+- No action or social-icon row follows the subtitle. Portfolio keeps its only
+  profile destination in the contextual X badge above the title.
 - Project records render as a responsive one/two-column grid of standard
   `Card` surfaces. Each two-column row uses equal fractional tracks and aligns
   Cards to the start. Every Card, content section, and footer keeps natural
@@ -290,14 +269,15 @@ runtime package and no automated cross-repository mutation.
 - `public/og.png` is a checked-in 1200×630 PNG generated from `/og-preview`.
 - The preview is forced dark and composed from the real social navbar and real
   Portfolio page-header components.
-- Keep the **Create CSV in DojiSnap** discovery badge above the title and end
+- Keep the **Follow Doga Fincan on X** contextual badge above the title and end
   after the complete subtitle. Do not render Connect wallet, Submit project,
-  X, GitHub, or any other page-only action in the social composition.
+  separate X or GitHub controls, or any other page-only action in the social
+  composition.
 - Keep a 64px safe inset around the meaningful composition. Do not add
   atmosphere, gradients, shadows, mockups, project cards, or request-time image
   generation.
 - Use semantic social alt text. Metadata uses the exact absolute HTTPS URL
-  `https://dogafincan.com/og.png?v=2026081101` across Open Graph and Twitter.
+  `https://dogafincan.com/og.png?v=2026081401` across Open Graph and Twitter.
   Advance the version without reuse whenever the PNG bytes or composition
   changes.
 - `scripts/generate-og.mjs` waits for fonts, uses reduced motion, verifies
@@ -321,7 +301,6 @@ runtime package and no automated cross-repository mutation.
 
 The current migration intentionally keeps only these product-owned exceptions:
 
-- exact inline X and GitHub brand SVGs;
 - checked-in project brand artwork;
 - the **Remove image** Trash icon;
 - the Portfolio-specific home copy and project-grid content.

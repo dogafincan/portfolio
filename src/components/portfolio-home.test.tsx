@@ -4,6 +4,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vite-plus/test";
 
 import { AppProviders } from "@/components/app-providers";
+import { PORTFOLIO_BADGE_LABEL, X_PROFILE_URL } from "@/components/app-header";
 import { PortfolioHome } from "@/components/portfolio-home";
 import { portfolioProjects } from "@/content/projects";
 import {
@@ -56,13 +57,7 @@ describe("PortfolioHome", () => {
     expect(navbar?.className).toContain("bg-card");
     expect(navbarContent?.className).toContain("h-full");
     expect(navbar?.querySelector('[data-slot="app-header-actions"]')).toBeNull();
-    expect(headerActions?.className).toContain("flex-col");
-    expect(headerActions?.className).toContain("sm:flex-row");
-    expect(headerActions?.className).toContain("sm:[&>*]:px-6");
-    expect(headerActions?.className).toContain("xl:mt-2");
-    expect(
-      headerActions?.previousElementSibling?.querySelector('[data-slot="page-subtitle"]'),
-    ).toBeTruthy();
+    expect(headerActions).toBeNull();
     expect(brand.className).toContain("control-target");
     expect(brand.className).toContain("gap-0.5");
     expect(brand.className).toContain("ml-5");
@@ -78,18 +73,15 @@ describe("PortfolioHome", () => {
     expect(logo?.getAttribute("sizes")).toBe("32px");
     expect(logo?.getAttribute("width")).toBe("32");
     expect(logo?.getAttribute("height")).toBe("32");
-    const connectWallet = screen.getByRole("button", { name: "Connect wallet" });
-    expect(connectWallet.hasAttribute("disabled")).toBe(false);
-    expect(screen.getByRole("link", { name: "Submit project" }).getAttribute("href")).toBe(
-      "/submit",
-    );
-    expect(headerActions?.parentElement?.querySelector("[data-chain-migration-alert]")).toBeNull();
-    const discovery = screen.getByRole("link", {
-      name: "Create CSV in DojiSnap (opens in a new tab)",
+    expect(screen.queryByRole("button", { name: "Connect wallet" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Submit project" })).toBeNull();
+    const profileBadge = screen.getByRole("link", {
+      name: `${PORTFOLIO_BADGE_LABEL} (opens in a new tab)`,
     });
-    expect(discovery.getAttribute("href")).toBe("https://dojisnap.xyz");
-    expect(discovery.getAttribute("target")).toBe("_blank");
-    expect(discovery.className).toContain("expanded-control-target");
+    expect(profileBadge.getAttribute("href")).toBe(X_PROFILE_URL);
+    expect(profileBadge.getAttribute("target")).toBe("_blank");
+    expect(profileBadge.className).toContain("expanded-control-target");
+    expect(profileBadge.querySelector('[data-lucide="x-profile-link"]')).not.toBeNull();
     expect(footer?.className).toContain("bg-card");
     expect(footer?.textContent).toContain("Copyright Doga Fincan");
 
@@ -142,6 +134,8 @@ describe("PortfolioHome", () => {
       expect(action.getAttribute("target")).toBe("_blank");
       expect(action.className).toContain("control-target");
       expect(action.className).toContain("w-full");
+      expect(action.className).toContain("border-border");
+      expect(action.className).not.toContain("bg-primary");
       expect(action.querySelector("svg")).toBeNull();
       expect(action.textContent).toBe("Open app");
     }
@@ -151,27 +145,27 @@ describe("PortfolioHome", () => {
     expect(container.innerHTML).not.toContain("page-atmosphere");
   });
 
-  it("keeps profile and project actions keyboard reachable with canonical focus and target geometry", () => {
+  it("keeps the single profile badge and project actions keyboard reachable", () => {
     renderPortfolioHome();
 
-    const profileLinks = [
-      screen.getByRole("link", { name: "Open Doga Fincan on X" }),
-      screen.getByRole("link", { name: "Open Doga Fincan on GitHub" }),
-    ];
+    const profileBadge = screen.getByRole("link", {
+      name: `${PORTFOLIO_BADGE_LABEL} (opens in a new tab)`,
+    });
     const projectLinks = portfolioProjects.map((project) =>
       screen.getByRole("link", { name: `Open ${project.name} app` }),
     );
 
-    for (const target of [...profileLinks, ...projectLinks]) {
+    for (const target of [profileBadge, ...projectLinks]) {
       expect(target.tabIndex).toBe(0);
-      expect(target.className).toContain("control-target");
-      expect(target.className).toContain("focus-visible:ring-3");
       expect(target.className).toContain("focus-visible:ring-focus-ring");
     }
-    for (const link of profileLinks) {
-      expect(link.className).toContain("size-11");
-      expect(link.className).toContain("bg-control-info");
-      expect(link.querySelector("svg")?.getAttribute("class")).toBe("size-5");
+    expect(profileBadge.className).toContain("focus-visible:ring-[3px]");
+    for (const link of projectLinks) {
+      expect(link.className).toContain("focus-visible:ring-3");
+      expect(link.className).toContain("control-target");
+      expect(link.className).toContain("border-border");
     }
+    expect(profileBadge.className).toContain("expanded-control-target");
+    expect(document.querySelector('[data-slot="profile-links"]')).toBeNull();
   });
 });

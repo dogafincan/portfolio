@@ -126,6 +126,31 @@ describe("global styles", () => {
     expect(styles).not.toContain("outline-ring/50");
   });
 
+  it("defines bright and muted warning and destructive button roles", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+
+    for (const semantic of [
+      "warning-hover",
+      "warning-active",
+      "warning-strong",
+      "warning-strong-foreground",
+      "warning-strong-hover",
+      "warning-strong-active",
+      "destructive-active",
+      "destructive-strong",
+      "destructive-strong-foreground",
+      "destructive-strong-hover",
+      "destructive-strong-active",
+    ]) {
+      expect(styles).toContain(`--color-${semantic}: var(--${semantic});`);
+    }
+
+    expect(styles).toContain("--warning-strong: oklch(0.72 0.18 70);");
+    expect(styles).toContain("--warning-strong-foreground: oklch(0.2 0.035 70);");
+    expect(styles).toContain("--destructive-strong: oklch(0.55 0.232 25.29);");
+    expect(styles).toContain("--destructive-strong-foreground: var(--contrast-foreground);");
+  });
+
   it("sets one global Lucide stroke metric without component-local styling", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const lucideBlock = getBlock(styles, "svg.lucide");

@@ -2,8 +2,6 @@ import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { WalletControl } from "@/components/wallet-control";
-import { buttonVariants } from "@/components/ui/button";
 import { dojiTypography } from "@/lib/doji-ui";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +10,8 @@ const HEADER_LOGO_DARK = "/app-logo-120-navbar-dark.png";
 const HEADER_LOGO_LIGHT_SRCSET = "/app-logo-120-navbar-light.png 120w";
 
 export const PORTFOLIO_APP_NAME = "Doga Fincan";
-export const DOJISNAP_URL = "https://dojisnap.xyz";
+export const PORTFOLIO_BADGE_LABEL = "Follow Doga Fincan on X";
+export const X_PROFILE_URL = "https://x.com/dogafincan";
 export const PORTFOLIO_MAIN_CLASS_NAME =
   "app-shell mx-auto flex w-full min-w-0 max-w-full flex-1 flex-col gap-8 sm:max-w-6xl lg:gap-12";
 
@@ -132,21 +131,15 @@ export function PortfolioFooter() {
 }
 
 export function PortfolioPageHeader({
-  children,
   className,
-  staticNotFoundDocument = false,
   subtitle,
   title,
   variant = "page",
-  walletControl = <WalletControl />,
 }: {
-  children?: ReactNode;
   className?: string;
-  staticNotFoundDocument?: boolean;
   subtitle?: ReactNode;
   title: ReactNode;
   variant?: "page" | "social";
-  walletControl?: ReactNode;
 }) {
   const social = variant === "social";
   return (
@@ -173,15 +166,15 @@ export function PortfolioPageHeader({
           variant="header-info"
           render={
             <a
-              href={DOJISNAP_URL}
+              href={X_PROFILE_URL}
               target="_blank"
               rel="noreferrer"
-              aria-label="Create CSV in DojiSnap (opens in a new tab)"
+              aria-label={`${PORTFOLIO_BADGE_LABEL} (opens in a new tab)`}
             />
           }
         >
-          Create CSV in DojiSnap
-          <ArrowUpRight data-icon="inline-end" data-lucide="dojisnap-link" aria-hidden="true" />
+          {PORTFOLIO_BADGE_LABEL}
+          <ArrowUpRight data-icon="inline-end" data-lucide="x-profile-link" aria-hidden="true" />
         </Badge>
         <h1
           className={cn(
@@ -205,24 +198,6 @@ export function PortfolioPageHeader({
           </p>
         ) : null}
       </div>
-      {!social ? (
-        <div
-          className="flex w-full max-w-sm flex-col items-stretch gap-2 sm:w-auto sm:max-w-none sm:flex-row sm:items-center sm:justify-center sm:[&>*]:px-6 xl:mt-2"
-          data-slot="app-header-actions"
-        >
-          {staticNotFoundDocument ? (
-            <a className={buttonVariants()} href="/#connect-wallet">
-              Connect wallet
-            </a>
-          ) : (
-            walletControl
-          )}
-          <a className={cn(buttonVariants({ variant: "outline" }), "bg-card")} href="/submit">
-            Submit project
-          </a>
-        </div>
-      ) : null}
-      {children}
     </header>
   );
 }

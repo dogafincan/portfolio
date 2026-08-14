@@ -42,9 +42,28 @@ describe("button variants", () => {
     expect(secondary).toContain("bg-secondary");
     expect(secondary).toContain("hover:bg-secondary-hover");
     expect(ghost).toContain("hover:bg-control-hover");
-    expect(destructive).toContain("bg-destructive-surface");
-    expect(destructive).toContain("text-destructive-foreground");
-    expect(destructive).toContain("hover:bg-destructive-hover");
+    expect(destructive).toContain("bg-destructive-strong");
+    expect(destructive).toContain("text-destructive-strong-foreground");
+    expect(destructive).toContain("hover:bg-destructive-strong-hover");
+  });
+
+  it("provides bright and muted semantic severity pairs", () => {
+    const warning = buttonVariants({ variant: "warning" });
+    const warningMuted = buttonVariants({ variant: "warning-muted" });
+    const destructive = buttonVariants({ variant: "destructive" });
+    const destructiveMuted = buttonVariants({ variant: "destructive-muted" });
+
+    expect(warning).toContain("bg-warning-strong");
+    expect(warning).toContain("text-warning-strong-foreground");
+    expect(warning).toContain("active:bg-warning-strong-active");
+    expect(warningMuted).toContain("bg-warning");
+    expect(warningMuted).toContain("text-warning-foreground");
+    expect(warningMuted).toContain("active:bg-warning-active");
+    expect(destructive).toContain("bg-destructive-strong");
+    expect(destructive).toContain("active:bg-destructive-strong-active");
+    expect(destructiveMuted).toContain("bg-destructive-surface");
+    expect(destructiveMuted).toContain("text-destructive-foreground");
+    expect(destructiveMuted).toContain("active:bg-destructive-active");
   });
 
   it("keeps link buttons on the shared blue foreground role", () => {

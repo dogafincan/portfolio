@@ -4,6 +4,7 @@ import { render } from "@testing-library/react";
 import { describe, expect, it } from "vite-plus/test";
 
 import { OgImagePreview } from "@/components/og-image-preview";
+import { PORTFOLIO_BADGE_LABEL, X_PROFILE_URL } from "@/components/app-header";
 import { dojiTypography } from "@/lib/doji-ui";
 import {
   PORTFOLIO_PAGE_SUBTITLE,
@@ -56,7 +57,9 @@ describe("OgImagePreview", () => {
     expect(subtitle?.textContent).toBe(PORTFOLIO_PAGE_SUBTITLE);
     expect(subtitle?.className).toContain(dojiTypography.socialSubtitle);
     expect(subtitle?.className).toContain("max-w-[860px]");
-    expect(discovery?.textContent).toContain("Create CSV in DojiSnap");
+    expect(discovery?.textContent).toContain(PORTFOLIO_BADGE_LABEL);
+    expect(discovery?.getAttribute("href")).toBe(X_PROFILE_URL);
+    expect(discovery?.querySelector('[data-lucide="x-profile-link"]')).not.toBeNull();
     expect(discovery?.className).toContain("h-14");
     expect(container.querySelector('[data-slot="app-header-actions"]')).toBeNull();
     expect(container.textContent).not.toContain("Connect wallet");
