@@ -126,10 +126,14 @@ describe("global styles", () => {
     expect(styles).not.toContain("outline-ring/50");
   });
 
-  it("defines bright and muted warning and destructive button roles", () => {
+  it("defines filled success, warning, and destructive button roles", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
     for (const semantic of [
+      "success-strong",
+      "success-strong-foreground",
+      "success-strong-hover",
+      "success-strong-active",
       "warning-hover",
       "warning-active",
       "warning-strong",
@@ -145,6 +149,8 @@ describe("global styles", () => {
       expect(styles).toContain(`--color-${semantic}: var(--${semantic});`);
     }
 
+    expect(styles).toContain("--success-strong: oklch(0.67 0.19 147);");
+    expect(styles).toContain("--success-strong-foreground: oklch(0.18 0.04 147);");
     expect(styles).toContain("--warning-strong: oklch(0.72 0.18 70);");
     expect(styles).toContain("--warning-strong-foreground: oklch(0.2 0.035 70);");
     expect(styles).toContain("--destructive-strong: oklch(0.55 0.232 25.29);");

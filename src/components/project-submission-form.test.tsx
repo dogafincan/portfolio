@@ -113,7 +113,7 @@ describe("ProjectSubmissionFlow", () => {
     const recover = screen.getByRole("button", { name: "Recover payment" });
     expect(pay.hasAttribute("disabled")).toBe(false);
     expect(recover.hasAttribute("disabled")).toBe(false);
-    expect(pay.className).toContain("bg-control-info");
+    expect(pay.className).toContain("border-border");
     expect(pay.className).not.toContain("bg-primary");
     expect(recover.className).toContain("border-border");
 

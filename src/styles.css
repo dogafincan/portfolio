@@ -190,6 +190,10 @@
   --color-success-border: var(--success-border);
   --color-success-foreground: var(--success-foreground);
   --color-success: var(--success);
+  --color-success-strong-active: var(--success-strong-active);
+  --color-success-strong-hover: var(--success-strong-hover);
+  --color-success-strong-foreground: var(--success-strong-foreground);
+  --color-success-strong: var(--success-strong);
   --color-info-border: var(--info-border);
   --color-info-foreground: var(--info-foreground);
   --color-info: var(--info);
@@ -295,6 +299,10 @@
   --success: light-dark(var(--ds-green-100), var(--muted));
   --success-border: var(--ds-green-400);
   --success-foreground: light-dark(oklch(0.7 0.214 145.179993), var(--ds-green-900));
+  --success-strong: oklch(0.67 0.19 147);
+  --success-strong-foreground: oklch(0.18 0.04 147);
+  --success-strong-hover: oklch(0.63 0.18 147);
+  --success-strong-active: oklch(0.59 0.17 147);
   --warning: light-dark(var(--ds-amber-100), var(--muted));
   --warning-border: var(--ds-amber-400);
   --warning-foreground: light-dark(oklch(0.7 0.1991 64.279999), oklch(0.72 0.1991 64.28));

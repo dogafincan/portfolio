@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `b39a1ded59e5751e1ec7d92b7ac2f29bce693df0` (committed draft; release tag pending)
+Doji Design System source revision: `8c0fede57e06e532dd06775785067a3cf33ba67b` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -85,7 +85,7 @@ runtime package and no automated cross-repository mutation.
 - Browser-rendered colors resolve through semantic aliases in `src/styles.css`.
   Do not use raw palette utilities, component-local color literals,
   `color-mix()`, or painted opacity suffixes.
-- Neutral muted surfaces, editable controls, and secondary actions use
+- Neutral muted surfaces and editable controls use
   `oklab(0.98 0 0)` in light mode and `oklch(0.17 0 0)` in dark mode. Colored
   statuses keep their tone surfaces in light mode and use the muted surface
   behind colored foregrounds in dark mode. The single `--warning-foreground`
@@ -102,10 +102,13 @@ runtime package and no automated cross-repository mutation.
   `#FFFFFF` in light mode and `#090909` in dark mode; the manifest background
   is `#FCFCFC`.
 - Each active page or dialog exposes at most one enabled filled dominant
-  Button. An action that may become primary later uses muted-blue `info`; an
-  action that never will uses `outline`. Bright warning or destructive Buttons
-  own the same single dominant slot, while `warning-muted` and
-  `destructive-muted` support another primary decision.
+  Button. Every ordinary secondary action uses blue-foreground `outline`,
+  whether it may become primary later or remains supporting. Filled `success`,
+  `warning`, and `destructive` Buttons may own that same single dominant slot;
+  supporting semantic actions use `success-outline`, `warning-outline`, or
+  `destructive-outline`, whose text matches the corresponding Alert foreground.
+  The shadcn `secondary` variant is reserved for selected or toggled state; it
+  is not a secondary workflow-action treatment.
 - The document uses `viewport-fit=cover`, `html` uses `overscroll-y-none`, the
   body and complete page shell use `overscroll-none`, and body horizontal
   overflow is clipped rather than hidden.
