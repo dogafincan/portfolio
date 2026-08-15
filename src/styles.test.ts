@@ -169,6 +169,12 @@ describe("global styles", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
     expect(styles).toContain("--muted: light-dark(oklab(0.98 0 0), oklch(0.17 0 0));");
+    expect(styles).toContain("--item-muted: light-dark(oklab(0.985 0 0), var(--muted));");
+    expect(styles).toContain(
+      "--item-avatar-background: light-dark(var(--card), var(--background));",
+    );
+    expect(styles).toContain("--color-item-muted: var(--item-muted);");
+    expect(styles).toContain("--color-item-avatar-background: var(--item-avatar-background);");
     expect(styles).toContain("--control: var(--muted);");
     expect(styles).toContain("--secondary: var(--muted);");
     expect(styles).not.toContain("color-mix(");

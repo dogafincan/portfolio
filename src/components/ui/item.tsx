@@ -39,7 +39,7 @@ const itemVariants = cva(
       variant: {
         default: "border-transparent",
         outline: "border-border",
-        muted: "border-transparent bg-muted",
+        muted: "border-transparent bg-item-muted",
       },
       size: {
         default: "gap-3.5 px-4 py-3.5",
@@ -86,7 +86,7 @@ const itemMediaVariants = cva(
         default: "bg-transparent group-has-data-[slot=item-description]/item:translate-y-0.5",
         icon: "group-has-data-[slot=item-description]/item:translate-y-[3px] [&_svg:not([class*='size-'])]:size-4",
         image:
-          "size-10 overflow-hidden rounded-xl group-has-data-[slot=item-description]/item:translate-y-0.5 group-data-[size=sm]/item:size-8 group-data-[size=xs]/item:size-6 group-data-[size=xs]/item:rounded-lg [&_img]:size-full [&_img]:object-cover",
+          "size-10 overflow-hidden rounded-xl bg-item-avatar-background group-has-data-[slot=item-description]/item:translate-y-0.5 group-data-[size=sm]/item:size-8 group-data-[size=xs]/item:size-6 group-data-[size=xs]/item:rounded-lg [&_img]:size-full [&_img]:object-cover",
       },
     },
     defaultVariants: {

@@ -22,7 +22,7 @@ function ProjectCard({
       <CardContent>
         <Item className="min-w-0 flex-nowrap" data-project={project.slug} variant="muted">
           <ItemMedia
-            className="size-12 overflow-hidden rounded-xl border border-border bg-background [&_img]:object-contain"
+            className="size-12 overflow-hidden rounded-xl border border-border [&_img]:object-contain"
             variant="image"
           >
             <picture className="block size-full" data-slot="project-logo-picture">

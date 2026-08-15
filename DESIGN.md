@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `6ca029d68b3832a9dcb64c2c194e06b82d258bf0` (committed draft; release tag pending)
+Doji Design System source revision: `abf5999126d309c8d0ab5f9a308150c012a06608` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -92,6 +92,11 @@ runtime package and no automated cross-repository mutation.
   role owns warning alerts, amber badges, warning buttons and controls, and all
   other amber status text. It resolves to `oklch(0.7 0.1991 64.279999)` in
   light mode and `oklch(0.72 0.1991 64.28)` in dark mode.
+- The resting muted `Item` alone uses `oklab(0.985 0 0)` in light mode and the
+  unchanged muted role in dark mode. Avatar/image `ItemMedia` containers match
+  the Card background in light mode and retain the page background in dark
+  mode. The Item primitive owns both roles; call sites do not add local
+  background utilities, and every non-Item muted surface stays unchanged.
 - Respect system light and dark modes. Do not add a theme switch without a
   separate product decision.
 - Use the solid neutral page field and raised app chrome. Do not add page
@@ -214,7 +219,7 @@ runtime package and no automated cross-repository mutation.
   revision-named light/dark pairs. Render the pair with `picture`: the dark
   source responds to `prefers-color-scheme: dark`, and the light image is the
   fallback. Every project remains a muted `Item`, and its `picture` belongs in
-  the standard 48px avatar/image `ItemMedia` with the shared background,
+  the standard 48px avatar/image `ItemMedia` with the primitive-owned background,
   border, radius, clipping, and `object-contain` behavior. Use the source app's
   current transparent navbar/logo artwork; do not bake that avatar container
   into the raster or use a favicon, install icon, hotlink, CSS inversion, or

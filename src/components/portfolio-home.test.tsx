@@ -126,7 +126,7 @@ describe("PortfolioHome", () => {
       });
 
       expect(item?.getAttribute("data-variant")).toBe("muted");
-      expect(item?.className).toContain("bg-muted");
+      expect(item?.className).toContain("bg-item-muted");
       expect(item?.className).not.toContain("bg-muted/50");
       expect(item?.querySelector('[data-slot="item-title"] h2')?.textContent).toBe(project.name);
       expect(item?.querySelector('[data-slot="item-description"]')?.textContent).toBe(
@@ -144,7 +144,8 @@ describe("PortfolioHome", () => {
       expect(avatar?.className).toContain("size-12");
       expect(avatar?.className).toContain("rounded-xl");
       expect(avatar?.className).toContain("border-border");
-      expect(avatar?.className).toContain("bg-background");
+      expect(avatar?.className).toContain("bg-item-avatar-background");
+      expect(avatar?.className).not.toContain("bg-background");
       expect(avatar?.className).toContain("[&_img]:object-contain");
       expect(action.getAttribute("href")).toBe(project.liveUrl);
       expect(action.getAttribute("target")).toBe("_blank");

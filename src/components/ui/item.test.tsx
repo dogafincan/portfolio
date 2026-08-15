@@ -45,8 +45,9 @@ describe("Item", () => {
     const { container } = render(<Item variant="muted">Muted summary</Item>);
     const item = container.querySelector('[data-slot="item"]');
 
-    expect(item?.className).toContain("bg-muted");
+    expect(item?.className).toContain("bg-item-muted");
     expect(item?.className).toContain("focus-visible:ring-focus-ring");
+    expect(item?.className.split(/\s+/)).not.toContain("bg-muted");
     expect(item?.className).not.toContain("bg-muted/50");
     expect(item?.className).not.toContain("ring-ring/50");
   });
@@ -113,6 +114,20 @@ describe("Item", () => {
 
     expect(container.querySelector('[data-slot="item-media"]')?.className).toContain(
       "group-has-data-[slot=item-description]/item:translate-y-0.5",
+    );
+  });
+
+  it("owns the avatar and image container background", () => {
+    const { container } = render(
+      <Item>
+        <ItemMedia variant="image">
+          <img alt="" />
+        </ItemMedia>
+      </Item>,
+    );
+
+    expect(container.querySelector('[data-slot="item-media"]')?.className).toContain(
+      "bg-item-avatar-background",
     );
   });
 

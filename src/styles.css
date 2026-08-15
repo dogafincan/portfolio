@@ -204,6 +204,8 @@
   --color-skeleton: var(--skeleton);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
+  --color-item-avatar-background: var(--item-avatar-background);
+  --color-item-muted: var(--item-muted);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
@@ -236,6 +238,8 @@
   --secondary: var(--muted);
   --secondary-foreground: var(--ds-gray-1000);
   --muted: light-dark(oklab(0.98 0 0), oklch(0.17 0 0));
+  --item-muted: light-dark(oklab(0.985 0 0), var(--muted));
+  --item-avatar-background: light-dark(var(--card), var(--background));
   --muted-foreground: light-dark(oklch(31% 0 0), oklch(83% 0 0));
   --quiet-foreground: var(--ds-gray-900);
   --skeleton: var(--ds-gray-300);
