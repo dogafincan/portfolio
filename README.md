@@ -31,7 +31,8 @@ Expected content:
 
 - project index for built work outside the portfolio site itself
 - compact X and GitHub profile links in the header
-- focused project cards with product icon, name, short subtitle, and a live app
+- focused project cards with the current scheme-matched product logo, navbar
+  name, complete primary-page subtitle, and a live app
   link
 - project detail or case-study pages when a project needs more context
 - concise explanations of technical decisions in plain language
@@ -153,9 +154,13 @@ the repository for later migration rather than being deleted.
 - Keep project fields and the image in page memory only until payment succeeds.
 - Keep the Registry treasury address deliberately unconfigured until the owner
   supplies the first generated publication; new payments fail closed meanwhile.
-- Use product-owned app icons in project cards. Keep deeper visuals, stack
-  details, and implementation notes for future case-study pages. The portfolio
-  site should not list itself as one of its own products.
+- Use checked-in, revision-named light/dark copies of each product's current
+  transparent logo in project cards. Keep each project in a muted `Item` and
+  place the logo inside its standard 48px avatar/image media container. Copy
+  the navbar name and complete primary subtitle from the same source revision.
+  Keep deeper visuals, stack details, and implementation notes for future
+  case-study pages. The portfolio site should not list itself as one of its own
+  products.
 
 ## Shared Web App Design System
 
@@ -229,8 +234,8 @@ The imported sibling organization now used here:
 - `public/app-logo-120.png`, `public/apple-touch-icon.png`,
   `public/android-chrome-*.png`, `public/favicon.ico`, `public/favicon-*`, and
   `public/og.png`: portfolio-owned logo and social assets.
-- `public/projects/*-icon.avif`: local app icons copied from the shipped sibling
-  apps.
+- `public/projects/*-logo-{light,dark}-<revision>.png`: local, immutable copies
+  of the shipped sibling apps' current transparent light/dark logos.
 
 ## Local Commands
 

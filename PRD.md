@@ -6,27 +6,28 @@ This table tracks implementation slices for future chats. `Done` rows are
 already implemented. `Pending` rows are planned work only and should not be
 treated as complete.
 
-| Status      | Slice                               | PRD coverage        | Commit    | Notes                                                                                                                                                                                                                                                                                       |
-| ----------- | ----------------------------------- | ------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Done        | Project showcase surface            | 1, 7, 8, 9, 10      | `e221b4d` | Replaces the starter page with a real portfolio route, structured sibling-project records and cards.                                                                                                                                                                                        |
-| Done        | Shared app chrome and metadata      | 9.5-9.7, 12, 13, 15 | `e221b4d` | Adds logo assets, page chrome, root metadata, social preview assets, and regression coverage.                                                                                                                                                                                               |
-| Done        | Remove project-section intro copy   | 8.1, 9.1, 13        | `3b6d334` | Removes the visible `Projects` heading/subtitle so the project cards lead the workbench.                                                                                                                                                                                                    |
-| Done        | Align project workbench container   | 8.1, 9.1, 13        | `05aff21` | Matches the portfolio workbench container to the sibling Snapshot/Airdrop workbench treatment.                                                                                                                                                                                              |
-| Done        | Remove build-principles section     | 6, 8.1, 9.1         | `ad7c462` | Removes the extra principles section and keeps the route focused on project cards.                                                                                                                                                                                                          |
-| Done        | Align header typography             | 8.1, 9.1, 13        | `88a46d0` | Matches the portfolio title/subtitle sizing, weight, tracking, and foreground color to sibling apps.                                                                                                                                                                                        |
-| Done        | Remove footer/profile content       | 6, 8.1, 8.3, 13     | `96a0bc7` | Removes the visible content below the project workbench so the route ends on project cards.                                                                                                                                                                                                 |
-| Done        | Header social profile links         | 7, 8.1, 8.3, 9.1    | -         | Adds compact X and GitHub icon links between the header subtitle and project workbench.                                                                                                                                                                                                     |
-| Done        | Keyboard-visible action focus       | 8.1, 9.4, 13        | -         | Keeps profile and live app links in DOM tab order with the same visible focus ring treatment.                                                                                                                                                                                               |
-| Done        | Natural-height project workbench    | 8.1, 9.1, 13        | -         | Lets the workbench size to its project-card content instead of filling spare first-viewport height.                                                                                                                                                                                         |
-| Done        | Unified page chrome background      | 9.5, 9.7, 13        | -         | Aligns safe areas, page background, shell insets, and theme colors. The later Doji Design System 1.0 migration supersedes its original atmosphere treatment.                                                                                                                                |
-| Done        | Memerank project card               | 7, 8.1, 9.2-9.4     | -         | Adds Memerank to the four-card project grid with the requested card copy and live app link.                                                                                                                                                                                                 |
-| Done        | Central Registry project submission | 2, 5, 7, 8.4, 12-15 | -         | Static form, lazy wallet, generated contract, digest-bound recovery wire, static 404, narrow gateway, environment-isolated Worker type generation, and audited build dependencies are implemented. Activation remains fail closed until wallet publication.                                 |
-| Done        | Temporary chain migration lockout   | 2, 7, 8.5, 9.10, 12 | -         | Preserves the Sui implementation while making wallet, payment, recovery, submission, and public dynamic entry points inaccessible during the Robinhood Chain migration. Static portfolio content remains available.                                                                         |
-| Done        | Doji Design System 1.0 migration    | 8-9, 13, 15         | -         | Replaces legacy atmosphere and showcase exceptions with the canonical neutral canvas, raised chrome, standard Cards, text-only actions, static 404, and forced-dark social composition. Immutable source revision `5df1b9c102d9a28abc5437ed70b22fcba3b74c93` remains the released baseline. |
-| In progress | Design-system draft migration       | 8-9, 13, 15         | -         | Adopts the Doji Design System `1.0.1-draft`: semantic descriptions render in full, Alert/Item copy targets one or two lines when possible, and the primary header follows the shared shadcn-scale copy target. Adoption remains `migrating` until release and proof gates pass.             |
-| Pending     | Project case-study pages            | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                                                                                                                                                                                                           |
-| In progress | Production release operations       | 12, 15              | -         | A portfolio-specific runbook now records release gates, static/network proof, binding-operation budgets, and rollback. A repeatable browser smoke script remains pending.                                                                                                                   |
-| Pending     | Contact action beyond profile links | 7, 8.3, 9.9         | -         | Add only when the portfolio needs a direct contact workflow beyond simple profile links.                                                                                                                                                                                                    |
+| Status      | Slice                                | PRD coverage        | Commit    | Notes                                                                                                                                                                                                                                                                                       |
+| ----------- | ------------------------------------ | ------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Done        | Project showcase surface             | 1, 7, 8, 9, 10      | `e221b4d` | Replaces the starter page with a real portfolio route, structured sibling-project records and cards.                                                                                                                                                                                        |
+| Done        | Shared app chrome and metadata       | 9.5-9.7, 12, 13, 15 | `e221b4d` | Adds logo assets, page chrome, root metadata, social preview assets, and regression coverage.                                                                                                                                                                                               |
+| Done        | Remove project-section intro copy    | 8.1, 9.1, 13        | `3b6d334` | Removes the visible `Projects` heading/subtitle so the project cards lead the workbench.                                                                                                                                                                                                    |
+| Done        | Align project workbench container    | 8.1, 9.1, 13        | `05aff21` | Matches the portfolio workbench container to the sibling Snapshot/Airdrop workbench treatment.                                                                                                                                                                                              |
+| Done        | Remove build-principles section      | 6, 8.1, 9.1         | `ad7c462` | Removes the extra principles section and keeps the route focused on project cards.                                                                                                                                                                                                          |
+| Done        | Align header typography              | 8.1, 9.1, 13        | `88a46d0` | Matches the portfolio title/subtitle sizing, weight, tracking, and foreground color to sibling apps.                                                                                                                                                                                        |
+| Done        | Remove footer/profile content        | 6, 8.1, 8.3, 13     | `96a0bc7` | Removes the visible content below the project workbench so the route ends on project cards.                                                                                                                                                                                                 |
+| Done        | Header social profile links          | 7, 8.1, 8.3, 9.1    | -         | Adds compact X and GitHub icon links between the header subtitle and project workbench.                                                                                                                                                                                                     |
+| Done        | Keyboard-visible action focus        | 8.1, 9.4, 13        | -         | Keeps profile and live app links in DOM tab order with the same visible focus ring treatment.                                                                                                                                                                                               |
+| Done        | Natural-height project workbench     | 8.1, 9.1, 13        | -         | Lets the workbench size to its project-card content instead of filling spare first-viewport height.                                                                                                                                                                                         |
+| Done        | Unified page chrome background       | 9.5, 9.7, 13        | -         | Aligns safe areas, page background, shell insets, and theme colors. The later Doji Design System 1.0 migration supersedes its original atmosphere treatment.                                                                                                                                |
+| Done        | Memerank project card                | 7, 8.1, 9.2-9.4     | -         | Adds Memerank to the four-card project grid with the requested card copy and live app link.                                                                                                                                                                                                 |
+| Done        | Current ecosystem project identities | 7, 8.1, 9.2-9.4     | -         | Adds DojiRegistry and synchronizes all five project cards to current navbar names, complete primary subtitles, canonical URLs, and revision-named light/dark logo pairs.                                                                                                                    |
+| Done        | Central Registry project submission  | 2, 5, 7, 8.4, 12-15 | -         | Static form, lazy wallet, generated contract, digest-bound recovery wire, static 404, narrow gateway, environment-isolated Worker type generation, and audited build dependencies are implemented. Activation remains fail closed until wallet publication.                                 |
+| Done        | Temporary chain migration lockout    | 2, 7, 8.5, 9.10, 12 | -         | Preserves the Sui implementation while making wallet, payment, recovery, submission, and public dynamic entry points inaccessible during the Robinhood Chain migration. Static portfolio content remains available.                                                                         |
+| Done        | Doji Design System 1.0 migration     | 8-9, 13, 15         | -         | Replaces legacy atmosphere and showcase exceptions with the canonical neutral canvas, raised chrome, standard Cards, text-only actions, static 404, and forced-dark social composition. Immutable source revision `5df1b9c102d9a28abc5437ed70b22fcba3b74c93` remains the released baseline. |
+| In progress | Design-system draft migration        | 8-9, 13, 15         | -         | Adopts the Doji Design System `1.0.1-draft`: semantic descriptions render in full, Alert/Item copy targets one or two lines when possible, and the primary header follows the shared shadcn-scale copy target. Adoption remains `migrating` until release and proof gates pass.             |
+| Pending     | Project case-study pages             | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                                                                                                                                                                                                           |
+| In progress | Production release operations        | 12, 15              | -         | A portfolio-specific runbook now records release gates, static/network proof, binding-operation budgets, and rollback. A repeatable browser smoke script remains pending.                                                                                                                   |
+| Pending     | Contact action beyond profile links  | 7, 8.3, 9.9         | -         | Add only when the portfolio needs a direct contact workflow beyond simple profile links.                                                                                                                                                                                                    |
 
 ---
 
@@ -52,7 +53,7 @@ Keep the site simple, fast, and consistent with the sibling apps.
 | --------------- | -------------------------------------------------------------------- |
 | App surface     | Static `/` showcase plus shared `/submit` project flow               |
 | Primary content | Structured project records in `src/content/projects.ts`              |
-| Current visuals | Product-owned app icons in compact project cards                     |
+| Current visuals | Scheme-matched current app logos in compact project cards            |
 | Frontend        | React 19                                                             |
 | App framework   | TanStack Start and TanStack Router                                   |
 | Toolchain       | Vite+                                                                |
@@ -108,7 +109,7 @@ Visitors should be able to:
 2. See real project content without scrolling past generic marketing sections.
 3. Understand each listed project in one short scan.
 4. Open a live project when it exists.
-5. See each project's icon, title, and short subtitle without extra metadata.
+5. See each project's current logo, navbar title, and complete primary subtitle without extra metadata.
 6. View the site comfortably on mobile and desktop.
 
 ### 5.2 Owner goals
@@ -168,7 +169,8 @@ The current product includes:
 1. Header with portfolio logo, title, and concise subtitle.
 2. Compact header profile links for X and GitHub.
 3. Structured sibling-project list.
-4. Project cards with app icon, name, short subtitle, and live app link.
+4. Project cards with the current scheme-matched app logo, navbar name,
+   complete primary subtitle, and live app link.
 5. Live project links when available.
 6. App logo, favicon, install icons, manifest, and social preview image.
 7. Responsive shared light/dark neutral page canvas, raised browser chrome, and
@@ -270,21 +272,23 @@ inside its Empty surface, not in an Alert below its trigger.
 ### 9.2 Project records
 
 - Project content lives in `src/content/projects.ts`.
-- Each project record includes name, slug, subtitle, icon, iconAlt, and liveUrl.
-- Project names should match the corresponding app's current title. Project
-  subtitles should use approved portfolio card copy; when no specific card copy
-  is specified, mirror the corresponding app's concise subtitle.
-- Current project-card order is Memerank, Sui Swap, Sui Airdrop, and Sui
-  Snapshot, which maps to upper-left, upper-right, bottom-left, and bottom-right
-  in the two-column desktop grid.
+- Each project record includes name, slug, subtitle, logoLight, logoDark,
+  logoAlt, and liveUrl.
+- Project names match the corresponding app's compact current navbar name.
+  Project subtitles copy the complete primary-page subtitle verbatim from the
+  same immutable source revision; Portfolio does not shorten or paraphrase it.
+- Current project-card order is DojiMemerank, DojiSwap, DojiAirdrop, DojiSnap,
+  and DojiRegistry.
 - Do not list the portfolio website as one of its own projects.
 - `liveUrl` should only point to a useful public app surface.
 
 ### 9.3 Project cards
 
 - Render one card for each project record.
-- Use real product-owned app icons, app-matched names, and app-matched subtitles
-  inside the muted `Item` summary defined in `DESIGN.md`.
+- Use checked-in revision-named light/dark copies of the current transparent
+  product logos, exact navbar names, and exact primary subtitles inside the
+  muted `Item` summary defined in `DESIGN.md`. Place each scheme-aware logo in
+  that Item's standard 48px avatar/image media container.
 - Keep the live app link outside the summary item as the card footer action.
 - Do not show status, role, stack, implementation highlights, source links, or
   large preview images in project cards for now.
@@ -392,9 +396,11 @@ MDX, markdown files, or a CMS.
 When adding a project:
 
 1. Add the project record to `src/content/projects.ts`.
-2. Add a product-owned preview image under `public/projects/` when possible.
-3. Verify the project card renders on mobile and desktop.
-4. Update tests if the new project changes expected structure or metadata.
+2. Copy the current transparent light/dark logo pair from the source revision
+   into revision-named files under `public/projects/`.
+3. Copy the current compact navbar name and complete primary subtitle exactly.
+4. Verify the project card renders in light/dark themes on mobile and desktop.
+5. Update tests if the new project changes expected structure or metadata.
 
 ## 12. Technical and deployment shape
 

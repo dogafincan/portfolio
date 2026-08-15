@@ -90,10 +90,11 @@ describe("PortfolioHome", () => {
       "sui-swap",
       "sui-airdrop",
       "sui-snapshot",
+      "doji-registry",
     ]);
     expect(
       screen.getAllByRole("heading", { level: 2 }).map((heading) => heading.textContent),
-    ).toEqual(["Memerank", "Sui Swap", "Sui Airdrop", "Sui Snapshot"]);
+    ).toEqual(["DojiMemerank", "DojiSwap", "DojiAirdrop", "DojiSnap", "DojiRegistry"]);
   });
 
   it("keeps every project Card at its independent natural height", () => {
@@ -117,7 +118,9 @@ describe("PortfolioHome", () => {
 
     for (const project of portfolioProjects) {
       const item = projects.querySelector(`[data-project="${project.slug}"]`);
-      const image = screen.getByAltText(project.iconAlt);
+      const image = screen.getByAltText(project.logoAlt);
+      const picture = image.closest("picture");
+      const darkSource = picture?.querySelector("source");
       const action = screen.getByRole("link", { name: `Open ${project.name} app` });
 
       expect(item?.getAttribute("data-variant")).toBe("muted");
@@ -127,9 +130,20 @@ describe("PortfolioHome", () => {
       expect(item?.querySelector('[data-slot="item-description"]')?.textContent).toBe(
         project.subtitle,
       );
-      expect(image.getAttribute("src")).toBe(project.icon);
+      expect(picture?.getAttribute("data-slot")).toBe("project-logo-picture");
+      expect(image.getAttribute("data-slot")).toBe("project-logo");
+      expect(image.getAttribute("src")).toBe(project.logoLight);
+      expect(darkSource?.getAttribute("media")).toBe("(prefers-color-scheme: dark)");
+      expect(darkSource?.getAttribute("srcset")).toBe(project.logoDark);
       expect(image.getAttribute("width")).toBe("48");
       expect(image.getAttribute("height")).toBe("48");
+      const avatar = image.closest('[data-slot="item-media"]');
+      expect(avatar?.getAttribute("data-variant")).toBe("image");
+      expect(avatar?.className).toContain("size-12");
+      expect(avatar?.className).toContain("rounded-xl");
+      expect(avatar?.className).toContain("border-border");
+      expect(avatar?.className).toContain("bg-background");
+      expect(avatar?.className).toContain("[&_img]:object-contain");
       expect(action.getAttribute("href")).toBe(project.liveUrl);
       expect(action.getAttribute("target")).toBe("_blank");
       expect(action.className).toContain("control-target");

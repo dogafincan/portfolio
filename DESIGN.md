@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `8c0fede57e06e532dd06775785067a3cf33ba67b` (committed draft; release tag pending)
+Doji Design System source revision: `63f3d37041511f518b55593b253dc08793486565` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -196,14 +196,31 @@ runtime package and no automated cross-repository mutation.
   height; the footer follows content after the required 24px structural gap.
   Unequal row bottoms are expected when descriptions differ. Do not wrap the
   grid in a second card-like workbench.
-- Each project card contains one 48px product icon, one title, one concise
-  description, and—when a live URL exists—a full-width text-only
+- Each project card contains one 48px current product logo, one title, one
+  complete primary-page subtitle, and—when a live URL exists—a full-width text-only
   **Open app** footer action.
 - Cards have shared borders, radii, insets, section gaps, and no box shadows.
   Do not place a Card inside another Card.
 - A project without a live URL omits the action instead of rendering a disabled
   placeholder.
-- Product icons remain checked-in static assets under `public/projects/`.
+- A project title is the exact compact app name shown in that app's current
+  navbar, not its page title or a legacy product name. The subtitle is copied
+  verbatim from the app's current primary page header; do not shorten or
+  paraphrase it for Portfolio.
+- Product logos remain checked-in static assets under `public/projects/` as
+  revision-named light/dark pairs. Render the pair with `picture`: the dark
+  source responds to `prefers-color-scheme: dark`, and the light image is the
+  fallback. Every project remains a muted `Item`, and its `picture` belongs in
+  the standard 48px avatar/image `ItemMedia` with the shared background,
+  border, radius, clipping, and `object-contain` behavior. Use the source app's
+  current transparent navbar/logo artwork; do not bake that avatar container
+  into the raster or use a favicon, install icon, hotlink, CSS inversion, or
+  crop.
+- Current source revisions are DojiMemerank `2ce5e89fce7ebff100c7d99e747db396a2ab8091`,
+  DojiSwap `3eda353c8f5016a6e5321a84331838c18958e784`, DojiAirdrop
+  `141d1b391ed369795663be16dcc511dfd35ddf92`, DojiSnap
+  `17fd09053e51d695c1b08c9119e5bdf1444dc889`, and DojiRegistry
+  `c6f191fde3c8d1238bcfd16e6f79e06d595be65b`.
 
 ## Project Submission
 

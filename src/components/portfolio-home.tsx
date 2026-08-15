@@ -21,19 +21,22 @@ function ProjectCard({
       <CardContent>
         <Item className="min-w-0 flex-nowrap" data-project={project.slug} variant="muted">
           <ItemMedia
-            className="size-12 overflow-hidden rounded-xl border border-border bg-background"
+            className="size-12 overflow-hidden rounded-xl border border-border bg-background [&_img]:object-contain"
             variant="image"
           >
-            <img
-              alt={project.iconAlt}
-              className="size-full object-cover"
-              data-slot="project-icon"
-              decoding="async"
-              height="48"
-              loading={loading}
-              src={project.icon}
-              width="48"
-            />
+            <picture className="block size-full" data-slot="project-logo-picture">
+              <source media="(prefers-color-scheme: dark)" srcSet={project.logoDark} />
+              <img
+                alt={project.logoAlt}
+                className="size-full"
+                data-slot="project-logo"
+                decoding="async"
+                height="48"
+                loading={loading}
+                src={project.logoLight}
+                width="48"
+              />
+            </picture>
           </ItemMedia>
           <ItemContent className="min-w-0">
             <ItemTitle className="line-clamp-none">
