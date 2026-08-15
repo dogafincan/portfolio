@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `abf5999126d309c8d0ab5f9a308150c012a06608` (committed draft; release tag pending)
+Doji Design System source revision: `773c6d8fac5850937b4cf00bb8a80b3347bd8956` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -153,8 +153,9 @@ runtime package and no automated cross-repository mutation.
   shadow, outer radius, or decorative fill.
 - Navbar identity uses the 32px Portfolio logo and full `Doga Fincan` label.
   This owner-approved personal identity is the naming exception to the
-  `Doji…` product-name rule. Its 2px gap, `text-xl`/`leading-7` name, shared 1px
-  optical offset, and transparent artwork wrapper still match DojiSnap. The
+  naturally spaced `Doji …` product-name rule. Its 2px gap,
+  `text-xl`/`leading-7` name, shared 1px optical offset, and transparent artwork
+  wrapper still match Doji Snap. The
   complete app-owned identity uses the approved full-color memoji behind the
   laptop, never a substitute glyph or redrawn silhouette. Light artwork keeps
   that subject on a full-bleed white square; dark artwork keeps the same subject
@@ -177,7 +178,7 @@ runtime package and no automated cross-repository mutation.
   its 24px visual and a trailing `ArrowUpRight`.
 - The navbar contains identity and genuine navigation only. Portfolio's page
   header ends after its subtitle: it has no Connect wallet, Submit project,
-  DojiSnap, GitHub, X-icon, or other secondary action row. The single X-profile
+  Doji Snap, GitHub, X-icon, or other secondary action row. The single X-profile
   badge above the title owns the contextual profile link.
 - The page shell owns responsive content and safe-area insets. Use the shared
   page rail and natural document height; do not vertically center the showcase
@@ -224,10 +225,10 @@ runtime package and no automated cross-repository mutation.
   current transparent navbar/logo artwork; do not bake that avatar container
   into the raster or use a favicon, install icon, hotlink, CSS inversion, or
   crop.
-- Current source revisions are DojiMemerank `2ce5e89fce7ebff100c7d99e747db396a2ab8091`,
-  DojiSwap `3eda353c8f5016a6e5321a84331838c18958e784`, DojiAirdrop
-  `141d1b391ed369795663be16dcc511dfd35ddf92`, DojiSnap
-  `17fd09053e51d695c1b08c9119e5bdf1444dc889`, and DojiRegistry
+- Current logo-source revisions are Doji Rank `2ce5e89fce7ebff100c7d99e747db396a2ab8091`,
+  Doji Swap `3eda353c8f5016a6e5321a84331838c18958e784`, Doji Drop
+  `141d1b391ed369795663be16dcc511dfd35ddf92`, Doji Snap
+  `17fd09053e51d695c1b08c9119e5bdf1444dc889`, and Doji Registry
   `c6f191fde3c8d1238bcfd16e6f79e06d595be65b`.
 
 ## Project Submission

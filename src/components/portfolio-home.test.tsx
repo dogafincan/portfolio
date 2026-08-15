@@ -94,7 +94,7 @@ describe("PortfolioHome", () => {
     ]);
     expect(
       screen.getAllByRole("heading", { level: 2 }).map((heading) => heading.textContent),
-    ).toEqual(["DojiMemerank", "DojiSwap", "DojiAirdrop", "DojiSnap", "DojiRegistry"]);
+    ).toEqual(["Doji Rank", "Doji Swap", "Doji Drop", "Doji Snap", "Doji Registry"]);
   });
 
   it("keeps every project Card at its independent natural height", () => {

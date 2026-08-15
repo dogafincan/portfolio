@@ -20,7 +20,7 @@ treated as complete.
 | Done        | Natural-height project workbench     | 8.1, 9.1, 13        | -         | Lets the workbench size to its project-card content instead of filling spare first-viewport height.                                                                                                                                                                                         |
 | Done        | Unified page chrome background       | 9.5, 9.7, 13        | -         | Aligns safe areas, page background, shell insets, and theme colors. The later Doji Design System 1.0 migration supersedes its original atmosphere treatment.                                                                                                                                |
 | Done        | Memerank project card                | 7, 8.1, 9.2-9.4     | -         | Adds Memerank to the four-card project grid with the requested card copy and live app link.                                                                                                                                                                                                 |
-| Done        | Current ecosystem project identities | 7, 8.1, 9.2-9.4     | -         | Adds DojiRegistry and synchronizes all five project cards to current navbar names, complete primary subtitles, canonical URLs, and revision-named light/dark logo pairs.                                                                                                                    |
+| Done        | Current ecosystem project identities | 7, 8.1, 9.2-9.4     | -         | Adds Doji Registry and synchronizes all five project cards to current navbar names, complete primary subtitles, canonical URLs, and revision-named light/dark logo pairs.                                                                                                                   |
 | Done        | Cross-app action affordance          | 8.1, 9.3-9.4, 13    | -         | Gives every project **Open app** link the shared trailing `ArrowUpRight`, explicit new-tab accessible name, 44px outline target, and canonical new-tab link semantics.                                                                                                                      |
 | Done        | Central Registry project submission  | 2, 5, 7, 8.4, 12-15 | -         | Static form, lazy wallet, generated contract, digest-bound recovery wire, static 404, narrow gateway, environment-isolated Worker type generation, and audited build dependencies are implemented. Activation remains fail closed until wallet publication.                                 |
 | Done        | Temporary chain migration lockout    | 2, 7, 8.5, 9.10, 12 | -         | Preserves the Sui implementation while making wallet, payment, recovery, submission, and public dynamic entry points inaccessible during the Robinhood Chain migration. Static portfolio content remains available.                                                                         |
@@ -278,8 +278,8 @@ inside its Empty surface, not in an Alert below its trigger.
 - Project names match the corresponding app's compact current navbar name.
   Project subtitles copy the complete primary-page subtitle verbatim from the
   same immutable source revision; Portfolio does not shorten or paraphrase it.
-- Current project-card order is DojiMemerank, DojiSwap, DojiAirdrop, DojiSnap,
-  and DojiRegistry.
+- Current project-card order is Doji Rank, Doji Swap, Doji Drop, Doji Snap,
+  and Doji Registry.
 - Do not list the portfolio website as one of its own projects.
 - `liveUrl` should only point to a useful public app surface.
 

@@ -13,37 +13,43 @@ describe("portfolioProjects", () => {
         slug: project.slug,
         name: project.name,
         subtitle: project.subtitle,
+        liveUrl: project.liveUrl,
       })),
     ).toEqual([
       {
         slug: "memerank",
-        name: "DojiMemerank",
+        name: "Doji Rank",
         subtitle:
-          "Explore approved Sui projects ranked by relative trading activity on Memerank, then review each project or open its built-in wallet trade flow.",
+          "Explore approved Sui projects ranked by relative trading activity on Doji Rank, then review each project or open its built-in wallet trade flow.",
+        liveUrl: "https://dojirank.com",
       },
       {
         slug: "sui-swap",
-        name: "DojiSwap",
+        name: "Doji Swap",
         subtitle:
           "Choose two Registry-approved Sui coins, enter the amount you want to spend or receive, review the live route, then approve the swap in your wallet.",
+        liveUrl: "https://sui-swap.dogafincan.workers.dev",
       },
       {
         slug: "sui-airdrop",
-        name: "DojiAirdrop",
+        name: "Doji Drop",
         subtitle:
           "Upload a Sui Snapshot CSV, choose the coin and amount for each wallet, review every recipient, then approve one funding transaction and track delivery.",
+        liveUrl: "https://dojidrop.xyz",
       },
       {
         slug: "sui-snapshot",
-        name: "DojiSnap",
+        name: "Doji Snap",
         subtitle:
-          "Choose an approved Sui coin or NFT project, pay its published SUI price, then let DojiSnap build a complete ranked holder CSV in the background.",
+          "Choose an approved Sui coin or NFT project, pay its published SUI price, then let Doji Snap build a complete ranked holder CSV in the background.",
+        liveUrl: "https://dojisnap.xyz",
       },
       {
         slug: "doji-registry",
-        name: "DojiRegistry",
+        name: "Doji Registry",
         subtitle:
           "Review submissions, maintain approved metadata, and publish one versioned project catalog for every Doji application from a protected Registry.",
+        liveUrl: "https://registry.dogafincan.com",
       },
     ]);
   });
