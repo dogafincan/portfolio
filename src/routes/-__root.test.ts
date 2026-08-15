@@ -49,6 +49,7 @@ describe("RootDocument head", () => {
     expect(manifest).toContain('"theme_color": "#FFFFFF"');
     expect(manifest).toContain('"background_color": "#FCFCFC"');
     expect(manifest).toContain('"short_name": "Doga Fincan"');
+    expect(manifest).toContain('"name": "Doga Fincan"');
     expect(readPngSize("../../public/app-logo-120.png")).toEqual({ width: 120, height: 120 });
     expect(readPngSize("../../public/apple-touch-icon.png")).toEqual({ width: 180, height: 180 });
     expect(readPngSize("../../public/android-chrome-192x192.png")).toEqual({
