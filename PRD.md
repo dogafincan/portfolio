@@ -21,6 +21,7 @@ treated as complete.
 | Done        | Unified page chrome background       | 9.5, 9.7, 13        | -         | Aligns safe areas, page background, shell insets, and theme colors. The later Doji Design System 1.0 migration supersedes its original atmosphere treatment.                                                                                                                                |
 | Done        | Memerank project card                | 7, 8.1, 9.2-9.4     | -         | Adds Memerank to the four-card project grid with the requested card copy and live app link.                                                                                                                                                                                                 |
 | Done        | Current ecosystem project identities | 7, 8.1, 9.2-9.4     | -         | Adds DojiRegistry and synchronizes all five project cards to current navbar names, complete primary subtitles, canonical URLs, and revision-named light/dark logo pairs.                                                                                                                    |
+| Done        | Cross-app action affordance          | 8.1, 9.3-9.4, 13    | -         | Gives every project **Open app** link the shared trailing `ArrowUpRight`, explicit new-tab accessible name, 44px outline target, and canonical new-tab link semantics.                                                                                                                      |
 | Done        | Central Registry project submission  | 2, 5, 7, 8.4, 12-15 | -         | Static form, lazy wallet, generated contract, digest-bound recovery wire, static 404, narrow gateway, environment-isolated Worker type generation, and audited build dependencies are implemented. Activation remains fail closed until wallet publication.                                 |
 | Done        | Temporary chain migration lockout    | 2, 7, 8.5, 9.10, 12 | -         | Preserves the Sui implementation while making wallet, payment, recovery, submission, and public dynamic entry points inaccessible during the Robinhood Chain migration. Static portfolio content remains available.                                                                         |
 | Done        | Doji Design System 1.0 migration     | 8-9, 13, 15         | -         | Replaces legacy atmosphere and showcase exceptions with the canonical neutral canvas, raised chrome, standard Cards, text-only actions, static 404, and forced-dark social composition. Immutable source revision `5df1b9c102d9a28abc5437ed70b22fcba3b74c93` remains the released baseline. |
@@ -300,7 +301,11 @@ inside its Empty surface, not in an Alert below its trigger.
 - Do not show repository source links in the portfolio; project repositories may
   be private.
 - External links should open in a new tab and use `rel="noreferrer"`.
-- Buttons should have accessible labels that include the project name.
+- Project **Open app** links should have accessible labels that include the
+  project name and state that they open in a new tab.
+- Every button-styled link that opens another Doji app in a new tab keeps its
+  visible label first and one decorative trailing Lucide `ArrowUpRight`, while
+  preserving the ordinary 44px outline target and keyboard focus treatment.
 - Header profile links should have accessible labels that include the profile
   destination.
 - Header profile links and project live app links should stay in their natural

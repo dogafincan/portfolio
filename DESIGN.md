@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `63f3d37041511f518b55593b253dc08793486565` (committed draft; release tag pending)
+Doji Design System source revision: `6ca029d68b3832a9dcb64c2c194e06b82d258bf0` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -197,8 +197,11 @@ runtime package and no automated cross-repository mutation.
   Unequal row bottoms are expected when descriptions differ. Do not wrap the
   grid in a second card-like workbench.
 - Each project card contains one 48px current product logo, one title, one
-  complete primary-page subtitle, and—when a live URL exists—a full-width text-only
-  **Open app** footer action.
+  complete primary-page subtitle, and—when a live URL exists—a full-width
+  **Open app** outline footer action. Because it opens another Doji app in a new
+  tab, its visible label ends with one decorative Lucide `ArrowUpRight`, its
+  accessible name states the new-tab behavior, and its link preserves
+  `target="_blank"` plus `rel="noreferrer"`.
 - Cards have shared borders, radii, insets, section gaps, and no box shadows.
   Do not place a Card inside another Card.
 - A project without a live URL omits the action instead of rendering a disabled
@@ -259,8 +262,9 @@ runtime package and no automated cross-repository mutation.
 - Cards and card-like panels do not use box shadows. Modal overlays may use the
   canonical component-owned scrim, blur, and transition.
 - Text-labeled buttons and button-styled links are text-only by default.
-  Component-owned icon controls and documented brand/file exceptions retain
-  accessible names.
+  Cross-app new-tab actions are the shared exception: keep the label first and
+  one decorative Lucide `ArrowUpRight` at the inline end. Component-owned icon
+  controls and documented brand/file exceptions retain accessible names.
 - Standard controls expose a real 44px minimum width and height.
 - The global Tailwind v4 `@layer base` rule gives `a[href]`, enabled native
   buttons, and enabled `[role="button"]` controls a pointer cursor while leaving
@@ -326,8 +330,9 @@ The current migration intentionally keeps only these product-owned exceptions:
 - the Portfolio-specific home copy and project-grid content.
 
 These exceptions do not authorize new icon families, raw component colors,
-decorative backgrounds, button-label icons, card shadows, or custom control
-metrics.
+decorative backgrounds, unapproved button-label icons, card shadows, or custom
+control metrics. The shared trailing `ArrowUpRight` on a text-labeled action
+that opens another Doji app in a new tab is an approved canonical exception.
 
 ## Adoption Proof
 

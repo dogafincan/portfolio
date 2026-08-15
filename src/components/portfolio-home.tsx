@@ -8,6 +8,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { portfolioProjects, type PortfolioProject } from "@/content/projects";
 import { PORTFOLIO_PAGE_SUBTITLE, PORTFOLIO_PAGE_TITLE_ACCENT } from "@/lib/portfolio-page-copy";
+import { ArrowUpRight } from "lucide-react";
 
 function ProjectCard({
   project,
@@ -48,13 +49,14 @@ function ProjectCard({
       </CardContent>
       <CardFooter>
         <a
-          aria-label={`Open ${project.name} app`}
+          aria-label={`Open ${project.name} app (opens in a new tab)`}
           className={buttonVariants({ className: "w-full", variant: "outline" })}
           href={project.liveUrl}
           rel="noreferrer"
           target="_blank"
         >
           Open app
+          <ArrowUpRight aria-hidden="true" data-icon="inline-end" data-lucide="open-app-link" />
         </a>
       </CardFooter>
     </Card>

@@ -182,7 +182,8 @@ Expected portfolio omissions:
 - Show real project content early on the first screen.
 - Present each project with revision-named local light/dark copies of its
   current transparent product logo, the exact compact navbar name, the exact
-  complete primary-page subtitle, and a live app link. Keep the project in the
+  complete primary-page subtitle, and a live app link whose label ends with the
+  shared trailing `ArrowUpRight` new-tab affordance. Keep the project in the
   standard muted `Item` and its logo in the 48px avatar/image `ItemMedia`.
 - Keep project cards intentionally compact for now. Move role, status, stack,
   implementation highlights, and larger product visuals into future case-study

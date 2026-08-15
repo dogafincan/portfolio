@@ -121,7 +121,9 @@ describe("PortfolioHome", () => {
       const image = screen.getByAltText(project.logoAlt);
       const picture = image.closest("picture");
       const darkSource = picture?.querySelector("source");
-      const action = screen.getByRole("link", { name: `Open ${project.name} app` });
+      const action = screen.getByRole("link", {
+        name: `Open ${project.name} app (opens in a new tab)`,
+      });
 
       expect(item?.getAttribute("data-variant")).toBe("muted");
       expect(item?.className).toContain("bg-muted");
@@ -150,7 +152,11 @@ describe("PortfolioHome", () => {
       expect(action.className).toContain("w-full");
       expect(action.className).toContain("border-border");
       expect(action.className).not.toContain("bg-primary");
-      expect(action.querySelector("svg")).toBeNull();
+      const actionIcon = action.querySelector('[data-lucide="open-app-link"]');
+      expect(actionIcon).not.toBeNull();
+      expect(actionIcon?.getAttribute("data-icon")).toBe("inline-end");
+      expect(actionIcon?.getAttribute("aria-hidden")).toBe("true");
+      expect(action.lastElementChild).toBe(actionIcon);
       expect(action.textContent).toBe("Open app");
     }
 
@@ -166,7 +172,9 @@ describe("PortfolioHome", () => {
       name: `${PORTFOLIO_BADGE_LABEL} (opens in a new tab)`,
     });
     const projectLinks = portfolioProjects.map((project) =>
-      screen.getByRole("link", { name: `Open ${project.name} app` }),
+      screen.getByRole("link", {
+        name: `Open ${project.name} app (opens in a new tab)`,
+      }),
     );
 
     for (const target of [profileBadge, ...projectLinks]) {
