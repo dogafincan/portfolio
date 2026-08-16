@@ -332,7 +332,8 @@ inside its Empty surface, not in an Alert below its trigger.
 
 - Social metadata must use absolute HTTPS URLs for images.
 - The social image must be a generated checked-in 1200x630 truecolor RGB
-  `public/og.png` with a cache-busting query in `src/routes/index.tsx`.
+  `public/og.png` with `og:image:type=image/png` and a cache-busting query in
+  `src/routes/index.tsx`.
 - Generate the social image from the React/Tailwind `/og-preview` route with
   `npx vp run generate:og`. Do not add a social SVG source or dynamic request-time
   image endpoint.

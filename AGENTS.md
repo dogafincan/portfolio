@@ -149,8 +149,8 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   `public/og.png` changes, update `SITE_URL`, the `SOCIAL_IMAGE`
   cache-busting query, and `src/routes/-index.test.ts` together. Regenerate the
   image with `npx vp run generate:og`; keep it an 8-bit truecolor RGB PNG for
-  broad social-crawler compatibility, and do not add a social SVG source or
-  dynamic request-time image endpoint.
+  broad social-crawler compatibility, declare `og:image:type=image/png`, and
+  do not add a social SVG source or dynamic request-time image endpoint.
 
 ## Current Stack
 

@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `246b48ff6d8515c91c96c6e4f49cd2f7d8ed93f7` (committed draft; release tag pending)
+Doji Design System source revision: `397e71cc366dffa87487085af47a6214ba02a12e` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -330,8 +330,8 @@ runtime package and no automated cross-repository mutation.
   mockups, project cards, or request-time image generation.
 - Use semantic social alt text. Metadata uses the exact absolute HTTPS URL
   `https://dogafincan.com/og.png?v=2026081604` across Open Graph and Twitter.
-  Advance the version without reuse whenever the PNG bytes or composition
-  changes.
+  It declares `og:image:type=image/png`. Advance the version without reuse
+  whenever the PNG bytes or composition changes.
 - `scripts/generate-og.mjs` waits for fonts, uses reduced motion, verifies
   dimensions, the top offset, horizontal safe region, bottom exclusion zone and
   type floors against the shipped copy, optimizes through Sharp, and replaces
