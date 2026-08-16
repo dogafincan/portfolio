@@ -19,6 +19,7 @@ describe("OgImagePreview", () => {
     const navbar = container.querySelector('[data-slot="app-navbar"]');
     const brand = navbar?.querySelector('[data-slot="app-navbar-brand"]');
     const logo = navbar?.querySelector('[data-slot="app-navbar-logo"]');
+    const headerSection = container.querySelector('[data-slot="og-preview-header"]');
     const safeRegion = container.querySelector('[data-slot="og-preview-safe-region"]');
     const title = safeRegion?.querySelector('[data-slot="app-header-title"]');
     const accent = safeRegion?.querySelector('[data-slot="app-header-title-accent"]');
@@ -48,7 +49,10 @@ describe("OgImagePreview", () => {
     expect(logo?.className).not.toContain("rounded");
     expect(logo?.parentElement?.className).not.toContain("overflow-hidden");
 
-    expect(safeRegion?.parentElement?.className).toContain("px-16");
+    expect(headerSection?.className).toContain("px-16");
+    expect(headerSection?.className).toContain("pt-5");
+    expect(headerSection?.className).toContain("pb-24");
+    expect(safeRegion?.className).toContain("items-start");
     expect(title?.textContent).toBe(PORTFOLIO_PAGE_TITLE);
     expect(title?.className).toContain(dojiTypography.socialTitle);
     expect(title?.className).toContain("max-w-[900px]");

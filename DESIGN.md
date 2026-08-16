@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `2d4d08631c9051a93427e97a0adee8bbff82888e` (committed draft; release tag pending)
+Doji Design System source revision: `246b48ff6d8515c91c96c6e4f49cd2f7d8ed93f7` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -322,16 +322,18 @@ runtime package and no automated cross-repository mutation.
   after the complete subtitle. Do not render Connect wallet, Submit project,
   separate X or GitHub controls, or any other page-only action in the social
   composition.
-- Keep a 64px safe inset around the meaningful composition. Do not add
-  atmosphere, gradients, shadows, mockups, project cards, or request-time image
-  generation.
+- Top-align the contextual badge exactly 20px below the 112px navbar, keep the
+  64px horizontal crop-safe inset, and reserve the final 96px as a full-width
+  platform-overlay exclusion zone. Do not add atmosphere, gradients, shadows,
+  mockups, project cards, or request-time image generation.
 - Use semantic social alt text. Metadata uses the exact absolute HTTPS URL
-  `https://dogafincan.com/og.png?v=2026081401` across Open Graph and Twitter.
+  `https://dogafincan.com/og.png?v=2026081603` across Open Graph and Twitter.
   Advance the version without reuse whenever the PNG bytes or composition
   changes.
 - `scripts/generate-og.mjs` waits for fonts, uses reduced motion, verifies
-  dimensions/safe-region/type floors, optimizes through Sharp, and replaces the
-  checked-in PNG atomically.
+  dimensions, the top offset, horizontal safe region, bottom exclusion zone and
+  type floors against the shipped copy, optimizes through Sharp, and replaces
+  the checked-in PNG atomically.
 
 ## Responsive And Accessibility
 

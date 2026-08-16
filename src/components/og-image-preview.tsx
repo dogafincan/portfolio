@@ -12,11 +12,11 @@ export function OgImagePreview({ seed, title }: { seed: string; title: string })
     >
       <PortfolioNavbar variant="social" />
       <section
-        className="relative z-10 flex min-h-0 w-full flex-1 px-16"
+        className="relative z-10 flex min-h-0 w-full flex-1 px-16 pt-5 pb-24"
         data-slot="og-preview-header"
       >
         <div
-          className="flex size-full items-center justify-center"
+          className="flex size-full items-start justify-center"
           data-slot="og-preview-safe-region"
         >
           <PortfolioPageHeader

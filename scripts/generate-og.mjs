@@ -12,6 +12,8 @@ import sharp from "sharp";
 const OG_WIDTH = 1200;
 const OG_HEIGHT = 630;
 const OG_SAFE_INSET = 64;
+const OG_HEADER_TOP_GAP = 20;
+const OG_PLATFORM_OVERLAY_ZONE_HEIGHT = 96;
 const OG_REFERENCE_SCALE = 0.5;
 const SERVER_HOST = "127.0.0.1";
 const DEFAULT_START_PORT = 4173;
@@ -21,7 +23,7 @@ const repoRoot = resolve(scriptsDirectory, "..");
 const packageJson = JSON.parse(readFileSync(resolve(repoRoot, "package.json"), "utf8"));
 const outputPath = resolve(repoRoot, process.env.OG_OUTPUT_PATH?.trim() || "public/og.png");
 const temporaryOutputPath = `${outputPath}.${process.pid}.tmp`;
-const seed = process.env.OG_SEED?.trim() || `${packageJson.name}:2026081401`;
+const seed = process.env.OG_SEED?.trim() || `${packageJson.name}:2026081603`;
 const externalBaseUrl = process.env.OG_PREVIEW_BASE_URL?.replace(/\/$/, "");
 const startPort =
   Number.parseInt(process.env.OG_PREVIEW_PORT ?? "", 10) ||
@@ -115,7 +117,9 @@ async function readPreviewLayout(page) {
     };
     const preview = element("[data-og-preview]");
     return {
+      badge: text('[data-slot="badge"]'),
       brand: rect(element('[data-slot="app-navbar-brand"]')),
+      navbar: rect(element('[data-slot="app-navbar"]')),
       preview: {
         ...rect(preview),
         scrollHeight: preview.scrollHeight,
@@ -134,10 +138,23 @@ function assertPreviewLayout(layout) {
   }
   const leftInset = layout.safeRegion.left - layout.preview.left;
   const rightInset = layout.preview.right - layout.safeRegion.right;
+  const topGap = layout.safeRegion.top - layout.navbar.bottom;
+  const overlayZoneHeight = layout.preview.bottom - layout.safeRegion.bottom;
   if (Math.round(leftInset) !== OG_SAFE_INSET || Math.round(rightInset) !== OG_SAFE_INSET) {
     throw new Error(`OG safe region must keep ${OG_SAFE_INSET}px horizontal insets.`);
   }
+  if (Math.round(topGap) !== OG_HEADER_TOP_GAP) {
+    throw new Error(
+      `OG page header must begin ${OG_HEADER_TOP_GAP}px below the navbar, received ${topGap}px.`,
+    );
+  }
+  if (Math.round(overlayZoneHeight) !== OG_PLATFORM_OVERLAY_ZONE_HEIGHT) {
+    throw new Error(
+      `OG preview must reserve a ${OG_PLATFORM_OVERLAY_ZONE_HEIGHT}px bottom platform-overlay exclusion zone, received ${overlayZoneHeight}px.`,
+    );
+  }
   for (const [name, bounds] of [
+    ["badge", layout.badge],
     ["title", layout.title],
     ["subtitle", layout.subtitle],
   ]) {
@@ -161,6 +178,9 @@ function assertPreviewLayout(layout) {
   }
   if (layout.subtitle.fontSize * OG_REFERENCE_SCALE < 16) {
     throw new Error("OG subtitle is too small at the 600x315 reference size.");
+  }
+  if (layout.badge.fontSize * OG_REFERENCE_SCALE < 15) {
+    throw new Error("OG badge is too small at the 600x315 reference size.");
   }
 }
 
