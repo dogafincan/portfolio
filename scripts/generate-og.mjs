@@ -23,7 +23,7 @@ const repoRoot = resolve(scriptsDirectory, "..");
 const packageJson = JSON.parse(readFileSync(resolve(repoRoot, "package.json"), "utf8"));
 const outputPath = resolve(repoRoot, process.env.OG_OUTPUT_PATH?.trim() || "public/og.png");
 const temporaryOutputPath = `${outputPath}.${process.pid}.tmp`;
-const seed = process.env.OG_SEED?.trim() || `${packageJson.name}:2026081603`;
+const seed = process.env.OG_SEED?.trim() || `${packageJson.name}:2026081604`;
 const externalBaseUrl = process.env.OG_PREVIEW_BASE_URL?.replace(/\/$/, "");
 const startPort =
   Number.parseInt(process.env.OG_PREVIEW_PORT ?? "", 10) ||
@@ -186,7 +186,7 @@ function assertPreviewLayout(layout) {
 
 async function optimizePng(path) {
   const optimized = await sharp(path)
-    .png({ compressionLevel: 9, adaptiveFiltering: true, effort: 10 })
+    .png({ compressionLevel: 9, adaptiveFiltering: true, effort: 10, palette: false })
     .toBuffer();
   await writeFile(path, optimized);
 }
@@ -315,5 +315,12 @@ function assertPngSize(path) {
   const height = image.readUInt32BE(20);
   if (width !== OG_WIDTH || height !== OG_HEIGHT) {
     throw new Error(`Generated OG image is ${width}x${height}, expected ${OG_WIDTH}x${OG_HEIGHT}.`);
+  }
+
+  const colorType = image.readUInt8(25);
+  if (colorType !== 2) {
+    throw new Error(
+      `Generated OG image must be an 8-bit truecolor PNG, received color type ${colorType}.`,
+    );
   }
 }

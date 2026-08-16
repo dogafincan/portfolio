@@ -315,7 +315,9 @@ runtime package and no automated cross-repository mutation.
 
 ## Social Preview
 
-- `public/og.png` is a checked-in 1200×630 PNG generated from `/og-preview`.
+- `public/og.png` is a checked-in 1200×630, 8-bit truecolor RGB PNG generated
+  from `/og-preview`; do not palette-index the final social asset because X's
+  card image pipeline does not ingest the indexed output consistently.
 - The preview is forced dark and composed from the real social navbar and real
   Portfolio page-header components.
 - Keep the **Follow Doga Fincan on X** contextual badge above the title and end
@@ -327,7 +329,7 @@ runtime package and no automated cross-repository mutation.
   platform-overlay exclusion zone. Do not add atmosphere, gradients, shadows,
   mockups, project cards, or request-time image generation.
 - Use semantic social alt text. Metadata uses the exact absolute HTTPS URL
-  `https://dogafincan.com/og.png?v=2026081603` across Open Graph and Twitter.
+  `https://dogafincan.com/og.png?v=2026081604` across Open Graph and Twitter.
   Advance the version without reuse whenever the PNG bytes or composition
   changes.
 - `scripts/generate-og.mjs` waits for fonts, uses reduced motion, verifies

@@ -17,6 +17,8 @@ describe("index route head", () => {
     expect(source).toContain('property: "og:description"');
     expect(source).toContain('property: "og:image"');
     expect(source).toContain('property: "og:image:secure_url"');
+    expect(source).toContain('property: "og:image:type"');
+    expect(source).toContain('content: "image/png"');
     expect(source).toContain("content: SOCIAL_IMAGE");
     expect(source).toContain('property: "og:image:width"');
     expect(source).toContain('content: "1200"');
@@ -45,7 +47,7 @@ describe("index route head", () => {
     expect(siteUrlMatch?.[1]).toBe("https://dogafincan.com");
     expect(socialImageMatch?.[1]).toMatch(/^\/og\.png\?v=\d+$/);
     expect(new URL(`${siteUrlMatch?.[1]}${socialImageMatch?.[1]}`).href).toBe(
-      "https://dogafincan.com/og.png?v=2026081603",
+      "https://dogafincan.com/og.png?v=2026081604",
     );
     expect(source).toContain(
       "Doga Fincan social preview reading Explore the useful products I’m building, with I’m building highlighted in blue and a Follow Doga Fincan on X badge.",
@@ -56,6 +58,8 @@ describe("index route head", () => {
     expect(ogImage.subarray(0, 8).toString("hex")).toBe("89504e470d0a1a0a");
     expect(ogImage.readUInt32BE(16)).toBe(1200);
     expect(ogImage.readUInt32BE(20)).toBe(630);
+    expect(ogImage.readUInt8(24)).toBe(8);
+    expect(ogImage.readUInt8(25)).toBe(2);
     expect(existsSync(new URL("../../public/og.svg", import.meta.url))).toBe(false);
   });
 });

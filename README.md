@@ -194,8 +194,9 @@ Design principles that should remain visible in day-to-day work:
 ## Social Preview
 
 The `/` route declares Open Graph and X/Twitter Card metadata in
-`src/routes/index.tsx`. The social image is `public/og.png`, a generated
-checked-in 1200x630 PNG from the React/Tailwind `/og-preview` route.
+`src/routes/index.tsx`. The social image is `public/og.png`, a generated,
+checked-in 1200x630 truecolor RGB PNG from the React/Tailwind `/og-preview`
+route.
 Regenerate it with `npx vp run generate:og`; do not add a social SVG source or
 dynamic request-time image endpoint.
 
