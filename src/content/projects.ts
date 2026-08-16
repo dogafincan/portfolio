@@ -13,7 +13,7 @@ export const portfolioProjects: PortfolioProject[] = [
     name: "Doji Rank",
     slug: "memerank",
     subtitle:
-      "Explore approved Sui projects ranked by relative trading activity on Doji Rank, then review each project or open its built-in wallet trade flow.",
+      "Explore approved projects ranked by relative trading activity on Doji Rank, then review each project or open its built-in wallet trade flow directly.",
     logoLight: "/projects/doji-memerank-logo-light-2ce5e89.png",
     logoDark: "/projects/doji-memerank-logo-dark-2ce5e89.png",
     logoAlt: "Doji Rank logo.",
@@ -23,7 +23,7 @@ export const portfolioProjects: PortfolioProject[] = [
     name: "Doji Swap",
     slug: "sui-swap",
     subtitle:
-      "Choose two Registry-approved Sui coins, enter the amount you want to spend or receive, review the live route, then approve the swap in your wallet.",
+      "Choose two approved assets, review the live route, compare the expected amounts, and complete the swap directly with your connected wallet.",
     logoLight: "/projects/doji-swap-logo-light-3eda353.png",
     logoDark: "/projects/doji-swap-logo-dark-3eda353.png",
     logoAlt: "Doji Swap logo.",
@@ -33,7 +33,7 @@ export const portfolioProjects: PortfolioProject[] = [
     name: "Doji Drop",
     slug: "sui-airdrop",
     subtitle:
-      "Upload a Sui Snapshot CSV, choose the coin and amount for each wallet, review every recipient, then approve one funding transaction and track delivery.",
+      "Upload a holder snapshot CSV, choose the asset and amount for each wallet, review every recipient, then approve one funding transaction and track delivery.",
     logoLight: "/projects/doji-airdrop-logo-light-141d1b3.png",
     logoDark: "/projects/doji-airdrop-logo-dark-141d1b3.png",
     logoAlt: "Doji Drop logo.",
@@ -43,7 +43,7 @@ export const portfolioProjects: PortfolioProject[] = [
     name: "Doji Snap",
     slug: "sui-snapshot",
     subtitle:
-      "Choose an approved Sui coin or NFT project, pay its published SUI price, then let Doji Snap build a complete ranked holder CSV in the background.",
+      "Choose an approved project, complete its published payment, then let Doji Snap build a complete ranked holder CSV in the background for review and export.",
     logoLight: "/projects/dojisnap-logo-light-17fd090.png",
     logoDark: "/projects/dojisnap-logo-dark-17fd090.png",
     logoAlt: "Doji Snap logo.",

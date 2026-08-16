@@ -11,7 +11,7 @@ export function isValidSuiAddress(value: string) {
 export function normalizeSuiAddress(value: string) {
   const match = value.trim().match(SUI_ADDRESS_PATTERN);
   if (!match) {
-    throw new Error("Invalid Sui address.");
+    throw new Error("Invalid wallet address.");
   }
   return `0x${match[1].toLowerCase().padStart(64, "0")}`;
 }

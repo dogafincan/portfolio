@@ -61,7 +61,7 @@ function WalletRuntime() {
         async signAndExecutePayment(terms) {
           const accountAddress = connection.account?.address;
           if (!accountAddress) {
-            throw new Error("Connect a Sui wallet before paying.");
+            throw new Error("Connect a compatible wallet before paying.");
           }
           const transaction = buildProjectSubmissionPaymentTransaction({
             senderAddress: accountAddress,
@@ -69,7 +69,7 @@ function WalletRuntime() {
           });
           const result = await dAppKit.signAndExecuteTransaction({ transaction });
           if (result.$kind === "FailedTransaction") {
-            throw new Error("The Sui payment did not complete.");
+            throw new Error("The payment did not complete.");
           }
           return result.Transaction.digest;
         },
@@ -120,7 +120,7 @@ function WalletRuntime() {
         ref={chooserSurfaceRef}
       >
         <DrawerHeader className="p-(--ds-surface-inset) pb-0">
-          <DrawerTitle>Connect a Sui wallet</DrawerTitle>
+          <DrawerTitle>Connect a wallet</DrawerTitle>
           <DrawerDescription>
             Choose a mainnet wallet. Portfolio never asks for a recovery phrase or private key.
           </DrawerDescription>
@@ -128,7 +128,7 @@ function WalletRuntime() {
 
         <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto overscroll-y-none px-(--ds-surface-inset) py-6">
           {wallets.length > 0 ? (
-            <div aria-label="Available Sui wallets" className="flex flex-col gap-2">
+            <div aria-label="Available wallets" className="flex flex-col gap-2">
               {wallets.map((availableWallet) => (
                 <Button
                   className="w-full"
@@ -150,7 +150,7 @@ function WalletRuntime() {
                 </EmptyMedia>
                 <EmptyTitle>No compatible wallet found</EmptyTitle>
                 <EmptyDescription>
-                  Install or enable a Sui wallet in this browser, then try again.
+                  Install or enable a compatible wallet in this browser, then try again.
                 </EmptyDescription>
               </EmptyHeader>
             </Empty>

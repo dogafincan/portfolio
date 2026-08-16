@@ -69,13 +69,13 @@ export function DojiWalletProvider({ children }: { children: ReactNode }) {
       reportRuntimeConnection: setRuntime,
       signAndExecutePayment: async (terms) => {
         if (!runtime.actions) {
-          throw new Error("Connect a Sui wallet before paying.");
+          throw new Error("Connect a compatible wallet before paying.");
         }
         return runtime.actions.signAndExecutePayment(terms);
       },
       signPersonalMessage: async (message) => {
         if (!runtime.actions) {
-          throw new Error("Connect a Sui wallet before signing.");
+          throw new Error("Connect a compatible wallet before signing.");
         }
         return runtime.actions.signPersonalMessage(message);
       },

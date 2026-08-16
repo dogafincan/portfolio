@@ -66,9 +66,14 @@ Relevant shared guidance:
 - Reuse a sibling implementation only as evidence of the canonical pattern and
   keep product boundaries explicit.
 - Prefer the local canonical primitives before inventing new ones.
-  The central Doji project-submission flow is the one deliberate Sui workflow
+  The central Doji project-submission flow is the one deliberate chain workflow
   in this repo; snapshot, airdrop, swap, and Memerank-specific behavior remains
   in the apps that own it.
+
+Visitor-facing project names and subtitles are copied exactly from each app's
+current public header and remain blockchain-neutral while the destination-chain
+product contract is unresolved. Retained implementation details and stable
+technical identifiers may remain Sui-specific until migration.
 
 ## Current Stack
 

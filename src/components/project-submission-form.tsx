@@ -367,7 +367,7 @@ export function ProjectSubmissionForm({
     }
     const digest = recoveryDigest.trim();
     if (!isValidSuiTransactionDigest(digest)) {
-      setRecoveryError("Enter a valid Sui transaction digest.");
+      setRecoveryError("Enter a valid transaction digest.");
       return;
     }
     setRecoveryError(null);
@@ -391,8 +391,8 @@ export function ProjectSubmissionForm({
           <CardHeader>
             <CardTitle>Project details</CardTitle>
             <CardDescription>
-              Enter one Sui asset manually. Its project details and image stay in this page until a
-              10 SUI payment has completed.
+              Enter one asset manually. Its project details and image stay in this page until the
+              submission payment has completed.
             </CardDescription>
           </CardHeader>
 
@@ -400,13 +400,13 @@ export function ProjectSubmissionForm({
             <FieldGroup className="gap-3">
               <TextField
                 autoComplete="off"
-                description="Use the complete 0xpackage::module::TypeName. An administrator assigns coin or NFT during review."
+                description="Use the complete asset identifier. An administrator assigns the asset kind during review."
                 error={errors.assetType}
-                label="Sui asset type"
+                label="Asset identifier"
                 name="assetType"
                 onBlur={() => validateField("assetType")}
                 onChange={(value) => updateField("assetType", value)}
-                placeholder="0x2::sui::SUI"
+                placeholder="Enter the complete asset identifier"
                 required
                 value={values.assetType}
               />
@@ -556,12 +556,12 @@ export function ProjectSubmissionForm({
               <ItemContent>
                 <ItemTitle>One submission across every Doji app</ItemTitle>
                 <ItemDescription>
-                  Pay 10 SUI for one asset. Redeem within seven days; unused rights are recoverable
-                  for 90 days, but expiry is not refunded. Rejections refund 10 SUI, excluding Sui
-                  network fees.
+                  One submission fee covers one asset. Redeem within seven days; unused rights are
+                  recoverable for 90 days, but expiry is not refunded. Rejections refund the
+                  submission fee, excluding network fees.
                 </ItemDescription>
               </ItemContent>
-              <Badge>10 SUI</Badge>
+              <Badge>Submission fee</Badge>
             </Item>
           </CardContent>
 
@@ -569,7 +569,7 @@ export function ProjectSubmissionForm({
             {migrationLocked ? (
               <div className="flex flex-col gap-3" data-slot="project-submission-actions">
                 <Button type="submit" variant="outline">
-                  Pay 10 SUI
+                  Pay submission fee
                 </Button>
                 <Button type="button" variant="outline">
                   Recover payment
@@ -590,7 +590,7 @@ export function ProjectSubmissionForm({
                   disabled={!paymentEnabled}
                   type="submit"
                 >
-                  Pay 10 SUI
+                  Pay submission fee
                 </Button>
                 <Button
                   disabled={!recoveryEnabled}
@@ -621,7 +621,7 @@ export function ProjectSubmissionForm({
             <DialogHeader>
               <DialogTitle>Recover a project payment</DialogTitle>
               <DialogDescription>
-                Re-enter the project details and image, then provide the original 10 SUI payment
+                Re-enter the project details and image, then provide the original submission payment
                 digest. The paying wallet must sign a fresh recovery message.
               </DialogDescription>
             </DialogHeader>
@@ -635,7 +635,7 @@ export function ProjectSubmissionForm({
                   setRecoveryDigest(event.target.value);
                   setRecoveryError(null);
                 }}
-                placeholder="Sui transaction digest"
+                placeholder="Transaction digest"
                 value={recoveryDigest}
               />
               {recoveryError ? (

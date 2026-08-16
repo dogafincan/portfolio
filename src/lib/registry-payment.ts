@@ -97,7 +97,7 @@ function encodeBase64Url(bytes: Uint8Array) {
 
 function normalizeAddress(value: string) {
   if (!isValidSuiAddress(value)) {
-    throw new Error("Invalid Sui address.");
+    throw new Error("Invalid wallet address.");
   }
   return normalizeSuiAddress(value);
 }

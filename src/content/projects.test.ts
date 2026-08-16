@@ -20,28 +20,28 @@ describe("portfolioProjects", () => {
         slug: "memerank",
         name: "Doji Rank",
         subtitle:
-          "Explore approved Sui projects ranked by relative trading activity on Doji Rank, then review each project or open its built-in wallet trade flow.",
+          "Explore approved projects ranked by relative trading activity on Doji Rank, then review each project or open its built-in wallet trade flow directly.",
         liveUrl: "https://dojirank.com",
       },
       {
         slug: "sui-swap",
         name: "Doji Swap",
         subtitle:
-          "Choose two Registry-approved Sui coins, enter the amount you want to spend or receive, review the live route, then approve the swap in your wallet.",
+          "Choose two approved assets, review the live route, compare the expected amounts, and complete the swap directly with your connected wallet.",
         liveUrl: "https://sui-swap.dogafincan.workers.dev",
       },
       {
         slug: "sui-airdrop",
         name: "Doji Drop",
         subtitle:
-          "Upload a Sui Snapshot CSV, choose the coin and amount for each wallet, review every recipient, then approve one funding transaction and track delivery.",
+          "Upload a holder snapshot CSV, choose the asset and amount for each wallet, review every recipient, then approve one funding transaction and track delivery.",
         liveUrl: "https://dojidrop.xyz",
       },
       {
         slug: "sui-snapshot",
         name: "Doji Snap",
         subtitle:
-          "Choose an approved Sui coin or NFT project, pay its published SUI price, then let Doji Snap build a complete ranked holder CSV in the background.",
+          "Choose an approved project, complete its published payment, then let Doji Snap build a complete ranked holder CSV in the background for review and export.",
         liveUrl: "https://dojisnap.xyz",
       },
       {

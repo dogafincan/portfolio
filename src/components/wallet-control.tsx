@@ -51,7 +51,7 @@ export function WalletControl() {
           <DrawerHeader className="p-(--ds-surface-inset) pb-0">
             <DrawerTitle>Connect wallet</DrawerTitle>
             <DrawerDescription>
-              Wallet connections are paused during the chain migration.
+              Wallet connections are paused during the infrastructure migration.
             </DrawerDescription>
           </DrawerHeader>
 

@@ -82,7 +82,7 @@ describe("ProjectSubmissionFlow", () => {
     );
     await enterValidProject();
 
-    fireEvent.click(screen.getByRole("button", { name: "Pay 10 SUI" }));
+    fireEvent.click(screen.getByRole("button", { name: "Pay submission fee" }));
 
     expect(await screen.findByText("Image processing limit reached")).toBeTruthy();
     expect(document.body.textContent).toContain("all three image-processing attempts");
@@ -109,7 +109,7 @@ describe("ProjectSubmissionFlow", () => {
     };
     const { container } = render(<ProjectSubmissionFlow api={api} configuration={CONFIGURATION} />);
 
-    const pay = screen.getByRole("button", { name: "Pay 10 SUI" });
+    const pay = screen.getByRole("button", { name: "Pay submission fee" });
     const recover = screen.getByRole("button", { name: "Recover payment" });
     expect(pay.hasAttribute("disabled")).toBe(false);
     expect(recover.hasAttribute("disabled")).toBe(false);
@@ -133,7 +133,7 @@ describe("ProjectSubmissionFlow", () => {
     expect(
       Array.from(content?.querySelectorAll("label") ?? []).map((label) => label.textContent),
     ).toEqual([
-      "Sui asset type",
+      "Asset identifier",
       "Project name",
       "Short description",
       "Ticker",
@@ -150,7 +150,7 @@ describe("ProjectSubmissionFlow", () => {
   it("documents the project and asset selector migration drawer as not applicable", () => {
     const { container } = render(<ProjectSubmissionFlow configuration={CONFIGURATION} />);
 
-    expect(screen.getByLabelText("Sui asset type").tagName).toBe("INPUT");
+    expect(screen.getByLabelText("Asset identifier").tagName).toBe("INPUT");
     expect(screen.queryByRole("combobox")).toBeNull();
     expect(screen.queryByRole("listbox")).toBeNull();
     expect(container.querySelector('[data-slot="drawer-trigger"]')).toBeNull();
@@ -174,7 +174,7 @@ function WalletRuntime() {
 }
 
 async function enterValidProject() {
-  fireEvent.change(screen.getByLabelText("Sui asset type"), {
+  fireEvent.change(screen.getByLabelText("Asset identifier"), {
     target: { value: "0x2::sui::SUI" },
   });
   fireEvent.change(screen.getByLabelText("Project name"), {

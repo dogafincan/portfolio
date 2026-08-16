@@ -15,7 +15,7 @@ export function ProjectSubmissionPage() {
               Submit once, <span className="text-page-title-accent">publish everywhere</span>
             </>
           }
-          subtitle="Prepare one Sui project locally, connect your wallet only when you are ready, and pay the shared 10 SUI Registry fee to submit it across every Doji app."
+          subtitle="Prepare one project locally, connect your wallet only when you are ready, and use the shared submission payment when payments return."
         />
         <ProjectSubmissionFlow />
       </main>

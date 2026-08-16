@@ -17,7 +17,7 @@ export function buildProjectSubmissionPaymentTransaction(input: {
   }
   const amountMist = validatePositiveU64Mist(input.terms.amountMist);
   if (amountMist !== PROJECT_SUBMISSION_FEE_MIST) {
-    throw new Error("The project submission fee must be exactly 10 SUI.");
+    throw new Error("The project submission fee does not match the configured amount.");
   }
 
   const transaction = new Transaction();

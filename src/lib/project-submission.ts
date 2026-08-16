@@ -75,15 +75,15 @@ export function validateAssetType(value: string): ValidationResult<string> {
     trimmed.length > PROJECT_SUBMISSION_LIMITS.assetTypeMaxCharacters ||
     !isValidStructTag(trimmed)
   ) {
-    return invalid("Enter a full Sui Move type in 0xpackage::module::TypeName format.");
+    return invalid("Enter the complete valid asset identifier.");
   }
   try {
     const normalized = normalizeStructTag(parseStructTag(trimmed));
     return normalized.length <= PROJECT_SUBMISSION_LIMITS.assetTypeMaxCharacters
       ? { ok: true, value: normalized }
-      : invalid("Enter a full Sui Move type in 0xpackage::module::TypeName format.");
+      : invalid("Enter the complete valid asset identifier.");
   } catch {
-    return invalid("Enter a full Sui Move type in 0xpackage::module::TypeName format.");
+    return invalid("Enter the complete valid asset identifier.");
   }
 }
 

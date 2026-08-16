@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `773c6d8fac5850937b4cf00bb8a80b3347bd8956` (committed draft; release tag pending)
+Doji Design System source revision: `a215d25cd5b9f415e1143243e82fede1acd37a25` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -12,6 +12,16 @@ complete description rendering, a concise Alert/Item description target,
 progressive informational-Item disclosure, and the connect-wallet Drawer
 contract, and remains `migrating` until an immutable
 source revision and local proof exist.
+
+During the unresolved infrastructure migration, every visitor-facing string
+stays blockchain-neutral. This includes headers, forms, fees, actions, alerts,
+Empty states, validation and recovery messages, metadata, manifests, social
+images, static recovery, deployment smoke expectations, and Portfolio project
+descriptions. Public copy must not name the departing or prospective chain,
+token denomination, chain-specific identifier format, provider, or transaction
+mechanism. Stable repository, package, Worker, route, schema, environment,
+provider, and retained implementation identifiers remain technically accurate
+and are not renamed for this copy change.
 
 Every local Card keeps 24px (`gap-6`) between each present header, content,
 and footer section at every size. `CardContent` is shrink-safe but natural-height
@@ -31,12 +41,12 @@ second, and the canonical skill third. Canonical changes are synchronized by a
 manual skill run after each accepted design-system change; there is no shared
 runtime package and no automated cross-repository mutation.
 
-## Temporary Chain Migration Lockout
+## Temporary Infrastructure Migration Lockout
 
-- Portfolio's Sui-dependent wallet, payment, recovery, submission, and public
-  dynamic API behavior is temporarily unavailable while Doji migrates from Sui
-  to Robinhood Chain. This is a reversible access lock; keep the existing Sui
-  implementation intact for the later chain migration.
+- Portfolio's network-dependent wallet, payment, recovery, submission, and
+  public dynamic API behavior is temporarily unavailable while Doji completes
+  an infrastructure migration. This is a reversible access lock; keep the
+  retained implementation intact for the later technical migration.
 - Keep genuinely static routes, portfolio content, profile links, and live app
   links available.
 - Portfolio page headers intentionally expose neither **Connect wallet** nor
@@ -45,7 +55,7 @@ runtime package and no automated cross-repository mutation.
 - `/submit` keeps the complete shared field order, local image selection,
   validation and preview, and one fee-and-recovery Item usable without network
   access. CardContent contains no migration Empty or Alert.
-- The ordinary **Pay 10 SUI** and **Recover payment** form actions retain their
+- The ordinary **Pay submission fee** and **Recover payment** form actions retain their
   labels and enabled visual/focus behavior without the `disabled` attribute.
   They are inert during the lockout, never validate, open recovery, connect,
   sign, request, or mutate, and own one persistent informational Doji Alert
@@ -247,7 +257,7 @@ runtime package and no automated cross-repository mutation.
   40 million decoded pixels. Preview remains local and uses a muted Item.
 - **Remove image** may keep its Trash icon as the documented destructive
   file-control exception. Ordinary text actions remain text-only.
-- One fee disclosure Item identifies a 10 SUI submission across every Doji app
+- One fee disclosure Item identifies the submission fee across every Doji app
   and combines the seven-day redemption, 90-day recovery, expiry, and
   rejection-refund terms. Payment and recovery actions stay together, with
   action-owned feedback after the complete cluster.

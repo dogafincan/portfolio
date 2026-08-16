@@ -35,7 +35,7 @@ describe("WalletActionButton", () => {
 
     expect(await screen.findByText("Wallet connections are temporarily unavailable")).toBeTruthy();
     expect(screen.getByText(CHAIN_MIGRATION_DESCRIPTION)).toBeTruthy();
-    expect(screen.queryByLabelText("Available Sui wallets")).toBeNull();
+    expect(screen.queryByLabelText("Available wallets")).toBeNull();
     expect(screen.queryByRole("button", { name: /wallet$/iu })).toBeNull();
     expect(document.querySelector("[data-chain-migration-alert]")).toBeNull();
 
