@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `e763d9885db15249ef8ab8910a79a0b81c3629cd` (committed draft; release tag pending)
+Doji Design System source revision: `2d4d08631c9051a93427e97a0adee8bbff82888e` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -109,6 +109,10 @@ runtime package and no automated cross-repository mutation.
   the Card background in light mode and retain the page background in dark
   mode. The Item primitive owns both roles; call sites do not add local
   background utilities, and every non-Item muted surface stays on `--muted`.
+- The same primitive keeps each muted project Item's title and complete
+  subtitle on `--foreground` in both schemes. Default and outline Item
+  descriptions remain on `--muted-foreground`; this scoped rule does not
+  recolor actions, badges, or other separately styled metadata.
 - Respect system light and dark modes. Do not add a theme switch without a
   separate product decision.
 - Use the solid neutral page field and raised app chrome. Do not add page

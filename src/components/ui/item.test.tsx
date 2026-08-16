@@ -46,6 +46,7 @@ describe("Item", () => {
     const item = container.querySelector('[data-slot="item"]');
 
     expect(item?.className).toContain("bg-item-muted");
+    expect(item?.className).toContain("[&_[data-slot=item-description]]:text-foreground");
     expect(item?.className).toContain("focus-visible:ring-focus-ring");
     expect(item?.className.split(/\s+/)).not.toContain("bg-muted");
     expect(item?.className).not.toContain("bg-muted/50");
@@ -94,6 +95,7 @@ describe("Item", () => {
     expect(itemTitle?.className).toContain("tracking-[-0.01em]");
     expect(itemDescription?.className).toContain("whitespace-normal");
     expect(itemDescription?.className).toContain("break-words");
+    expect(itemDescription?.className).toContain("text-muted-foreground");
     expect(itemDescription?.className).not.toMatch(DESCRIPTION_CUTOFF_UTILITY);
     expect(itemDescription?.className).toContain("text-base");
     expect(itemDescription?.className).toContain("leading-6");
