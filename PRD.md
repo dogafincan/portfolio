@@ -278,6 +278,9 @@ inside its Empty surface, not in an Alert below its trigger.
 - Project names match the corresponding app's compact current navbar name.
   Project subtitles copy the complete primary-page subtitle verbatim from the
   same immutable source revision; Portfolio does not shorten or paraphrase it.
+  Source apps own end-user-first wording that leads with the intended person's
+  outcome, useful signal, and next action while keeping internal mechanics
+  secondary and material qualifiers truthful.
 - Current project-card order is Doji Rank, Doji Swap, Doji Drop, Doji Snap,
   and Doji Registry.
 - Do not list the portfolio website as one of its own projects.

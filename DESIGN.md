@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `a215d25cd5b9f415e1143243e82fede1acd37a25` (committed draft; release tag pending)
+Doji Design System source revision: `e9f387e9bb0f1d1dca3d370f075fd084e9f77e31` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -10,8 +10,10 @@ repository. Runtime components remain local to this repository. The released
 baseline remains immutable `v1.0.0`; the active manual `1.0.1-draft` run adds
 complete description rendering, a concise Alert/Item description target,
 progressive informational-Item disclosure, and the connect-wallet Drawer
-contract, and remains `migrating` until an immutable
-source revision and local proof exist.
+contract. It also requires end-user-first primary copy that leads with the
+intended person's outcome, decision, useful signal, and next action while
+keeping internal mechanics secondary and truthful qualifiers visible. Adoption
+remains `migrating` until an immutable source revision and local proof exist.
 
 During the unresolved infrastructure migration, every visitor-facing string
 stays blockchain-neutral. This includes headers, forms, fees, actions, alerts,
@@ -225,7 +227,10 @@ runtime package and no automated cross-repository mutation.
 - A project title is the exact compact app name shown in that app's current
   navbar, not its page title or a legacy product name. The subtitle is copied
   verbatim from the app's current primary page header; do not shorten or
-  paraphrase it for Portfolio.
+  paraphrase it for Portfolio. The source app owns end-user-first wording that
+  leads with its audience's outcome, useful signal, and next action; Portfolio
+  preserves that product voice instead of replacing it with implementation-led
+  directory copy.
 - Product logos remain checked-in static assets under `public/projects/` as
   revision-named light/dark pairs. Render the pair with `picture`: the dark
   source responds to `prefers-color-scheme: dark`, and the light image is the

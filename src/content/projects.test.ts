@@ -20,7 +20,7 @@ describe("portfolioProjects", () => {
         slug: "memerank",
         name: "Doji Rank",
         subtitle:
-          "Explore approved projects ranked by relative trading activity on Doji Rank, then review each project or open its built-in wallet trade flow directly.",
+          "Discover the approved projects drawing the most trading activity on Doji Rank, spot useful signals in the ranked list, and trade your picks in one place.",
         liveUrl: "https://dojirank.com",
       },
       {

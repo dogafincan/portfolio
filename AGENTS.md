@@ -37,7 +37,10 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   source/config files that exist.
 - Keep visitor-facing project names and subtitles synchronized exactly with the
   source apps and blockchain-neutral while the destination-chain product
-  contract is unresolved. Stable technical identifiers may remain Sui-specific.
+  contract is unresolved. Source-app primary copy leads with its intended
+  user's outcome, useful signal, and next action; Portfolio preserves that exact
+  copy rather than substituting implementation-led summaries. Stable technical
+  identifiers may remain Sui-specific.
 - Before UI, copy, layout, icon, responsive, state, 404, or social-preview
   work, read the canonical design-system skill completely and then
   `DESIGN.md`. Product behavior remains local; shared visual policy comes from

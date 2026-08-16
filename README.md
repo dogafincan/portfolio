@@ -72,8 +72,11 @@ Relevant shared guidance:
 
 Visitor-facing project names and subtitles are copied exactly from each app's
 current public header and remain blockchain-neutral while the destination-chain
-product contract is unresolved. Retained implementation details and stable
-technical identifiers may remain Sui-specific until migration.
+product contract is unresolved. Each source subtitle is written for its intended
+user, leading with the outcome, useful signal, and next action rather than
+internal mechanics; Portfolio preserves that wording verbatim. Retained
+implementation details and stable technical identifiers may remain Sui-specific
+until migration.
 
 ## Current Stack
 

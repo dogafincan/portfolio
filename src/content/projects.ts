@@ -13,7 +13,7 @@ export const portfolioProjects: PortfolioProject[] = [
     name: "Doji Rank",
     slug: "memerank",
     subtitle:
-      "Explore approved projects ranked by relative trading activity on Doji Rank, then review each project or open its built-in wallet trade flow directly.",
+      "Discover the approved projects drawing the most trading activity on Doji Rank, spot useful signals in the ranked list, and trade your picks in one place.",
     logoLight: "/projects/doji-memerank-logo-light-2ce5e89.png",
     logoDark: "/projects/doji-memerank-logo-dark-2ce5e89.png",
     logoAlt: "Doji Rank logo.",
