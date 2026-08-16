@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `e9f387e9bb0f1d1dca3d370f075fd084e9f77e31` (committed draft; release tag pending)
+Doji Design System source revision: `e763d9885db15249ef8ab8910a79a0b81c3629cd` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -104,11 +104,11 @@ runtime package and no automated cross-repository mutation.
   role owns warning alerts, amber badges, warning buttons and controls, and all
   other amber status text. It resolves to `oklch(0.7 0.1991 64.279999)` in
   light mode and `oklch(0.72 0.1991 64.28)` in dark mode.
-- The resting muted `Item` alone uses `oklab(0.985 0 0)` in light mode and the
-  unchanged muted role in dark mode. Avatar/image `ItemMedia` containers match
+- The resting muted `Item` alone uses `oklab(0.985 0 0)` in light mode and
+  `oklch(0.16 0 0)` in dark mode. Avatar/image `ItemMedia` containers match
   the Card background in light mode and retain the page background in dark
   mode. The Item primitive owns both roles; call sites do not add local
-  background utilities, and every non-Item muted surface stays unchanged.
+  background utilities, and every non-Item muted surface stays on `--muted`.
 - Respect system light and dark modes. Do not add a theme switch without a
   separate product decision.
 - Use the solid neutral page field and raised app chrome. Do not add page

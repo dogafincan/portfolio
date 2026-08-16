@@ -238,7 +238,7 @@
   --secondary: var(--muted);
   --secondary-foreground: var(--ds-gray-1000);
   --muted: light-dark(oklab(0.98 0 0), oklch(0.17 0 0));
-  --item-muted: light-dark(oklab(0.985 0 0), var(--muted));
+  --item-muted: light-dark(oklab(0.985 0 0), oklch(0.16 0 0));
   --item-avatar-background: light-dark(var(--card), var(--background));
   --muted-foreground: light-dark(oklch(31% 0 0), oklch(83% 0 0));
   --quiet-foreground: var(--ds-gray-900);
