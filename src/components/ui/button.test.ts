@@ -21,7 +21,7 @@ describe("button variants", () => {
     expect(primary).not.toContain("--button-primary");
   });
 
-  it("keeps ordinary secondary actions on the outlined blue hierarchy", () => {
+  it("keeps ordinary secondary actions on the neutral outline hierarchy", () => {
     const outline = buttonVariants({ variant: "outline" });
     const secondary = buttonVariants({ variant: "secondary" });
     const ghost = buttonVariants({ variant: "ghost" });
@@ -33,7 +33,8 @@ describe("button variants", () => {
     expect(outline).not.toContain("bg-card");
     expect(outline).not.toContain("dark:bg-transparent");
     expect(outline).toContain("bg-transparent");
-    expect(outline).toContain("text-info-foreground");
+    expect(outline).toContain("text-foreground");
+    expect(outline).not.toContain("text-info-foreground");
     expect(outline).toContain("hover:bg-muted");
     expect(outline).toContain("active:bg-control-active");
     expect(secondary).toContain("bg-secondary");
@@ -44,34 +45,40 @@ describe("button variants", () => {
     expect(destructive).toContain("hover:bg-destructive-strong-hover");
   });
 
-  it("provides filled and outlined semantic status pairs", () => {
+  it("provides filled semantic actions and alert-matched muted tones", () => {
     const success = buttonVariants({ variant: "success" });
-    const successOutline = buttonVariants({ variant: "success-outline" });
+    const infoMuted = buttonVariants({ variant: "info-muted" });
     const warning = buttonVariants({ variant: "warning" });
-    const warningOutline = buttonVariants({ variant: "warning-outline" });
+    const warningMuted = buttonVariants({ variant: "warning-muted" });
     const destructive = buttonVariants({ variant: "destructive" });
-    const destructiveOutline = buttonVariants({ variant: "destructive-outline" });
+    const destructiveMuted = buttonVariants({ variant: "destructive-muted" });
 
     expect(success).toContain("bg-success-strong");
     expect(success).toContain("text-success-strong-foreground");
     expect(success).toContain("active:bg-success-strong-active");
-    expect(successOutline).toContain("border-border");
-    expect(successOutline).toContain("text-success-foreground");
-    expect(successOutline).toContain("hover:bg-muted");
-    expect(successOutline).not.toContain("border-transparent");
+    expect(infoMuted).toContain("border-transparent");
+    expect(infoMuted).toContain("bg-info");
+    expect(infoMuted).toContain("text-info-foreground");
+    expect(infoMuted).toContain("hover:bg-control-info-hover");
+    expect(infoMuted).toContain("active:bg-control-info-active");
+    expect(infoMuted).not.toContain("border-border");
     expect(warning).toContain("bg-warning-strong");
     expect(warning).toContain("text-warning-strong-foreground");
     expect(warning).toContain("active:bg-warning-strong-active");
-    expect(warningOutline).toContain("border-border");
-    expect(warningOutline).toContain("text-warning-foreground");
-    expect(warningOutline).toContain("active:bg-control-active");
-    expect(warningOutline).not.toContain("border-transparent");
+    expect(warningMuted).toContain("border-transparent");
+    expect(warningMuted).toContain("bg-warning");
+    expect(warningMuted).toContain("text-warning-foreground");
+    expect(warningMuted).toContain("hover:bg-warning-hover");
+    expect(warningMuted).toContain("active:bg-warning-active");
+    expect(warningMuted).not.toContain("border-border");
     expect(destructive).toContain("bg-destructive-strong");
     expect(destructive).toContain("active:bg-destructive-strong-active");
-    expect(destructiveOutline).toContain("border-border");
-    expect(destructiveOutline).toContain("text-destructive-foreground");
-    expect(destructiveOutline).toContain("active:bg-control-active");
-    expect(destructiveOutline).not.toContain("border-transparent");
+    expect(destructiveMuted).toContain("border-transparent");
+    expect(destructiveMuted).toContain("bg-destructive-surface");
+    expect(destructiveMuted).toContain("text-destructive-foreground");
+    expect(destructiveMuted).toContain("hover:bg-destructive-hover");
+    expect(destructiveMuted).toContain("active:bg-destructive-active");
+    expect(destructiveMuted).not.toContain("border-border");
   });
 
   it("keeps link buttons on the shared blue foreground role", () => {

@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `397e71cc366dffa87487085af47a6214ba02a12e` (committed draft; release tag pending)
+Doji Design System source revision: `0277f03256680442fe1ce3693ba49e97f91ffcc9` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -122,14 +122,20 @@ runtime package and no automated cross-repository mutation.
 - Keep platform metadata aligned to the neutral chrome:
   `#FFFFFF` in light mode and `#090909` in dark mode; the manifest background
   is `#FCFCFC`.
-- Each active page or dialog exposes at most one enabled filled dominant
-  Button. Every ordinary secondary action uses blue-foreground `outline`,
-  whether it may become primary later or remains supporting. Filled `success`,
-  `warning`, and `destructive` Buttons may own that same single dominant slot;
-  supporting semantic actions use `success-outline`, `warning-outline`, or
-  `destructive-outline`, whose text matches the corresponding Alert foreground.
-  The shadcn `secondary` variant is reserved for selected or toggled state; it
-  is not a secondary workflow-action treatment.
+- A page or dialog may expose multiple filled primary Buttons when separate
+  local workflow contexts keep the composition clear. Do not place two filled
+  Buttons immediately beside one another or directly one below the other in one
+  choice cluster. Every ordinary secondary action uses neutral-foreground
+  `outline`. Filled `success`, `warning`, and `destructive` variants remain
+  available for strong semantic actions. Alert-matched `info-muted`,
+  `warning-muted`, and `destructive-muted` variants use semantic foreground
+  and surface roles without outline geometry; colored outline variants are not
+  part of the API. The shadcn `secondary` variant remains reserved for selected
+  or toggled state, not workflow action hierarchy. Button prominence and
+  semantic tone are presentation only: every handler still enforces wallet,
+  backend, provider, storage, and mutation admission before a request exists;
+  migration-locked actions remain keyboard reachable and make zero forbidden
+  requests regardless of variant.
 - The document uses `viewport-fit=cover`, `html` uses `overscroll-y-none`, the
   body and complete page shell use `overscroll-none`, and body horizontal
   overflow is clipped rather than hidden.
