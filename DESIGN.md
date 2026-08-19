@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `0277f03256680442fe1ce3693ba49e97f91ffcc9` (committed draft; release tag pending)
+Doji Design System source revision: `cc15aedf019f63e4aad9106678c6f5a1c69a9586` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -126,7 +126,13 @@ runtime package and no automated cross-repository mutation.
   local workflow contexts keep the composition clear. Do not place two filled
   Buttons immediately beside one another or directly one below the other in one
   choice cluster. Every ordinary secondary action uses neutral-foreground
-  `outline`. Filled `success`, `warning`, and `destructive` variants remain
+  `outline`. Review blue and neutral hierarchy across the complete page:
+  blue identifies product accent, useful primary actions, and genuine
+  information states inside the predominantly neutral canvas and surfaces. A
+  Card-like owner may have one filled primary when it is that surface's main
+  outcome; supporting actions stay neutral, while migration-unavailable
+  actions retain their truthful Alert-muted treatment. Filled `success`,
+  `warning`, and `destructive` variants remain
   available for strong semantic actions. Alert-matched `info-muted`,
   `warning-muted`, and `destructive-muted` variants use semantic foreground
   and surface roles without outline geometry; colored outline variants are not
@@ -226,7 +232,10 @@ runtime package and no automated cross-repository mutation.
   grid in a second card-like workbench.
 - Each project card contains one 48px current product logo, one title, one
   complete primary-page subtitle, and—when a live URL exists—a full-width
-  **Open app** outline footer action. Because it opens another Doji app in a new
+  primary **Open app** footer action. This is the card's one main outcome, so
+  each independent project Card repeats the primary treatment while the page's
+  neutral canvas, Cards, Items, and copy retain the overall balance. Because it
+  opens another Doji app in a new
   tab, its visible label ends with one decorative Lucide `ArrowUpRight`, its
   accessible name states the new-tab behavior, and its link preserves
   `target="_blank"` plus `rel="noreferrer"`.
@@ -313,7 +322,7 @@ runtime package and no automated cross-repository mutation.
 - The document uses the normal Portfolio navbar, page header, footer, and one
   centered standard Card.
 - The Card owns **Page not found**, explanatory copy, and the full-width
-  text-only **Back to Portfolio** action.
+  text-only primary **Back to Portfolio** action.
 - The page uses the same solid neutral design at every viewport and color
   scheme.
 - The generated static document contains no application JavaScript, wallet
