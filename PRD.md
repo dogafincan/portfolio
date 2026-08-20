@@ -344,8 +344,8 @@ inside its Empty surface, not in an Alert below its trigger.
   truth for visual, layout, icon, loading, alert, empty-state, responsive, and
   copy contracts.
 - Product UI icons should remain on Lucide.
-- Button targets remain `40px` tall; editable fields retain their separate
-  `44px` minimum.
+- Buttons, editable fields, search fields, input-like controls, and contextual-
+  badge hit regions share the `40px` minimum-height contract.
 - The app should respect system dark mode.
 
 ### 9.8 Case-study pages
