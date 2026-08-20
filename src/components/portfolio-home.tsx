@@ -50,7 +50,7 @@ function ProjectCard({
       <CardFooter>
         <a
           aria-label={`Open ${project.name} app (opens in a new tab)`}
-          className={buttonVariants()}
+          className={buttonVariants({ className: "w-full", variant: "outline" })}
           href={project.liveUrl}
           rel="noreferrer"
           target="_blank"

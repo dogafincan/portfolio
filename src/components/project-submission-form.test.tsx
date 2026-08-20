@@ -130,9 +130,6 @@ describe("ProjectSubmissionFlow", () => {
     const actions = container.querySelector('[data-slot="project-submission-actions"]');
     const content = container.querySelector('[data-slot="card-content"]');
     expect(actions?.className).toContain("gap-3");
-    expect(actions?.className).toContain("w-fit");
-    expect(actions?.className).toContain("grid-cols-[max-content]");
-    expect(actions?.className).toContain("[&>*]:w-full");
     expect(actions?.nextElementSibling?.hasAttribute("data-chain-migration-alert")).toBe(true);
     expect(
       Array.from(content?.querySelectorAll("label") ?? []).map((label) => label.textContent),

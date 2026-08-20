@@ -1,17 +1,15 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `c7f6baeb2bb06c0805835ec7379c8833df0c6f76` (committed draft; release tag pending)
+Doji Design System source revision: `9de8749b736548d0086ee0c84bc6faa4f16e5bcb` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
-Ordinary Buttons and button-styled links use natural content width. A compact
-vertical choice cluster shrinks to its longest label and gives sibling Buttons
-equal width without spanning its Card. Full-width Button treatment is reserved
-for documented surface-spanning roles: Drawer dismissal, wallet or selector
-option rows, and genuine upload/drop-zone actions. Inputs, search controls, and
-selector triggers remain full-width input-like controls. Width is presentation
-only; it must not change labels, focus order, handlers, request paths, migration
-Alert-versus-Empty ownership, or fail-closed behavior.
+Ordinary workflow, Card, footer, dialog, not-found, and vertically stacked
+actions fill the available width of their owner. The shared utility page-header
+group is the responsive exception: it is one bounded full-width stack below the
+small breakpoint and a natural-width row from the small breakpoint. Inputs,
+search controls, selectors, Drawer dismissal, option rows, and upload/drop-zone
+actions remain full width.
 
 This file is Portfolio's local UI contract. The canonical shared source is the
 versioned `doji-design-system` Codex skill in the separate design-system
@@ -131,18 +129,14 @@ runtime package and no automated cross-repository mutation.
 - Keep platform metadata aligned to the neutral chrome:
   `#FFFFFF` in light mode and `#090909` in dark mode; the manifest background
   is `#FCFCFC`.
-- A page or dialog may expose multiple filled primary Buttons when separate
-  local workflow contexts keep the composition clear. Filled primary blue and
-  neutral-foreground `outline` are the normal action treatments. Do not place
-  two filled Buttons immediately beside one another or directly one below the
-  other in one choice cluster. Review blue and neutral hierarchy across the
-  complete page: blue identifies product accent and useful primary actions
-  inside the predominantly neutral canvas and surfaces. A Card-like owner may
-  have one filled primary when it is that surface's main outcome; supporting
-  actions stay neutral outline. Temporary unavailability does not demote an
-  action: migration-locked actions keep their normal primary or outline
-  hierarchy while their handlers and owned Alert or opened Empty remain fail
-  closed. Filled `success`, `warning`, and `destructive` variants remain
+- Keep at most one visible filled dominant Button across the active page or
+  modal workflow state. Filled primary blue and neutral-foreground `outline`
+  are the normal action treatments. The next useful action owns the single
+  filled slot; independent Cards and repeated Items do not each receive one
+  while they remain visible together. Supporting and migration-locked workflow
+  actions remain neutral outline until state moves primary ownership. Filled
+  `success`, `warning`, or `destructive` may own that same single slot when
+  the current decision requires its semantic treatment. These variants remain
   available for strong semantic actions. `info-muted`, `warning-muted`, and
   `destructive-muted` remain reserved primitives and have no product consumer
   without an explicit current owner instruction approving that exact use; no
@@ -242,10 +236,9 @@ runtime package and no automated cross-repository mutation.
   Unequal row bottoms are expected when descriptions differ. Do not wrap the
   grid in a second card-like workbench.
 - Each project card contains one 48px current product logo, one title, one
-  complete primary-page subtitle, and—when a live URL exists—a content-sized
-  primary **Open app** footer action. This is the card's one main outcome, so
-  each independent project Card repeats the primary treatment while the page's
-  neutral canvas, Cards, Items, and copy retain the overall balance. Because it
+  complete primary-page subtitle, and—when a live URL exists—a full-width
+  outline **Open app** footer action. Repeated project Cards do not each claim
+  the page's single filled-primary slot. Because the action
   opens another Doji app in a new
   tab, its visible label ends with one decorative Lucide `ArrowUpRight`, its
   accessible name states the new-tab behavior, and its link preserves
@@ -334,7 +327,7 @@ runtime package and no automated cross-repository mutation.
 - Unknown routes resolve to a real static `404.html` without Worker invocation.
 - The document uses the normal Portfolio navbar, page header, footer, and one
   centered standard Card.
-- The Card owns **Page not found**, explanatory copy, and the content-sized
+- The Card owns **Page not found**, explanatory copy, and the full-width
   text-only primary **Back to Portfolio** action.
 - The page uses the same solid neutral design at every viewport and color
   scheme.

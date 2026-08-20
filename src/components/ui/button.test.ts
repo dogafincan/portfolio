@@ -10,7 +10,6 @@ describe("button variants", () => {
     expect(primary).toContain("border-transparent");
     expect(primary).toContain("text-primary-foreground");
     expect(primary).toContain("button-target");
-    expect(primary).toContain("w-fit");
     expect(primary).toContain("text-base");
     expect(primary).toContain("leading-6");
     expect(primary).not.toContain("tracking-tight");

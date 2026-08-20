@@ -129,7 +129,7 @@ export function NotFoundPage() {
             </CardDescription>
           </CardHeader>
           <CardFooter>
-            <a className={buttonVariants({ size: "lg" })} href="/">
+            <a className={buttonVariants({ className: "w-full", size: "lg" })} href="/">
               Back to Portfolio
             </a>
           </CardFooter>

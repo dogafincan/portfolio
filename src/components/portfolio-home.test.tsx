@@ -150,11 +150,10 @@ describe("PortfolioHome", () => {
       expect(action.getAttribute("href")).toBe(project.liveUrl);
       expect(action.getAttribute("target")).toBe("_blank");
       expect(action.className).toContain("button-target");
-      expect(action.className).toContain("w-fit");
-      expect(action.className.split(/\s+/)).not.toContain("w-full");
-      expect(action.className).toContain("bg-primary");
-      expect(action.className).toContain("text-primary-foreground");
-      expect(action.className).toContain("border-transparent");
+      expect(action.className).toContain("w-full");
+      expect(action.className).toContain("border-border");
+      expect(action.className).toContain("bg-transparent");
+      expect(action.className).not.toContain("bg-primary");
       const actionIcon = action.querySelector('[data-lucide="open-app-link"]');
       expect(actionIcon).not.toBeNull();
       expect(actionIcon?.getAttribute("data-icon")).toBe("inline-end");
@@ -188,8 +187,8 @@ describe("PortfolioHome", () => {
     for (const link of projectLinks) {
       expect(link.className).toContain("focus-visible:ring-3");
       expect(link.className).toContain("button-target");
-      expect(link.className).toContain("border-transparent");
-      expect(link.className).toContain("bg-primary");
+      expect(link.className).toContain("border-border");
+      expect(link.className).not.toContain("bg-primary");
     }
     expect(profileBadge.className).toContain("expanded-control-target");
     expect(document.querySelector('[data-slot="profile-links"]')).toBeNull();
