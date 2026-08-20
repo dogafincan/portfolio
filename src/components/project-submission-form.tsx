@@ -567,38 +567,45 @@ export function ProjectSubmissionForm({
 
           <CardFooter className="flex-col items-stretch">
             {migrationLocked ? (
-              <div className="flex flex-col gap-3" data-slot="project-submission-actions">
+              <div
+                className="grid w-fit grid-cols-[max-content] gap-3 [&>*]:w-full"
+                data-slot="project-submission-actions"
+              >
                 <Button type="submit">Pay submission fee</Button>
                 <Button type="button" variant="outline">
                   Recover payment
                 </Button>
               </div>
-            ) : paidDigest && status !== "success" ? (
-              <Button
-                disabled={!recoveryEnabled}
-                onClick={() => setRecoveryOpen(true)}
-                type="button"
-              >
-                Recover payment
-              </Button>
             ) : (
-              <>
-                <Button
-                  aria-busy={status === "submitting" || undefined}
-                  disabled={!paymentEnabled}
-                  type="submit"
-                >
-                  Pay submission fee
-                </Button>
-                <Button
-                  disabled={!recoveryEnabled}
-                  onClick={() => setRecoveryOpen(true)}
-                  type="button"
-                  variant="outline"
-                >
-                  Recover payment
-                </Button>
-              </>
+              <div className="grid w-fit grid-cols-[max-content] gap-3 [&>*]:w-full">
+                {paidDigest && status !== "success" ? (
+                  <Button
+                    disabled={!recoveryEnabled}
+                    onClick={() => setRecoveryOpen(true)}
+                    type="button"
+                  >
+                    Recover payment
+                  </Button>
+                ) : (
+                  <>
+                    <Button
+                      aria-busy={status === "submitting" || undefined}
+                      disabled={!paymentEnabled}
+                      type="submit"
+                    >
+                      Pay submission fee
+                    </Button>
+                    <Button
+                      disabled={!recoveryEnabled}
+                      onClick={() => setRecoveryOpen(true)}
+                      type="button"
+                      variant="outline"
+                    >
+                      Recover payment
+                    </Button>
+                  </>
+                )}
+              </div>
             )}
             <SubmissionFeedback
               configurationAvailable={configuration.available}

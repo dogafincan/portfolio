@@ -1,8 +1,17 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `327a5577b6a3b66eaea9caaacf3d7b82ef15e876` (committed draft; release tag pending)
+Doji Design System source revision: `c7f6baeb2bb06c0805835ec7379c8833df0c6f76` (committed draft; release tag pending)
 Doji Design System adoption: migrating
+
+Ordinary Buttons and button-styled links use natural content width. A compact
+vertical choice cluster shrinks to its longest label and gives sibling Buttons
+equal width without spanning its Card. Full-width Button treatment is reserved
+for documented surface-spanning roles: Drawer dismissal, wallet or selector
+option rows, and genuine upload/drop-zone actions. Inputs, search controls, and
+selector triggers remain full-width input-like controls. Width is presentation
+only; it must not change labels, focus order, handlers, request paths, migration
+Alert-versus-Empty ownership, or fail-closed behavior.
 
 This file is Portfolio's local UI contract. The canonical shared source is the
 versioned `doji-design-system` Codex skill in the separate design-system
@@ -233,7 +242,7 @@ runtime package and no automated cross-repository mutation.
   Unequal row bottoms are expected when descriptions differ. Do not wrap the
   grid in a second card-like workbench.
 - Each project card contains one 48px current product logo, one title, one
-  complete primary-page subtitle, and—when a live URL exists—a full-width
+  complete primary-page subtitle, and—when a live URL exists—a content-sized
   primary **Open app** footer action. This is the card's one main outcome, so
   each independent project Card repeats the primary treatment while the page's
   neutral canvas, Cards, Items, and copy retain the overall balance. Because it
@@ -325,7 +334,7 @@ runtime package and no automated cross-repository mutation.
 - Unknown routes resolve to a real static `404.html` without Worker invocation.
 - The document uses the normal Portfolio navbar, page header, footer, and one
   centered standard Card.
-- The Card owns **Page not found**, explanatory copy, and the full-width
+- The Card owns **Page not found**, explanatory copy, and the content-sized
   text-only primary **Back to Portfolio** action.
 - The page uses the same solid neutral design at every viewport and color
   scheme.

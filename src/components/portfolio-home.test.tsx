@@ -150,7 +150,8 @@ describe("PortfolioHome", () => {
       expect(action.getAttribute("href")).toBe(project.liveUrl);
       expect(action.getAttribute("target")).toBe("_blank");
       expect(action.className).toContain("button-target");
-      expect(action.className).toContain("w-full");
+      expect(action.className).toContain("w-fit");
+      expect(action.className.split(/\s+/)).not.toContain("w-full");
       expect(action.className).toContain("bg-primary");
       expect(action.className).toContain("text-primary-foreground");
       expect(action.className).toContain("border-transparent");
