@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `cc15aedf019f63e4aad9106678c6f5a1c69a9586` (committed draft; release tag pending)
+Doji Design System source revision: `f57031f6d8669ee19d8150e8e17b59b8cd08b306` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -123,21 +123,23 @@ runtime package and no automated cross-repository mutation.
   `#FFFFFF` in light mode and `#090909` in dark mode; the manifest background
   is `#FCFCFC`.
 - A page or dialog may expose multiple filled primary Buttons when separate
-  local workflow contexts keep the composition clear. Do not place two filled
-  Buttons immediately beside one another or directly one below the other in one
-  choice cluster. Every ordinary secondary action uses neutral-foreground
-  `outline`. Review blue and neutral hierarchy across the complete page:
-  blue identifies product accent, useful primary actions, and genuine
-  information states inside the predominantly neutral canvas and surfaces. A
-  Card-like owner may have one filled primary when it is that surface's main
-  outcome; supporting actions stay neutral, while migration-unavailable
-  actions retain their truthful Alert-muted treatment. Filled `success`,
-  `warning`, and `destructive` variants remain
-  available for strong semantic actions. Alert-matched `info-muted`,
-  `warning-muted`, and `destructive-muted` variants use semantic foreground
-  and surface roles without outline geometry; colored outline variants are not
-  part of the API. The shadcn `secondary` variant remains reserved for selected
-  or toggled state, not workflow action hierarchy. Button prominence and
+  local workflow contexts keep the composition clear. Filled primary blue and
+  neutral-foreground `outline` are the normal action treatments. Do not place
+  two filled Buttons immediately beside one another or directly one below the
+  other in one choice cluster. Review blue and neutral hierarchy across the
+  complete page: blue identifies product accent and useful primary actions
+  inside the predominantly neutral canvas and surfaces. A Card-like owner may
+  have one filled primary when it is that surface's main outcome; supporting
+  actions stay neutral outline. Temporary unavailability does not demote an
+  action: migration-locked actions keep their normal primary or outline
+  hierarchy while their handlers and owned Alert or opened Empty remain fail
+  closed. Filled `success`, `warning`, and `destructive` variants remain
+  available for strong semantic actions. `info-muted`, `warning-muted`, and
+  `destructive-muted` remain reserved primitives and have no product consumer
+  without an explicit current owner instruction approving that exact use; no
+  such exception is active here. Colored outline variants are not part of the
+  API. The shadcn `secondary` variant remains reserved for selected or toggled
+  state, not workflow action hierarchy. Button prominence and
   semantic tone are presentation only: every handler still enforces wallet,
   backend, provider, storage, and mutation admission before a request exists;
   migration-locked actions remain keyboard reachable and make zero forbidden
