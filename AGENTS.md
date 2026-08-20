@@ -190,8 +190,10 @@ Expected portfolio omissions:
 - Present each project with revision-named local light/dark copies of its
   current transparent product logo, the exact compact navbar name, the exact
   complete primary-page subtitle, and a live app link whose label ends with the
-  shared trailing `ArrowUpRight` new-tab affordance. Keep the project in the
-  standard muted `Item` and its logo in the 48px avatar/image `ItemMedia`.
+  shared trailing `ArrowUpRight` new-tab affordance. Use one centered standard
+  Card: the 48px muted logo container sits above the title, the complete
+  subtitle uses `CardDescription`, and the full-width neutral outline link
+  remains in `CardFooter`.
 - Keep project cards intentionally compact for now. Move role, status, stack,
   implementation highlights, and larger product visuals into future case-study
   pages if the portfolio needs that depth.

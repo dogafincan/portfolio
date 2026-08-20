@@ -163,12 +163,12 @@ the repository for later migration rather than being deleted.
 - Keep the Registry treasury address deliberately unconfigured until the owner
   supplies the first generated publication; new payments fail closed meanwhile.
 - Use checked-in, revision-named light/dark copies of each product's current
-  transparent logo in project cards. Keep each project in a muted `Item` and
-  place the logo inside its standard 48px avatar/image media container. Copy
-  the navbar name and complete primary subtitle from the same source revision.
-  Keep deeper visuals, stack details, and implementation notes for future
-  case-study pages. The portfolio site should not list itself as one of its own
-  products.
+  transparent logo in project cards. Center the 48px logo container above the
+  exact navbar name and complete primary subtitle in `CardHeader`; use the
+  slightly dimmed Card-description color for that subtitle. Keep **Open app**
+  as a full-width outline action in `CardFooter`. Keep deeper visuals, stack
+  details, and implementation notes for future case-study pages. The portfolio
+  site should not list itself as one of its own products.
 
 ## Shared Web App Design System
 

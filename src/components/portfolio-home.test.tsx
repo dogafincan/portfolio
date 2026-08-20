@@ -108,16 +108,17 @@ describe("PortfolioHome", () => {
     expect(cards).toHaveLength(portfolioProjects.length);
     for (const card of cards) {
       expect(card.className).not.toContain("h-full");
-      expect(
-        card.querySelector('[data-slot="card-content"]')?.className.split(/\s+/),
-      ).not.toContain("flex-1");
+      expect(card.querySelector('[data-slot="card-content"]')).toBeNull();
       expect(card.querySelector('[data-slot="card-footer"]')?.className).not.toContain(
         "lg:mt-auto",
       );
     }
 
     for (const project of portfolioProjects) {
-      const item = projects.querySelector(`[data-project="${project.slug}"]`);
+      const card = projects.querySelector(`[data-project="${project.slug}"]`);
+      const header = card?.querySelector('[data-slot="card-header"]');
+      const title = header?.querySelector('[data-slot="card-title"]');
+      const description = header?.querySelector('[data-slot="card-description"]');
       const image = screen.getByAltText(project.logoAlt);
       const picture = image.closest("picture");
       const darkSource = picture?.querySelector("source");
@@ -125,13 +126,17 @@ describe("PortfolioHome", () => {
         name: `Open ${project.name} app (opens in a new tab)`,
       });
 
-      expect(item?.getAttribute("data-variant")).toBe("muted");
-      expect(item?.className).toContain("bg-item-muted");
-      expect(item?.className).not.toContain("bg-muted/50");
-      expect(item?.querySelector('[data-slot="item-title"] h2')?.textContent).toBe(project.name);
-      expect(item?.querySelector('[data-slot="item-description"]')?.textContent).toBe(
-        project.subtitle,
-      );
+      expect(card?.getAttribute("data-slot")).toBe("card");
+      expect(card?.querySelector('[data-slot="item"]')).toBeNull();
+      expect(header?.className).toContain("place-items-center");
+      expect(header?.className).toContain("text-center");
+      expect(
+        Array.from(header?.children ?? []).map((child) => child.getAttribute("data-slot")),
+      ).toEqual(["project-logo-media", "card-title", "card-description"]);
+      expect(title?.querySelector("h2")?.textContent).toBe(project.name);
+      expect(description?.textContent).toBe(project.subtitle);
+      expect(description?.className).toContain("text-muted-foreground");
+      expect(description?.className).not.toContain("text-foreground");
       expect(picture?.getAttribute("data-slot")).toBe("project-logo-picture");
       expect(image.getAttribute("data-slot")).toBe("project-logo");
       expect(image.getAttribute("src")).toBe(project.logoLight);
@@ -139,14 +144,15 @@ describe("PortfolioHome", () => {
       expect(darkSource?.getAttribute("srcset")).toBe(project.logoDark);
       expect(image.getAttribute("width")).toBe("48");
       expect(image.getAttribute("height")).toBe("48");
-      const avatar = image.closest('[data-slot="item-media"]');
-      expect(avatar?.getAttribute("data-variant")).toBe("image");
-      expect(avatar?.className).toContain("size-12");
-      expect(avatar?.className).toContain("rounded-xl");
-      expect(avatar?.className).toContain("border-border");
-      expect(avatar?.className).toContain("bg-item-avatar-background");
-      expect(avatar?.className).not.toContain("bg-background");
-      expect(avatar?.className).toContain("[&_img]:object-contain");
+      const media = image.closest('[data-slot="project-logo-media"]');
+      expect(media?.className).toContain("size-12");
+      expect(media?.className).toContain("rounded-xl");
+      expect(media?.className).toContain("bg-muted");
+      expect(media?.className).toContain("[&_img]:object-contain");
+      expect(header?.firstElementChild).toBe(media);
+      expect(action.closest('[data-slot="card-footer"]')).toBe(
+        card?.querySelector('[data-slot="card-footer"]'),
+      );
       expect(action.getAttribute("href")).toBe(project.liveUrl);
       expect(action.getAttribute("target")).toBe("_blank");
       expect(action.className).toContain("button-target");

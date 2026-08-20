@@ -22,6 +22,7 @@ treated as complete.
 | Done        | Memerank project card                | 7, 8.1, 9.2-9.4     | -         | Adds Memerank to the four-card project grid with the requested card copy and live app link.                                                                                                                                                                                                 |
 | Done        | Current ecosystem project identities | 7, 8.1, 9.2-9.4     | -         | Adds Doji Registry and synchronizes all five project cards to current navbar names, complete primary subtitles, canonical URLs, and revision-named light/dark logo pairs.                                                                                                                   |
 | Done        | Cross-app action affordance          | 8.1, 9.3-9.4, 13    | -         | Gives every project **Open app** link the shared trailing `ArrowUpRight`, explicit new-tab accessible name, 40px Button target, and canonical new-tab link semantics.                                                                                                                       |
+| Done        | Centered project Card composition    | 8.1, 9.3-9.4, 13    | -         | Centers each checked-in project logo above its title and muted Card description while retaining the full-width neutral outline **Open app** link in `CardFooter`.                                                                                                                           |
 | Done        | Central Registry project submission  | 2, 5, 7, 8.4, 12-15 | -         | Static form, lazy wallet, generated contract, digest-bound recovery wire, static 404, narrow gateway, environment-isolated Worker type generation, and audited build dependencies are implemented. Activation remains fail closed until wallet publication.                                 |
 | Done        | Temporary chain migration lockout    | 2, 7, 8.5, 9.10, 12 | -         | Preserves the Sui implementation while making wallet, payment, recovery, submission, and public dynamic entry points inaccessible during the Robinhood Chain migration. Static portfolio content remains available.                                                                         |
 | Done        | Doji Design System 1.0 migration     | 8-9, 13, 15         | -         | Replaces legacy atmosphere and showcase exceptions with the canonical neutral canvas, raised chrome, standard Cards, text-only actions, static 404, and forced-dark social composition. Immutable source revision `5df1b9c102d9a28abc5437ed70b22fcba3b74c93` remains the released baseline. |
@@ -290,10 +291,10 @@ inside its Empty surface, not in an Alert below its trigger.
 
 - Render one card for each project record.
 - Use checked-in revision-named light/dark copies of the current transparent
-  product logos, exact navbar names, and exact primary subtitles inside the
-  muted `Item` summary defined in `DESIGN.md`. Place each scheme-aware logo in
-  that Item's standard 48px avatar/image media container.
-- Keep the live app link outside the summary item as the card footer action.
+  product logos, exact navbar names, and exact primary subtitles. Center the
+  48px scheme-aware logo container above the title and complete slightly
+  dimmed `CardDescription` in `CardHeader`.
+- Keep the live app link as the full-width neutral outline `CardFooter` action.
 - Do not show status, role, stack, implementation highlights, source links, or
   large preview images in project cards for now.
 - Do not nest cards inside project cards.

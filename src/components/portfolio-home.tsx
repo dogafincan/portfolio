@@ -4,8 +4,7 @@ import {
   PORTFOLIO_MAIN_CLASS_NAME,
 } from "@/components/app-header";
 import { buttonVariants } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { portfolioProjects, type PortfolioProject } from "@/content/projects";
 import { PORTFOLIO_PAGE_SUBTITLE, PORTFOLIO_PAGE_TITLE_ACCENT } from "@/lib/portfolio-page-copy";
 import { ArrowUpRight } from "lucide-react";
@@ -18,35 +17,31 @@ function ProjectCard({
   loading?: "eager" | "lazy";
 }) {
   return (
-    <Card className="min-w-0">
-      <CardContent>
-        <Item className="min-w-0 flex-nowrap" data-project={project.slug} variant="muted">
-          <ItemMedia
-            className="size-12 overflow-hidden rounded-xl border border-border [&_img]:object-contain"
-            variant="image"
-          >
-            <picture className="block size-full" data-slot="project-logo-picture">
-              <source media="(prefers-color-scheme: dark)" srcSet={project.logoDark} />
-              <img
-                alt={project.logoAlt}
-                className="size-full"
-                data-slot="project-logo"
-                decoding="async"
-                height="48"
-                loading={loading}
-                src={project.logoLight}
-                width="48"
-              />
-            </picture>
-          </ItemMedia>
-          <ItemContent className="min-w-0">
-            <ItemTitle className="line-clamp-none">
-              <h2>{project.name}</h2>
-            </ItemTitle>
-            <ItemDescription>{project.subtitle}</ItemDescription>
-          </ItemContent>
-        </Item>
-      </CardContent>
+    <Card className="min-w-0" data-project={project.slug}>
+      <CardHeader className="place-items-center text-center">
+        <div
+          className="flex size-12 overflow-hidden rounded-xl bg-muted [&_img]:object-contain"
+          data-slot="project-logo-media"
+        >
+          <picture className="block size-full" data-slot="project-logo-picture">
+            <source media="(prefers-color-scheme: dark)" srcSet={project.logoDark} />
+            <img
+              alt={project.logoAlt}
+              className="size-full"
+              data-slot="project-logo"
+              decoding="async"
+              height="48"
+              loading={loading}
+              src={project.logoLight}
+              width="48"
+            />
+          </picture>
+        </div>
+        <CardTitle>
+          <h2>{project.name}</h2>
+        </CardTitle>
+        <CardDescription>{project.subtitle}</CardDescription>
+      </CardHeader>
       <CardFooter>
         <a
           aria-label={`Open ${project.name} app (opens in a new tab)`}

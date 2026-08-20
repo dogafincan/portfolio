@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `9de8749b736548d0086ee0c84bc6faa4f16e5bcb` (committed draft; release tag pending)
+Doji Design System source revision: `87722942ae8176ed43887149239d252c79209557` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 Ordinary workflow, Card, footer, dialog, not-found, and vertically stacked
@@ -17,7 +17,8 @@ repository. Runtime components remain local to this repository. The released
 baseline remains immutable `v1.0.0`; the active manual `1.0.1-draft` run adds
 complete description rendering, a concise Alert/Item description target,
 progressive informational-Item disclosure, and the connect-wallet Drawer
-contract. It also requires end-user-first primary copy that leads with the
+contract. It also standardizes centered ecosystem project Cards and requires
+end-user-first primary copy that leads with the
 intended person's outcome, decision, useful signal, and next action while
 keeping internal mechanics secondary and truthful qualifiers visible. Adoption
 remains `migrating` until an immutable source revision and local proof exist.
@@ -116,8 +117,8 @@ runtime package and no automated cross-repository mutation.
   the Card background in light mode and retain the page background in dark
   mode. The Item primitive owns both roles; call sites do not add local
   background utilities, and every non-Item muted surface stays on `--muted`.
-- The same primitive keeps each muted project Item's title and complete
-  subtitle on `--foreground` in both schemes. Default and outline Item
+- The same primitive keeps each muted selector or summary Item's title and
+  complete subtitle on `--foreground` in both schemes. Default and outline Item
   descriptions remain on `--muted-foreground`; this scoped rule does not
   recolor actions, badges, or other separately styled metadata.
 - Respect system light and dark modes. Do not add a theme switch without a
@@ -235,10 +236,14 @@ runtime package and no automated cross-repository mutation.
   height; the footer follows content after the required 24px structural gap.
   Unequal row bottoms are expected when descriptions differ. Do not wrap the
   grid in a second card-like workbench.
-- Each project card contains one 48px current product logo, one title, one
-  complete primary-page subtitle, and—when a live URL exists—a full-width
-  outline **Open app** footer action. Repeated project Cards do not each claim
-  the page's single filled-primary slot. Because the action
+- Each project Card centers one 48px current product logo above its title and
+  complete primary-page subtitle in `CardHeader`. The title uses the normal
+  Card foreground; the subtitle uses the slightly dimmed
+  `--muted-foreground` `CardDescription` role. This is not a muted Item and does
+  not inherit muted-Item foreground parity.
+- When a live URL exists, keep one full-width outline **Open app** action in
+  `CardFooter`. Repeated project Cards do not each claim the page's single
+  filled-primary slot. Because the action
   opens another Doji app in a new
   tab, its visible label ends with one decorative Lucide `ArrowUpRight`, its
   accessible name states the new-tab behavior, and its link preserves
@@ -257,12 +262,15 @@ runtime package and no automated cross-repository mutation.
 - Product logos remain checked-in static assets under `public/projects/` as
   revision-named light/dark pairs. Render the pair with `picture`: the dark
   source responds to `prefers-color-scheme: dark`, and the light image is the
-  fallback. Every project remains a muted `Item`, and its `picture` belongs in
-  the standard 48px avatar/image `ItemMedia` with the primitive-owned background,
-  border, radius, clipping, and `object-contain` behavior. Use the source app's
-  current transparent navbar/logo artwork; do not bake that avatar container
-  into the raster or use a favicon, install icon, hotlink, CSS inversion, or
-  crop.
+  fallback. Place its `picture` in the centered 48px rounded logo container on
+  the ordinary muted surface with clipping and `object-contain` behavior. Use
+  the source app's current transparent navbar/logo artwork; do not bake that
+  container into the raster or use a favicon, install icon, hotlink, CSS
+  inversion, or crop.
+- Project names, subtitles, destinations, and logo assets remain checked-in
+  Portfolio data. This layout migration changes no handler, dynamic route,
+  Registry/provider access, analytics request, or assets-only delivery
+  boundary; opening a footer link performs only ordinary browser navigation.
 - Current logo-source revisions are Doji Rank `2ce5e89fce7ebff100c7d99e747db396a2ab8091`,
   Doji Swap `3eda353c8f5016a6e5321a84331838c18958e784`, Doji Drop
   `141d1b391ed369795663be16dcc511dfd35ddf92`, Doji Snap
