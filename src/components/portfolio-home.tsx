@@ -4,7 +4,14 @@ import {
   PORTFOLIO_MAIN_CLASS_NAME,
 } from "@/components/app-header";
 import { buttonVariants } from "@/components/ui/button";
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { portfolioProjects, type PortfolioProject } from "@/content/projects";
 import { PORTFOLIO_PAGE_SUBTITLE, PORTFOLIO_PAGE_TITLE_ACCENT } from "@/lib/portfolio-page-copy";
 import { ArrowUpRight } from "lucide-react";
@@ -18,7 +25,7 @@ function ProjectCard({
 }) {
   return (
     <Card className="min-w-0" data-project={project.slug}>
-      <CardHeader className="place-items-center text-center">
+      <CardHeader className="place-items-center">
         <div
           className="flex size-12 overflow-hidden rounded-xl bg-muted [&_img]:object-contain"
           data-slot="project-logo-media"
@@ -37,11 +44,13 @@ function ProjectCard({
             />
           </picture>
         </div>
+      </CardHeader>
+      <CardContent className="place-items-center text-center">
         <CardTitle>
           <h2>{project.name}</h2>
         </CardTitle>
-        <CardDescription>{project.subtitle}</CardDescription>
-      </CardHeader>
+        <CardDescription className="text-pretty">{project.subtitle}</CardDescription>
+      </CardContent>
       <CardFooter>
         <a
           aria-label={`Open ${project.name} app (opens in a new tab)`}

@@ -292,8 +292,11 @@ inside its Empty surface, not in an Alert below its trigger.
 - Render one card for each project record.
 - Use checked-in revision-named light/dark copies of the current transparent
   product logos, exact navbar names, and exact primary subtitles. Center the
-  48px scheme-aware logo container above the title and complete slightly
-  dimmed `CardDescription` in `CardHeader`.
+  48px scheme-aware logo container by itself in `CardHeader`, then center the
+  title and complete slightly dimmed, `text-pretty` `CardDescription` in
+  `CardContent`. Use
+  the shared 24px Card section gap so logo-to-title and description-to-action
+  spacing are equal without custom margins.
 - Keep the live app link as the full-width neutral outline `CardFooter` action.
 - Do not show status, role, stack, implementation highlights, source links, or
   large preview images in project cards for now.

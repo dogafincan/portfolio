@@ -164,9 +164,12 @@ the repository for later migration rather than being deleted.
   supplies the first generated publication; new payments fail closed meanwhile.
 - Use checked-in, revision-named light/dark copies of each product's current
   transparent logo in project cards. Center the 48px logo container above the
-  exact navbar name and complete primary subtitle in `CardHeader`; use the
-  slightly dimmed Card-description color for that subtitle. Keep **Open app**
-  as a full-width outline action in `CardFooter`. Keep deeper visuals, stack
+  exact navbar name and complete primary subtitle by placing the logo alone in
+  `CardHeader` and the centered text in `CardContent`; the standard 24px Card
+  section gap must make logo-to-title and description-to-action spacing equal.
+  Use the slightly dimmed Card-description color and `text-pretty` wrapping for
+  that subtitle. Keep
+  **Open app** as a full-width outline action in `CardFooter`. Keep deeper visuals, stack
   details, and implementation notes for future case-study pages. The portfolio
   site should not list itself as one of its own products.
 

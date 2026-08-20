@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `87722942ae8176ed43887149239d252c79209557` (committed draft; release tag pending)
+Doji Design System source revision: `f39a2bbcb6fb1f011f66aa77d8e5de27ace5b48f` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 Ordinary workflow, Card, footer, dialog, not-found, and vertically stacked
@@ -236,10 +236,13 @@ runtime package and no automated cross-repository mutation.
   height; the footer follows content after the required 24px structural gap.
   Unequal row bottoms are expected when descriptions differ. Do not wrap the
   grid in a second card-like workbench.
-- Each project Card centers one 48px current product logo above its title and
-  complete primary-page subtitle in `CardHeader`. The title uses the normal
-  Card foreground; the subtitle uses the slightly dimmed
-  `--muted-foreground` `CardDescription` role. This is not a muted Item and does
+- Each project Card centers one 48px current product logo by itself in
+  `CardHeader`, then centers its title and complete primary-page subtitle in
+  `CardContent`. The shared 24px Card section gap makes logo-to-title spacing
+  equal to description-to-action spacing without custom margins. The title
+  uses the normal Card foreground; the subtitle uses the slightly dimmed
+  `--muted-foreground` `CardDescription` role with `text-pretty` wrapping. This
+  is not a muted Item and does
   not inherit muted-Item foreground parity.
 - When a live URL exists, keep one full-width outline **Open app** action in
   `CardFooter`. Repeated project Cards do not each claim the page's single
