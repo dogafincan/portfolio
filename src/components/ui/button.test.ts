@@ -85,11 +85,11 @@ describe("button variants", () => {
     expect(buttonVariants({ variant: "link" })).toContain("text-info-foreground");
   });
 
-  it("keeps every text button size on the universal 40px height", () => {
+  it("keeps every text button size on the universal 36px height", () => {
     const sizes = ["xs", "sm", "default", "lg"] as const;
 
     for (const size of sizes) {
-      expect(buttonVariants({ size })).toContain("h-10");
+      expect(buttonVariants({ size })).toContain("h-9");
       expect(buttonVariants({ size })).toContain("button-target");
     }
 
@@ -100,11 +100,11 @@ describe("button variants", () => {
     expect(large).not.toContain("font-semibold");
   });
 
-  it("keeps every icon button on a real 40px square", () => {
+  it("keeps every icon button on a real 36px square", () => {
     const sizes = ["icon-xs", "icon-sm", "icon", "icon-lg"] as const;
 
     for (const size of sizes) {
-      expect(buttonVariants({ size })).toContain("size-10");
+      expect(buttonVariants({ size })).toContain("size-9");
       expect(buttonVariants({ size })).toContain("button-target");
     }
   });

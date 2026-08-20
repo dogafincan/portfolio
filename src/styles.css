@@ -328,8 +328,8 @@
   --ds-surface-inset: 1.5rem;
   --ds-surface-section-gap: 1.5rem;
   --ds-surface-stack-gap: 0.75rem;
-  --ds-button-height: 2.5rem;
-  --ds-control-height: 2.5rem;
+  --ds-button-height: 2.25rem;
+  --ds-control-height: 2.25rem;
   --ds-motion-duration-fast: 150ms;
   --ds-motion-duration-medium: 300ms;
   --ds-motion-duration-drawer: 450ms;

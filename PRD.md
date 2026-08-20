@@ -21,7 +21,7 @@ treated as complete.
 | Done        | Unified page chrome background       | 9.5, 9.7, 13        | -         | Aligns safe areas, page background, shell insets, and theme colors. The later Doji Design System 1.0 migration supersedes its original atmosphere treatment.                                                                                                                                |
 | Done        | Memerank project card                | 7, 8.1, 9.2-9.4     | -         | Adds Memerank to the four-card project grid with the requested card copy and live app link.                                                                                                                                                                                                 |
 | Done        | Current ecosystem project identities | 7, 8.1, 9.2-9.4     | -         | Adds Doji Registry and synchronizes all five project cards to current navbar names, complete primary subtitles, canonical URLs, and revision-named light/dark logo pairs.                                                                                                                   |
-| Done        | Cross-app action affordance          | 8.1, 9.3-9.4, 13    | -         | Gives every project **Open app** link the shared trailing `ArrowUpRight`, explicit new-tab accessible name, 40px Button target, and canonical new-tab link semantics.                                                                                                                       |
+| Done        | Cross-app action affordance          | 8.1, 9.3-9.4, 13    | -         | Gives every project **Open app** link the shared trailing `ArrowUpRight`, explicit new-tab accessible name, 36px Button target, and canonical new-tab link semantics.                                                                                                                       |
 | Done        | Centered project Card composition    | 8.1, 9.3-9.4, 13    | -         | Centers each checked-in project logo above its title and muted Card description while retaining the full-width neutral outline **Open app** link in `CardFooter`.                                                                                                                           |
 | Done        | Central Registry project submission  | 2, 5, 7, 8.4, 12-15 | -         | Static form, lazy wallet, generated contract, digest-bound recovery wire, static 404, narrow gateway, environment-isolated Worker type generation, and audited build dependencies are implemented. Activation remains fail closed until wallet publication.                                 |
 | Done        | Temporary chain migration lockout    | 2, 7, 8.5, 9.10, 12 | -         | Preserves the Sui implementation while making wallet, payment, recovery, submission, and public dynamic entry points inaccessible during the Robinhood Chain migration. Static portfolio content remains available.                                                                         |
@@ -248,7 +248,7 @@ prefill, validation RPC, or wallet auto-connection.
 
 During the Sui-to-Robinhood Chain migration, static showcase content and routes
 stay available while every chain-dependent action fails closed. Header actions
-retain their normal labels, enabled presentation, focus behavior, and 40px Button
+retain their normal labels, enabled presentation, focus behavior, and 36px Button
 geometry without a migration Alert below either action or their shared cluster.
 **Connect wallet** opens the normal Drawer, but its body contains only an Empty
 migration explanation and **Close**; the wallet runtime is not loaded.
@@ -312,7 +312,7 @@ inside its Empty surface, not in an Alert below its trigger.
   project name and state that they open in a new tab.
 - Every button-styled link that opens another Doji app in a new tab keeps its
   visible label first and one decorative trailing Lucide `ArrowUpRight`, while
-  preserving the ordinary 40px outline Button target and keyboard focus treatment.
+  preserving the ordinary 36px outline Button target and keyboard focus treatment.
 - Header profile links should have accessible labels that include the profile
   destination.
 - Header profile links and project live app links should stay in their natural
@@ -349,7 +349,7 @@ inside its Empty surface, not in an Alert below its trigger.
   copy contracts.
 - Product UI icons should remain on Lucide.
 - Buttons, editable fields, search fields, input-like controls, and contextual-
-  badge hit regions share the `40px` minimum-height contract.
+  badge hit regions share the `36px` minimum-height contract.
 - The app should respect system dark mode.
 
 ### 9.8 Case-study pages

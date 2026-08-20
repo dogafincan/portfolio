@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `f39a2bbcb6fb1f011f66aa77d8e5de27ace5b48f` (committed draft; release tag pending)
+Doji Design System source revision: `09eabd7c3bd304ed15d669d02488e048a1a24a25` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 Ordinary workflow, Card, footer, dialog, not-found, and vertically stacked
@@ -208,7 +208,7 @@ runtime package and no automated cross-repository mutation.
 - The page navbar is an explicit 56px border box with a full-height content
   rail and a 20px brand inset. Every primary page header places the compact
   **Follow Doga Fincan on X** header-information badge above its title. It
-  links to `https://x.com/dogafincan` in a new tab with a 40px hit area around
+  links to `https://x.com/dogafincan` in a new tab with a 36px hit area around
   its 24px visual and a trailing `ArrowUpRight`.
 - The navbar contains identity and genuine navigation only. Portfolio's page
   header ends after its subtitle: it has no Connect wallet, Submit project,
@@ -291,7 +291,7 @@ runtime package and no automated cross-repository mutation.
   `CardContent`, actions and their feedback in `CardFooter`.
 - Keep the shared 24px card inset/section rhythm and 12px sibling rhythm.
 - Standard Buttons, button-styled action links, inputs, search fields, and
-  input-like controls are 40px high. Labels are visible;
+  input-like controls are 36px high. Labels are visible;
   errors are field-local and programmatically associated.
 - Image input accepts static JPG, PNG, WebP, or AVIF up to 5,000,000 bytes and
   40 million decoded pixels. Preview remains local and uses a muted Item.
@@ -321,8 +321,8 @@ runtime package and no automated cross-repository mutation.
   Cross-app new-tab actions are the shared exception: keep the label first and
   one decorative Lucide `ArrowUpRight` at the inline end. Component-owned icon
   controls and documented brand/file exceptions retain accessible names.
-- Standard Buttons expose a real 40px minimum width and height; editable fields,
-  search fields, and other input-like controls expose a real 40px minimum height.
+- Standard Buttons expose a real 36px minimum width and height; editable fields,
+  search fields, and other input-like controls expose a real 36px minimum height.
 - The global Tailwind v4 `@layer base` rule gives `a[href]`, enabled native
   buttons, and enabled `[role="button"]` controls a pointer cursor while leaving
   native disabled buttons outside the selector. `src/styles.test.ts` and
@@ -380,7 +380,7 @@ runtime package and no automated cross-repository mutation.
 - Modal focus, dismissal, and focus restoration remain owned by Base UI.
 - Loading has one authoritative live region. Avoid duplicate announcements.
 - Standard Button, field, search, input-like-control, and contextual-badge hit
-  targets meet the 40px contract; documented content-rich and compact
+  targets meet the 36px contract; documented content-rich and compact
   affordances keep their own geometry.
 
 ## Local Exceptions

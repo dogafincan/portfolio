@@ -189,7 +189,7 @@ Design principles that should remain visible in day-to-day work:
 - Keep project cards scannable, responsive, and backed by structured content.
 - Mark each button-styled link that opens another Doji app in a new tab with the
   shared trailing `ArrowUpRight`, explicit new-tab accessible name, and normal
-  40px Button target.
+  36px Button target.
 - Explain what projects do before naming libraries or infrastructure.
 - Avoid generic hero filler, decorative principles sections, fake metrics, and
   card nesting.
