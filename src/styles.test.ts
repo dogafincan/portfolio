@@ -351,6 +351,7 @@ describe("global styles", () => {
     expect(styles).toContain("--ds-surface-inset: 1.5rem;");
     expect(styles).toContain("--ds-surface-section-gap: 1.5rem;");
     expect(styles).toContain("--ds-surface-stack-gap: 0.75rem;");
+    expect(styles).toContain("--ds-button-height: 2.5rem;");
     expect(styles).toContain("--ds-control-height: 2.75rem;");
     expect(styles).toContain("--color-overlay-scrim: var(--overlay-scrim);");
     expect(styles).toContain("--overlay-scrim: oklch(0% 0 0 / 30%);");
@@ -361,9 +362,12 @@ describe("global styles", () => {
     expect(styles).toContain("--ds-motion-ease-drawer: cubic-bezier(0.22, 1, 0.36, 1);");
   });
 
-  it("keeps standard controls at 44px while supporting safe compact affordances", () => {
+  it("keeps Buttons at 40px, fields at 44px, and safe compact affordances", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
+    expect(styles).toContain(".button-target {");
+    expect(styles).toContain("min-width: var(--ds-button-height);");
+    expect(styles).toContain("min-height: var(--ds-button-height);");
     expect(styles).toContain(".control-target {");
     expect(styles).toContain("min-width: var(--ds-control-height);");
     expect(styles).toContain("min-height: var(--ds-control-height);");

@@ -328,6 +328,7 @@
   --ds-surface-inset: 1.5rem;
   --ds-surface-section-gap: 1.5rem;
   --ds-surface-stack-gap: 0.75rem;
+  --ds-button-height: 2.5rem;
   --ds-control-height: 2.75rem;
   --ds-motion-duration-fast: 150ms;
   --ds-motion-duration-medium: 300ms;
@@ -364,6 +365,11 @@
   :root:not(.light) {
     color-scheme: dark;
   }
+}
+
+.button-target {
+  min-width: var(--ds-button-height);
+  min-height: var(--ds-button-height);
 }
 
 .control-target {

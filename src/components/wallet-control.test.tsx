@@ -14,7 +14,7 @@ describe("WalletActionButton", () => {
     const { rerender } = render(<WalletActionButton isConnected={false} onAction={onAction} />);
     const connect = screen.getByRole("button", { name: "Connect wallet" });
     expect(connect.className).toContain("bg-primary");
-    expect(connect.className).toContain("control-target");
+    expect(connect.className).toContain("button-target");
     expect(connect.className).toContain("focus-visible:ring-focus-ring");
     fireEvent.click(connect);
     expect(onAction).toHaveBeenCalledOnce();

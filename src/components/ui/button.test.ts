@@ -9,7 +9,7 @@ describe("button variants", () => {
     expect(primary).toContain("bg-primary");
     expect(primary).toContain("border-transparent");
     expect(primary).toContain("text-primary-foreground");
-    expect(primary).toContain("control-target");
+    expect(primary).toContain("button-target");
     expect(primary).toContain("text-base");
     expect(primary).toContain("leading-6");
     expect(primary).not.toContain("tracking-tight");
@@ -85,12 +85,12 @@ describe("button variants", () => {
     expect(buttonVariants({ variant: "link" })).toContain("text-info-foreground");
   });
 
-  it("keeps every text button size on the universal 44px height", () => {
+  it("keeps every text button size on the universal 40px height", () => {
     const sizes = ["xs", "sm", "default", "lg"] as const;
 
     for (const size of sizes) {
-      expect(buttonVariants({ size })).toContain("h-11");
-      expect(buttonVariants({ size })).toContain("control-target");
+      expect(buttonVariants({ size })).toContain("h-10");
+      expect(buttonVariants({ size })).toContain("button-target");
     }
 
     const large = buttonVariants({ size: "lg" });
@@ -100,12 +100,12 @@ describe("button variants", () => {
     expect(large).not.toContain("font-semibold");
   });
 
-  it("keeps every icon button on a real 44px square", () => {
+  it("keeps every icon button on a real 40px square", () => {
     const sizes = ["icon-xs", "icon-sm", "icon", "icon-lg"] as const;
 
     for (const size of sizes) {
-      expect(buttonVariants({ size })).toContain("size-11");
-      expect(buttonVariants({ size })).toContain("control-target");
+      expect(buttonVariants({ size })).toContain("size-10");
+      expect(buttonVariants({ size })).toContain("button-target");
     }
   });
 

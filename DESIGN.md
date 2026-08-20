@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `f57031f6d8669ee19d8150e8e17b59b8cd08b306` (committed draft; release tag pending)
+Doji Design System source revision: `c5601fd09916e55179e65b0af1e5a66944da5c9d` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -277,7 +277,8 @@ runtime package and no automated cross-repository mutation.
   primitives. The form wraps the complete Card; inputs belong in
   `CardContent`, actions and their feedback in `CardFooter`.
 - Keep the shared 24px card inset/section rhythm and 12px sibling rhythm.
-- Inputs and standard controls are at least 44px high. Labels are visible;
+- Standard Buttons and button-styled action links are 40px high. Inputs and
+  search controls retain at least 44px. Labels are visible;
   errors are field-local and programmatically associated.
 - Image input accepts static JPG, PNG, WebP, or AVIF up to 5,000,000 bytes and
   40 million decoded pixels. Preview remains local and uses a muted Item.
@@ -307,7 +308,8 @@ runtime package and no automated cross-repository mutation.
   Cross-app new-tab actions are the shared exception: keep the label first and
   one decorative Lucide `ArrowUpRight` at the inline end. Component-owned icon
   controls and documented brand/file exceptions retain accessible names.
-- Standard controls expose a real 44px minimum width and height.
+- Standard Buttons expose a real 40px minimum width and height; editable fields
+  retain a real 44px minimum.
 - The global Tailwind v4 `@layer base` rule gives `a[href]`, enabled native
   buttons, and enabled `[role="button"]` controls a pointer cursor while leaving
   native disabled buttons outside the selector. `src/styles.test.ts` and
@@ -364,8 +366,9 @@ runtime package and no automated cross-repository mutation.
 - Icon-only controls and brand links have explicit accessible names.
 - Modal focus, dismissal, and focus restoration remain owned by Base UI.
 - Loading has one authoritative live region. Avoid duplicate announcements.
-- Touch and pointer targets meet the 44px contract except a documented
-  component-owned compact affordance.
+- Standard Button touch and pointer targets meet the 40px contract; editable
+  fields retain 44px, and documented compact affordances keep their own
+  geometry.
 
 ## Local Exceptions
 

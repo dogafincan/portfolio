@@ -149,7 +149,7 @@ describe("PortfolioHome", () => {
       expect(avatar?.className).toContain("[&_img]:object-contain");
       expect(action.getAttribute("href")).toBe(project.liveUrl);
       expect(action.getAttribute("target")).toBe("_blank");
-      expect(action.className).toContain("control-target");
+      expect(action.className).toContain("button-target");
       expect(action.className).toContain("w-full");
       expect(action.className).toContain("bg-primary");
       expect(action.className).toContain("text-primary-foreground");
@@ -186,7 +186,7 @@ describe("PortfolioHome", () => {
     expect(profileBadge.className).toContain("focus-visible:ring-[3px]");
     for (const link of projectLinks) {
       expect(link.className).toContain("focus-visible:ring-3");
-      expect(link.className).toContain("control-target");
+      expect(link.className).toContain("button-target");
       expect(link.className).toContain("border-transparent");
       expect(link.className).toContain("bg-primary");
     }
