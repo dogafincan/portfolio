@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `3de360631727f88831b5a4bebaba1f0282441a88` (committed draft; release tag pending)
+Doji Design System source revision: `37a57ea201d6ef9f52db75793139cb2b231b84e2` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This typography-only synchronization returns ordinary neutral text to stock
@@ -20,12 +20,23 @@ through 26px. Component radius utilities, intentional full/none shapes, logo
 and favicon geometry, and every non-radius token, dimension, spacing rule,
 interaction, and request boundary remain unchanged.
 
+The centered-action composition uses one centered 40px `rounded-xl` muted
+media container with a 20px icon or approved logo, then exact 24px media-to-
+title, 8px title-to-description, and 16px description-to-action spacing when an
+action exists. Its standard full-size surface keeps 40px of top and bottom
+padding at every viewport. Every repeated project Card adopts that rhythm as
+one `CardContent` stack containing its logo, title, complete `text-pretty`
+subtitle, and natural-width outline Open app link. It does not add visual-only
+`CardHeader` or `CardFooter` sections. Wallet
+Empty states already match; submission previews, inline Alerts, and multi-
+action clusters keep their existing compositions and behavior.
+
 Ordinary workflow, Card, footer, dialog, not-found, and vertically stacked
 actions fill the available width of their owner. The shared utility page-header
 group is the responsive exception: it is one bounded full-width stack below the
 small breakpoint and a natural-width row from the small breakpoint. Inputs,
 search controls, selectors, Drawer dismissal, option rows, and upload/drop-zone
-actions remain full width.
+actions outside the centered-action composition remain full width.
 
 This file is Portfolio's local UI contract. The canonical shared source is the
 versioned `doji-design-system` Codex skill in the separate design-system
@@ -254,16 +265,16 @@ runtime package and no automated cross-repository mutation.
   height; the footer follows content after the required 24px structural gap.
   Unequal row bottoms are expected when descriptions differ. Do not wrap the
   grid in a second card-like workbench.
-- Each project Card centers one 48px current product logo by itself in
-  `CardHeader`, then centers its title and complete primary-page subtitle in
-  `CardContent`. The shared 24px Card section gap makes logo-to-title spacing
-  equal to description-to-action spacing without custom margins. The title
+- Each project Card centers one 40px current product logo, its title, complete
+  primary-page subtitle, and optional action in one `CardContent` stack. The
+  centered-action rhythm uses a 40px top/bottom inset, 24px logo-to-title gap,
+  8px title-to-description gap, and 16px description-to-action gap. The title
   uses the normal Card foreground; the subtitle uses the slightly dimmed
   `--muted-foreground` `CardDescription` role with `text-pretty` wrapping. This
   is not a muted Item and does
   matches the standard Item title/supporting-text distinction.
-- When a live URL exists, keep one full-width outline **Open app** action in
-  `CardFooter`. Repeated project Cards do not each claim the page's single
+- When a live URL exists, keep one natural-width outline **Open app** action
+  last in the same `CardContent`. Repeated project Cards do not each claim the page's single
   filled-primary slot. Because the action
   opens another Doji app in a new
   tab, its visible label ends with one decorative Lucide `ArrowUpRight`, its

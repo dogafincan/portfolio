@@ -8,5 +8,8 @@ describe("Empty layout contract", () => {
 
     expect(source).toContain("flex-1 self-stretch");
     expect(source).toContain("border-dashed");
+    expect(source).toContain("px-6 py-10");
+    expect(source).toContain("sm:px-12");
+    expect(source).not.toContain("sm:p-12");
   });
 });

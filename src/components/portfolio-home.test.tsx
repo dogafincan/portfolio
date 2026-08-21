@@ -109,16 +109,14 @@ describe("PortfolioHome", () => {
     for (const card of cards) {
       expect(card.className).not.toContain("h-full");
       expect(card.querySelector('[data-slot="card-content"]')).not.toBeNull();
-      expect(card.querySelector('[data-slot="card-footer"]')?.className).not.toContain(
-        "lg:mt-auto",
-      );
+      expect(card.querySelector('[data-slot="card-header"]')).toBeNull();
+      expect(card.querySelector('[data-slot="card-footer"]')).toBeNull();
     }
 
     for (const project of portfolioProjects) {
       const card = projects.querySelector(`[data-project="${project.slug}"]`);
-      const header = card?.querySelector('[data-slot="card-header"]');
       const content = card?.querySelector('[data-slot="card-content"]');
-      const footer = card?.querySelector('[data-slot="card-footer"]');
+      const copy = content?.querySelector('[data-slot="project-copy"]');
       const title = content?.querySelector('[data-slot="card-title"]');
       const description = content?.querySelector('[data-slot="card-description"]');
       const image = screen.getByAltText(project.logoAlt);
@@ -129,21 +127,21 @@ describe("PortfolioHome", () => {
       });
 
       expect(card?.getAttribute("data-slot")).toBe("card");
+      expect(card?.getAttribute("data-layout")).toBe("centered-action");
+      expect(card?.className).toContain("py-0");
       expect(card?.querySelector('[data-slot="item"]')).toBeNull();
-      expect(header?.className).toContain("place-items-center");
-      expect(content?.className).toContain("place-items-center");
+      expect(content?.className).toContain("items-center");
+      expect(content?.className).toContain("gap-4");
+      expect(content?.className).toContain("py-10");
       expect(content?.className).toContain("text-center");
-      expect(
-        Array.from(header?.children ?? []).map((child) => child.getAttribute("data-slot")),
-      ).toEqual(["project-logo-media"]);
+      expect(copy?.className).toContain("gap-2");
       expect(
         Array.from(content?.children ?? []).map((child) => child.getAttribute("data-slot")),
-      ).toEqual(["card-title", "card-description"]);
+      ).toEqual(["project-logo-media", "project-copy", null]);
       expect(
         Array.from(card?.children ?? []).map((child) => child.getAttribute("data-slot")),
-      ).toEqual(["card-header", "card-content", "card-footer"]);
-      expect(card?.className).toContain("gap-(--ds-surface-section-gap)");
-      expect(content?.className).toContain("gap-(--ds-surface-stack-gap)");
+      ).toEqual(["card-content"]);
+      expect(card?.className).toContain("gap-0");
       expect(title?.querySelector("h2")?.textContent).toBe(project.name);
       expect(description?.textContent).toBe(project.subtitle);
       expect(description?.className).toContain("text-muted-foreground");
@@ -154,19 +152,20 @@ describe("PortfolioHome", () => {
       expect(image.getAttribute("src")).toBe(project.logoLight);
       expect(darkSource?.getAttribute("media")).toBe("(prefers-color-scheme: dark)");
       expect(darkSource?.getAttribute("srcset")).toBe(project.logoDark);
-      expect(image.getAttribute("width")).toBe("48");
-      expect(image.getAttribute("height")).toBe("48");
+      expect(image.getAttribute("width")).toBe("40");
+      expect(image.getAttribute("height")).toBe("40");
       const media = image.closest('[data-slot="project-logo-media"]');
-      expect(media?.className).toContain("size-12");
+      expect(media?.className).toContain("size-10");
+      expect(media?.className).toContain("mb-2");
       expect(media?.className).toContain("rounded-xl");
       expect(media?.className).toContain("bg-muted");
       expect(media?.className).toContain("[&_img]:object-contain");
-      expect(header?.firstElementChild).toBe(media);
-      expect(action.closest('[data-slot="card-footer"]')).toBe(footer);
+      expect(content?.firstElementChild).toBe(media);
+      expect(action.closest('[data-slot="card-content"]')).toBe(content);
       expect(action.getAttribute("href")).toBe(project.liveUrl);
       expect(action.getAttribute("target")).toBe("_blank");
       expect(action.className).toContain("button-target");
-      expect(action.className).toContain("w-full");
+      expect(action.className).not.toContain("w-full");
       expect(action.className).toContain("border-border");
       expect(action.className).toContain("bg-transparent");
       expect(action.className).not.toContain("bg-primary");

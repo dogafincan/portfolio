@@ -4,14 +4,7 @@ import {
   PORTFOLIO_MAIN_CLASS_NAME,
 } from "@/components/app-header";
 import { buttonVariants } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 import { portfolioProjects, type PortfolioProject } from "@/content/projects";
 import { PORTFOLIO_PAGE_SUBTITLE, PORTFOLIO_PAGE_TITLE_ACCENT } from "@/lib/portfolio-page-copy";
 import { ArrowUpRight } from "lucide-react";
@@ -24,10 +17,10 @@ function ProjectCard({
   loading?: "eager" | "lazy";
 }) {
   return (
-    <Card className="min-w-0" data-project={project.slug}>
-      <CardHeader className="place-items-center">
+    <Card className="min-w-0 gap-0 py-0" data-layout="centered-action" data-project={project.slug}>
+      <CardContent className="items-center gap-4 py-10 text-center">
         <div
-          className="flex size-12 overflow-hidden rounded-xl bg-muted [&_img]:object-contain"
+          className="mb-2 flex size-10 overflow-hidden rounded-xl bg-muted [&_img]:object-contain"
           data-slot="project-logo-media"
         >
           <picture className="block size-full" data-slot="project-logo-picture">
@@ -37,24 +30,22 @@ function ProjectCard({
               className="size-full"
               data-slot="project-logo"
               decoding="async"
-              height="48"
+              height="40"
               loading={loading}
               src={project.logoLight}
-              width="48"
+              width="40"
             />
           </picture>
         </div>
-      </CardHeader>
-      <CardContent className="place-items-center text-center">
-        <CardTitle>
-          <h2>{project.name}</h2>
-        </CardTitle>
-        <CardDescription className="text-pretty">{project.subtitle}</CardDescription>
-      </CardContent>
-      <CardFooter>
+        <div className="flex max-w-sm flex-col items-center gap-2" data-slot="project-copy">
+          <CardTitle>
+            <h2>{project.name}</h2>
+          </CardTitle>
+          <CardDescription className="text-pretty">{project.subtitle}</CardDescription>
+        </div>
         <a
           aria-label={`Open ${project.name} app (opens in a new tab)`}
-          className={buttonVariants({ className: "w-full", variant: "outline" })}
+          className={buttonVariants({ variant: "outline" })}
           href={project.liveUrl}
           rel="noreferrer"
           target="_blank"
@@ -62,7 +53,7 @@ function ProjectCard({
           Open app
           <ArrowUpRight aria-hidden="true" data-icon="inline-end" data-lucide="open-app-link" />
         </a>
-      </CardFooter>
+      </CardContent>
     </Card>
   );
 }
