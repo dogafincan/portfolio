@@ -45,7 +45,7 @@ function ProjectCard({
         </div>
         <a
           aria-label={`Open ${project.name} app (opens in a new tab)`}
-          className={buttonVariants({ variant: "outline" })}
+          className={buttonVariants({ variant: "default" })}
           href={project.liveUrl}
           rel="noreferrer"
           target="_blank"

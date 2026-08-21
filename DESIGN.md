@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `37a57ea201d6ef9f52db75793139cb2b231b84e2` (committed draft; release tag pending)
+Doji Design System source revision: `34d4af3d3040b79c9e0acc2153b4cae4048ac093` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This typography-only synchronization returns ordinary neutral text to stock
@@ -26,7 +26,7 @@ title, 8px title-to-description, and 16px description-to-action spacing when an
 action exists. Its standard full-size surface keeps 40px of top and bottom
 padding at every viewport. Every repeated project Card adopts that rhythm as
 one `CardContent` stack containing its logo, title, complete `text-pretty`
-subtitle, and natural-width outline Open app link. It does not add visual-only
+subtitle, and natural-width primary Open app link. It does not add visual-only
 `CardHeader` or `CardFooter` sections. Wallet
 Empty states already match; submission previews, inline Alerts, and multi-
 action clusters keep their existing compositions and behavior.
@@ -159,10 +159,13 @@ runtime package and no automated cross-repository mutation.
   `#FFFFFF` in light mode and `#090909` in dark mode; the manifest background
   is `#FCFCFC`.
 - Keep at most one visible filled dominant Button across the active page or
-  modal workflow state. Filled primary blue and neutral-foreground `outline`
+  modal workflow state by default. Filled primary blue and neutral-foreground `outline`
   are the normal action treatments. The next useful action owns the single
-  filled slot; independent Cards and repeated Items do not each receive one
-  while they remain visible together. Supporting and migration-locked workflow
+  filled slot. Portfolio's project directory is the explicit local exception:
+  every independent project Card owns exactly one filled primary **Open app**
+  outcome, with no second filled action in the Card or adjacent action cluster.
+  Ordinary independent Cards and repeated Items do not infer that exception.
+  Supporting and migration-locked workflow
   actions remain neutral outline until state moves primary ownership. Filled
   `success`, `warning`, or `destructive` may own that same single slot when
   the current decision requires its semantic treatment. These variants remain
@@ -271,12 +274,13 @@ runtime package and no automated cross-repository mutation.
   8px title-to-description gap, and 16px description-to-action gap. The title
   uses the normal Card foreground; the subtitle uses the slightly dimmed
   `--muted-foreground` `CardDescription` role with `text-pretty` wrapping. This
-  is not a muted Item and does
-  matches the standard Item title/supporting-text distinction.
-- When a live URL exists, keep one natural-width outline **Open app** action
-  last in the same `CardContent`. Repeated project Cards do not each claim the page's single
-  filled-primary slot. Because the action
-  opens another Doji app in a new
+  is not a muted Item and matches the standard Item title/supporting-text
+  distinction.
+- When a live URL exists, keep one natural-width filled primary (`default`)
+  **Open app** action last in the same `CardContent`. This owner-approved
+  repeated-Card exception gives each project Card one focused outcome without
+  changing the centered-action layout's default hierarchy elsewhere. Because
+  the action opens another Doji app in a new
   tab, its visible label ends with one decorative Lucide `ArrowUpRight`, its
   accessible name states the new-tab behavior, and its link preserves
   `target="_blank"` plus `rel="noreferrer"`.
@@ -294,7 +298,7 @@ runtime package and no automated cross-repository mutation.
 - Product logos remain checked-in static assets under `public/projects/` as
   revision-named light/dark pairs. Render the pair with `picture`: the dark
   source responds to `prefers-color-scheme: dark`, and the light image is the
-  fallback. Place its `picture` in the centered 48px rounded logo container on
+  fallback. Place its `picture` in the centered 40px rounded logo container on
   the ordinary muted surface with clipping and `object-contain` behavior. Use
   the source app's current transparent navbar/logo artwork; do not bake that
   container into the raster or use a favicon, install icon, hotlink, CSS
@@ -302,7 +306,8 @@ runtime package and no automated cross-repository mutation.
 - Project names, subtitles, destinations, and logo assets remain checked-in
   Portfolio data. This layout migration changes no handler, dynamic route,
   Registry/provider access, analytics request, or assets-only delivery
-  boundary; opening a footer link performs only ordinary browser navigation.
+  boundary; opening the content-owned link performs only ordinary browser
+  navigation.
 - Current logo-source revisions are Doji Rank `2ce5e89fce7ebff100c7d99e747db396a2ab8091`,
   Doji Swap `3eda353c8f5016a6e5321a84331838c18958e784`, Doji Drop
   `141d1b391ed369795663be16dcc511dfd35ddf92`, Doji Snap
@@ -418,11 +423,14 @@ The current migration intentionally keeps only these product-owned exceptions:
 
 - checked-in project brand artwork;
 - the **Remove image** Trash icon;
-- the Portfolio-specific home copy and project-grid content.
+- the Portfolio-specific home copy and project-grid content;
+- one natural-width primary **Open app** link per independent project Card.
 
 These exceptions do not authorize new icon families, raw component colors,
 decorative backgrounds, unapproved button-label icons, card shadows, or custom
-control metrics. The shared trailing `ArrowUpRight` on a text-labeled action
+control metrics. Primary treatment changes presentation only: destinations,
+link semantics, keyboard behavior, runtime requests, and authorization remain
+unchanged. The shared trailing `ArrowUpRight` on a text-labeled action
 that opens another Doji app in a new tab is an approved canonical exception.
 
 ## Adoption Proof

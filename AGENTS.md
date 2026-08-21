@@ -191,9 +191,10 @@ Expected portfolio omissions:
   current transparent product logo, the exact compact navbar name, the exact
   complete primary-page subtitle, and a live app link whose label ends with the
   shared trailing `ArrowUpRight` new-tab affordance. Use one centered standard
-  Card: the 48px muted logo container sits above the title, the complete
-  subtitle uses `CardDescription`, and the full-width neutral outline link
-  remains in `CardFooter`.
+  Card: the 40px muted logo container, title, complete `CardDescription`, and
+  natural-width link remain together in one `CardContent` stack. Portfolio's
+  documented exception renders that one **Open app** outcome per independent
+  Card with the filled primary (`default`) variant.
 - Keep project cards intentionally compact for now. Move role, status, stack,
   implementation highlights, and larger product visuals into future case-study
   pages if the portfolio needs that depth.
