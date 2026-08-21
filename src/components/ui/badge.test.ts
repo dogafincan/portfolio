@@ -70,9 +70,10 @@ describe("badge variants", () => {
   });
 
   it.each(["outline", "ghost"] as const)(
-    "keeps the %s variant on the shared status surface",
+    "keeps the %s variant on the neutral muted surface",
     (variant) => {
-      expect(badgeVariants({ variant })).toContain("bg-status-surface");
+      expect(badgeVariants({ variant })).toContain("bg-muted");
+      expect(badgeVariants({ variant })).not.toContain("bg-status-surface");
     },
   );
 

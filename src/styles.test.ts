@@ -66,7 +66,6 @@ describe("global styles", () => {
       skeleton: "gray-300",
       accent: "gray-200",
       destructive: "red-900",
-      input: "gray-alpha-400",
     } as const;
 
     for (const [semantic, geist] of Object.entries(mappings)) {
@@ -186,10 +185,11 @@ describe("global styles", () => {
     expect(lucideBlock).toContain("stroke-width: var(--lucide-stroke-width);");
   });
 
-  it("uses one light and dark muted surface for neutral states and inputs", () => {
+  it("uses stock shadcn neutral muted and input surface roles", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
-    expect(styles).toContain("--muted: light-dark(oklab(0.97 0 0), oklch(0.19 0 0));");
+    expect(styles).toContain("--muted: light-dark(oklch(0.97 0 0), oklch(0.269 0 0));");
+    expect(styles).toContain("--input: light-dark(oklch(0.922 0 0), oklch(1 0 0 / 15%));");
     expect(styles).toContain("--item-muted: var(--muted);");
     expect(styles).toContain(
       "--item-avatar-background: light-dark(var(--card), var(--background));",
@@ -206,18 +206,27 @@ describe("global styles", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
     expect(styles).toContain("--color-status-surface: var(--status-surface);");
-    expect(styles).toContain("--status-surface: var(--muted);");
-    expect(styles).toContain("--info: light-dark(var(--ds-blue-100), var(--muted));");
+    expect(styles).toContain(
+      "--chromatic-muted-surface: light-dark(oklab(0.97 0 0), oklch(0.19 0 0));",
+    );
+    expect(styles).toContain("--status-surface: var(--chromatic-muted-surface);");
+    expect(styles).toContain(
+      "--info: light-dark(var(--ds-blue-100), var(--chromatic-muted-surface));",
+    );
     expect(styles).toContain("--info-border: var(--ds-blue-400);");
     expect(styles).toContain(
       "--info-foreground: light-dark(oklch(63% 0.24 256.99), var(--ds-blue-900));",
     );
-    expect(styles).toContain("--success: light-dark(var(--ds-green-100), var(--muted));");
+    expect(styles).toContain(
+      "--success: light-dark(var(--ds-green-100), var(--chromatic-muted-surface));",
+    );
     expect(styles).toContain("--success-border: var(--ds-green-400);");
     expect(styles).toContain(
       "--success-foreground: light-dark(oklch(0.7 0.214 145.179993), var(--ds-green-900));",
     );
-    expect(styles).toContain("--warning: light-dark(var(--ds-amber-100), var(--muted));");
+    expect(styles).toContain(
+      "--warning: light-dark(var(--ds-amber-100), var(--chromatic-muted-surface));",
+    );
     expect(styles).toContain("--warning-border: var(--ds-amber-400);");
     expect(styles).toContain(
       "--warning-foreground: light-dark(oklch(0.7 0.1991 64.279999), oklch(0.72 0.1991 64.28));",
@@ -228,7 +237,9 @@ describe("global styles", () => {
     expect(styles).toContain("--color-success-border: var(--success-border);");
     expect(styles).toContain("--color-warning: var(--warning);");
     expect(styles).toContain("--color-warning-border: var(--warning-border);");
-    expect(styles).toContain("--destructive-surface: light-dark(var(--ds-red-100), var(--muted));");
+    expect(styles).toContain(
+      "--destructive-surface: light-dark(var(--ds-red-100), var(--chromatic-muted-surface));",
+    );
     expect(styles).toContain("--destructive-border: var(--ds-red-400);");
     expect(styles).toContain(
       "--destructive-foreground: light-dark(var(--ds-red-700), var(--ds-red-900));",
@@ -252,6 +263,8 @@ describe("global styles", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     expect(styles).toContain("--color-badge-neutral-foreground: var(--badge-neutral-foreground);");
     expect(styles).toContain("--badge-neutral-foreground: var(--foreground);");
+    expect(styles).toContain("--badge-neutral: var(--muted);");
+    expect(styles).toContain("--badge-neutral-strong: var(--muted);");
 
     expect(styles).toContain("--badge-info-foreground: var(--info-foreground);");
     expect(styles).toContain("--badge-success-foreground: var(--success-foreground);");
@@ -259,8 +272,6 @@ describe("global styles", () => {
     expect(styles).toContain("--badge-destructive-foreground: var(--destructive-foreground);");
 
     for (const semantic of [
-      "badge-neutral",
-      "badge-neutral-strong",
       "badge-info-strong",
       "badge-success-strong",
       "badge-warning-strong",
@@ -299,7 +310,9 @@ describe("global styles", () => {
       expect(styles).toContain(`--color-${semantic}: var(--${semantic});`);
     }
 
-    expect(styles).toContain("--control-info: light-dark(var(--ds-blue-100), var(--muted));");
+    expect(styles).toContain(
+      "--control-info: light-dark(var(--ds-blue-100), var(--chromatic-muted-surface));",
+    );
     expect(styles).toContain("--control-info-foreground: var(--badge-info-foreground);");
     expect(styles).toContain(
       "--control-info-hover: light-dark(var(--ds-blue-200), var(--control-hover));",

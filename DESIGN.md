@@ -1,18 +1,18 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `4ee36bb08f79b9020ac99bc748fea201261be34d` (committed draft; release tag pending)
+Doji Design System source revision: `03a2f9f8acf5f3d428e4d216733c157b35b6dd2c` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
-This typography-only synchronization returns ordinary neutral text to stock
-shadcn roles: `--foreground` is `oklch(0.145 0 0)` light /
-`oklch(0.985 0 0)` dark and `--muted-foreground` is
-`oklch(0.556 0 0)` light / `oklch(0.708 0 0)` dark. Card titles, page-header
-title/subtitle, navbar text, and neutral Button/Badge labels use the foreground;
-Card descriptions, footer copy, and placeholders use the muted foreground.
-Geist-backed blue, green, amber, and red semantics, contrast text, and every
-non-font token remain unchanged. Muted Items and Item-based selector triggers
-use the standard foreground title plus muted-foreground description hierarchy.
+This synchronization uses stock shadcn neutral typography and neutral surface
+roles. `--foreground` is `oklch(0.145 0 0)` light /
+`oklch(0.985 0 0)` dark, `--muted-foreground` is `oklch(0.556 0 0)`
+light / `oklch(0.708 0 0)` dark, and neutral `--muted` is
+`oklch(0.97 0 0)` light / `oklch(0.269 0 0)` dark. Editable inputs use
+stock shadcn `--input` paint at 50% opacity, entered text and labels use
+foreground, and placeholders, field descriptions, search icons, and supporting
+form copy use muted foreground. Geist-backed blue, green, amber, and red
+semantics retain their existing Doji surfaces and foregrounds.
 
 This radius-only synchronization sets the shared shadcn foundation to
 `--radius: 0.625rem`, yielding the existing semantic utility scale from 6px
@@ -38,9 +38,11 @@ action clusters keep their existing compositions and behavior.
 
 Ordinary workflow, Card, footer, dialog, not-found, and vertically stacked
 actions fill the available width of their owner. The shared utility page-header
-group is the responsive exception: it is one bounded full-width stack below the
-small breakpoint and a natural-width row from the small breakpoint. Inputs,
-search controls, selectors, Drawer dismissal, option rows, and upload/drop-zone
+action group is the responsive exception: it remains one horizontal row at
+every viewport, using a bounded full-width group with equally flexible actions
+on narrow screens and a natural-width group from the small breakpoint. Keep
+both full labels visible without wrapping or abbreviation. Inputs, search
+controls, selectors, Drawer dismissal, option rows, and upload/drop-zone
 actions outside the centered-action composition remain full width.
 
 This file is Portfolio's local UI contract. The canonical shared source is the
@@ -137,11 +139,13 @@ runtime package and no automated cross-repository mutation.
 - Browser-rendered colors resolve through semantic aliases in `src/styles.css`.
   Do not use raw palette utilities, component-local color literals,
   `color-mix()`, or painted opacity suffixes.
-- All resting muted surfaces use `oklab(0.97 0 0)` in light mode and
-  `oklch(0.19 0 0)` in dark mode. This includes editable controls, search,
-  selector summaries, muted Items, muted icon and project-logo containers, and
-  badges. Alerts keep their tone surfaces in light mode and use the shared
-  muted surface behind unchanged chromatic semantic foregrounds in dark mode. The single `--warning-foreground`
+- Neutral muted surfaces use stock shadcn `--muted`: `oklch(0.97 0 0)`
+  in light mode and `oklch(0.269 0 0)` in dark mode. Inputs and search use
+  stock `--input` through `bg-input/50`, foreground entered text, and
+  muted-foreground placeholders and descriptions. Muted Items, icon and
+  project-logo containers, selector summaries, and neutral badges use
+  `--muted`. Chromatic badges and Alerts keep their tone surfaces in light
+  mode and the protected `oklch(0.19 0 0)` surface in dark mode. The single `--warning-foreground`
   role owns warning alerts, amber badges, warning buttons and controls, and all
   other amber status text. It resolves to `oklch(0.7 0.1991 64.279999)` in
   light mode and `oklch(0.72 0.1991 64.28)` in dark mode.
