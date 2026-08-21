@@ -31,6 +31,20 @@ function getBlock(styles: string, selector: string) {
 }
 
 describe("global styles", () => {
+  it("uses the stock shadcn radius foundation and derived scale", () => {
+    const styles = readFileSync("src/styles.css", "utf8");
+
+    expect(styles).toContain("--radius: 0.625rem;");
+    expect(styles).not.toContain("--radius: 0.875rem;");
+    expect(styles).toContain("--radius-sm: calc(var(--radius) * 0.6);");
+    expect(styles).toContain("--radius-md: calc(var(--radius) * 0.8);");
+    expect(styles).toContain("--radius-lg: var(--radius);");
+    expect(styles).toContain("--radius-xl: calc(var(--radius) * 1.4);");
+    expect(styles).toContain("--radius-2xl: calc(var(--radius) * 1.8);");
+    expect(styles).toContain("--radius-3xl: calc(var(--radius) * 2.2);");
+    expect(styles).toContain("--radius-4xl: calc(var(--radius) * 2.6);");
+  });
+
   it("imports the standalone Geist palette and exposes every Tailwind alias", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const paletteImport = '@import "./styles/geist-colors.css";';

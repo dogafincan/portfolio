@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `8538548c29c171988baa12c3bcf4e391c28a6315` (committed draft; release tag pending)
+Doji Design System source revision: `3de360631727f88831b5a4bebaba1f0282441a88` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This typography-only synchronization returns ordinary neutral text to stock
@@ -13,6 +13,12 @@ Card descriptions, footer copy, and placeholders use the muted foreground.
 Geist-backed blue, green, amber, and red semantics, contrast text, and every
 non-font token remain unchanged. Muted Items and Item-based selector triggers
 use the standard foreground title plus muted-foreground description hierarchy.
+
+This radius-only synchronization sets the shared shadcn foundation to
+`--radius: 0.625rem`, yielding the existing semantic utility scale from 6px
+through 26px. Component radius utilities, intentional full/none shapes, logo
+and favicon geometry, and every non-radius token, dimension, spacing rule,
+interaction, and request boundary remain unchanged.
 
 Ordinary workflow, Card, footer, dialog, not-found, and vertically stacked
 actions fill the available width of their owner. The shared utility page-header
@@ -373,7 +379,7 @@ runtime package and no automated cross-repository mutation.
   platform-overlay exclusion zone. Do not add atmosphere, gradients, shadows,
   mockups, project cards, or request-time image generation.
 - Use semantic social alt text. Metadata uses the exact absolute HTTPS URL
-  `https://dogafincan.com/og.png?v=2026082101` across Open Graph and Twitter.
+  `https://dogafincan.com/og.png?v=2026082102` across Open Graph and Twitter.
   It declares `og:image:type=image/png`. Advance the version without reuse
   whenever the PNG bytes or composition changes.
 - `scripts/generate-og.mjs` waits for fonts, uses reduced motion, verifies

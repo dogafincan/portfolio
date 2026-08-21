@@ -324,7 +324,7 @@
   --chart-3: var(--ds-blue-600);
   --chart-4: var(--ds-blue-800);
   --chart-5: var(--ds-blue-1000);
-  --radius: 0.875rem;
+  --radius: 0.625rem;
   --ds-surface-inset: 1.5rem;
   --ds-surface-section-gap: 1.5rem;
   --ds-surface-stack-gap: 0.75rem;
