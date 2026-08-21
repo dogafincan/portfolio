@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `09eabd7c3bd304ed15d669d02488e048a1a24a25` (committed draft; release tag pending)
+Doji Design System source revision: `4182f3b22d9693ba235b8086c97596140e0fbbc7` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 Ordinary workflow, Card, footer, dialog, not-found, and vertically stacked
@@ -105,18 +105,19 @@ runtime package and no automated cross-repository mutation.
 - Browser-rendered colors resolve through semantic aliases in `src/styles.css`.
   Do not use raw palette utilities, component-local color literals,
   `color-mix()`, or painted opacity suffixes.
-- Neutral muted surfaces and editable controls use
-  `oklab(0.98 0 0)` in light mode and `oklch(0.17 0 0)` in dark mode. Colored
-  statuses keep their tone surfaces in light mode and use the muted surface
-  behind colored foregrounds in dark mode. The single `--warning-foreground`
+- All resting muted surfaces use `oklab(0.97 0 0)` in light mode and
+  `oklch(0.19 0 0)` in dark mode. This includes editable controls, search,
+  selector summaries, muted Items, muted icon and project-logo containers, and
+  badges. Alerts keep their tone surfaces in light mode and use the shared
+  muted surface behind unchanged semantic foregrounds in dark mode. The single `--warning-foreground`
   role owns warning alerts, amber badges, warning buttons and controls, and all
   other amber status text. It resolves to `oklch(0.7 0.1991 64.279999)` in
   light mode and `oklch(0.72 0.1991 64.28)` in dark mode.
-- The resting muted `Item` alone uses `oklab(0.985 0 0)` in light mode and
-  `oklch(0.16 0 0)` in dark mode. Avatar/image `ItemMedia` containers match
+- The resting muted `Item` keeps its primitive-owned `--item-muted` alias,
+  which resolves to that same shared muted surface. Avatar/image `ItemMedia` containers match
   the Card background in light mode and retain the page background in dark
   mode. The Item primitive owns both roles; call sites do not add local
-  background utilities, and every non-Item muted surface stays on `--muted`.
+  background utilities; Item hover states use the shared interaction ladder.
 - The same primitive keeps each muted selector or summary Item's title and
   complete subtitle on `--foreground` in both schemes. Default and outline Item
   descriptions remain on `--muted-foreground`; this scoped rule does not

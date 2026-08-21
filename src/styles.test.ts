@@ -168,8 +168,8 @@ describe("global styles", () => {
   it("uses one light and dark muted surface for neutral states and inputs", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
-    expect(styles).toContain("--muted: light-dark(oklab(0.98 0 0), oklch(0.17 0 0));");
-    expect(styles).toContain("--item-muted: light-dark(oklab(0.985 0 0), oklch(0.16 0 0));");
+    expect(styles).toContain("--muted: light-dark(oklab(0.97 0 0), oklch(0.19 0 0));");
+    expect(styles).toContain("--item-muted: var(--muted);");
     expect(styles).toContain(
       "--item-avatar-background: light-dark(var(--card), var(--background));",
     );
@@ -254,44 +254,22 @@ describe("global styles", () => {
       expect(styles).toContain(`--${semantic}: var(--status-surface);`);
     }
 
-    expect(styles).toContain("--badge-info: light-dark(var(--ds-blue-100), var(--muted));");
-    expect(styles).toContain("--badge-success: light-dark(var(--ds-green-100), var(--muted));");
-    expect(styles).toContain("--badge-warning: light-dark(var(--ds-amber-100), var(--muted));");
-    expect(styles).toContain("--badge-destructive: light-dark(var(--ds-red-100), var(--muted));");
+    expect(styles).toContain("--badge-info: var(--status-surface);");
+    expect(styles).toContain("--badge-success: var(--status-surface);");
+    expect(styles).toContain("--badge-warning: var(--status-surface);");
+    expect(styles).toContain("--badge-destructive: var(--status-surface);");
     expect(styles).toContain("--color-badge-info-active: var(--badge-info-active);");
-    expect(styles).toContain(
-      "--badge-info-hover: light-dark(var(--ds-blue-200), var(--control-hover));",
-    );
-    expect(styles).toContain(
-      "--badge-info-active: light-dark(var(--ds-blue-300), var(--control-active));",
-    );
-    expect(styles).toContain(
-      "--badge-header-info: light-dark(var(--ds-blue-100), oklch(0.19 0 0));",
-    );
-    expect(styles).toContain(
-      "--badge-header-info-hover: light-dark(var(--ds-blue-200), var(--control-hover));",
-    );
-    expect(styles).toContain(
-      "--badge-header-info-active: light-dark(var(--ds-blue-300), var(--control-active));",
-    );
-    expect(styles).toContain(
-      "--badge-success-hover: light-dark(var(--ds-green-200), var(--control-hover));",
-    );
-    expect(styles).toContain(
-      "--badge-success-active: light-dark(var(--ds-green-300), var(--control-active));",
-    );
-    expect(styles).toContain(
-      "--badge-warning-hover: light-dark(var(--ds-amber-200), var(--control-hover));",
-    );
-    expect(styles).toContain(
-      "--badge-warning-active: light-dark(var(--ds-amber-300), var(--control-active));",
-    );
-    expect(styles).toContain(
-      "--badge-destructive-hover: light-dark(var(--ds-red-200), var(--control-hover));",
-    );
-    expect(styles).toContain(
-      "--badge-destructive-active: light-dark(var(--ds-red-300), var(--control-active));",
-    );
+    expect(styles).toContain("--badge-info-hover: var(--control-hover);");
+    expect(styles).toContain("--badge-info-active: var(--control-active);");
+    expect(styles).toContain("--badge-header-info: var(--status-surface);");
+    expect(styles).toContain("--badge-header-info-hover: var(--control-hover);");
+    expect(styles).toContain("--badge-header-info-active: var(--control-active);");
+    expect(styles).toContain("--badge-success-hover: var(--control-hover);");
+    expect(styles).toContain("--badge-success-active: var(--control-active);");
+    expect(styles).toContain("--badge-warning-hover: var(--control-hover);");
+    expect(styles).toContain("--badge-warning-active: var(--control-active);");
+    expect(styles).toContain("--badge-destructive-hover: var(--control-hover);");
+    expect(styles).toContain("--badge-destructive-active: var(--control-active);");
   });
 
   it("maps information controls to light blue and dark neutral surfaces", () => {
