@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `4182f3b22d9693ba235b8086c97596140e0fbbc7` (committed draft; release tag pending)
+Doji Design System source revision: `812137bb0125469cc7615082d4e2e59772fee78c` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 Ordinary workflow, Card, footer, dialog, not-found, and vertically stacked
@@ -210,7 +210,8 @@ runtime package and no automated cross-repository mutation.
   rail and a 20px brand inset. Every primary page header places the compact
   **Follow Doga Fincan on X** header-information badge above its title. It
   links to `https://x.com/dogafincan` in a new tab with a 36px hit area around
-  its 24px visual and a trailing `ArrowUpRight`.
+  its 24px visual and a trailing `ArrowUpRight`. Its surface is Blue 100 in
+  light mode and the shared muted surface in dark mode.
 - The navbar contains identity and genuine navigation only. Portfolio's page
   header ends after its subtitle: it has no Connect wallet, Submit project,
   Doji Snap, GitHub, X-icon, or other secondary action row. The single X-profile

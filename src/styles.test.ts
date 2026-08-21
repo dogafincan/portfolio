@@ -261,9 +261,9 @@ describe("global styles", () => {
     expect(styles).toContain("--color-badge-info-active: var(--badge-info-active);");
     expect(styles).toContain("--badge-info-hover: var(--control-hover);");
     expect(styles).toContain("--badge-info-active: var(--control-active);");
-    expect(styles).toContain("--badge-header-info: var(--status-surface);");
-    expect(styles).toContain("--badge-header-info-hover: var(--control-hover);");
-    expect(styles).toContain("--badge-header-info-active: var(--control-active);");
+    expect(styles).toContain("--badge-header-info: var(--control-info);");
+    expect(styles).toContain("--badge-header-info-hover: var(--control-info-hover);");
+    expect(styles).toContain("--badge-header-info-active: var(--control-info-active);");
     expect(styles).toContain("--badge-success-hover: var(--control-hover);");
     expect(styles).toContain("--badge-success-active: var(--control-active);");
     expect(styles).toContain("--badge-warning-hover: var(--control-hover);");

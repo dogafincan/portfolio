@@ -273,10 +273,10 @@
   --badge-info-foreground: var(--info-foreground);
   --badge-info-hover: var(--control-hover);
   --badge-info-active: var(--control-active);
-  --badge-header-info: var(--status-surface);
+  --badge-header-info: var(--control-info);
   --badge-header-info-foreground: var(--info-foreground);
-  --badge-header-info-hover: var(--control-hover);
-  --badge-header-info-active: var(--control-active);
+  --badge-header-info-hover: var(--control-info-hover);
+  --badge-header-info-active: var(--control-info-active);
   --badge-success: var(--status-surface);
   --badge-success-foreground: var(--success-foreground);
   --badge-success-hover: var(--control-hover);
