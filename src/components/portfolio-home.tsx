@@ -18,7 +18,7 @@ function ProjectCard({
 }) {
   return (
     <Card className="min-w-0 gap-0 py-0" data-layout="centered-action" data-project={project.slug}>
-      <CardContent className="items-center gap-4 py-10 text-center">
+      <CardContent className="items-center gap-4 px-4 py-10 text-center">
         <div
           className="mb-2 flex size-10 overflow-hidden rounded-xl bg-muted [&_img]:object-contain"
           data-slot="project-logo-media"
@@ -37,7 +37,7 @@ function ProjectCard({
             />
           </picture>
         </div>
-        <div className="flex max-w-sm flex-col items-center gap-2" data-slot="project-copy">
+        <div className="flex w-full max-w-md flex-col items-center gap-2" data-slot="project-copy">
           <CardTitle>
             <h2>{project.name}</h2>
           </CardTitle>

@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `34d4af3d3040b79c9e0acc2153b4cae4048ac093` (committed draft; release tag pending)
+Doji Design System source revision: `4ee36bb08f79b9020ac99bc748fea201261be34d` (committed draft; release tag pending)
 Doji Design System adoption: migrating
 
 This typography-only synchronization returns ordinary neutral text to stock
@@ -26,7 +26,12 @@ title, 8px title-to-description, and 16px description-to-action spacing when an
 action exists. Its standard full-size surface keeps 40px of top and bottom
 padding at every viewport. Every repeated project Card adopts that rhythm as
 one `CardContent` stack containing its logo, title, complete `text-pretty`
-subtitle, and natural-width primary Open app link. It does not add visual-only
+subtitle, and natural-width primary Open app link. Because this is the Card's
+direct primary content, the composition uses a local 16px horizontal
+`CardContent` inset rather than the ordinary 24px Card inset. Its copy group
+uses the deliberate readable `max-w-md` measure instead of inheriting the
+narrower `max-w-sm` cap used by nested Empty content. The shared Card
+primitive and `--ds-surface-inset` remain unchanged. It does not add visual-only
 `CardHeader` or `CardFooter` sections. Wallet
 Empty states already match; submission previews, inline Alerts, and multi-
 action clusters keep their existing compositions and behavior.
@@ -60,7 +65,7 @@ mechanism. Stable repository, package, Worker, route, schema, environment,
 provider, and retained implementation identifiers remain technically accurate
 and are not renamed for this copy change.
 
-Every local Card keeps 24px (`gap-6`) between each present header, content,
+Every ordinary local Card keeps 24px (`gap-6`) between each present header, content,
 and footer section at every size. `CardContent` is shrink-safe but natural-height
 by default. A present footer stays in ordinary flow after the exact structural
 24px gap at every width. Sibling items in `CardContent` and `CardFooter` use
@@ -271,7 +276,10 @@ runtime package and no automated cross-repository mutation.
 - Each project Card centers one 40px current product logo, its title, complete
   primary-page subtitle, and optional action in one `CardContent` stack. The
   centered-action rhythm uses a 40px top/bottom inset, 24px logo-to-title gap,
-  8px title-to-description gap, and 16px description-to-action gap. The title
+  8px title-to-description gap, 16px description-to-action gap, and a local
+  16px horizontal `CardContent` inset. The title-description group may use
+  up to the deliberate `max-w-md` readable measure rather than the nested
+  Empty primitive's narrower cap. The title
   uses the normal Card foreground; the subtitle uses the slightly dimmed
   `--muted-foreground` `CardDescription` role with `text-pretty` wrapping. This
   is not a muted Item and matches the standard Item title/supporting-text
@@ -308,6 +316,11 @@ runtime package and no automated cross-repository mutation.
   Registry/provider access, analytics request, or assets-only delivery
   boundary; opening the content-owned link performs only ordinary browser
   navigation.
+- The direct-Card 16px horizontal inset is a presentation-only density rule.
+  It does not change the Card primitive, project data, link destination,
+  keyboard order, assets-only public delivery, or request boundary. Portfolio
+  makes no Registry, source-app, provider, analytics, or image-service request
+  to populate the additional readable width.
 - Current logo-source revisions are Doji Rank `2ce5e89fce7ebff100c7d99e747db396a2ab8091`,
   Doji Swap `3eda353c8f5016a6e5321a84331838c18958e784`, Doji Drop
   `141d1b391ed369795663be16dcc511dfd35ddf92`, Doji Snap

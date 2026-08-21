@@ -132,8 +132,12 @@ describe("PortfolioHome", () => {
       expect(card?.querySelector('[data-slot="item"]')).toBeNull();
       expect(content?.className).toContain("items-center");
       expect(content?.className).toContain("gap-4");
+      expect(content?.className).toContain("px-4");
       expect(content?.className).toContain("py-10");
       expect(content?.className).toContain("text-center");
+      expect(copy?.className).toContain("w-full");
+      expect(copy?.className).toContain("max-w-md");
+      expect(copy?.className).not.toContain("max-w-sm");
       expect(copy?.className).toContain("gap-2");
       expect(
         Array.from(content?.children ?? []).map((child) => child.getAttribute("data-slot")),

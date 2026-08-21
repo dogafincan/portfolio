@@ -192,7 +192,10 @@ Expected portfolio omissions:
   complete primary-page subtitle, and a live app link whose label ends with the
   shared trailing `ArrowUpRight` new-tab affordance. Use one centered standard
   Card: the 40px muted logo container, title, complete `CardDescription`, and
-  natural-width link remain together in one `CardContent` stack. Portfolio's
+  natural-width link remain together in one `CardContent` stack. That
+  direct-Card composition owns a local 16px horizontal inset and a deliberate
+  readable copy measure; do not change the shared Card primitive or reuse a
+  narrower nested-Item/Empty copy cap. Portfolio's
   documented exception renders that one **Open app** outcome per independent
   Card with the filled primary (`default`) variant.
 - Keep project cards intentionally compact for now. Move role, status, stack,
