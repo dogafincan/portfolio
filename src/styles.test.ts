@@ -46,16 +46,11 @@ describe("global styles", () => {
     expect(styles.match(/--color-ds-[a-z-]+-\d+:/g)).toHaveLength(92);
   });
 
-  it("maps shadcn semantics to Geist roles with the documented app-owned surfaces", () => {
+  it("maps shadcn neutral text and Geist chromatic roles with app-owned surfaces", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const mappings = {
-      foreground: "gray-1000",
-      "card-foreground": "gray-1000",
-      "popover-foreground": "gray-1000",
-      "secondary-foreground": "gray-1000",
       skeleton: "gray-300",
       accent: "gray-200",
-      "accent-foreground": "gray-1000",
       destructive: "red-900",
       input: "gray-alpha-400",
     } as const;
@@ -64,14 +59,26 @@ describe("global styles", () => {
       expect(styles).toContain(`--${semantic}: var(--ds-${geist});`);
     }
 
-    expect(styles).toContain("--muted-foreground: light-dark(oklch(31% 0 0), oklch(83% 0 0));");
+    expect(styles).toContain("--foreground: light-dark(oklch(0.145 0 0), oklch(0.985 0 0));");
+    expect(styles).toContain("--muted-foreground: light-dark(oklch(0.556 0 0), oklch(0.708 0 0));");
+    for (const semantic of [
+      "card-foreground",
+      "popover-foreground",
+      "secondary-foreground",
+      "accent-foreground",
+      "badge-neutral-foreground",
+      "sidebar-foreground",
+      "sidebar-accent-foreground",
+    ]) {
+      expect(styles).toContain(`--${semantic}: var(--foreground);`);
+    }
     expect(styles).toContain("--color-page-title-accent: var(--page-title-accent);");
     expect(styles).toContain("--page-title-accent: var(--info-foreground);");
     expect(styles).toContain(
       "--primary: light-dark(oklch(0.6 0.2508 258.230011), var(--ds-blue-700));",
     );
     expect(styles).toContain("--color-quiet-foreground: var(--quiet-foreground);");
-    expect(styles).toContain("--quiet-foreground: var(--ds-gray-900);");
+    expect(styles).toContain("--quiet-foreground: var(--muted-foreground);");
     expect(styles).toContain("--color-skeleton: var(--skeleton);");
     expect(styles).toContain("--contrast-foreground: oklch(100% 0 0);");
     expect(styles).toContain("--primary-foreground: var(--contrast-foreground);");
@@ -229,14 +236,8 @@ describe("global styles", () => {
 
   it("maps colored badges to light tones and dark neutral surfaces", () => {
     const styles = readFileSync("src/styles.css", "utf8");
-    const foregroundMappings = {
-      "badge-neutral-foreground": "gray-1000",
-    } as const;
-
-    for (const [semantic, geist] of Object.entries(foregroundMappings)) {
-      expect(styles).toContain(`--color-${semantic}: var(--${semantic});`);
-      expect(styles).toContain(`--${semantic}: var(--ds-${geist});`);
-    }
+    expect(styles).toContain("--color-badge-neutral-foreground: var(--badge-neutral-foreground);");
+    expect(styles).toContain("--badge-neutral-foreground: var(--foreground);");
 
     expect(styles).toContain("--badge-info-foreground: var(--info-foreground);");
     expect(styles).toContain("--badge-success-foreground: var(--success-foreground);");

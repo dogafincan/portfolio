@@ -46,7 +46,7 @@ describe("Item", () => {
     const item = container.querySelector('[data-slot="item"]');
 
     expect(item?.className).toContain("bg-item-muted");
-    expect(item?.className).toContain("[&_[data-slot=item-description]]:text-foreground");
+    expect(item?.className).not.toContain("[&_[data-slot=item-description]]:text-foreground");
     expect(item?.className).toContain("focus-visible:ring-focus-ring");
     expect(item?.className.split(/\s+/)).not.toContain("bg-muted");
     expect(item?.className).not.toContain("bg-muted/50");
