@@ -127,9 +127,7 @@ describe("global styles", () => {
     expect(styles).toContain("--color-secondary-hover: var(--secondary-hover);");
     expect(styles).toContain("--secondary-hover: var(--control-hover);");
     expect(styles).toContain("--color-destructive-hover: var(--destructive-hover);");
-    expect(styles).toContain(
-      "--destructive-hover: light-dark(var(--ds-red-200), var(--control-hover));",
-    );
+    expect(styles).toContain("--destructive-hover: var(--ds-red-200);");
     expect(styles).toContain(
       "--primary-hover: light-dark(var(--ds-blue-700), var(--ds-blue-800));",
     );
@@ -202,31 +200,24 @@ describe("global styles", () => {
     expect(styles).not.toContain("--muted: var(--ds-gray-100);");
   });
 
-  it("maps light alerts to tone surfaces and dark alerts to the muted surface", () => {
+  it("maps chromatic surfaces and borders to scheme-aware Geist tone families", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
-    expect(styles).toContain("--color-status-surface: var(--status-surface);");
-    expect(styles).toContain(
-      "--chromatic-muted-surface: light-dark(oklab(0.97 0 0), oklch(0.19 0 0));",
-    );
-    expect(styles).toContain("--status-surface: var(--chromatic-muted-surface);");
-    expect(styles).toContain(
-      "--info: light-dark(var(--ds-blue-100), var(--chromatic-muted-surface));",
-    );
+    expect(styles).toContain("--info: var(--ds-blue-100);");
     expect(styles).toContain("--info-border: var(--ds-blue-400);");
+    expect(styles).toContain("--info-hover: var(--ds-blue-200);");
+    expect(styles).toContain("--info-active: var(--ds-blue-300);");
     expect(styles).toContain(
       "--info-foreground: light-dark(oklch(63% 0.24 256.99), var(--ds-blue-900));",
     );
-    expect(styles).toContain(
-      "--success: light-dark(var(--ds-green-100), var(--chromatic-muted-surface));",
-    );
+    expect(styles).toContain("--success: var(--ds-green-100);");
     expect(styles).toContain("--success-border: var(--ds-green-400);");
+    expect(styles).toContain("--success-hover: var(--ds-green-200);");
+    expect(styles).toContain("--success-active: var(--ds-green-300);");
     expect(styles).toContain(
       "--success-foreground: light-dark(oklch(0.7 0.214 145.179993), var(--ds-green-900));",
     );
-    expect(styles).toContain(
-      "--warning: light-dark(var(--ds-amber-100), var(--chromatic-muted-surface));",
-    );
+    expect(styles).toContain("--warning: var(--ds-amber-100);");
     expect(styles).toContain("--warning-border: var(--ds-amber-400);");
     expect(styles).toContain(
       "--warning-foreground: light-dark(oklch(0.7 0.1991 64.279999), oklch(0.72 0.1991 64.28));",
@@ -237,9 +228,7 @@ describe("global styles", () => {
     expect(styles).toContain("--color-success-border: var(--success-border);");
     expect(styles).toContain("--color-warning: var(--warning);");
     expect(styles).toContain("--color-warning-border: var(--warning-border);");
-    expect(styles).toContain(
-      "--destructive-surface: light-dark(var(--ds-red-100), var(--chromatic-muted-surface));",
-    );
+    expect(styles).toContain("--destructive-surface: var(--ds-red-100);");
     expect(styles).toContain("--destructive-border: var(--ds-red-400);");
     expect(styles).toContain(
       "--destructive-foreground: light-dark(var(--ds-red-700), var(--ds-red-900));",
@@ -259,7 +248,7 @@ describe("global styles", () => {
     expect(styles).toContain("--sidebar-border: var(--ds-gray-alpha-400);");
   });
 
-  it("maps colored badges to light tones and dark neutral surfaces", () => {
+  it("maps chromatic badges to scheme-aware Geist tone families", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     expect(styles).toContain("--color-badge-neutral-foreground: var(--badge-neutral-foreground);");
     expect(styles).toContain("--badge-neutral-foreground: var(--foreground);");
@@ -271,34 +260,29 @@ describe("global styles", () => {
     expect(styles).toContain("--badge-warning-foreground: var(--warning-foreground);");
     expect(styles).toContain("--badge-destructive-foreground: var(--destructive-foreground);");
 
-    for (const semantic of [
-      "badge-info-strong",
-      "badge-success-strong",
-      "badge-warning-strong",
-      "badge-destructive-strong",
-    ]) {
-      expect(styles).toContain(`--${semantic}: var(--status-surface);`);
-    }
-
-    expect(styles).toContain("--badge-info: var(--status-surface);");
-    expect(styles).toContain("--badge-success: var(--status-surface);");
-    expect(styles).toContain("--badge-warning: var(--status-surface);");
-    expect(styles).toContain("--badge-destructive: var(--status-surface);");
+    expect(styles).toContain("--badge-info-strong: var(--primary);");
+    expect(styles).toContain("--badge-success-strong: var(--success-strong);");
+    expect(styles).toContain("--badge-warning-strong: var(--warning-strong);");
+    expect(styles).toContain("--badge-destructive-strong: var(--destructive-strong);");
+    expect(styles).toContain("--badge-info: var(--info);");
+    expect(styles).toContain("--badge-success: var(--success);");
+    expect(styles).toContain("--badge-warning: var(--warning);");
+    expect(styles).toContain("--badge-destructive: var(--destructive-surface);");
     expect(styles).toContain("--color-badge-info-active: var(--badge-info-active);");
-    expect(styles).toContain("--badge-info-hover: var(--control-hover);");
-    expect(styles).toContain("--badge-info-active: var(--control-active);");
+    expect(styles).toContain("--badge-info-hover: var(--info-hover);");
+    expect(styles).toContain("--badge-info-active: var(--info-active);");
     expect(styles).toContain("--badge-header-info: var(--control-info);");
     expect(styles).toContain("--badge-header-info-hover: var(--control-info-hover);");
     expect(styles).toContain("--badge-header-info-active: var(--control-info-active);");
-    expect(styles).toContain("--badge-success-hover: var(--control-hover);");
-    expect(styles).toContain("--badge-success-active: var(--control-active);");
-    expect(styles).toContain("--badge-warning-hover: var(--control-hover);");
-    expect(styles).toContain("--badge-warning-active: var(--control-active);");
-    expect(styles).toContain("--badge-destructive-hover: var(--control-hover);");
-    expect(styles).toContain("--badge-destructive-active: var(--control-active);");
+    expect(styles).toContain("--badge-success-hover: var(--success-hover);");
+    expect(styles).toContain("--badge-success-active: var(--success-active);");
+    expect(styles).toContain("--badge-warning-hover: var(--warning-hover);");
+    expect(styles).toContain("--badge-warning-active: var(--warning-active);");
+    expect(styles).toContain("--badge-destructive-hover: var(--destructive-hover);");
+    expect(styles).toContain("--badge-destructive-active: var(--destructive-active);");
   });
 
-  it("maps information controls to light blue and dark neutral surfaces", () => {
+  it("maps information controls to the scheme-aware blue family", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
     for (const semantic of [
@@ -310,16 +294,10 @@ describe("global styles", () => {
       expect(styles).toContain(`--color-${semantic}: var(--${semantic});`);
     }
 
-    expect(styles).toContain(
-      "--control-info: light-dark(var(--ds-blue-100), var(--chromatic-muted-surface));",
-    );
+    expect(styles).toContain("--control-info: var(--ds-blue-100);");
     expect(styles).toContain("--control-info-foreground: var(--badge-info-foreground);");
-    expect(styles).toContain(
-      "--control-info-hover: light-dark(var(--ds-blue-200), var(--control-hover));",
-    );
-    expect(styles).toContain(
-      "--control-info-active: light-dark(var(--ds-blue-300), var(--control-active));",
-    );
+    expect(styles).toContain("--control-info-hover: var(--ds-blue-200);");
+    expect(styles).toContain("--control-info-active: var(--ds-blue-300);");
   });
 
   it("uses one semantic map with system and explicit theme resolution", () => {

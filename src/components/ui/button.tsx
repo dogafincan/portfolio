@@ -11,21 +11,21 @@ const buttonVariants = cva(
         default:
           "border-transparent bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active",
         outline:
-          "border-border bg-transparent text-foreground hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-input/30",
+          "border-border bg-transparent text-foreground hover:bg-control-hover hover:text-foreground active:bg-control-active aria-expanded:bg-control-hover aria-expanded:text-foreground aria-pressed:bg-control-active",
         secondary:
           "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary-hover active:bg-control-active aria-expanded:bg-accent aria-expanded:text-secondary-foreground",
         ghost:
           "border-transparent hover:bg-control-hover active:bg-control-active hover:text-foreground aria-expanded:bg-accent aria-expanded:text-foreground dark:hover:bg-control-hover",
         "info-muted":
-          "border-transparent bg-info text-info-foreground hover:bg-control-info-hover active:bg-control-info-active aria-expanded:bg-control-info-hover aria-expanded:text-info-foreground",
+          "border-info-border bg-info text-info-foreground hover:bg-info-hover active:bg-info-active aria-expanded:bg-info-hover aria-expanded:text-info-foreground",
         warning:
           "border-transparent bg-warning-strong text-warning-strong-foreground hover:bg-warning-strong-hover active:bg-warning-strong-active focus-visible:border-warning-border focus-visible:ring-warning-border",
         "warning-muted":
-          "border-transparent bg-warning text-warning-foreground hover:bg-warning-hover active:bg-warning-active aria-expanded:bg-warning-hover aria-expanded:text-warning-foreground focus-visible:border-warning-border focus-visible:ring-warning-border",
+          "border-warning-border bg-warning text-warning-foreground hover:bg-warning-hover active:bg-warning-active aria-expanded:bg-warning-hover aria-expanded:text-warning-foreground focus-visible:border-warning-border focus-visible:ring-warning-border",
         destructive:
           "border-transparent bg-destructive-strong text-destructive-strong-foreground hover:bg-destructive-strong-hover active:bg-destructive-strong-active focus-visible:border-destructive-border focus-visible:ring-destructive-border",
         "destructive-muted":
-          "border-transparent bg-destructive-surface text-destructive-foreground hover:bg-destructive-hover active:bg-destructive-active aria-expanded:bg-destructive-hover aria-expanded:text-destructive-foreground focus-visible:border-destructive-border focus-visible:ring-destructive-border",
+          "border-destructive-border bg-destructive-surface text-destructive-foreground hover:bg-destructive-hover active:bg-destructive-active aria-expanded:bg-destructive-hover aria-expanded:text-destructive-foreground focus-visible:border-destructive-border focus-visible:ring-destructive-border",
         success:
           "border-transparent bg-success-strong text-success-strong-foreground hover:bg-success-strong-hover active:bg-success-strong-active focus-visible:border-success-border focus-visible:ring-success-border",
         link: "border-transparent text-info-foreground underline-offset-4 hover:underline",

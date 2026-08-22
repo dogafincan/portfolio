@@ -14,10 +14,10 @@ function expectClassTokens(element: Element | null, tokens: string[]) {
   }
 }
 
-function expectToneSurface(element: Element | null, surface: string) {
-  expectClassTokens(element, ["border", "border-transparent", surface]);
+function expectToneSurface(element: Element | null, surface: string, border: string) {
+  expectClassTokens(element, ["border", border, surface]);
   expect(element?.className).not.toContain("bg-transparent");
-  expect(element?.className).not.toMatch(/border-(?:info|success|warning|destructive)-border/);
+  expect(element?.className).not.toContain("border-transparent");
 }
 
 describe("Alert", () => {
@@ -50,7 +50,7 @@ describe("Alert", () => {
     expect(alert?.className).toContain("*:[svg]:translate-y-[3px]");
   });
 
-  it("uses transparent borders, semantic surfaces, and foreground families for every variant", () => {
+  it("uses matching semantic borders, surfaces, and foreground families for every variant", () => {
     const variants = ["default", "destructive", "info", "success", "warning"] as const;
     const { container } = render(
       <>
@@ -70,31 +70,31 @@ describe("Alert", () => {
 
     const expectedTokens = {
       default: [
-        "border-transparent",
+        "border-info-border",
         "bg-info",
         "text-info-foreground",
         "*:data-[slot=alert-description]:text-info-foreground",
       ],
       destructive: [
-        "border-transparent",
+        "border-destructive-border",
         "bg-destructive-surface",
         "text-destructive-foreground",
         "*:data-[slot=alert-description]:text-destructive-foreground",
       ],
       info: [
-        "border-transparent",
+        "border-info-border",
         "bg-info",
         "text-info-foreground",
         "*:data-[slot=alert-description]:text-info-foreground",
       ],
       success: [
-        "border-transparent",
+        "border-success-border",
         "bg-success",
         "text-success-foreground",
         "*:data-[slot=alert-description]:text-success-foreground",
       ],
       warning: [
-        "border-transparent",
+        "border-warning-border",
         "bg-warning",
         "text-warning-foreground",
         "*:data-[slot=alert-description]:text-warning-foreground",
@@ -105,7 +105,7 @@ describe("Alert", () => {
       const alert = container.querySelector(`[data-testid="${variant}-alert"]`);
 
       expectClassTokens(alert, [...expectedTokens[variant]]);
-      expectToneSurface(alert, expectedTokens[variant][1]);
+      expectToneSurface(alert, expectedTokens[variant][1], expectedTokens[variant][0]);
       expect(alert?.className).toContain("*:[svg]:text-current");
 
       if (variant !== "destructive") {

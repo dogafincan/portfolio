@@ -1,19 +1,16 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `3d7d62a149b0022c6eab0087b0ac81cba5f49940` (committed draft; release tag pending)
+Doji Design System source revision: `10d075bfdf3a2b71453ee4394cea6b33083589a9` (committed draft; release tag pending)
 
-Neutral outline Buttons use the installed shadcn `base-luma` interaction
-colors: light hover is `hover:bg-muted`, dark hover is
-`dark:hover:bg-input/30`, hover and expanded text use foreground, and the
-expanded surface uses muted. The variant has no Doji-owned active background;
-the shared non-color pressed motion, border, focus, disabled, and page-header
-resting-surface contracts remain unchanged.
+Neutral outline Buttons use the shared visible interaction ladder in both schemes: hover and expanded use `--control-hover`, active or pressed uses `--control-active`, and text remains on `--foreground`. The shared non-color pressed motion, border, focus, disabled, and page-header resting-surface contracts remain unchanged.
 Because Portfolio follows the system color scheme without a root theme class,
 Tailwind's default media-driven `dark:` variant remains active; a class-only
 override would leave shadcn's dark interaction states dormant.
 
-Doji Design System adoption: migrating
+Chromatic Alerts and Items use their matching scheme-aware Geist tone 100 background and tone 400 border in both schemes; chromatic Badges use tone 100 without a border, and interactive chromatic surfaces step through tone 200 and tone 300. Ordinary non-chromatic Buttons, Alerts, Items, selector triggers, and outline Badges stay transparent with the shared border. Neutral filled Button, Alert, and Item variants require a current explicit product exception; muted icon or logo containers and neutral non-Button Badges remain normal neutral-fill consumers.
+
+Doji Design System adoption: current
 
 This synchronization uses stock shadcn neutral typography and neutral surface
 roles. `--foreground` is `oklch(0.145 0 0)` light /
@@ -155,10 +152,11 @@ runtime package and no automated cross-repository mutation.
 - Neutral muted surfaces use stock shadcn `--muted`: `oklch(0.97 0 0)`
   in light mode and `oklch(0.269 0 0)` in dark mode. Inputs and search use
   stock `--input` through `bg-input/50`, foreground entered text, and
-  muted-foreground placeholders and descriptions. Muted Items, icon and
-  project-logo containers, selector summaries, and neutral badges use
-  `--muted`. Chromatic badges and Alerts keep their tone surfaces in light
-  mode and the protected `oklch(0.19 0 0)` surface in dark mode. The single `--warning-foreground`
+  muted-foreground placeholders and descriptions. Explicit neutral fills, icon
+  and project-logo containers, and neutral badges use `--muted`. Chromatic
+  Alerts and Items use matching scheme-aware Geist tone 100 backgrounds plus
+  tone 400 borders; chromatic Badges use matching tone 100 backgrounds without
+  borders. The single `--warning-foreground`
   role owns warning alerts, amber badges, warning buttons and controls, and all
   other amber status text. It resolves to `oklch(0.7 0.1991 64.279999)` in
   light mode and `oklch(0.72 0.1991 64.28)` in dark mode.
@@ -167,9 +165,9 @@ runtime package and no automated cross-repository mutation.
   the Card background in light mode and retain the page background in dark
   mode. The Item primitive owns both roles; call sites do not add local
   background utilities; Item hover states use the shared interaction ladder.
-- The same primitive keeps each muted selector or summary Item's title and
-  complete subtitle on `--foreground` in both schemes. Default and outline Item
-  descriptions remain on `--muted-foreground`; this scoped rule does not
+- The same primitive keeps each Item title on `--foreground` and its complete
+  subtitle on `--muted-foreground` in both schemes. Ordinary selectors and
+  summaries use `outline`; this rule does not
   recolor actions, badges, or other separately styled metadata.
 - Respect system light and dark modes. Do not add a theme switch without a
   separate product decision.
@@ -358,7 +356,7 @@ runtime package and no automated cross-repository mutation.
   input-like controls are 36px high. Labels are visible;
   errors are field-local and programmatically associated.
 - Image input accepts static JPG, PNG, WebP, or AVIF up to 5,000,000 bytes and
-  40 million decoded pixels. Preview remains local and uses a muted Item.
+  40 million decoded pixels. Preview remains local and uses an outlined Item.
 - **Remove image** may keep its Trash icon as the documented destructive
   file-control exception. Ordinary text actions remain text-only.
 - One fee disclosure Item identifies the submission fee across every Doji app
@@ -425,7 +423,7 @@ runtime package and no automated cross-repository mutation.
   platform-overlay exclusion zone. Do not add atmosphere, gradients, shadows,
   mockups, project cards, or request-time image generation.
 - Use semantic social alt text. Metadata uses the exact absolute HTTPS URL
-  `https://dogafincan.com/og.png?v=2026082102` across Open Graph and Twitter.
+  `https://dogafincan.com/og.png?v=2026082201` across Open Graph and Twitter.
   It declares `og:image:type=image/png`. Advance the version without reuse
   whenever the PNG bytes or composition changes.
 - `scripts/generate-og.mjs` waits for fonts, uses reduced motion, verifies

@@ -33,13 +33,21 @@ function ItemSeparator({ className, ...props }: React.ComponentProps<typeof Sepa
 }
 
 const itemVariants = cva(
-  "group/item flex w-full flex-wrap items-center rounded-2xl border text-base transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-focus-ring [a]:transition-colors [a]:hover:bg-muted",
+  "group/item flex w-full flex-wrap items-center rounded-2xl border text-base transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-focus-ring [a]:transition-colors",
   {
     variants: {
       variant: {
         default: "border-transparent",
-        outline: "border-border",
-        muted: "border-transparent bg-item-muted",
+        outline: "border-border [a]:hover:bg-control-hover [a]:active:bg-control-active",
+        muted:
+          "border-transparent bg-item-muted [a]:hover:bg-control-hover [a]:active:bg-control-active",
+        info: "border-info-border bg-info text-info-foreground [a]:hover:bg-info-hover [a]:active:bg-info-active *:data-[slot=item-description]:text-info-foreground",
+        success:
+          "border-success-border bg-success text-success-foreground [a]:hover:bg-success-hover [a]:active:bg-success-active *:data-[slot=item-description]:text-success-foreground",
+        warning:
+          "border-warning-border bg-warning text-warning-foreground [a]:hover:bg-warning-hover [a]:active:bg-warning-active *:data-[slot=item-description]:text-warning-foreground",
+        destructive:
+          "border-destructive-border bg-destructive-surface text-destructive-foreground [a]:hover:bg-destructive-hover [a]:active:bg-destructive-active *:data-[slot=item-description]:text-destructive-foreground",
       },
       size: {
         default: "gap-3.5 px-4 py-3.5",

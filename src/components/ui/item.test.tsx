@@ -53,6 +53,25 @@ describe("Item", () => {
     expect(item?.className).not.toContain("ring-ring/50");
   });
 
+  it.each([
+    ["info", "border-info-border", "bg-info", "text-info-foreground"],
+    ["success", "border-success-border", "bg-success", "text-success-foreground"],
+    ["warning", "border-warning-border", "bg-warning", "text-warning-foreground"],
+    [
+      "destructive",
+      "border-destructive-border",
+      "bg-destructive-surface",
+      "text-destructive-foreground",
+    ],
+  ] as const)("uses the complete %s semantic surface family", (variant, border, surface, text) => {
+    const { container } = render(<Item variant={variant}>Semantic summary</Item>);
+    const item = container.querySelector('[data-slot="item"]');
+
+    expect(item?.className).toContain(border);
+    expect(item?.className).toContain(surface);
+    expect(item?.className).toContain(text);
+  });
+
   it("uses the preset item and alert icon treatment", () => {
     const { container } = render(
       <>

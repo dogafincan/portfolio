@@ -69,13 +69,12 @@ describe("badge variants", () => {
     expect(badge).toContain("[a]:active:bg-badge-header-info-active");
   });
 
-  it.each(["outline", "ghost"] as const)(
-    "keeps the %s variant on the neutral muted surface",
-    (variant) => {
-      expect(badgeVariants({ variant })).toContain("bg-muted");
-      expect(badgeVariants({ variant })).not.toContain("bg-status-surface");
-    },
-  );
+  it("keeps outline badges transparent while allowing neutral filled badges", () => {
+    expect(badgeVariants({ variant: "outline" })).toContain("bg-transparent");
+    expect(badgeVariants({ variant: "outline" })).toContain("border-border");
+    expect(badgeVariants({ variant: "outline" })).not.toContain("bg-muted");
+    expect(badgeVariants({ variant: "ghost" })).toContain("bg-muted");
+  });
 
   it("gives the blue-foreground link variant the information surface", () => {
     const badge = badgeVariants({ variant: "link" });

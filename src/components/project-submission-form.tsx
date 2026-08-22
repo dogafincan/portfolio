@@ -467,7 +467,7 @@ export function ProjectSubmissionForm({
                   <FieldError id="profileImage-error">{errors.profileImage}</FieldError>
                 ) : null}
                 {profileImage && previewUrl ? (
-                  <Item className="mt-1" variant="muted">
+                  <Item className="mt-1" variant="outline">
                     <ItemMedia className="size-16 rounded-2xl" variant="image">
                       <img
                         alt="Selected project profile preview"
@@ -491,7 +491,7 @@ export function ProjectSubmissionForm({
                     </ItemActions>
                   </Item>
                 ) : imagePending ? (
-                  <Item className="mt-1" variant="muted">
+                  <Item className="mt-1" variant="outline">
                     <ItemMedia variant="icon">
                       <ImageIcon aria-hidden="true" />
                     </ItemMedia>
@@ -549,7 +549,7 @@ export function ProjectSubmissionForm({
               </div>
             </FieldGroup>
 
-            <Item variant="muted">
+            <Item variant="outline">
               <ItemMedia variant="icon">
                 <CircleDollarSign aria-hidden="true" />
               </ItemMedia>

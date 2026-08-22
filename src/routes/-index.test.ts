@@ -47,7 +47,7 @@ describe("index route head", () => {
     expect(siteUrlMatch?.[1]).toBe("https://dogafincan.com");
     expect(socialImageMatch?.[1]).toMatch(/^\/og\.png\?v=\d+$/);
     expect(new URL(`${siteUrlMatch?.[1]}${socialImageMatch?.[1]}`).href).toBe(
-      "https://dogafincan.com/og.png?v=2026082102",
+      "https://dogafincan.com/og.png?v=2026082201",
     );
     expect(source).toContain(
       "Doga Fincan social preview reading Explore the useful products I’m building, with I’m building highlighted in blue and a Follow Doga Fincan on X badge.",
