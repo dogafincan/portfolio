@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `a371294cc187db42042ac11e66c35f84e6b01115` (committed draft; release tag pending)
+Doji Design System source revision: `b0481f90a49e37e49f75d5d47f782dc6118a9e64` (committed draft; release tag pending)
 
 Neutral outline Buttons use the shared visible interaction ladder in both schemes: hover and expanded use `--control-hover`, active or pressed uses `--control-active`, and text remains on `--foreground`. The shared non-color pressed motion, border, focus, disabled, and page-header resting-surface contracts remain unchanged.
 Because Portfolio follows the system color scheme without a root theme class,
@@ -191,7 +191,11 @@ runtime package and no automated cross-repository mutation.
   filled slot. Portfolio's project directory is the explicit local exception:
   every independent project Card owns exactly one filled primary **Open app**
   outcome, with no second filled action in the Card or adjacent action cluster.
-  Ordinary independent Cards and repeated Items do not infer that exception.
+  A separately owner-approved standalone workflow Card could likewise own one
+  scoped primary main action only when its local contract records the
+  exception, keeps supporting actions outlined, and visually separates any
+  page-header primary. Portfolio has no such standalone-Card exception;
+  ordinary independent Cards and repeated Items do not infer either exception.
   Supporting and migration-locked workflow
   actions remain neutral outline until state moves primary ownership. Filled
   `success`, `warning`, or `destructive` may own that same single slot when
