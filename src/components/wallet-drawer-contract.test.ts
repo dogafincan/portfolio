@@ -10,7 +10,7 @@ const walletLoaderSource = readFileSync(
 );
 
 describe("connect-wallet drawer contract", () => {
-  it("uses the responsive-center migration Drawer with Empty and one footer close action", () => {
+  it("uses the responsive-center migration Drawer with Empty and one primary footer close action", () => {
     expect(walletActionSource).toContain('from "@/components/ui/drawer"');
     expect(walletActionSource).toContain('from "@/components/ui/empty"');
     expect(walletActionSource).toContain("<Drawer");
@@ -23,8 +23,20 @@ describe("connect-wallet drawer contract", () => {
     expect(walletActionSource).toContain("<Empty");
     expect(walletActionSource).toContain("<DrawerFooter");
     expect(walletActionSource).toMatch(
-      /<DrawerClose render={<Button className="w-full" variant="outline" \/>}>\s*Close\s*<\/DrawerClose>/,
+      /<DrawerClose render={<Button className="w-full" \/>}>\s*Close\s*<\/DrawerClose>/,
     );
+  });
+
+  it("keeps every dormant sole Drawer footer action primary without changing DrawerClose ownership", () => {
+    for (const source of [walletChooserSource, walletActionSource]) {
+      const footers = source.match(/<DrawerFooter[\s\S]*?<\/DrawerFooter>/gu) ?? [];
+
+      expect(footers).toHaveLength(1);
+      expect(footers[0]).toContain('<DrawerClose render={<Button className="w-full" />}>');
+      expect(footers[0]).toContain("Close");
+      expect(footers[0]).toContain("</DrawerClose>");
+      expect(footers[0]).not.toContain('variant="outline"');
+    }
   });
 
   it("does not fall back to a Dialog or its automatic corner close control", () => {

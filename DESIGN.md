@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `7caa12403a5cc240467784fcc83198766803d510` (committed draft; release tag pending)
+Doji Design System source revision: `bb8a64d9b316635f1f84c55dde76e24013f77eaa` (committed draft; release tag pending)
 
 The Field/Input, centered semantic-text feedback, and global-action ownership
 audit found no Portfolio runtime seam to change. Its centered project Cards
@@ -115,6 +115,10 @@ runtime package and no automated cross-repository mutation.
 - Portfolio page headers intentionally expose neither **Connect wallet** nor
   **Submit project**. The public showcase has no Doji utility-action group and
   therefore owns no adjacent migration Alert or wallet Drawer trigger.
+- Retained dormant wallet Drawer sources still follow the shared footer
+  hierarchy: their sole visible full-width `Close` Button is primary/default,
+  while `DrawerClose`, focus restoration, dismissal, and request boundaries
+  remain unchanged. This does not make a wallet surface reachable in Portfolio.
 - `/submit` keeps the complete shared field order, local image selection,
   validation and preview, and one fee-and-recovery Item usable without network
   access. CardContent contains no migration Empty or Alert.

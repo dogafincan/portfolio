@@ -39,7 +39,10 @@ describe("WalletActionButton", () => {
     expect(screen.queryByRole("button", { name: /wallet$/iu })).toBeNull();
     expect(document.querySelector("[data-chain-migration-alert]")).toBeNull();
 
-    fireEvent.click(screen.getByRole("button", { name: "Close" }));
+    const close = screen.getByRole("button", { name: "Close" });
+    expect(close.className).toContain("bg-primary");
+    expect(close.className).toContain("text-primary-foreground");
+    fireEvent.click(close);
     await waitFor(() => expect(document.activeElement).toBe(trigger));
   });
 });
