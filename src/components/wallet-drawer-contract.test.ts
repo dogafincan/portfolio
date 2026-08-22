@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vite-plus/test";
 
+const drawerPrimitiveSource = readFileSync(new URL("./ui/drawer.tsx", import.meta.url), "utf8");
 const walletChooserSource = readFileSync(new URL("./wallet-runtime.tsx", import.meta.url), "utf8");
 const walletActionSource = readFileSync(new URL("./wallet-control.tsx", import.meta.url), "utf8");
 const appProvidersSource = readFileSync(new URL("./app-providers.tsx", import.meta.url), "utf8");
@@ -10,6 +11,15 @@ const walletLoaderSource = readFileSync(
 );
 
 describe("connect-wallet drawer contract", () => {
+  it("centers every visible Drawer header at every width", () => {
+    const drawerHeader = drawerPrimitiveSource.match(
+      /function DrawerHeader[\s\S]*?function DrawerFooter/u,
+    )?.[0];
+
+    expect(drawerHeader).toContain("text-center");
+    expect(drawerHeader).not.toContain("text-left");
+  });
+
   it("uses the responsive-center migration Drawer with Empty and one primary footer close action", () => {
     expect(walletActionSource).toContain('from "@/components/ui/drawer"');
     expect(walletActionSource).toContain('from "@/components/ui/empty"');
@@ -23,7 +33,7 @@ describe("connect-wallet drawer contract", () => {
     expect(walletActionSource).toContain("<Empty");
     expect(walletActionSource).toContain("<DrawerFooter");
     expect(walletActionSource).toMatch(
-      /<DrawerClose render={<Button className="w-full" \/>}>\s*Close\s*<\/DrawerClose>/,
+      /<DrawerClose render={<Button className="w-full" variant="default" \/>}>\s*Close\s*<\/DrawerClose>/,
     );
   });
 
@@ -32,7 +42,9 @@ describe("connect-wallet drawer contract", () => {
       const footers = source.match(/<DrawerFooter[\s\S]*?<\/DrawerFooter>/gu) ?? [];
 
       expect(footers).toHaveLength(1);
-      expect(footers[0]).toContain('<DrawerClose render={<Button className="w-full" />}>');
+      expect(footers[0]).toContain(
+        '<DrawerClose render={<Button className="w-full" variant="default" />}>',
+      );
       expect(footers[0]).toContain("Close");
       expect(footers[0]).toContain("</DrawerClose>");
       expect(footers[0]).not.toContain('variant="outline"');

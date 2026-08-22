@@ -166,7 +166,7 @@ function WalletRuntime() {
         </div>
 
         <DrawerFooter className="p-(--ds-surface-inset) pt-0">
-          <DrawerClose render={<Button className="w-full" />}>Close</DrawerClose>
+          <DrawerClose render={<Button className="w-full" variant="default" />}>Close</DrawerClose>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

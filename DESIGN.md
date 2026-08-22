@@ -1,7 +1,13 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `ab33270b816b91efa2b2ccbfaf2a5c19d40c69f1` (committed draft; release tag pending)
+Doji Design System source revision: `b924896f0854706efc46760a9b9583922e5cab25` (committed draft; release tag pending)
+
+The dormant Drawer primitive centers every visible header title and description
+at every viewport. Each retained Drawer footer has exactly one visible action,
+so its full-width Close Button explicitly uses the primary/default variant.
+This creates no Portfolio wallet entry point and changes no focus, dismissal,
+handler, or request boundary.
 
 The Field/Input, centered semantic-text feedback, and global-action ownership
 audit found no Portfolio runtime seam to change. Its centered project Cards
