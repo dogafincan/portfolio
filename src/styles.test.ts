@@ -53,7 +53,7 @@ describe("global styles", () => {
     expect(styles.indexOf(paletteImport)).toBeGreaterThan(
       styles.indexOf('@import "@fontsource-variable/geist";'),
     );
-    expect(styles.indexOf(paletteImport)).toBeLessThan(styles.indexOf("@custom-variant dark"));
+    expect(styles.indexOf(paletteImport)).toBeLessThan(styles.indexOf("@theme inline"));
     for (const token of GEIST_TOKENS) {
       expect(styles).toContain(`--color-ds-${token}: var(--ds-${token});`);
     }
@@ -336,7 +336,7 @@ describe("global styles", () => {
     ).toHaveLength(1);
     expect(styles.match(/--portfolio-app-chrome-color: var\(--card\);/g)).toHaveLength(1);
     expect(styles.match(/--portfolio-page-background: var\(--background\);/g)).toHaveLength(1);
-    expect(styles).toContain("@custom-variant dark (&:is(.dark *));");
+    expect(styles).not.toContain("@custom-variant dark");
   });
 
   it("uses coordinated app-owned page, raised-surface, and chrome colors", () => {

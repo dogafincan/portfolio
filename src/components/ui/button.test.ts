@@ -36,7 +36,12 @@ describe("button variants", () => {
     expect(outline).toContain("text-foreground");
     expect(outline).not.toContain("text-info-foreground");
     expect(outline).toContain("hover:bg-muted");
-    expect(outline).toContain("active:bg-control-active");
+    expect(outline).toContain("hover:text-foreground");
+    expect(outline).toContain("aria-expanded:bg-muted");
+    expect(outline).toContain("aria-expanded:text-foreground");
+    expect(outline).toContain("dark:hover:bg-input/30");
+    expect(outline).not.toContain("active:bg-control-active");
+    expect(outline).not.toContain("aria-expanded:bg-accent");
     expect(secondary).toContain("bg-secondary");
     expect(secondary).toContain("hover:bg-secondary-hover");
     expect(ghost).toContain("hover:bg-control-hover");

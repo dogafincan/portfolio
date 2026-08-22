@@ -1,7 +1,18 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `03a2f9f8acf5f3d428e4d216733c157b35b6dd2c` (committed draft; release tag pending)
+Doji Design System source revision: `3d7d62a149b0022c6eab0087b0ac81cba5f49940` (committed draft; release tag pending)
+
+Neutral outline Buttons use the installed shadcn `base-luma` interaction
+colors: light hover is `hover:bg-muted`, dark hover is
+`dark:hover:bg-input/30`, hover and expanded text use foreground, and the
+expanded surface uses muted. The variant has no Doji-owned active background;
+the shared non-color pressed motion, border, focus, disabled, and page-header
+resting-surface contracts remain unchanged.
+Because Portfolio follows the system color scheme without a root theme class,
+Tailwind's default media-driven `dark:` variant remains active; a class-only
+override would leave shadcn's dark interaction states dormant.
+
 Doji Design System adoption: migrating
 
 This synchronization uses stock shadcn neutral typography and neutral surface
@@ -39,9 +50,11 @@ action clusters keep their existing compositions and behavior.
 Ordinary workflow, Card, footer, dialog, not-found, and vertically stacked
 actions fill the available width of their owner. The shared utility page-header
 action group is the responsive exception: it remains one horizontal row at
-every viewport, using a bounded full-width group with equally flexible actions
-on narrow screens and a natural-width group from the small breakpoint. Keep
-both full labels visible without wrapping or abbreviation. Inputs, search
+every viewport, using intrinsic-width actions with their size-owned padding on
+narrow screens and natural-width actions with documented call-site padding
+from the small breakpoint. The group does not stretch its children or apply
+descendant padding at narrow widths. Keep both full labels visible without
+wrapping or abbreviation. Inputs, search
 controls, selectors, Drawer dismissal, option rows, and upload/drop-zone
 actions outside the centered-action composition remain full width.
 
