@@ -1,7 +1,11 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `b0481f90a49e37e49f75d5d47f782dc6118a9e64` (committed draft; release tag pending)
+Doji Design System source revision: `7caa12403a5cc240467784fcc83198766803d510` (committed draft; release tag pending)
+
+The Field/Input, centered semantic-text feedback, and global-action ownership
+audit found no Portfolio runtime seam to change. Its centered project Cards
+contain one external app action each and expose no wallet workflow.
 
 Neutral outline Buttons use the shared visible interaction ladder in both schemes: hover and expanded use `--control-hover`, active or pressed uses `--control-active`, and text remains on `--foreground`. The shared non-color pressed motion, border, focus, disabled, and page-header resting-surface contracts remain unchanged.
 Because Portfolio follows the system color scheme without a root theme class,
