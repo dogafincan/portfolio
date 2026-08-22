@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `25d1d98463c872f9589b5437c895ea61fb089fc3` (committed draft; release tag pending)
+Doji Design System source revision: `302276e24dc036268f63d775b3f67aa6f6afaf49` (committed draft; release tag pending)
 
 The dormant Drawer primitive centers every visible header title and description
 at every viewport. Each retained Drawer footer has exactly one visible action,
@@ -49,7 +49,9 @@ The centered-action composition uses one centered 40px `rounded-xl` muted
 media container with a 20px icon or approved logo, then exact 24px media-to-
 title, 8px title-to-description, and 16px description-to-action spacing when an
 action exists. Its standard full-size surface keeps 40px of top and bottom
-padding at every viewport. Every repeated project Card adopts that rhythm as
+padding at every viewport. Every visible Card slot shares the `CardContent`
+horizontal midpoint; centered text alone is not proof. Every repeated project
+Card adopts that rhythm as
 one `CardContent` stack containing its logo, title, complete `text-pretty`
 subtitle, and natural-width primary Open app link. Because this is the Card's
 direct primary content, the composition uses a local 16px horizontal
