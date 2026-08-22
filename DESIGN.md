@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `d9f5dcea32e568e30e432bde966650b22a5f1756` (committed draft; release tag pending)
+Doji Design System source revision: `0e7719885f6a0654d04166570bb3b34157855ec7` (committed draft; release tag pending)
 
 Neutral outline Buttons use the shared visible interaction ladder in both schemes: hover and expanded use `--control-hover`, active or pressed uses `--control-active`, and text remains on `--foreground`. The shared non-color pressed motion, border, focus, disabled, and page-header resting-surface contracts remain unchanged.
 Because Portfolio follows the system color scheme without a root theme class,
@@ -116,11 +116,11 @@ runtime package and no automated cross-repository mutation.
   immediately after their complete action cluster.
 - Portfolio has no project or asset selector trigger; its manual asset-type
   input is not a selector, so the migration selector-Drawer requirement is not
-  applicable here. The centered coin-selector trigger and dashed unresolved-
-  selection outline are therefore also not applicable to the current app. If
-  a selector is added during this lockout, its migration
-  explanation belongs only in its Empty surface, never in an Alert below the
-  trigger.
+  applicable here. The non-interactive centered selector summary, its explicit
+  outline selector Button, and dashed unresolved-selection Item outline are
+  therefore also not applicable to the current app. If a selector is added
+  during this lockout, its migration explanation belongs only in its Empty
+  surface, never in an Alert below the Button.
 - Every public chain-dependent API path and broad server-function path returns
   the same no-store JSON `503` migration response before request-body work,
   rate limiting, service bindings, external providers, or mutations. Existing
