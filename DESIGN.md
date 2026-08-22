@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `0e7719885f6a0654d04166570bb3b34157855ec7` (committed draft; release tag pending)
+Doji Design System source revision: `a371294cc187db42042ac11e66c35f84e6b01115` (committed draft; release tag pending)
 
 Neutral outline Buttons use the shared visible interaction ladder in both schemes: hover and expanded use `--control-hover`, active or pressed uses `--control-active`, and text remains on `--foreground`. The shared non-color pressed motion, border, focus, disabled, and page-header resting-surface contracts remain unchanged.
 Because Portfolio follows the system color scheme without a root theme class,
@@ -9,6 +9,11 @@ Tailwind's default media-driven `dark:` variant remains active; a class-only
 override would leave shadcn's dark interaction states dormant.
 
 Chromatic Alerts and Items use their matching scheme-aware Geist tone 100 background and tone 400 border in both schemes; chromatic Badges use tone 100 without a border, and interactive chromatic surfaces step through tone 200 and tone 300. Ordinary non-chromatic Buttons, Alerts, Items, selector triggers, and outline Badges stay transparent with the shared border. Neutral filled Button, Alert, and Item variants require a current explicit product exception; muted icon or logo containers and neutral non-Button Badges remain normal neutral-fill consumers.
+
+Compact Card-header status badges are omitted when an Empty, status Alert,
+progress treatment, or result already owns the same state. Portfolio currently
+has no Card-header status consumer; project actions and the page-header profile
+badge are content and navigation, not workflow-status metadata.
 
 Doji Design System adoption: current
 
