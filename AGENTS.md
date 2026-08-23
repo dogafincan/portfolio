@@ -74,6 +74,10 @@ Keep `README.md` and `AGENTS.md` aligned when durable project rules change. Keep
   `wrangler.assets.jsonc`, with no Worker entrypoint or runtime binding.
   Retained backend handlers remain testable as defense in depth, but public
   deploys and dry-runs must not use `dist/server/wrangler.json`.
+- Keep the checked-in project directory as the immediate first render. Do not
+  add a hydration loading state, runtime catalog request, load performance mark,
+  or focus/pageshow/visibility refresh listener merely to mirror source-app
+  content while the migration lock is active.
 - Project fields and images remain in page memory until the fixed Registry
   payment succeeds. Do not persist drafts or make validation/prefill API calls.
 - A payment challenge is allowed only after a digest exists and must bind the

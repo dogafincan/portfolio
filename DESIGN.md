@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `f0b57292d4a2dd79b0604d3f258c1a742e8de4b4` (committed draft; release tag pending)
+Doji Design System source revision: `4a88f271b4a673ca5322209a02ac3ca445d2f8921` (committed draft; release tag pending)
 
 The dormant Drawer primitive centers every visible header title and description
 at every viewport. Each retained Drawer footer has exactly one visible action,
@@ -124,6 +124,12 @@ manual skill run after each accepted design-system change; there is no shared
 runtime package and no automated cross-repository mutation.
 
 ## Temporary Infrastructure Migration Lockout
+
+Portfolio satisfies the shared lock-precedence rule structurally: its project
+directory, logos, links, and copy are checked-in source data and the first
+render has no catalog loading state, hydration skeleton, Registry/provider
+read, performance load mark, or page-lifecycle refresh listener. Its retained
+submission lock remains separate from that static directory.
 
 - Portfolio's network-dependent wallet, payment, recovery, submission, and
   public dynamic API behavior is temporarily unavailable while Doji completes
