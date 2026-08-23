@@ -1,13 +1,18 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `2b5e699d51a55763fcc20fef36d21ac801628bb1` (committed draft; release tag pending)
+Doji Design System source revision: `aca2c1b050c4daff97782bd62b4cea91aefb5825` (committed draft; release tag pending)
 
 The dormant Drawer primitive centers every visible header title and description
 at every viewport. Each retained Drawer footer has exactly one visible action,
 so its full-width Close Button explicitly uses the primary/default variant.
 This creates no Portfolio wallet entry point and changes no focus, dismissal,
 handler, or request boundary.
+
+Portfolio exposes no app-owned wallet chooser. Its dormant primitive remains
+aligned with the local Drawer contract so any future wallet popup must use the
+responsive-center, swipe-aware Drawer rather than a Dialog or provider connect
+modal. This documentation change creates no trigger, handler, or request path.
 
 The Field/Input, centered semantic-text feedback, and global-action ownership
 audit found no Portfolio runtime seam to change. Its centered project Cards

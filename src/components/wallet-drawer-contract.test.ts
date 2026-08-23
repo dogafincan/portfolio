@@ -37,6 +37,12 @@ describe("connect-wallet drawer contract", () => {
     );
   });
 
+  it("uses the stock swipe-aware popup transform instead of an opacity-only opening", () => {
+    expect(drawerPrimitiveSource).toContain("data-starting-style:transform-(--closed-transform)");
+    expect(drawerPrimitiveSource).toContain("--drawer-swipe-movement-y");
+    expect(drawerPrimitiveSource).not.toContain("data-[starting-style]:translate-y-full");
+  });
+
   it("keeps every dormant sole Drawer footer action primary without changing DrawerClose ownership", () => {
     for (const source of [walletChooserSource, walletActionSource]) {
       const footers = source.match(/<DrawerFooter[\s\S]*?<\/DrawerFooter>/gu) ?? [];
@@ -54,6 +60,8 @@ describe("connect-wallet drawer contract", () => {
   it("does not fall back to a Dialog or its automatic corner close control", () => {
     expect(walletActionSource).not.toContain('from "@/components/ui/dialog"');
     expect(walletActionSource).not.toContain("<Dialog");
+    expect(walletActionSource).not.toContain("ConnectModal");
+    expect(walletChooserSource).not.toContain("@mysten/dapp-kit-react/ui");
     expect(walletActionSource).not.toContain("showCloseButton");
   });
 
