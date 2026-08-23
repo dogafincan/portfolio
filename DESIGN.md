@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `302276e24dc036268f63d775b3f67aa6f6afaf49` (committed draft; release tag pending)
+Doji Design System source revision: `f0b57292d4a2dd79b0604d3f258c1a742e8de4b4` (committed draft; release tag pending)
 
 The dormant Drawer primitive centers every visible header title and description
 at every viewport. Each retained Drawer footer has exactly one visible action,
@@ -62,6 +62,10 @@ primitive and `--ds-surface-inset` remain unchanged. It does not add visual-only
 `CardHeader` or `CardFooter` sections. Wallet
 Empty states already match; submission previews, inline Alerts, and multi-
 action clusters keep their existing compositions and behavior.
+Every semantic empty-state surface keeps a dashed border. The shared Empty
+primitive owns that style; call sites may add border width or color but never
+reset an Empty to solid. A documented alternative primitive applies the style
+only while it represents an empty state.
 Adjacent peer Cards do not currently present equivalent access-state prompts
 through different semantic hosts, so the cross-host parity rule requires no
 Portfolio runtime change. Any future pair must match the centered composition
