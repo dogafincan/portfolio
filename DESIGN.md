@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `4a88f271b4a673ca5322209a02ac3ca445d2f8921` (committed draft; release tag pending)
+Doji Design System source revision: `ff3bd19eea2e75a2b962cda5cd57a1bd66c8e90c` (committed draft; release tag pending)
 
 The dormant Drawer primitive centers every visible header title and description
 at every viewport. Each retained Drawer footer has exactly one visible action,
@@ -14,6 +14,9 @@ audit found no Portfolio runtime seam to change. Its centered project Cards
 contain one external app action each and expose no wallet workflow.
 The locked recipient-file picker and derived-value ordering rules are not
 applicable to the project directory.
+Each project surface is a direct Card composition rather than a row-sized
+placeholder, selector, balance, or status. The compact-status companion is
+therefore not applicable to the current Portfolio runtime.
 
 Neutral outline Buttons use the shared visible interaction ladder in both schemes: hover and expanded use `--control-hover`, active or pressed uses `--control-active`, and text remains on `--foreground`. The shared non-color pressed motion, border, focus, disabled, and page-header resting-surface contracts remain unchanged.
 Because Portfolio follows the system color scheme without a root theme class,
