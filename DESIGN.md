@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `aca2c1b050c4daff97782bd62b4cea91aefb5825` (committed draft; release tag pending)
+Doji Design System source revision: `262295c6a99116484ec69b8f18c00a35296ff0d1` (committed draft; release tag pending)
 
 The dormant Drawer primitive centers every visible header title and description
 at every viewport. Each retained Drawer footer has exactly one visible action,
@@ -13,6 +13,14 @@ Portfolio exposes no app-owned wallet chooser. Its dormant primitive remains
 aligned with the local Drawer contract so any future wallet popup must use the
 responsive-center, swipe-aware Drawer rather than a Dialog or provider connect
 modal. This documentation change creates no trigger, handler, or request path.
+
+Every retained app-owned blocking popup follows the responsive-center Drawer
+contract even when its route is dormant. The project-payment recovery workflow
+uses a swipe-aware Drawer with its complete header, scrollable body, and
+footer-owned primary outcome; no Dialog, AlertDialog, provider modal, anchored
+faux-dialog, custom role-dialog surface, or desktop/mobile component switch
+remains in product source. Recovery validation, signing, dismissal, and request
+admission are unchanged, and the migration lock still returns before opening.
 
 The Field/Input, centered semantic-text feedback, and global-action ownership
 audit found no Portfolio runtime seam to change. Its centered project Cards
@@ -86,7 +94,7 @@ Portfolio runtime change. Any future pair must match the centered composition
 without replacing its Item or Empty host, stretching the Cards, or changing
 request admission.
 
-Ordinary workflow, Card, footer, dialog, not-found, and vertically stacked
+Ordinary workflow, Card, footer, Drawer, not-found, and vertically stacked
 actions fill the available width of their owner. The shared utility page-header
 action group is the responsive exception: it remains one horizontal row at
 every viewport, using intrinsic-width actions with their size-owned padding on
@@ -233,7 +241,7 @@ submission lock remains separate from that static directory.
   `#FFFFFF` in light mode and `#090909` in dark mode; the manifest background
   is `#FCFCFC`.
 - Keep at most one visible filled dominant Button across the active page or
-  modal workflow state by default. Filled primary blue and neutral-foreground `outline`
+  Drawer workflow state by default. Filled primary blue and neutral-foreground `outline`
   are the normal action treatments. The next useful action owns the single
   filled slot. Portfolio's project directory is the explicit local exception:
   every independent project Card owns exactly one filled primary **Open app**
@@ -406,7 +414,7 @@ submission lock remains separate from that static directory.
 - Fields and the selected image stay in page memory only until payment
   succeeds. Do not persist drafts or perform pre-payment search, prefill,
   validation, upload, or other backend work.
-- Use shared `Field`, `Input`, `Item`, `Badge`, `Alert`, `Dialog`, and `Button`
+- Use shared `Field`, `Input`, `Item`, `Badge`, `Alert`, `Drawer`, and `Button`
   primitives. The form wraps the complete Card; inputs belong in
   `CardContent`, actions and their feedback in `CardFooter`.
 - Keep the shared 24px card inset/section rhythm and 12px sibling rhythm.
@@ -435,7 +443,7 @@ submission lock remains separate from that static directory.
   recoverable feedback; use `Empty` for empty states. Every Alert uses
   `border-transparent`, and every Empty flexes and stretches to fill unused
   space below its content when its owning layout has room.
-- Cards and card-like panels do not use box shadows. Modal overlays may use the
+- Cards and card-like panels do not use box shadows. Drawer overlays may use the
   canonical component-owned scrim, blur, and transition.
 - Text-labeled buttons and button-styled links are text-only by default.
   Cross-app new-tab actions are the shared exception: keep the label first and
@@ -497,7 +505,7 @@ submission lock remains separate from that static directory.
 - No horizontal page overflow is allowed at 320px or wider.
 - Images have meaningful alternative text unless decorative.
 - Icon-only controls and brand links have explicit accessible names.
-- Modal focus, dismissal, and focus restoration remain owned by Base UI.
+- Drawer focus, dismissal, and focus restoration remain owned by Base UI.
 - Loading has one authoritative live region. Avoid duplicate announcements.
 - Standard Button, field, search, input-like-control, and contextual-badge hit
   targets meet the 36px contract; documented content-rich and compact

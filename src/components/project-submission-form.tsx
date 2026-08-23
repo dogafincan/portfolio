@@ -20,13 +20,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer";
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import {
@@ -613,41 +614,51 @@ export function ProjectSubmissionForm({
         </Card>
       </form>
 
-      <Dialog open={!migrationLocked && recoveryOpen} onOpenChange={setRecoveryOpen}>
-        <DialogContent>
-          <form className="flex flex-col gap-6" onSubmit={handleRecovery}>
-            <DialogHeader>
-              <DialogTitle>Recover a project payment</DialogTitle>
-              <DialogDescription>
+      <Drawer
+        open={!migrationLocked && recoveryOpen}
+        onOpenChange={setRecoveryOpen}
+        showSwipeHandle
+      >
+        <DrawerContent placement="responsive-center">
+          <form className="flex min-h-0 flex-1 flex-col" onSubmit={handleRecovery}>
+            <DrawerHeader className="p-(--ds-surface-inset) pb-0">
+              <DrawerTitle>Recover a project payment</DrawerTitle>
+              <DrawerDescription>
                 Re-enter the project details and image, then provide the original submission payment
                 digest. The paying wallet must sign a fresh recovery message.
-              </DialogDescription>
-            </DialogHeader>
-            <Field data-invalid={Boolean(recoveryError)}>
-              <FieldLabel htmlFor="submission-payment-digest">Payment digest</FieldLabel>
-              <Input
-                aria-describedby={recoveryError ? "submission-payment-digest-error" : undefined}
-                aria-invalid={Boolean(recoveryError)}
-                id="submission-payment-digest"
-                onChange={(event) => {
-                  setRecoveryDigest(event.target.value);
-                  setRecoveryError(null);
-                }}
-                placeholder="Transaction digest"
-                value={recoveryDigest}
-              />
-              {recoveryError ? (
-                <FieldError id="submission-payment-digest-error">{recoveryError}</FieldError>
-              ) : null}
-            </Field>
-            <DialogFooter>
-              <Button disabled={!recoveryEnabled || !recoveryDigest.trim()} type="submit">
+              </DrawerDescription>
+            </DrawerHeader>
+            <DrawerBody className="py-6">
+              <Field data-invalid={Boolean(recoveryError)}>
+                <FieldLabel htmlFor="submission-payment-digest">Payment digest</FieldLabel>
+                <Input
+                  aria-describedby={recoveryError ? "submission-payment-digest-error" : undefined}
+                  aria-invalid={Boolean(recoveryError)}
+                  id="submission-payment-digest"
+                  onChange={(event) => {
+                    setRecoveryDigest(event.target.value);
+                    setRecoveryError(null);
+                  }}
+                  placeholder="Transaction digest"
+                  value={recoveryDigest}
+                />
+                {recoveryError ? (
+                  <FieldError id="submission-payment-digest-error">{recoveryError}</FieldError>
+                ) : null}
+              </Field>
+            </DrawerBody>
+            <DrawerFooter className="p-(--ds-surface-inset) pt-0">
+              <Button
+                className="w-full"
+                disabled={!recoveryEnabled || !recoveryDigest.trim()}
+                type="submit"
+              >
                 Recover paid submission
               </Button>
-            </DialogFooter>
+            </DrawerFooter>
           </form>
-        </DialogContent>
-      </Dialog>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 }

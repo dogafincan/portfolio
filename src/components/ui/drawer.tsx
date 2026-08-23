@@ -158,6 +158,19 @@ function DrawerHeader({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
+function DrawerBody({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="drawer-body"
+      className={cn(
+        "min-h-0 flex-1 overflow-y-auto overscroll-contain p-(--ds-surface-inset)",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
 function DrawerFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -196,6 +209,7 @@ export {
   DrawerTrigger,
   DrawerClose,
   DrawerContent,
+  DrawerBody,
   DrawerHeader,
   DrawerFooter,
   DrawerTitle,
