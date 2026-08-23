@@ -118,7 +118,7 @@ export function NotFoundPage() {
           subtitle="The requested address does not match a page in this portfolio. Return home to explore the current projects and live applications."
         />
 
-        <Card className="mx-auto w-full min-w-0 max-w-[45rem]">
+        <Card className="mx-auto w-full min-w-0 max-w-3xl">
           <CardHeader>
             <CardTitle role="heading" aria-level={2}>
               Page not found

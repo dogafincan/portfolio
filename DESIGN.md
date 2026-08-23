@@ -1,7 +1,13 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `262295c6a99116484ec69b8f18c00a35296ff0d1` (committed draft; release tag pending)
+Doji Design System source revision: `51d51e69b5f843dc081acc6399dde9a28ecfee25` (committed draft; release tag pending)
+
+Portfolio's project grid and app chrome use the 72rem wide rail. Submit project,
+recovery, and the static not-found Card use the 48rem standard rail. Its
+retained dormant wallet and recovery Drawers use the 36rem compact Drawer
+maximum and remain fluid inside the normal mobile inset; Portfolio has no
+current need for the 48rem wide Drawer tier.
 
 The dormant Drawer primitive centers every visible header title and description
 at every viewport. Each retained Drawer footer has exactly one visible action,
