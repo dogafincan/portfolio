@@ -182,6 +182,10 @@ The retained, temporarily unreachable Sui runtime is limited to:
 
 Expected portfolio omissions:
 
+- no public Connect wallet or Submit project header action; the shared
+  viewport-scrolling Submit Drawer rule therefore creates no Portfolio trigger
+  or request path, while the dormant direct `/submit` route remains preserved
+
 - Cloudflare Durable Objects
 - Cloudflare storage bindings
 - Sui provider or signing-key bindings in the public Worker
