@@ -38,7 +38,7 @@ afterEach(() => {
 });
 
 describe("ProjectSubmissionFlow", () => {
-  it("keeps required payment and recovery terms in one informative item", () => {
+  it("keeps required payment and refund terms in one informative item", () => {
     const { container } = render(
       <ProjectSubmissionForm
         configuration={CONFIGURATION}
@@ -51,7 +51,7 @@ describe("ProjectSubmissionFlow", () => {
     expect(container.querySelectorAll('[data-slot="item"]')).toHaveLength(1);
     expect(screen.queryByText("Payment deadlines")).toBeNull();
     expect(document.body.textContent).toContain("seven days");
-    expect(document.body.textContent).toContain("90 days");
+    expect(document.body.textContent).not.toContain("90 days");
   });
 
   it("keeps the digest and forbids repayment after all image attempts are spent", async () => {
@@ -86,13 +86,13 @@ describe("ProjectSubmissionFlow", () => {
 
     expect(await screen.findByText("Image processing limit reached")).toBeTruthy();
     expect(document.body.textContent).toContain("all three image-processing attempts");
-    expect(document.body.textContent).toContain("manual support");
+    expect(document.body.textContent).toContain("support");
     expect(document.body.textContent).toContain("do not pay again");
     expect(document.body.textContent).toContain(DIGEST);
     expect(uploadSubmission).not.toHaveBeenCalled();
   });
 
-  it("keeps submission actions enabled-looking but inert below a persistent migration alert", () => {
+  it("keeps Pay enabled-looking but inert above a persistent migration alert", () => {
     const createChallenge = vi.fn(async () => {
       throw new Error("Locked migration action unexpectedly created a challenge.");
     });
@@ -110,16 +110,12 @@ describe("ProjectSubmissionFlow", () => {
     const { container } = render(<ProjectSubmissionFlow api={api} configuration={CONFIGURATION} />);
 
     const pay = screen.getByRole("button", { name: "Pay submission fee" });
-    const recover = screen.getByRole("button", { name: "Recover payment" });
     expect(pay.hasAttribute("disabled")).toBe(false);
-    expect(recover.hasAttribute("disabled")).toBe(false);
     expect(pay.className).toContain("bg-primary");
     expect(pay.className).toContain("text-primary-foreground");
     expect(pay.className).toContain("border-transparent");
-    expect(recover.className).toContain("border-border");
 
     fireEvent.click(pay);
-    fireEvent.click(recover);
 
     expect(createChallenge).not.toHaveBeenCalled();
     expect(redeemPayment).not.toHaveBeenCalled();
@@ -127,10 +123,9 @@ describe("ProjectSubmissionFlow", () => {
     expect(screen.queryByRole("dialog")).toBeNull();
     expect(screen.getByText("Temporarily unavailable")).toBeTruthy();
 
-    const actions = container.querySelector('[data-slot="project-submission-actions"]');
     const content = container.querySelector('[data-slot="card-content"]');
-    expect(actions?.className).toContain("gap-3");
-    expect(actions?.nextElementSibling?.hasAttribute("data-chain-migration-alert")).toBe(true);
+    expect(pay.nextElementSibling?.hasAttribute("data-chain-migration-alert")).toBe(true);
+    expect(screen.queryByRole("button", { name: /Recover/u })).toBeNull();
     expect(
       Array.from(content?.querySelectorAll("label") ?? []).map((label) => label.textContent),
     ).toEqual([

@@ -19,15 +19,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-} from "@/components/ui/drawer";
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import {
@@ -70,7 +61,6 @@ import {
   type ProjectSubmissionApiErrorCode,
   type RegistrySubmissionApi,
 } from "@/lib/submission-api";
-import { isValidSuiTransactionDigest } from "@/lib/sui-identifiers";
 
 const EMPTY_VALUES: ProjectSubmissionFormValues = {
   assetType: "",
@@ -88,7 +78,6 @@ type SubmissionStatus = "idle" | "invalid" | "submitting" | "success" | "failed"
 
 export type SubmitPaidProject = (
   submission: ValidatedProjectSubmission,
-  recovery?: { configurationRevision?: string; digest: string },
   onPaymentDigest?: (digest: string) => void,
 ) => Promise<{ digest: string }>;
 
@@ -127,7 +116,7 @@ function ActiveProjectSubmissionFlow({
   accountAddressRef.current = accountAddress;
 
   async function redeemAndUpload(input: {
-    configurationRevision?: string;
+    configurationRevision: string;
     digest: string;
     submission: ValidatedProjectSubmission;
     walletAddress: string;
@@ -145,9 +134,7 @@ function ActiveProjectSubmissionFlow({
       digest: input.digest,
       signature,
       walletAddress: input.walletAddress,
-      ...(input.configurationRevision
-        ? { configurationRevision: input.configurationRevision }
-        : {}),
+      configurationRevision: input.configurationRevision,
     });
     if (redemption.status === "submission_accepted") {
       return;
@@ -159,30 +146,26 @@ function ActiveProjectSubmissionFlow({
   }
 
   const onPayAndSubmit: SubmitPaidProject | undefined = accountAddress
-    ? async (submission, recovery, onPaymentDigest) => {
+    ? async (submission, onPaymentDigest) => {
         const terms =
-          !recovery && configuration.available && configuration.treasuryAddress
+          configuration.available && configuration.treasuryAddress
             ? buildProjectSubmissionPaymentTerms({
                 configurationRevision: configuration.configurationRevision,
                 treasuryAddress: configuration.treasuryAddress,
                 executionValidFromMs: configuration.executionValidFromMs,
               })
             : null;
-        if (!recovery && !terms) {
+        if (!terms) {
           throw new Error("Project submissions are not configured.");
         }
-        const digest = recovery ? recovery.digest : await wallet.signAndExecutePayment(terms!);
+        const digest = await wallet.signAndExecutePayment(terms);
         onPaymentDigest?.(digest);
         assertWalletUnchanged(accountAddressRef.current, accountAddress);
         await redeemAndUpload({
           digest,
           submission,
           walletAddress: accountAddress,
-          ...(recovery?.configurationRevision
-            ? { configurationRevision: recovery.configurationRevision }
-            : terms
-              ? { configurationRevision: terms.configurationRevision }
-              : {}),
+          configurationRevision: terms.configurationRevision,
         });
         return { digest };
       }
@@ -216,9 +199,6 @@ export function ProjectSubmissionForm({
   const [imagePending, setImagePending] = useState(false);
   const [status, setStatus] = useState<SubmissionStatus>("idle");
   const [paidDigest, setPaidDigest] = useState<string | null>(null);
-  const [recoveryOpen, setRecoveryOpen] = useState(false);
-  const [recoveryDigest, setRecoveryDigest] = useState("");
-  const [recoveryError, setRecoveryError] = useState<string | null>(null);
   const [failureCode, setFailureCode] = useState<ProjectSubmissionApiErrorCode | null>(null);
   const imageValidationSequence = useRef(0);
 
@@ -305,50 +285,27 @@ export function ProjectSubmissionForm({
     }
   }
 
-  async function submit(recoveryDigestValue?: string) {
+  async function submit() {
     const result = validateProjectSubmission(values, profileImage);
     if (!result.ok) {
       setErrors(result.errors);
       setStatus("invalid");
       return;
     }
-    if (
-      !isWalletConnected ||
-      !onPayAndSubmit ||
-      (!recoveryDigestValue && !configuration.available)
-    ) {
+    if (!isWalletConnected || !onPayAndSubmit || !configuration.available) {
       setStatus("failed");
       return;
     }
     setErrors({});
     setFailureCode(null);
     setStatus("submitting");
-    setPaidDigest(recoveryDigestValue ?? null);
+    setPaidDigest(null);
     try {
-      const receipt = await onPayAndSubmit(
-        result.value,
-        recoveryDigestValue
-          ? {
-              digest: recoveryDigestValue,
-              ...(paidDigest === recoveryDigestValue && configuration.available
-                ? { configurationRevision: configuration.configurationRevision }
-                : {}),
-            }
-          : undefined,
-        setPaidDigest,
-      );
+      const receipt = await onPayAndSubmit(result.value, setPaidDigest);
       setPaidDigest(receipt.digest);
-      setRecoveryOpen(false);
-      setRecoveryDigest("");
-      setRecoveryError(null);
       setStatus("success");
     } catch (error) {
       setFailureCode(error instanceof ProjectSubmissionApiError ? error.code : null);
-      if (recoveryDigestValue) {
-        setRecoveryError(
-          "The paid submission could not be recovered. Check the digest and try again.",
-        );
-      }
       setStatus("failed");
     }
   }
@@ -361,20 +318,6 @@ export function ProjectSubmissionForm({
     void submit();
   }
 
-  function handleRecovery(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (migrationLocked) {
-      return;
-    }
-    const digest = recoveryDigest.trim();
-    if (!isValidSuiTransactionDigest(digest)) {
-      setRecoveryError("Enter a valid transaction digest.");
-      return;
-    }
-    setRecoveryError(null);
-    void submit(digest);
-  }
-
   const paymentEnabled =
     configuration.available &&
     isWalletConnected &&
@@ -382,9 +325,6 @@ export function ProjectSubmissionForm({
     status !== "submitting" &&
     !imagePending &&
     !(paidDigest && status !== "success");
-  const recoveryEnabled =
-    isWalletConnected && onPayAndSubmit !== undefined && status !== "submitting" && !imagePending;
-
   return (
     <>
       <form className="mx-auto w-full max-w-3xl" noValidate onSubmit={handleSubmit}>
@@ -557,9 +497,8 @@ export function ProjectSubmissionForm({
               <ItemContent>
                 <ItemTitle>One submission across every Doji app</ItemTitle>
                 <ItemDescription>
-                  One submission fee covers one asset. Redeem within seven days; unused rights are
-                  recoverable for 90 days, but expiry is not refunded. Rejections refund the
-                  submission fee, excluding network fees.
+                  One submission fee covers one asset. Redeem within seven days; expiry is not
+                  refunded. Rejections refund the submission fee, excluding network fees.
                 </ItemDescription>
               </ItemContent>
               <Badge>Submission fee</Badge>
@@ -568,38 +507,15 @@ export function ProjectSubmissionForm({
 
           <CardFooter className="flex-col items-stretch">
             {migrationLocked ? (
-              <div className="flex flex-col gap-3" data-slot="project-submission-actions">
-                <Button type="submit">Pay submission fee</Button>
-                <Button type="button" variant="outline">
-                  Recover payment
-                </Button>
-              </div>
-            ) : paidDigest && status !== "success" ? (
-              <Button
-                disabled={!recoveryEnabled}
-                onClick={() => setRecoveryOpen(true)}
-                type="button"
-              >
-                Recover payment
-              </Button>
+              <Button type="submit">Pay submission fee</Button>
             ) : (
-              <>
-                <Button
-                  aria-busy={status === "submitting" || undefined}
-                  disabled={!paymentEnabled}
-                  type="submit"
-                >
-                  Pay submission fee
-                </Button>
-                <Button
-                  disabled={!recoveryEnabled}
-                  onClick={() => setRecoveryOpen(true)}
-                  type="button"
-                  variant="outline"
-                >
-                  Recover payment
-                </Button>
-              </>
+              <Button
+                aria-busy={status === "submitting" || undefined}
+                disabled={!paymentEnabled}
+                type="submit"
+              >
+                Pay submission fee
+              </Button>
             )}
             <SubmissionFeedback
               configurationAvailable={configuration.available}
@@ -613,52 +529,6 @@ export function ProjectSubmissionForm({
           </CardFooter>
         </Card>
       </form>
-
-      <Drawer
-        open={!migrationLocked && recoveryOpen}
-        onOpenChange={setRecoveryOpen}
-        showSwipeHandle
-      >
-        <DrawerContent placement="responsive-center">
-          <form className="flex min-h-0 flex-1 flex-col" onSubmit={handleRecovery}>
-            <DrawerHeader className="p-(--ds-surface-inset) pb-0">
-              <DrawerTitle>Recover a project payment</DrawerTitle>
-              <DrawerDescription>
-                Re-enter the project details and image, then provide the original submission payment
-                digest. The paying wallet must sign a fresh recovery message.
-              </DrawerDescription>
-            </DrawerHeader>
-            <DrawerBody className="py-6">
-              <Field data-invalid={Boolean(recoveryError)}>
-                <FieldLabel htmlFor="submission-payment-digest">Payment digest</FieldLabel>
-                <Input
-                  aria-describedby={recoveryError ? "submission-payment-digest-error" : undefined}
-                  aria-invalid={Boolean(recoveryError)}
-                  id="submission-payment-digest"
-                  onChange={(event) => {
-                    setRecoveryDigest(event.target.value);
-                    setRecoveryError(null);
-                  }}
-                  placeholder="Transaction digest"
-                  value={recoveryDigest}
-                />
-                {recoveryError ? (
-                  <FieldError id="submission-payment-digest-error">{recoveryError}</FieldError>
-                ) : null}
-              </Field>
-            </DrawerBody>
-            <DrawerFooter className="p-(--ds-surface-inset) pt-0">
-              <Button
-                className="w-full"
-                disabled={!recoveryEnabled || !recoveryDigest.trim()}
-                type="submit"
-              >
-                Recover paid submission
-              </Button>
-            </DrawerFooter>
-          </form>
-        </DrawerContent>
-      </Drawer>
     </>
   );
 }
@@ -768,9 +638,9 @@ function SubmissionFeedback({
       <StatusAlert
         description={
           <>
-            Registry has used all three image-processing attempts for this paid right. Automatic
-            recovery cannot process another image. Keep this digest for manual support and do not
-            pay again: <code className="break-all font-mono">{paidDigest}</code>
+            Registry has used all three image-processing attempts for this paid right. Keep this
+            digest for support and do not pay again:{" "}
+            <code className="break-all font-mono">{paidDigest}</code>
           </>
         }
         title="Image processing limit reached"
@@ -798,8 +668,8 @@ function SubmissionFeedback({
         description={
           paidDigest ? (
             <>
-              Registry could not finish the paid submission yet. Use Recover payment and do not pay
-              again. Keep this digest: <code className="break-all font-mono">{paidDigest}</code>
+              Registry could not finish the paid submission yet. Do not pay again. Keep this digest
+              for support: <code className="break-all font-mono">{paidDigest}</code>
             </>
           ) : (
             "The Registry could not be reached before payment. Wait a moment, then try again."
@@ -815,8 +685,8 @@ function SubmissionFeedback({
       <StatusAlert
         description={
           <>
-            The payment exists, but the submission did not finish. Use Recover payment and do not
-            pay again. Keep this digest: <code className="break-all">{paidDigest}</code>
+            The payment exists, but the submission did not finish. Do not pay again. Keep this
+            digest for support: <code className="break-all">{paidDigest}</code>
           </>
         }
         title="Submission incomplete after payment"
@@ -827,7 +697,7 @@ function SubmissionFeedback({
   if (!isWalletConnected) {
     return (
       <StatusAlert
-        description="Connect a wallet to pay or recover a payment."
+        description="Connect a wallet to pay the submission fee."
         title="Wallet required"
         tone="info"
       />
@@ -845,7 +715,7 @@ function SubmissionFeedback({
   if (status === "failed") {
     return (
       <StatusAlert
-        description="The project submission could not be completed. If payment succeeded, use Recover payment instead of paying again."
+        description="The project submission could not be completed. Review the wallet result before trying again."
         title="Submission incomplete"
         tone="warning"
       />

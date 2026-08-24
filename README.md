@@ -130,16 +130,15 @@ rejected before any of them.
 
 Portfolio keeps static pages, project cards, profile links, and live app links
 available while Doji migrates from Sui to Robinhood Chain. The previous Sui
-wallet, payment, recovery, API, and Registry-gateway implementation remains in
+wallet, payment, API, and Registry-gateway implementation remains in
 the repository for later migration rather than being deleted.
 
 - **Connect wallet** keeps its normal enabled appearance and opens the existing
   Drawer. The Drawer shows an Empty migration explanation and **Close**, with no
   wallet choices, chain controls, or wallet-runtime load. No migration Alert
   appears below the trigger or its shared header-action cluster.
-- **Pay 10 SUI** and **Recover payment** retain their normal labels and focus
-  treatment. They are inert and their owning action cluster shows one persistent
-  informational Alert.
+- **Pay submission fee** retains its normal label and focus treatment. It is
+  inert and is followed by one persistent informational Alert.
 - Portfolio has no project or asset selector trigger, so a selector migration
   Drawer is not applicable. A future locked selector would explain the migration
   only in its Empty surface, without an Alert below its trigger.
@@ -152,8 +151,8 @@ the repository for later migration rather than being deleted.
 - Public portfolio website.
 - No app-level account system.
 - The project showcase and form editing require no wallet.
-- Wallet connection and transaction signing happen only for the fixed 10 SUI
-  project-submission payment or paid-digest recovery proof.
+- Wallet connection and transaction signing happen only for the fixed
+  project-submission payment.
 - No server-held secrets for normal portfolio content.
 - Prefer repo-owned structured content for project data before adding a CMS.
 - Keep the first route useful on its own: visitors should see real project
@@ -227,8 +226,8 @@ The imported sibling organization now used here:
 - `src/content/projects.ts`: structured project records for the portfolio grid.
 - `src/components/portfolio-home.tsx`: the `/` route surface, including the
   header and project card grid.
-- `src/components/project-submission-form.tsx`: local-only form, payment, and
-  paid-digest recovery UI for `/submit`.
+- `src/components/project-submission-form.tsx`: local-only form and payment UI
+  for `/submit`, with no manual recovery surface.
 - `src/components/wallet-runtime.tsx`: interaction-gated Mysten wallet island.
 - `src/start.ts`: cheapest exact-path request envelope and broad server-function
   rejection.

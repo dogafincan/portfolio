@@ -249,7 +249,6 @@ The current implementation follows the sibling conventions. Important files:
   portfolio surface
 - `src/lib/utils.ts`: shadcn `cn` helper
 - `src/lib/submission-api.ts`: exact bounded client for paid Registry submission
-  and digest recovery
 - `src/lib/chain-migration.ts` and `src/lib/chain-migration.server.ts`:
   temporary shared frontend copy and fail-closed server response
 - `src/generated/*`: canonical Registry-generated types and validators

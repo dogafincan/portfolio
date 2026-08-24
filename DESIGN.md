@@ -1,11 +1,11 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `7f8943f19894dde4952be379b486da6962995e90` (committed draft; release tag pending)
+Doji Design System source revision: `2f5d7ae7c28560c6368ffd8a18c1b8629ba5f83e` (committed draft; release tag pending)
 
-Portfolio's project grid and app chrome use the 72rem wide rail. Submit project,
-recovery, and the static not-found Card use the 48rem standard rail. Its
-retained dormant wallet and recovery Drawers use the 36rem compact Drawer
+Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
+and the static not-found Card use the 48rem standard rail. Its retained dormant
+wallet Drawer uses the 36rem compact Drawer
 maximum and remain fluid inside the normal mobile inset; Portfolio has no
 current need for the 48rem wide Drawer tier.
 
@@ -29,12 +29,9 @@ responsive-center, swipe-aware Drawer rather than a Dialog or provider connect
 modal. This documentation change creates no trigger, handler, or request path.
 
 Every retained app-owned blocking popup follows the responsive-center Drawer
-contract even when its route is dormant. The project-payment recovery workflow
-uses a swipe-aware Drawer with its complete header, scrollable body, and
-footer-owned primary outcome; no Dialog, AlertDialog, provider modal, anchored
-faux-dialog, custom role-dialog surface, or desktop/mobile component switch
-remains in product source. Recovery validation, signing, dismissal, and request
-admission are unchanged, and the migration lock still returns before opening.
+contract even when its route is dormant. No Dialog, AlertDialog, provider
+modal, anchored faux-dialog, custom role-dialog surface, or desktop/mobile
+component switch remains in product source.
 
 The Field/Input, centered semantic-text feedback, and global-action ownership
 audit found no Portfolio runtime seam to change. Its centered project Cards
@@ -167,7 +164,7 @@ render has no catalog loading state, hydration skeleton, Registry/provider
 read, performance load mark, or page-lifecycle refresh listener. Its retained
 submission lock remains separate from that static directory.
 
-- Portfolio's network-dependent wallet, payment, recovery, submission, and
+- Portfolio's network-dependent wallet, payment, submission, and
   public dynamic API behavior is temporarily unavailable while Doji completes
   an infrastructure migration. This is a reversible access lock; keep the
   retained implementation intact for the later technical migration.
@@ -181,13 +178,12 @@ submission lock remains separate from that static directory.
   while `DrawerClose`, focus restoration, dismissal, and request boundaries
   remain unchanged. This does not make a wallet surface reachable in Portfolio.
 - `/submit` keeps the complete shared field order, local image selection,
-  validation and preview, and one fee-and-recovery Item usable without network
+  validation and preview, and one fee Item usable without network
   access. CardContent contains no migration Empty or Alert.
-- The ordinary **Pay submission fee** and **Recover payment** form actions retain their
-  labels and enabled visual/focus behavior without the `disabled` attribute.
-  They are inert during the lockout, never validate, open recovery, connect,
-  sign, request, or mutate, and own one persistent informational Doji Alert
-  immediately after their complete action cluster.
+- The ordinary **Pay submission fee** action retains its label and enabled
+  visual/focus behavior without the `disabled` attribute. It is inert during
+  the lockout, never validates, connects, signs, requests, or mutates, and owns
+  one persistent informational Doji Alert immediately after it.
 - Portfolio has no project or asset selector trigger; its manual asset-type
   input is not a selector, so the migration selector-Drawer requirement is not
   applicable here. The non-interactive centered selector summary, its explicit
@@ -198,7 +194,7 @@ submission lock remains separate from that static directory.
 - Every public chain-dependent API path and broad server-function path returns
   the same no-store JSON `503` migration response before request-body work,
   rate limiting, service bindings, external providers, or mutations. Existing
-  envelope, gateway, wallet, payment, and recovery implementation remains
+  envelope, gateway, wallet, and payment implementation remains
   preserved behind this temporary boundary.
 - Production deploys `wrangler.assets.jsonc`, which has no Worker script or
   runtime binding. Dynamic URLs receive the static 404 boundary without paid
@@ -440,13 +436,12 @@ submission lock remains separate from that static directory.
 - **Remove image** may keep its Trash icon as the documented destructive
   file-control exception. Ordinary text actions remain text-only.
 - One fee disclosure Item identifies the submission fee across every Doji app
-  and combines the seven-day redemption, 90-day recovery, expiry, and
-  rejection-refund terms. Payment and recovery actions stay together, with
-  action-owned feedback after the complete cluster.
+  and combines the seven-day redemption, expiry, and rejection-refund terms.
+  Action-owned feedback follows the Pay action.
 - Alerts use semantic surface, border, foreground, and icon pairings:
   `Info`, `CircleCheck`, `TriangleAlert`, and `CircleAlert` as appropriate.
-- Once a digest exists, failure copy directs the user to recover the payment
-  and explicitly avoids prompting a second payment.
+- Once a digest exists, failure copy tells the user not to pay again, keeps the
+  digest available for support, and exposes no manual recovery or retry action.
 
 ## Components And Interaction
 

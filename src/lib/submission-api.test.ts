@@ -47,6 +47,7 @@ describe("Registry submission API", () => {
       api.redeemPayment({
         digest: DIGEST,
         walletAddress: WALLET,
+        configurationRevision: "registry-v1",
         challengeToken: "challenge",
         signature: "signature",
       }),
@@ -100,6 +101,7 @@ describe("Registry submission API", () => {
       .redeemPayment({
         digest: DIGEST,
         walletAddress: WALLET,
+        configurationRevision: "registry-v1",
         challengeToken: "challenge",
         signature: "signature",
       })
@@ -127,6 +129,7 @@ describe("Registry submission API", () => {
           ? api.redeemPayment({
               digest: DIGEST,
               walletAddress: WALLET,
+              configurationRevision: "registry-v1",
               challengeToken: "challenge",
               signature: "signature",
             })

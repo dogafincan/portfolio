@@ -8,7 +8,7 @@ a deploy.
 
 The current release is intentionally locked while Doji migrates from Sui to
 Robinhood Chain. Static routes remain available. Wallet runtime loading,
-payment, recovery, upload, and Registry forwarding must remain unreachable.
+payment, upload, and Registry forwarding must remain unreachable.
 Every public dynamic API and broad server-function request returns the same
 no-store JSON `503` before envelope processing, limiters, bindings, providers,
 or mutations. Do not remove the preserved Sui implementation merely to enforce
@@ -100,8 +100,9 @@ the canonical `503` before a limiter or service binding.
 
 If Registry or Sui is degraded, do not add browser polling or direct provider
 fallback. Keep new payments fail closed when configuration is unavailable.
-Payers who already have a digest use recovery without paying again. Diagnose
-the Registry binding and its observation state before changing Portfolio.
+For an interrupted paid submission, preserve the displayed digest for support
+and do not ask the payer to pay again. Portfolio exposes no manual recovery,
+retry, or digest-entry workflow.
 
 ## Rollback
 

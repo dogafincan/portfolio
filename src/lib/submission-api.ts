@@ -53,7 +53,7 @@ export type RegistrySubmissionApi = {
   createChallenge(input: { digest: string; walletAddress: string }): Promise<SubmissionChallenge>;
   redeemPayment(input: {
     challengeToken: string;
-    configurationRevision?: string;
+    configurationRevision: string;
     digest: string;
     signature: string;
     walletAddress: string;
@@ -112,9 +112,7 @@ export function createRegistrySubmissionApi({
         body: JSON.stringify({
           digest: input.digest,
           walletAddress: input.walletAddress,
-          ...(input.configurationRevision
-            ? { configurationRevision: input.configurationRevision }
-            : {}),
+          configurationRevision: input.configurationRevision,
           challengeToken: input.challengeToken,
           signature: input.signature,
         }),

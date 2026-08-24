@@ -23,8 +23,8 @@ treated as complete.
 | Done        | Current ecosystem project identities | 7, 8.1, 9.2-9.4     | -         | Adds Doji Registry and synchronizes all five project cards to current navbar names, complete primary subtitles, canonical URLs, and revision-named light/dark logo pairs.                                                                                                                   |
 | Done        | Cross-app action affordance          | 8.1, 9.3-9.4, 13    | -         | Gives every project **Open app** link the shared trailing `ArrowUpRight`, explicit new-tab accessible name, 36px Button target, and canonical new-tab link semantics.                                                                                                                       |
 | Done        | Centered project Card composition    | 8.1, 9.3-9.4, 13    | -         | Centers each checked-in project logo above its title and muted Card description while retaining the full-width neutral outline **Open app** link in `CardFooter`.                                                                                                                           |
-| Done        | Central Registry project submission  | 2, 5, 7, 8.4, 12-15 | -         | Static form, lazy wallet, generated contract, digest-bound recovery wire, static 404, narrow gateway, environment-isolated Worker type generation, and audited build dependencies are implemented. Activation remains fail closed until wallet publication.                                 |
-| Done        | Temporary chain migration lockout    | 2, 7, 8.5, 9.10, 12 | -         | Preserves the Sui implementation while making wallet, payment, recovery, submission, and public dynamic entry points inaccessible during the Robinhood Chain migration. Static portfolio content remains available.                                                                         |
+| Done        | Central Registry project submission  | 2, 5, 7, 8.4, 12-15 | -         | Static form, lazy wallet, fixed payment, static 404, narrow gateway, environment-isolated Worker type generation, and audited build dependencies are implemented. Activation remains fail closed until wallet publication.                                                                  |
+| Done        | Temporary chain migration lockout    | 2, 7, 8.5, 9.10, 12 | -         | Preserves the browser-local submission form while making wallet, payment, submission, and public dynamic entry points inaccessible during the Robinhood Chain migration. Static portfolio content remains available.                                                                        |
 | Done        | Doji Design System 1.0 migration     | 8-9, 13, 15         | -         | Replaces legacy atmosphere and showcase exceptions with the canonical neutral canvas, raised chrome, standard Cards, text-only actions, static 404, and forced-dark social composition. Immutable source revision `5df1b9c102d9a28abc5437ed70b22fcba3b74c93` remains the released baseline. |
 | In progress | Design-system draft migration        | 8-9, 13, 15         | -         | Adopts the Doji Design System `1.0.1-draft`: semantic descriptions render in full, Alert/Item copy targets one or two lines when possible, and the primary header follows the shared shadcn-scale copy target. Adoption remains `migrating` until release and proof gates pass.             |
 | Pending     | Project case-study pages             | 7, 8.2, 9.8, 10.2   | -         | Add only when a project needs more space than a card can provide.                                                                                                                                                                                                                           |
@@ -69,8 +69,8 @@ Keep the site simple, fast, and consistent with the sibling apps.
 | Agent docs      | `AGENTS.md` explains repo rules, verification, and work habits       |
 | Sui runtime     | Interaction-gated wallet/payment code; absent from anonymous payload |
 | Content backend | Showcase stays repo-owned; submissions go to the central Registry    |
-| Auth            | No account auth; paying wallet proves paid submission/recovery       |
-| Wallet flows    | Connect/disconnect, fixed 10 SUI payment, digest recovery            |
+| Auth            | No account auth; paying wallet proves the project payment            |
+| Wallet flows    | Connect/disconnect and fixed project payment                         |
 | Migration state | Sui-dependent frontend and server flows temporarily fail closed      |
 | Analytics       | Not specified                                                        |
 
@@ -182,7 +182,7 @@ The current product includes:
    primary page-header **Connect wallet** / **Disconnect wallet** and
    **Submit project** actions immediately below the subtitle at every width.
 10. Static `/submit` form with manual coin type, project metadata, one local
-    image, fixed 10 SUI payment, and paid-digest recovery.
+    image, and a fixed project payment.
 11. Static, zero-JavaScript Doji 404 document.
 12. Exact three-path, same-origin, rate-limited Registry gateway.
 
@@ -253,9 +253,9 @@ geometry without a migration Alert below either action or their shared cluster.
 **Connect wallet** opens the normal Drawer, but its body contains only an Empty
 migration explanation and **Close**; the wallet runtime is not loaded.
 
-The submission form preserves its existing implementation, but **Pay 10 SUI**
-and **Recover payment** are inert, are not marked disabled, and own one
-persistent informational Alert after their complete action cluster. Portfolio
+The submission form preserves its browser-local implementation, but **Pay
+submission fee** is inert, is not marked disabled, and owns one persistent
+informational Alert immediately after it. Portfolio
 has no project or asset selector trigger, so a selector migration Drawer is not
 applicable. Any future locked selector would likewise explain the migration only
 inside its Empty surface, not in an Alert below its trigger.
@@ -367,7 +367,7 @@ destination, abuse prevention, privacy, and retention.
 
 - Do not mount, import, connect, or expose wallet choices from the user-reachable
   migration Drawer.
-- Do not let a locked frontend action validate, open payment recovery, call an
+- Do not let a locked frontend action validate, call an
   API, sign, pay, upload, or otherwise begin chain-dependent work.
 - Locked ordinary actions retain their normal label and enabled appearance and
   do not use the `disabled` attribute.
@@ -439,7 +439,7 @@ When adding a project:
   rollback checks. A repeatable production smoke script remains a separate
   pending slice.
 
-### 12.1 Payment and recovery boundary
+### 12.1 Payment boundary
 
 - The checked-in Registry publication is runtime-validated with the exact
   generated JSON Schema validator. Until Registry publishes an enabled
@@ -529,7 +529,7 @@ The product is ready for the current portfolio scope when:
     on narrow screens, and never displays the connected address.
 14. Form editing, image preview, and wallet connection make no Portfolio API or
     Sui RPC calls; the first dynamic submission work follows a completed
-    payment or a user-entered recovery digest.
+    payment.
 15. Wallet/Sui code is isolated from initial static HTML and initial executable
     payloads and loads only after explicit wallet interaction.
 16. Payment amounts are canonical positive decimal MIST no greater than Sui

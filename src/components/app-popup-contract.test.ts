@@ -5,7 +5,7 @@ import { describe, expect, it } from "vite-plus/test";
 const componentsDirectory = fileURLToPath(new URL("./", import.meta.url));
 const legacyDialogPrimitive = fileURLToPath(new URL("./ui/dialog.tsx", import.meta.url));
 const representativePopupSources = [
-  readFileSync(new URL("./project-submission-form.tsx", import.meta.url), "utf8"),
+  readFileSync(new URL("./wallet-control.tsx", import.meta.url), "utf8"),
 ];
 
 function productionComponentSources(directory: string): Array<{ path: string; source: string }> {
