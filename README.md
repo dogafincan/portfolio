@@ -98,8 +98,11 @@ The app uses the shared Doji web stack, trimmed for a portfolio site:
 
 Portfolio intentionally exposes no public **Submit project** trigger, so the
 shared viewport-scrolling Submit Drawer rule adds no home-page action or request
-path; its complete-first lazy-open and responsive trailing viewport-gutter rules are likewise
-non-applicable to the public home page. The dormant direct `/submit` feature retains Mysten dApp Kit and the Sui SDK behind the
+path; its intent preload, complete-first opening, and responsive trailing
+viewport-gutter rules are likewise non-applicable to the public home page. Any
+future deferred Drawer trigger must keep its label and geometry stable with no
+code-loading spinner, and intent may fetch only cached app-owned presentation
+code without mounting or making a request. The dormant direct `/submit` feature retains Mysten dApp Kit and the Sui SDK behind the
 interaction boundary for later migration work. During the temporary
 Sui-to-Robinhood Chain lockout, the app does not mount that wallet runtime even
 after **Connect wallet** is activated. Anonymous portfolio and form loads remain

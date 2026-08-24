@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `b66431ad93816753bac8f9d7b0525ad98ca09b26` (committed draft; release tag pending)
+Doji Design System source revision: `cb3312e5175fd20e5ec79bcf005ec4dfa296d338` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -14,8 +14,12 @@ binding: the public portfolio header intentionally exposes no Submit project
 trigger. Its dormant `/submit` route remains directly addressable and retains
 the complete local form, but this synchronization adds no public action, Drawer,
 or request path to the portfolio home page. The shared complete-first lazy-open
-and responsive trailing viewport-gutter rules therefore create no Portfolio
-runtime change. The shared rule also keeps the ordinary responsive-center
+rule therefore creates no Portfolio runtime change. A future deferred Drawer
+trigger must start one cached app-owned code load on pointer hover, keyboard
+focus, or touch intent without mounting or opening the Drawer, changing its
+label or geometry, showing a spinner, or making a request; activation remains
+the authority seam. The shared responsive trailing viewport-gutter rule also
+keeps the ordinary responsive-center
 radius on all four popup corners so a viewport-scrolling Drawer never gains a
 flat lower edge; Portfolio still exposes no public trigger for that surface.
 
