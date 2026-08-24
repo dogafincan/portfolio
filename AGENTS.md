@@ -185,7 +185,7 @@ Expected portfolio omissions:
 - no public Connect wallet or Submit project header action; the shared
   viewport-scrolling Submit Drawer rule therefore creates no Portfolio trigger
   or request path, including its complete-first lazy-open and responsive
-  trailing viewport-gutter rules, while the dormant direct `/submit` route
+  trailing viewport-gutter and all-four-corner radius rules, while the dormant direct `/submit` route
   remains preserved
 
 - Cloudflare Durable Objects
