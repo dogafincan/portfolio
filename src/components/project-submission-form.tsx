@@ -6,7 +6,7 @@ import {
   type ComponentProps,
   type FormEvent,
 } from "react";
-import { ImageIcon, Trash2 } from "lucide-react";
+import { CloudUpload, ImageIcon, Trash2 } from "lucide-react";
 
 import { useDojiWallet } from "@/components/doji-wallet";
 import { Button } from "@/components/ui/button";
@@ -200,6 +200,7 @@ export function ProjectSubmissionForm({
   const [paidDigest, setPaidDigest] = useState<string | null>(null);
   const [failureCode, setFailureCode] = useState<ProjectSubmissionApiErrorCode | null>(null);
   const imageValidationSequence = useRef(0);
+  const profileImageInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(
     () => () => {
@@ -282,6 +283,9 @@ export function ProjectSubmissionForm({
       URL.revokeObjectURL(previewUrl);
       setPreviewUrl(null);
     }
+    if (profileImageInputRef.current) {
+      profileImageInputRef.current.value = "";
+    }
   }
 
   async function submit() {
@@ -340,7 +344,6 @@ export function ProjectSubmissionForm({
             <FieldGroup className="gap-3">
               <TextField
                 autoComplete="off"
-                description="Enter the complete identifier for the asset you want to list. An administrator assigns its type during review."
                 error={errors.assetType}
                 label="Asset identifier"
                 name="assetType"
@@ -352,7 +355,7 @@ export function ProjectSubmissionForm({
               />
               <TextField
                 autoComplete="organization"
-                description={`Use the public name shown across Doji apps. ${countGraphemes(values.projectName)}/${PROJECT_SUBMISSION_LIMITS.projectNameMaxGraphemes} characters.`}
+                description={`${countGraphemes(values.projectName)}/${PROJECT_SUBMISSION_LIMITS.projectNameMaxGraphemes} characters`}
                 error={errors.projectName}
                 label="Project name"
                 name="projectName"
@@ -364,7 +367,7 @@ export function ProjectSubmissionForm({
               />
               <TextField
                 autoComplete="off"
-                description={`Explain what the project helps people do. ${countGraphemes(values.shortDescription)}/${PROJECT_SUBMISSION_LIMITS.shortDescriptionMaxGraphemes} characters.`}
+                description={`${countGraphemes(values.shortDescription)}/${PROJECT_SUBMISSION_LIMITS.shortDescriptionMaxGraphemes} characters`}
                 error={errors.shortDescription}
                 label="Short description"
                 name="shortDescription"
@@ -376,18 +379,20 @@ export function ProjectSubmissionForm({
               />
               <TextField
                 autoComplete="off"
-                description="Optional. Use letters and numbers only, without a $ prefix."
+                description="Optional."
                 error={errors.ticker}
                 label="Ticker"
                 name="ticker"
                 onBlur={() => validateField("ticker")}
-                onChange={(value) => updateField("ticker", value)}
+                onChange={(value) => updateField("ticker", value.replaceAll("$", ""))}
                 placeholder="DOJI"
                 value={values.ticker}
               />
 
               <Field data-invalid={Boolean(errors.profileImage)}>
-                <FieldLabel htmlFor="profileImage">Profile image</FieldLabel>
+                <FieldLabel className="sr-only" htmlFor="profileImage">
+                  Profile image
+                </FieldLabel>
                 <Input
                   accept="image/avif,image/jpeg,image/png,image/webp"
                   aria-describedby="profileImage-description profileImage-error"
@@ -396,13 +401,33 @@ export function ProjectSubmissionForm({
                   id="profileImage"
                   name="profileImage"
                   onChange={(event) => void handleImageChange(event)}
+                  ref={profileImageInputRef}
                   required
+                  className="hidden"
                   type="file"
                 />
-                <FieldDescription id="profileImage-description">
-                  Choose a square-ready JPG, PNG, WebP, or AVIF up to 5 MB and 40 megapixels. It is
-                  checked and previewed only in this browser before submission.
-                </FieldDescription>
+                <Item className="flex-nowrap border-dashed" variant="outline">
+                  <ItemMedia className="self-center" variant="default">
+                    <CloudUpload aria-hidden="true" className="size-5" />
+                  </ItemMedia>
+                  <ItemContent>
+                    <ItemTitle>Profile image</ItemTitle>
+                    <ItemDescription id="profileImage-description">
+                      JPG, PNG, WebP, or AVIF up to 5 MB and 40 MP.
+                    </ItemDescription>
+                  </ItemContent>
+                  <ItemActions>
+                    <Button
+                      aria-label="Browse profile image"
+                      disabled={imagePending}
+                      onClick={() => profileImageInputRef.current?.click()}
+                      type="button"
+                      variant="outline"
+                    >
+                      Browse
+                    </Button>
+                  </ItemActions>
+                </Item>
                 {errors.profileImage ? (
                   <FieldError id="profileImage-error">{errors.profileImage}</FieldError>
                 ) : null}
@@ -448,7 +473,7 @@ export function ProjectSubmissionForm({
               <div className="grid gap-3 md:grid-cols-2">
                 <TextField
                   autoComplete="url"
-                  description="Optional. Link to the project's official website."
+                  description="Optional."
                   error={errors.websiteUrl}
                   label="Website"
                   name="websiteUrl"
@@ -459,7 +484,7 @@ export function ProjectSubmissionForm({
                 />
                 <TextField
                   autoComplete="url"
-                  description="Optional. Link to the project's official X profile."
+                  description="Optional."
                   error={errors.xUrl}
                   label="X"
                   name="xUrl"
@@ -470,7 +495,7 @@ export function ProjectSubmissionForm({
                 />
                 <TextField
                   autoComplete="url"
-                  description="Optional. Link to the project's official Telegram group or channel."
+                  description="Optional."
                   error={errors.telegramUrl}
                   label="Telegram"
                   name="telegramUrl"
@@ -481,7 +506,7 @@ export function ProjectSubmissionForm({
                 />
                 <TextField
                   autoComplete="url"
-                  description="Optional. Link to the project's official Discord server."
+                  description="Optional."
                   error={errors.discordUrl}
                   label="Discord"
                   name="discordUrl"

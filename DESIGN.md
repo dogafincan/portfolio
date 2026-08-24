@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `0836ab53ef5a295bcdb057f4af83159a8574b16d` (committed draft; release tag pending)
+Doji Design System source revision: `d467deab12947af1438e5c385a2186fb46a70b3e` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -439,7 +439,13 @@ submission lock remains separate from that static directory.
   input-like controls are 36px high. Labels are visible;
   errors are field-local and programmatically associated.
 - Image input accepts static JPG, PNG, WebP, or AVIF up to 5,000,000 bytes and
-  40 million decoded pixels. Preview remains local and uses an outlined Item.
+  40 million decoded pixels. The initial picker is a compact dashed outline Item
+  with an unframed 20px upload icon, short format/size copy, and a natural-width
+  outline **Browse** Button. Preview remains local and uses an outlined Item.
+- Asset identifier has no helper. Project name and short description show only
+  their character counts. Ticker and each social-link field show only
+  `Optional.` Ticker typing and paste filter `$` while domain validation still
+  enforces the alphanumeric contract.
 - **Remove image** may keep its Trash icon as the documented destructive
   file-control exception. Ordinary text actions remain text-only.
 - One fee disclosure Item identifies the submission fee across every Doji app

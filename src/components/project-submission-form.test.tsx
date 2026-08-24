@@ -48,8 +48,14 @@ describe("ProjectSubmissionFlow", () => {
     );
 
     expect(screen.queryByText("One submission across every Doji app")).toBeNull();
-    expect(container.querySelectorAll('[data-slot="item"]')).toHaveLength(0);
-    expect(screen.getByText("Optional. Link to the project's official website.")).toBeTruthy();
+    expect(container.querySelectorAll('[data-slot="item"]')).toHaveLength(1);
+    fireEvent.change(screen.getByLabelText("Ticker"), { target: { value: "$DO$JI" } });
+    expect((screen.getByLabelText("Ticker") as HTMLInputElement).value).toBe("DOJI");
+    expect(screen.getByText("0/60 characters")).toBeTruthy();
+    expect(screen.getByText("0/160 characters")).toBeTruthy();
+    expect(screen.getAllByText("Optional.")).toHaveLength(5);
+    expect(screen.getByRole("button", { name: "Browse profile image" })).toBeTruthy();
+    expect(screen.getByLabelText("Profile image").className).toContain("hidden");
   });
 
   it("keeps the digest and forbids repayment after all image attempts are spent", async () => {
