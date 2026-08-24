@@ -230,7 +230,8 @@ The imported sibling organization now used here:
 - `src/components/portfolio-home.tsx`: the `/` route surface, including the
   header and project card grid.
 - `src/components/project-submission-form.tsx`: local-only form and payment UI
-  for `/submit`, with no manual recovery surface.
+  for `/submit`, with concise project and optional official social-link guidance,
+  no redundant fee-summary Item, and no manual recovery surface.
 - `src/components/wallet-runtime.tsx`: interaction-gated Mysten wallet island.
 - `src/start.ts`: cheapest exact-path request envelope and broad server-function
   rejection.

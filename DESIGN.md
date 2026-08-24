@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `cb3312e5175fd20e5ec79bcf005ec4dfa296d338` (committed draft; release tag pending)
+Doji Design System source revision: `0836ab53ef5a295bcdb057f4af83159a8574b16d` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -183,9 +183,10 @@ submission lock remains separate from that static directory.
   hierarchy: their sole visible full-width `Close` Button is primary/default,
   while `DrawerClose`, focus restoration, dismissal, and request boundaries
   remain unchanged. This does not make a wallet surface reachable in Portfolio.
-- `/submit` keeps the complete shared field order, local image selection,
-  validation and preview, and one fee Item usable without network
-  access. CardContent contains no migration Empty or Alert.
+- `/submit` keeps the complete shared field order plus local image selection,
+  validation, and preview usable without network access. Its direct-route Card
+  does not add a fee-summary Item; social-link helpers identify each optional
+  official destination. CardContent contains no migration Empty or Alert.
 - The ordinary **Pay submission fee** action retains its label and enabled
   visual/focus behavior without the `disabled` attribute. It is inert during
   the lockout, never validates, connects, signs, requests, or mutates, and owns

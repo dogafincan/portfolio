@@ -6,10 +6,9 @@ import {
   type ComponentProps,
   type FormEvent,
 } from "react";
-import { CircleDollarSign, ImageIcon, Trash2 } from "lucide-react";
+import { ImageIcon, Trash2 } from "lucide-react";
 
 import { useDojiWallet } from "@/components/doji-wallet";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -332,8 +331,8 @@ export function ProjectSubmissionForm({
           <CardHeader>
             <CardTitle>Project details</CardTitle>
             <CardDescription>
-              Enter one asset manually. Its project details and image stay in this page until the
-              submission payment has completed.
+              Enter the details shown across Doji apps. Everything stays in this browser until you
+              pay and submit.
             </CardDescription>
           </CardHeader>
 
@@ -341,7 +340,7 @@ export function ProjectSubmissionForm({
             <FieldGroup className="gap-3">
               <TextField
                 autoComplete="off"
-                description="Use the complete asset identifier. An administrator assigns the asset kind during review."
+                description="Enter the complete identifier for the asset you want to list. An administrator assigns its type during review."
                 error={errors.assetType}
                 label="Asset identifier"
                 name="assetType"
@@ -353,7 +352,7 @@ export function ProjectSubmissionForm({
               />
               <TextField
                 autoComplete="organization"
-                description={`${countGraphemes(values.projectName)}/${PROJECT_SUBMISSION_LIMITS.projectNameMaxGraphemes} characters`}
+                description={`Use the public name shown across Doji apps. ${countGraphemes(values.projectName)}/${PROJECT_SUBMISSION_LIMITS.projectNameMaxGraphemes} characters.`}
                 error={errors.projectName}
                 label="Project name"
                 name="projectName"
@@ -365,13 +364,13 @@ export function ProjectSubmissionForm({
               />
               <TextField
                 autoComplete="off"
-                description={`${countGraphemes(values.shortDescription)}/${PROJECT_SUBMISSION_LIMITS.shortDescriptionMaxGraphemes} characters`}
+                description={`Explain what the project helps people do. ${countGraphemes(values.shortDescription)}/${PROJECT_SUBMISSION_LIMITS.shortDescriptionMaxGraphemes} characters.`}
                 error={errors.shortDescription}
                 label="Short description"
                 name="shortDescription"
                 onBlur={() => validateField("shortDescription")}
                 onChange={(value) => updateField("shortDescription", value)}
-                placeholder="A short description of the project"
+                placeholder="What does this project help people do?"
                 required
                 value={values.shortDescription}
               />
@@ -401,8 +400,8 @@ export function ProjectSubmissionForm({
                   type="file"
                 />
                 <FieldDescription id="profileImage-description">
-                  Static JPG, PNG, WebP, or AVIF, up to 5,000,000 bytes and 40 million decoded
-                  pixels.
+                  Choose a square-ready JPG, PNG, WebP, or AVIF up to 5 MB and 40 megapixels. It is
+                  checked and previewed only in this browser before submission.
                 </FieldDescription>
                 {errors.profileImage ? (
                   <FieldError id="profileImage-error">{errors.profileImage}</FieldError>
@@ -446,9 +445,10 @@ export function ProjectSubmissionForm({
                 ) : null}
               </Field>
 
-              <div className="grid gap-7 md:grid-cols-2">
+              <div className="grid gap-3 md:grid-cols-2">
                 <TextField
                   autoComplete="url"
+                  description="Optional. Link to the project's official website."
                   error={errors.websiteUrl}
                   label="Website"
                   name="websiteUrl"
@@ -459,6 +459,7 @@ export function ProjectSubmissionForm({
                 />
                 <TextField
                   autoComplete="url"
+                  description="Optional. Link to the project's official X profile."
                   error={errors.xUrl}
                   label="X"
                   name="xUrl"
@@ -469,6 +470,7 @@ export function ProjectSubmissionForm({
                 />
                 <TextField
                   autoComplete="url"
+                  description="Optional. Link to the project's official Telegram group or channel."
                   error={errors.telegramUrl}
                   label="Telegram"
                   name="telegramUrl"
@@ -479,6 +481,7 @@ export function ProjectSubmissionForm({
                 />
                 <TextField
                   autoComplete="url"
+                  description="Optional. Link to the project's official Discord server."
                   error={errors.discordUrl}
                   label="Discord"
                   name="discordUrl"
@@ -489,20 +492,6 @@ export function ProjectSubmissionForm({
                 />
               </div>
             </FieldGroup>
-
-            <Item variant="outline">
-              <ItemMedia variant="icon">
-                <CircleDollarSign aria-hidden="true" />
-              </ItemMedia>
-              <ItemContent>
-                <ItemTitle>One submission across every Doji app</ItemTitle>
-                <ItemDescription>
-                  One submission fee covers one asset. Redeem within seven days; expiry is not
-                  refunded. Rejections refund the submission fee, excluding network fees.
-                </ItemDescription>
-              </ItemContent>
-              <Badge>Submission fee</Badge>
-            </Item>
           </CardContent>
 
           <CardFooter className="flex-col items-stretch">

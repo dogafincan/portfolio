@@ -38,7 +38,7 @@ afterEach(() => {
 });
 
 describe("ProjectSubmissionFlow", () => {
-  it("keeps required payment and refund terms in one informative item", () => {
+  it("keeps the direct form focused on project details without a redundant fee item", () => {
     const { container } = render(
       <ProjectSubmissionForm
         configuration={CONFIGURATION}
@@ -47,11 +47,9 @@ describe("ProjectSubmissionFlow", () => {
       />,
     );
 
-    expect(screen.getByText("One submission across every Doji app")).toBeTruthy();
-    expect(container.querySelectorAll('[data-slot="item"]')).toHaveLength(1);
-    expect(screen.queryByText("Payment deadlines")).toBeNull();
-    expect(document.body.textContent).toContain("seven days");
-    expect(document.body.textContent).not.toContain("90 days");
+    expect(screen.queryByText("One submission across every Doji app")).toBeNull();
+    expect(container.querySelectorAll('[data-slot="item"]')).toHaveLength(0);
+    expect(screen.getByText("Optional. Link to the project's official website.")).toBeTruthy();
   });
 
   it("keeps the digest and forbids repayment after all image attempts are spent", async () => {
