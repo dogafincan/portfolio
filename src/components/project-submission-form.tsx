@@ -336,53 +336,56 @@ export function ProjectSubmissionForm({
           </CardHeader>
 
           <CardContent>
-            <FieldGroup className="gap-3">
-              <TextField
-                autoComplete="off"
-                error={errors.assetType}
-                label="Asset identifier"
-                name="assetType"
-                onBlur={() => validateField("assetType")}
-                onChange={(value) => updateField("assetType", value)}
-                placeholder="Enter the complete asset identifier"
-                required
-                value={values.assetType}
-              />
-              <TextField
-                autoComplete="organization"
-                description={`${countGraphemes(values.projectName)}/${PROJECT_SUBMISSION_LIMITS.projectNameMaxGraphemes} characters`}
-                error={errors.projectName}
-                label="Project name"
-                name="projectName"
-                onBlur={() => validateField("projectName")}
-                onChange={(value) => updateField("projectName", value)}
-                placeholder="Project name"
-                required
-                value={values.projectName}
-              />
-              <TextField
-                autoComplete="off"
-                description={`${countGraphemes(values.shortDescription)}/${PROJECT_SUBMISSION_LIMITS.shortDescriptionMaxGraphemes} characters`}
-                error={errors.shortDescription}
-                label="Short description"
-                name="shortDescription"
-                onBlur={() => validateField("shortDescription")}
-                onChange={(value) => updateField("shortDescription", value)}
-                placeholder="What does this project help people do?"
-                required
-                value={values.shortDescription}
-              />
-              <TextField
-                autoComplete="off"
-                description="Optional"
-                error={errors.ticker}
-                label="Ticker"
-                name="ticker"
-                onBlur={() => validateField("ticker")}
-                onChange={(value) => updateField("ticker", value.replaceAll("$", ""))}
-                placeholder="DOJI"
-                value={values.ticker}
-              />
+            <FieldGroup className="gap-6">
+              <FieldGroup className="gap-3">
+                <TextField
+                  autoComplete="off"
+                  description="Use the complete identifier for the asset you want to add or update."
+                  error={errors.assetType}
+                  label="Asset identifier"
+                  name="assetType"
+                  onBlur={() => validateField("assetType")}
+                  onChange={(value) => updateField("assetType", value)}
+                  placeholder="Enter the complete asset identifier"
+                  required
+                  value={values.assetType}
+                />
+                <TextField
+                  autoComplete="organization"
+                  description={`${countGraphemes(values.projectName)}/${PROJECT_SUBMISSION_LIMITS.projectNameMaxGraphemes} characters`}
+                  error={errors.projectName}
+                  label="Project name"
+                  name="projectName"
+                  onBlur={() => validateField("projectName")}
+                  onChange={(value) => updateField("projectName", value)}
+                  placeholder="Project name"
+                  required
+                  value={values.projectName}
+                />
+                <TextField
+                  autoComplete="off"
+                  description={`${countGraphemes(values.shortDescription)}/${PROJECT_SUBMISSION_LIMITS.shortDescriptionMaxGraphemes} characters`}
+                  error={errors.shortDescription}
+                  label="Short description"
+                  name="shortDescription"
+                  onBlur={() => validateField("shortDescription")}
+                  onChange={(value) => updateField("shortDescription", value)}
+                  placeholder="What does this project help people do?"
+                  required
+                  value={values.shortDescription}
+                />
+                <TextField
+                  autoComplete="off"
+                  description="Optional"
+                  error={errors.ticker}
+                  label="Ticker"
+                  name="ticker"
+                  onBlur={() => validateField("ticker")}
+                  onChange={(value) => updateField("ticker", value.replaceAll("$", ""))}
+                  placeholder="DOJI"
+                  value={values.ticker}
+                />
+              </FieldGroup>
 
               <Field data-invalid={Boolean(errors.profileImage)}>
                 <FieldLabel className="sr-only" htmlFor="profileImage">
@@ -484,7 +487,7 @@ export function ProjectSubmissionForm({
                 )}
               </Field>
 
-              <div className="grid gap-3 md:grid-cols-2">
+              <FieldGroup className="grid gap-3 md:grid-cols-2">
                 <TextField
                   autoComplete="url"
                   description="Optional"
@@ -529,7 +532,7 @@ export function ProjectSubmissionForm({
                   placeholder="https://discord.gg/project"
                   value={values.discordUrl}
                 />
-              </div>
+              </FieldGroup>
             </FieldGroup>
           </CardContent>
 
@@ -572,7 +575,7 @@ function TextField({
   value,
   ...props
 }: Omit<ComponentProps<typeof Input>, "name" | "onBlur" | "onChange" | "value"> & {
-  description?: string;
+  description: string;
   error?: string;
   label: string;
   name: keyof ProjectSubmissionFormValues;
@@ -587,7 +590,7 @@ function TextField({
       <FieldLabel htmlFor={name}>{label}</FieldLabel>
       <Input
         {...props}
-        aria-describedby={description || error ? messageId : undefined}
+        aria-describedby={messageId}
         aria-invalid={Boolean(error)}
         id={name}
         name={name}
@@ -601,12 +604,8 @@ function TextField({
           {error}
         </FieldError>
       ) : (
-        <FieldDescription
-          aria-hidden={description ? undefined : true}
-          className="min-h-6"
-          id={description ? messageId : undefined}
-        >
-          {description ?? "\u00a0"}
+        <FieldDescription className="min-h-6" id={messageId}>
+          {description}
         </FieldDescription>
       )}
     </Field>

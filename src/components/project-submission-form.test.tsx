@@ -54,8 +54,17 @@ describe("ProjectSubmissionFlow", () => {
     expect(screen.getByText("0/60 characters")).toBeTruthy();
     expect(screen.getByText("0/160 characters")).toBeTruthy();
     expect(screen.getAllByText("Optional")).toHaveLength(5);
+    const assetIdentifier = screen.getByLabelText("Asset identifier");
+    expect(assetIdentifier.getAttribute("aria-describedby")).toBe("assetType-description");
+    expect(
+      screen.getByText("Use the complete identifier for the asset you want to add or update."),
+    ).toBeTruthy();
     expect(screen.getByRole("button", { name: "Browse profile image" })).toBeTruthy();
-    expect(screen.getByLabelText("Profile image").className).toContain("hidden");
+    const profileImageInput = screen.getByLabelText("Profile image");
+    expect(profileImageInput.className).toContain("hidden");
+    expect(profileImageInput.closest('[data-slot="field"]')?.parentElement?.className).toContain(
+      "gap-6",
+    );
     expect(screen.queryByText(/40 MP/u)).toBeNull();
   });
 
@@ -71,7 +80,10 @@ describe("ProjectSubmissionFlow", () => {
     const assetIdentifier = screen.getByLabelText("Asset identifier");
     const restingSlot = assetIdentifier.nextElementSibling;
     expect(restingSlot?.getAttribute("data-slot")).toBe("field-description");
-    expect(restingSlot?.getAttribute("aria-hidden")).toBe("true");
+    expect(restingSlot?.getAttribute("aria-hidden")).toBeNull();
+    expect(restingSlot?.textContent).toBe(
+      "Use the complete identifier for the asset you want to add or update.",
+    );
     expect(restingSlot?.className).toContain("min-h-6");
 
     fireEvent.blur(assetIdentifier);

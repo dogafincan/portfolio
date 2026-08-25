@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `6316e98e89c21e0c2fd2a60c2277df38ae26499d` (committed draft; release tag pending)
+Doji Design System source revision: `678cd507eba2d8de9465da61cbc1b89c01c16754` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -444,11 +444,11 @@ submission lock remains separate from that static directory.
   outline **Browse** Button. A validated local preview replaces that picker,
   retains Browse for replacement, and wraps the action below readable media and
   copy on mobile.
-- Every text field owns one stable one-line supporting slot. Asset identifier
-  uses a hidden spacer; project name and short description use character counts;
+- Every text field owns one stable one-line supporting slot with visible resting
+  copy. Asset identifier explains the complete identifier; project name and short description use character counts;
   ticker and each external-link field use `Optional`; and errors replace the
   resting content. Use Website URL, X URL, Telegram URL, and Discord URL. Ticker
-  typing and paste filter `$` while domain validation still
+  The profile-image Field keeps `gap-6` above and below. Ticker typing and paste filter `$` while domain validation still
   enforces the alphanumeric contract.
 - One fee disclosure Item identifies the submission fee across every Doji app
   and combines the seven-day redemption, expiry, and rejection-refund terms.
