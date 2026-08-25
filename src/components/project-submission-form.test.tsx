@@ -53,9 +53,46 @@ describe("ProjectSubmissionFlow", () => {
     expect((screen.getByLabelText("Ticker") as HTMLInputElement).value).toBe("DOJI");
     expect(screen.getByText("0/60 characters")).toBeTruthy();
     expect(screen.getByText("0/160 characters")).toBeTruthy();
-    expect(screen.getAllByText("Optional.")).toHaveLength(5);
+    expect(screen.getAllByText("Optional")).toHaveLength(5);
     expect(screen.getByRole("button", { name: "Browse profile image" })).toBeTruthy();
     expect(screen.getByLabelText("Profile image").className).toContain("hidden");
+    expect(screen.queryByText(/40 MP/u)).toBeNull();
+  });
+
+  it("keeps one stable supporting slot and replaces the image picker after selection", async () => {
+    render(
+      <ProjectSubmissionForm
+        configuration={CONFIGURATION}
+        isWalletConnected={false}
+        migrationLocked={false}
+      />,
+    );
+
+    const assetIdentifier = screen.getByLabelText("Asset identifier");
+    const restingSlot = assetIdentifier.nextElementSibling;
+    expect(restingSlot?.getAttribute("data-slot")).toBe("field-description");
+    expect(restingSlot?.getAttribute("aria-hidden")).toBe("true");
+    expect(restingSlot?.className).toContain("min-h-6");
+
+    fireEvent.blur(assetIdentifier);
+    const errorSlot = assetIdentifier.nextElementSibling;
+    expect(errorSlot?.getAttribute("data-slot")).toBe("field-error");
+    expect(errorSlot?.className).toContain("min-h-6");
+
+    fireEvent.change(screen.getByLabelText("Profile image"), {
+      target: { files: [createPngFile()] },
+    });
+    await waitFor(() => {
+      expect(screen.getByRole("img", { name: "Selected project profile preview" })).toBeTruthy();
+    });
+
+    expect(screen.queryByText("JPG, PNG, WebP, or AVIF up to 5 MB.")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Remove image" })).toBeNull();
+    const browseAgain = screen.getByRole("button", {
+      name: "Browse for another profile image",
+    });
+    expect(browseAgain.className).toContain("w-full");
+    expect(browseAgain.className).toContain("sm:w-auto");
   });
 
   it("keeps the digest and forbids repayment after all image attempts are spent", async () => {
@@ -138,10 +175,10 @@ describe("ProjectSubmissionFlow", () => {
       "Short description",
       "Ticker",
       "Profile image",
-      "Website",
-      "X",
-      "Telegram",
-      "Discord",
+      "Website URL",
+      "X URL",
+      "Telegram URL",
+      "Discord URL",
     ]);
     expect(content?.querySelector('[data-slot="empty"]')).toBeNull();
     expect(content?.querySelector('[data-slot="alert"]')).toBeNull();

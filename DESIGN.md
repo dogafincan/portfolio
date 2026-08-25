@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `21ea37aa00334f5cba953e3c3661332f2efeb542` (committed draft; release tag pending)
+Doji Design System source revision: `6316e98e89c21e0c2fd2a60c2277df38ae26499d` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -440,14 +440,16 @@ submission lock remains separate from that static directory.
   errors are field-local and programmatically associated.
 - Image input accepts static JPG, PNG, WebP, or AVIF up to 5,000,000 bytes and
   40 million decoded pixels. The initial picker is a compact dashed outline Item
-  with an unframed 20px upload icon, short format/size copy, and a natural-width
-  outline **Browse** Button. Preview remains local and uses an outlined Item.
-- Asset identifier has no helper. Project name and short description show only
-  their character counts. Ticker and each social-link field show only
-  `Optional.` Ticker typing and paste filter `$` while domain validation still
+  with an unframed 20px upload icon, concise format/5 MB copy, and a natural-width
+  outline **Browse** Button. A validated local preview replaces that picker,
+  retains Browse for replacement, and wraps the action below readable media and
+  copy on mobile.
+- Every text field owns one stable one-line supporting slot. Asset identifier
+  uses a hidden spacer; project name and short description use character counts;
+  ticker and each external-link field use `Optional`; and errors replace the
+  resting content. Use Website URL, X URL, Telegram URL, and Discord URL. Ticker
+  typing and paste filter `$` while domain validation still
   enforces the alphanumeric contract.
-- **Remove image** may keep its Trash icon as the documented destructive
-  file-control exception. Ordinary text actions remain text-only.
 - One fee disclosure Item identifies the submission fee across every Doji app
   and combines the seven-day redemption, expiry, and rejection-refund terms.
   Action-owned feedback follows the Pay action.
@@ -538,7 +540,6 @@ submission lock remains separate from that static directory.
 The current migration intentionally keeps only these product-owned exceptions:
 
 - checked-in project brand artwork;
-- the **Remove image** Trash icon;
 - the Portfolio-specific home copy and project-grid content;
 - one natural-width primary **Open app** link per independent project Card.
 

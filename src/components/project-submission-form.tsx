@@ -6,7 +6,7 @@ import {
   type ComponentProps,
   type FormEvent,
 } from "react";
-import { CloudUpload, ImageIcon, Trash2 } from "lucide-react";
+import { CloudUpload, ImageIcon } from "lucide-react";
 
 import { useDojiWallet } from "@/components/doji-wallet";
 import { Button } from "@/components/ui/button";
@@ -274,18 +274,13 @@ export function ProjectSubmissionForm({
     setPreviewUrl(URL.createObjectURL(file));
   }
 
-  function removeImage() {
-    imageValidationSequence.current += 1;
-    setImagePending(false);
-    setProfileImage(null);
-    setErrors((current) => ({ ...current, profileImage: undefined }));
-    if (previewUrl) {
-      URL.revokeObjectURL(previewUrl);
-      setPreviewUrl(null);
+  function browseProfileImage() {
+    const input = profileImageInputRef.current;
+    if (!input) {
+      return;
     }
-    if (profileImageInputRef.current) {
-      profileImageInputRef.current.value = "";
-    }
+    input.value = "";
+    input.click();
   }
 
   async function submit() {
@@ -379,7 +374,7 @@ export function ProjectSubmissionForm({
               />
               <TextField
                 autoComplete="off"
-                description="Optional."
+                description="Optional"
                 error={errors.ticker}
                 label="Ticker"
                 name="ticker"
@@ -395,7 +390,15 @@ export function ProjectSubmissionForm({
                 </FieldLabel>
                 <Input
                   accept="image/avif,image/jpeg,image/png,image/webp"
-                  aria-describedby="profileImage-description profileImage-error"
+                  aria-describedby={
+                    errors.profileImage
+                      ? "profileImage-error"
+                      : profileImage
+                        ? "profileImage-selection-description"
+                        : imagePending
+                          ? "profileImage-pending-description"
+                          : "profileImage-description"
+                  }
                   aria-invalid={Boolean(errors.profileImage)}
                   disabled={imagePending}
                   id="profileImage"
@@ -406,33 +409,11 @@ export function ProjectSubmissionForm({
                   className="hidden"
                   type="file"
                 />
-                <Item className="flex-nowrap border-dashed" variant="outline">
-                  <ItemMedia className="self-center" variant="default">
-                    <CloudUpload aria-hidden="true" className="size-5" />
-                  </ItemMedia>
-                  <ItemContent>
-                    <ItemTitle>Profile image</ItemTitle>
-                    <ItemDescription id="profileImage-description">
-                      JPG, PNG, WebP, or AVIF up to 5 MB and 40 MP.
-                    </ItemDescription>
-                  </ItemContent>
-                  <ItemActions>
-                    <Button
-                      aria-label="Browse profile image"
-                      disabled={imagePending}
-                      onClick={() => profileImageInputRef.current?.click()}
-                      type="button"
-                      variant="outline"
-                    >
-                      Browse
-                    </Button>
-                  </ItemActions>
-                </Item>
-                {errors.profileImage ? (
-                  <FieldError id="profileImage-error">{errors.profileImage}</FieldError>
-                ) : null}
                 {profileImage && previewUrl ? (
-                  <Item className="mt-1" variant="outline">
+                  <Item
+                    className="flex-wrap items-start sm:flex-nowrap sm:items-center"
+                    variant="outline"
+                  >
                     <ItemMedia className="size-16 rounded-2xl" variant="image">
                       <img
                         alt="Selected project profile preview"
@@ -442,40 +423,73 @@ export function ProjectSubmissionForm({
                       />
                     </ItemMedia>
                     <ItemContent>
-                      <ItemTitle>{profileImage.file.name}</ItemTitle>
-                      <ItemDescription>
+                      <ItemTitle className="line-clamp-none w-auto break-words">
+                        {profileImage.file.name}
+                      </ItemTitle>
+                      <ItemDescription id="profileImage-selection-description">
                         {profileImage.width} × {profileImage.height}px ·{" "}
                         {formatFileSize(profileImage.file.size)}
                       </ItemDescription>
                     </ItemContent>
-                    <ItemActions>
-                      <Button onClick={removeImage} type="button" variant="outline">
-                        <Trash2 aria-hidden="true" />
-                        Remove image
+                    <ItemActions className="w-full basis-full sm:w-auto sm:basis-auto sm:self-center">
+                      <Button
+                        aria-label="Browse for another profile image"
+                        className="w-full sm:w-auto"
+                        onClick={browseProfileImage}
+                        type="button"
+                        variant="outline"
+                      >
+                        Browse
                       </Button>
                     </ItemActions>
                   </Item>
                 ) : imagePending ? (
-                  <Item className="mt-1" variant="outline">
+                  <Item variant="outline">
                     <ItemMedia variant="icon">
                       <ImageIcon aria-hidden="true" />
                     </ItemMedia>
                     <ItemContent>
                       <ItemTitle>Checking image</ItemTitle>
-                      <ItemDescription>
+                      <ItemDescription id="profileImage-pending-description">
                         Checking locally; the image stays on this page.
                       </ItemDescription>
                     </ItemContent>
                   </Item>
-                ) : null}
+                ) : (
+                  <Item className="flex-nowrap border-dashed" variant="outline">
+                    <ItemMedia className="self-center" variant="default">
+                      <CloudUpload aria-hidden="true" className="size-5" />
+                    </ItemMedia>
+                    <ItemContent>
+                      <ItemTitle>Profile image</ItemTitle>
+                      {errors.profileImage ? (
+                        <FieldError id="profileImage-error">{errors.profileImage}</FieldError>
+                      ) : (
+                        <ItemDescription id="profileImage-description">
+                          JPG, PNG, WebP, or AVIF up to 5 MB.
+                        </ItemDescription>
+                      )}
+                    </ItemContent>
+                    <ItemActions>
+                      <Button
+                        aria-label="Browse profile image"
+                        onClick={browseProfileImage}
+                        type="button"
+                        variant="outline"
+                      >
+                        Browse
+                      </Button>
+                    </ItemActions>
+                  </Item>
+                )}
               </Field>
 
               <div className="grid gap-3 md:grid-cols-2">
                 <TextField
                   autoComplete="url"
-                  description="Optional."
+                  description="Optional"
                   error={errors.websiteUrl}
-                  label="Website"
+                  label="Website URL"
                   name="websiteUrl"
                   onBlur={() => validateField("websiteUrl")}
                   onChange={(value) => updateField("websiteUrl", value)}
@@ -484,9 +498,9 @@ export function ProjectSubmissionForm({
                 />
                 <TextField
                   autoComplete="url"
-                  description="Optional."
+                  description="Optional"
                   error={errors.xUrl}
-                  label="X"
+                  label="X URL"
                   name="xUrl"
                   onBlur={() => validateField("xUrl")}
                   onChange={(value) => updateField("xUrl", value)}
@@ -495,9 +509,9 @@ export function ProjectSubmissionForm({
                 />
                 <TextField
                   autoComplete="url"
-                  description="Optional."
+                  description="Optional"
                   error={errors.telegramUrl}
-                  label="Telegram"
+                  label="Telegram URL"
                   name="telegramUrl"
                   onBlur={() => validateField("telegramUrl")}
                   onChange={(value) => updateField("telegramUrl", value)}
@@ -506,9 +520,9 @@ export function ProjectSubmissionForm({
                 />
                 <TextField
                   autoComplete="url"
-                  description="Optional."
+                  description="Optional"
                   error={errors.discordUrl}
-                  label="Discord"
+                  label="Discord URL"
                   name="discordUrl"
                   onBlur={() => validateField("discordUrl")}
                   onChange={(value) => updateField("discordUrl", value)}
@@ -567,14 +581,13 @@ function TextField({
   required?: boolean;
   value: string;
 }) {
-  const descriptionId = description ? `${name}-description` : undefined;
-  const errorId = error ? `${name}-error` : undefined;
+  const messageId = `${name}-${error ? "error" : "description"}`;
   return (
     <Field data-invalid={Boolean(error)}>
       <FieldLabel htmlFor={name}>{label}</FieldLabel>
       <Input
         {...props}
-        aria-describedby={[descriptionId, errorId].filter(Boolean).join(" ") || undefined}
+        aria-describedby={description || error ? messageId : undefined}
         aria-invalid={Boolean(error)}
         id={name}
         name={name}
@@ -583,8 +596,19 @@ function TextField({
         required={required}
         value={value}
       />
-      {description ? <FieldDescription id={descriptionId}>{description}</FieldDescription> : null}
-      {error ? <FieldError id={errorId}>{error}</FieldError> : null}
+      {error ? (
+        <FieldError className="min-h-6" id={messageId}>
+          {error}
+        </FieldError>
+      ) : (
+        <FieldDescription
+          aria-hidden={description ? undefined : true}
+          className="min-h-6"
+          id={description ? messageId : undefined}
+        >
+          {description ?? "\u00a0"}
+        </FieldDescription>
+      )}
     </Field>
   );
 }
