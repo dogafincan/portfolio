@@ -48,7 +48,7 @@ describe("ProjectSubmissionFlow", () => {
     );
 
     expect(screen.queryByText("One submission across every Doji app")).toBeNull();
-    expect(container.querySelectorAll('[data-slot="item"]')).toHaveLength(1);
+    expect(container.querySelectorAll('[data-slot="item"]')).toHaveLength(0);
     fireEvent.change(screen.getByLabelText("Ticker (optional)"), {
       target: { value: "$DO$JI" },
     });
@@ -62,9 +62,10 @@ describe("ProjectSubmissionFlow", () => {
     expect(
       screen.getByText("Use the complete identifier for the asset you want to add or update."),
     ).toBeTruthy();
-    expect(screen.getByRole("button", { name: "Browse profile image" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Browse profile image" })).toBeNull();
     const profileImageInput = screen.getByLabelText("Profile image");
-    expect(profileImageInput.className).toContain("hidden");
+    expect(profileImageInput.className).not.toContain("hidden");
+    expect(profileImageInput.getAttribute("type")).toBe("file");
     expect(profileImageInput.closest('[data-slot="field"]')?.parentElement?.className).toContain(
       "gap-7",
     );
@@ -109,8 +110,8 @@ describe("ProjectSubmissionFlow", () => {
     const browseAgain = screen.getByRole("button", {
       name: "Browse for another profile image",
     });
-    expect(browseAgain.className).toContain("w-full");
-    expect(browseAgain.className).toContain("sm:w-auto");
+    expect(browseAgain.className).not.toContain("w-full");
+    expect(browseAgain.closest('[data-slot="attachment"]')?.className).toContain("w-full");
   });
 
   it("keeps the digest and forbids repayment after all image attempts are spent", async () => {

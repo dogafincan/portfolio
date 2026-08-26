@@ -6,9 +6,16 @@ import {
   type ComponentProps,
   type FormEvent,
 } from "react";
-import { CloudUpload, ImageIcon } from "lucide-react";
-
 import { useDojiWallet } from "@/components/doji-wallet";
+import {
+  Attachment,
+  AttachmentAction,
+  AttachmentActions,
+  AttachmentContent,
+  AttachmentDescription,
+  AttachmentMedia,
+  AttachmentTitle,
+} from "@/components/ui/attachment";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -31,14 +38,6 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
-import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemMedia,
-  ItemTitle,
-} from "@/components/ui/item";
 import { StatusAlert } from "@/components/ui/status-alert";
 import {
   CHAIN_MIGRATION_ALERT_TITLE,
@@ -396,9 +395,7 @@ export function ProjectSubmissionForm({
               />
               <FieldSeparator />
               <Field data-invalid={Boolean(errors.profileImage)}>
-                <FieldLabel className="sr-only" htmlFor="profileImage">
-                  Profile image
-                </FieldLabel>
+                <FieldLabel htmlFor="profileImage">Profile image</FieldLabel>
                 <Input
                   accept="image/avif,image/jpeg,image/png,image/webp"
                   aria-describedby={
@@ -417,78 +414,52 @@ export function ProjectSubmissionForm({
                   onChange={(event) => void handleImageChange(event)}
                   ref={profileImageInputRef}
                   required
-                  className="hidden"
+                  className={profileImage ? "hidden" : undefined}
                   type="file"
                 />
                 {profileImage && previewUrl ? (
-                  <Item
-                    className="flex-wrap items-start sm:flex-nowrap sm:items-center"
-                    variant="outline"
-                  >
-                    <ItemMedia className="size-16 rounded-2xl" variant="image">
+                  <Attachment className="w-full">
+                    <AttachmentMedia variant="image">
                       <img
                         alt="Selected project profile preview"
                         height={profileImage.height}
                         src={previewUrl}
                         width={profileImage.width}
                       />
-                    </ItemMedia>
-                    <ItemContent>
-                      <ItemTitle className="line-clamp-none w-auto break-words">
+                    </AttachmentMedia>
+                    <AttachmentContent>
+                      <AttachmentTitle title={profileImage.file.name}>
                         {profileImage.file.name}
-                      </ItemTitle>
-                      <ItemDescription id="profileImage-selection-description">
+                      </AttachmentTitle>
+                      <AttachmentDescription id="profileImage-selection-description">
                         {profileImage.width} × {profileImage.height}px ·{" "}
                         {formatFileSize(profileImage.file.size)}
-                      </ItemDescription>
-                    </ItemContent>
-                    <ItemActions className="w-full basis-full sm:w-auto sm:basis-auto sm:self-center">
-                      <Button
+                      </AttachmentDescription>
+                    </AttachmentContent>
+                    <AttachmentActions>
+                      <AttachmentAction
                         aria-label="Browse for another profile image"
-                        className="w-full sm:w-auto"
                         onClick={browseProfileImage}
+                        size="default"
                         type="button"
                         variant="outline"
                       >
                         Browse
-                      </Button>
-                    </ItemActions>
-                  </Item>
-                ) : imagePending ? (
-                  <Item variant="outline">
-                    <ItemMedia variant="icon">
-                      <ImageIcon aria-hidden="true" />
-                    </ItemMedia>
-                    <ItemContent>
-                      <ItemTitle>Checking image</ItemTitle>
-                      <ItemDescription id="profileImage-pending-description">
-                        Checking locally; the image stays on this page.
-                      </ItemDescription>
-                    </ItemContent>
-                  </Item>
-                ) : (
-                  <Item className="flex-nowrap border-dashed" variant="outline">
-                    <ItemMedia className="self-center" variant="default">
-                      <CloudUpload aria-hidden="true" className="size-5" />
-                    </ItemMedia>
-                    <ItemContent>
-                      <ItemTitle>Profile image</ItemTitle>
-                      <ItemDescription id="profileImage-description">
-                        JPG, PNG, WebP, or AVIF up to 5 MB.
-                      </ItemDescription>
-                    </ItemContent>
-                    <ItemActions>
-                      <Button
-                        aria-label="Browse profile image"
-                        onClick={browseProfileImage}
-                        type="button"
-                        variant="outline"
-                      >
-                        Browse
-                      </Button>
-                    </ItemActions>
-                  </Item>
-                )}
+                      </AttachmentAction>
+                    </AttachmentActions>
+                  </Attachment>
+                ) : null}
+                {!profileImage && !errors.profileImage ? (
+                  <FieldDescription
+                    id={
+                      imagePending ? "profileImage-pending-description" : "profileImage-description"
+                    }
+                  >
+                    {imagePending
+                      ? "Checking locally; the image stays on this page."
+                      : "JPG, PNG, WebP, or AVIF up to 5 MB."}
+                  </FieldDescription>
+                ) : null}
                 {errors.profileImage ? (
                   <FieldError id="profileImage-error">{errors.profileImage}</FieldError>
                 ) : null}

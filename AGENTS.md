@@ -200,7 +200,11 @@ Expected portfolio omissions:
   `FieldSeparator` separates identity, image, and link sections. Validation
   follows its control without removing durable guidance;
   the profile-image Field is an ordinary FieldGroup peer without a custom outer
-  gap
+  gap, starts with a visible labelled shadcn file Input, and replaces that
+  control after local validation with one shadcn Attachment containing the
+  preview, filename, dimensions, size, and outline **Browse** replacement
+  action. Preserve the stock 24px form-to-footer action boundary without an
+  additive Field margin or separator
 
 - Cloudflare Durable Objects
 - Cloudflare storage bindings

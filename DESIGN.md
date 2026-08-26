@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `ca37a97c31ad36b003a34785e99bada4622775ee` (committed draft; release tag pending)
+Doji Design System source revision: `4e9d4f1a6a86a29a6db987f23fa8d0b1129c1187` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -432,7 +432,7 @@ submission lock remains separate from that static directory.
 - Fields and the selected image stay in page memory only until payment
   succeeds. Do not persist drafts or perform pre-payment search, prefill,
   validation, upload, or other backend work.
-- Use shared `Field`, `Input`, `Item`, `Badge`, `Alert`, `Drawer`, and `Button`
+- Use shared `Field`, `Input`, `Attachment`, `Badge`, `Alert`, `Drawer`, and `Button`
   primitives. The form wraps the complete Card; inputs belong in
   `CardContent`, actions and their feedback in `CardFooter`.
 - Keep the shared 24px card inset/section rhythm and 12px sibling rhythm.
@@ -440,11 +440,10 @@ submission lock remains separate from that static directory.
   input-like controls are 36px high. Labels are visible;
   errors are field-local and programmatically associated.
 - Image input accepts static JPG, PNG, WebP, or AVIF up to 5,000,000 bytes and
-  40 million decoded pixels. The initial picker is a compact dashed outline Item
-  with an unframed 20px upload icon, concise format/5 MB copy, and a natural-width
-  outline **Browse** Button. A validated local preview replaces that picker,
-  retains Browse for replacement, and wraps the action below readable media and
-  copy on mobile.
+  40 million decoded pixels. The initial control is the visible labelled
+  shadcn file Input with concise format/5 MB guidance. A validated local
+  selection replaces it with one shadcn Attachment containing the preview,
+  filename, dimensions, file size, and outline **Browse** replacement action.
 - Use the stock shadcn form hierarchy: `FieldGroup` keeps `gap-7`, each Field
   keeps its internal `gap-3`, and `FieldContent` groups the label with durable
   purpose, format, or constraint guidance before the control. Project-name and
@@ -457,9 +456,9 @@ submission lock remains separate from that static directory.
   an ordinary FieldGroup peer without a custom outer gap. Ticker typing and
   paste filter `$` while domain validation still enforces the alphanumeric
   contract.
-- One fee disclosure Item identifies the submission fee across every Doji app
-  and combines the seven-day redemption, expiry, and rejection-refund terms.
-  Action-owned feedback follows the Pay action.
+- The Pay action follows the form after the standard 24px content-to-footer
+  boundary. Do not add a fee-summary Item, separator, or bespoke margin there;
+  action-owned feedback follows the complete footer action cluster.
 - Alerts use semantic surface, border, foreground, and icon pairings:
   `Info`, `CircleCheck`, `TriangleAlert`, and `CircleAlert` as appropriate.
 - Once a digest exists, failure copy tells the user not to pay again, keeps the
