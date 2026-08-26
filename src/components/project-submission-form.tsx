@@ -421,10 +421,7 @@ export function ProjectSubmissionForm({
                   className={`flex-nowrap items-start overflow-hidden ${profileImage && previewUrl ? "border-solid" : "border-dashed"}`}
                   variant="outline"
                 >
-                  <ItemMedia
-                    className={profileImage && previewUrl ? undefined : "bg-muted"}
-                    variant="image"
-                  >
+                  <ItemMedia variant={profileImage && previewUrl ? "image" : "icon"}>
                     {profileImage && previewUrl ? (
                       <img
                         alt="Selected project profile preview"
@@ -433,7 +430,7 @@ export function ProjectSubmissionForm({
                         width={profileImage.width}
                       />
                     ) : (
-                      <ImageIcon aria-hidden="true" className="size-5 text-muted-foreground" />
+                      <ImageIcon aria-hidden="true" />
                     )}
                   </ItemMedia>
                   <ItemContent>

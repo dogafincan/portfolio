@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `9097e3cf07ff50352f9ed0d0703c2feb13b78cd5` (committed draft; release tag pending)
+Doji Design System source revision: `4e1690400ca2f58dc8eecf6e19ec537499b8122e` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -443,7 +443,7 @@ submission lock remains separate from that static directory.
 - Image input accepts static JPG, PNG, WebP, or AVIF up to 5,000,000 bytes and
   40 million decoded pixels. Its visible title and concise format/5 MB guidance
   precede one non-interactive outline Item with an explicit **Browse** action.
-  The initial dashed Item uses a muted image placeholder; a validated local
+  The initial dashed Item uses a bare stock 16px image icon; a validated local
   selection updates the same solid Item with the preview, filename, dimensions,
   and file size. Media and Browse action remain non-shrinking while the content
   column yields. A long filename visually ellipsizes in its title while its

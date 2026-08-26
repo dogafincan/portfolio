@@ -202,8 +202,8 @@ Expected portfolio omissions:
   follows its control without removing durable guidance;
   the profile-image Field is an ordinary FieldGroup peer without a custom outer
   gap. Its title and format/size description precede one non-interactive outline
-  Item with an explicit **Browse** action. The initial dashed Item uses a muted
-  image placeholder; local validation updates the same solid Item with the
+  Item with an explicit **Browse** action. The initial dashed Item uses a bare
+  stock 16px image icon; local validation updates the same solid Item with the
   preview, filename, dimensions, and size. Keep media and Browse action
   non-shrinking, let the content column yield, and visually ellipsize only an
   unbounded filename title while preserving its complete DOM and hover value.

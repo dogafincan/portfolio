@@ -67,7 +67,15 @@ describe("ProjectSubmissionFlow", () => {
     expect(screen.getByRole("button", { name: "Browse profile images" }).textContent).toBe(
       "Browse",
     );
-    expect(screen.getByText("No profile image selected")).toBeTruthy();
+    const unselectedProfileImageTitle = screen.getByText("No profile image selected");
+    const unselectedProfileImageMedia = unselectedProfileImageTitle
+      .closest('[data-slot="item"]')
+      ?.querySelector('[data-slot="item-media"]');
+    expect(unselectedProfileImageMedia?.getAttribute("data-variant")).toBe("icon");
+    expect(unselectedProfileImageMedia?.className).toContain(
+      "[&_svg:not([class*='size-'])]:size-4",
+    );
+    expect(unselectedProfileImageMedia?.className).not.toContain("bg-muted");
     const profileImageInput = screen.getByLabelText("Profile image");
     expect(profileImageInput.className).toContain("sr-only");
     expect(profileImageInput.getAttribute("type")).toBe("file");

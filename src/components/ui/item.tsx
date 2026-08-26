@@ -87,14 +87,14 @@ function Item({
 }
 
 const itemMediaVariants = cva(
-  "flex shrink-0 items-center justify-center gap-2 group-has-data-[slot=item-description]/item:self-start [&_svg]:pointer-events-none",
+  "flex shrink-0 items-center justify-center gap-2 group-has-data-[slot=item-description]/item:translate-y-0.5 group-has-data-[slot=item-description]/item:self-start [&_svg]:pointer-events-none",
   {
     variants: {
       variant: {
-        default: "bg-transparent group-has-data-[slot=item-description]/item:translate-y-0.5",
-        icon: "group-has-data-[slot=item-description]/item:translate-y-[3px] [&_svg:not([class*='size-'])]:size-4",
+        default: "bg-transparent",
+        icon: "[&_svg:not([class*='size-'])]:size-4",
         image:
-          "size-10 overflow-hidden rounded-xl bg-item-avatar-background group-has-data-[slot=item-description]/item:translate-y-0.5 group-data-[size=sm]/item:size-8 group-data-[size=xs]/item:size-6 group-data-[size=xs]/item:rounded-lg [&_img]:size-full [&_img]:object-cover",
+          "size-10 overflow-hidden rounded-xl bg-item-avatar-background group-data-[size=sm]/item:size-8 group-data-[size=xs]/item:size-6 group-data-[size=xs]/item:rounded-lg [&_img]:size-full [&_img]:object-cover",
       },
     },
     defaultVariants: {

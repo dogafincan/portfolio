@@ -106,8 +106,10 @@ describe("Item", () => {
     expect(alert?.className).toContain("*:[svg]:translate-y-[3px]");
     expect(itemMedia?.className).toContain("[&_svg:not([class*='size-'])]:size-4");
     expect(itemMedia?.className).toContain(
-      "group-has-data-[slot=item-description]/item:translate-y-[3px]",
+      "group-has-data-[slot=item-description]/item:translate-y-0.5",
     );
+    expect(itemMedia?.getAttribute("data-variant")).toBe("icon");
+    expect(itemMedia?.className).not.toContain("bg-muted");
     expect(itemMedia?.className).toContain(
       "group-has-data-[slot=item-description]/item:self-start",
     );
