@@ -192,6 +192,14 @@ Expected portfolio omissions:
   remains the authority seam, while the dormant direct `/submit` route
   remains preserved
 
+- the preserved `/submit` form uses stock shadcn composition: `FieldGroup`
+  gap-7, primitive-owned Field gap-3, `FieldContent` for label plus durable
+  pre-control guidance, `InputGroup` for in-control counters, `FieldSet` for
+  Project links, and `FieldSeparator` between identity, image, and link
+  sections. Validation follows its control without removing durable guidance;
+  the profile-image Field is an ordinary FieldGroup peer without a custom outer
+  gap
+
 - Cloudflare Durable Objects
 - Cloudflare storage bindings
 - Sui provider or signing-key bindings in the public Worker

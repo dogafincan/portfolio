@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `678cd507eba2d8de9465da61cbc1b89c01c16754` (committed draft; release tag pending)
+Doji Design System source revision: `76564cccd3f17b960f76970eff314a83e6823a2b` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -147,9 +147,10 @@ and are not renamed for this copy change.
 Every ordinary local Card keeps 24px (`gap-6`) between each present header, content,
 and footer section at every size. `CardContent` is shrink-safe but natural-height
 by default. A present footer stays in ordinary flow after the exact structural
-24px gap at every width. Sibling items in `CardContent` and `CardFooter` use
-12px (`gap-3`); a direct `FieldGroup` in Card content must use that same stack
-instead of its stock `gap-7`.
+24px gap at every width. Sibling non-form items in `CardContent` and
+`CardFooter` use 12px (`gap-3`). Forms keep the stock shadcn rhythm instead: a
+direct `FieldGroup` uses 28px (`gap-7`) between Fields and each Field uses its
+primitive-owned 12px (`gap-3`) internal spacing.
 
 At the large breakpoint, page-level peer Cards use equal fractional columns and
 align to the start. Every Card keeps its independent natural height, so unequal
@@ -444,12 +445,16 @@ submission lock remains separate from that static directory.
   outline **Browse** Button. A validated local preview replaces that picker,
   retains Browse for replacement, and wraps the action below readable media and
   copy on mobile.
-- Every text field owns one stable one-line supporting slot with visible resting
-  copy. Asset identifier explains the complete identifier; project name and short description use character counts;
-  ticker and each external-link field use `Optional`; and errors replace the
-  resting content. Use Website URL, X URL, Telegram URL, and Discord URL. Ticker
-  The profile-image Field keeps `gap-6` above and below. Ticker typing and paste filter `$` while domain validation still
-  enforces the alphanumeric contract.
+- Use the stock shadcn form hierarchy: `FieldGroup` keeps `gap-7`, each Field
+  keeps its internal `gap-3`, and `FieldContent` groups the label with durable
+  purpose, format, or optional guidance before the control. Project-name and
+  short-description counters render inside `InputGroup`; validation follows the
+  control and does not remove durable guidance. `FieldSet` groups Project links
+  and `FieldSeparator` divides identity, profile image, and link sections. Use
+  Website URL, X URL, Telegram URL, and Discord URL. The profile-image Field is
+  an ordinary FieldGroup peer without a custom outer gap. Ticker typing and
+  paste filter `$` while domain validation still enforces the alphanumeric
+  contract.
 - One fee disclosure Item identifies the submission fee across every Doji app
   and combines the seven-day redemption, expiry, and rejection-refund terms.
   Action-owned feedback follows the Pay action.

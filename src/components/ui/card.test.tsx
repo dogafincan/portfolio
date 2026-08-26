@@ -43,6 +43,7 @@ describe("Card", () => {
     );
     const card = container.querySelector('[data-slot="card"]');
     const content = container.querySelector('[data-slot="card-content"]');
+    const fieldGroup = container.querySelector('[data-slot="field-group"]');
     const footer = container.querySelector('[data-slot="card-footer"]');
 
     expect(card?.className).toContain("gap-(--ds-surface-section-gap)");
@@ -53,9 +54,10 @@ describe("Card", () => {
     expect(content?.className).toContain("flex-col");
     expect(content?.className).toContain("gap-(--ds-surface-stack-gap)");
     expect(content?.className).toContain("px-(--ds-surface-inset)");
-    expect(content?.className).toContain(
+    expect(content?.className).not.toContain(
       "[&>[data-slot=field-group]]:gap-(--ds-surface-stack-gap)",
     );
+    expect(fieldGroup?.className).toContain("gap-7");
     expect(footer?.className).toContain("gap-(--ds-surface-stack-gap)");
     expect(footer?.className).toContain("px-(--ds-surface-inset)");
   });

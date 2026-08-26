@@ -51,8 +51,8 @@ describe("ProjectSubmissionFlow", () => {
     expect(container.querySelectorAll('[data-slot="item"]')).toHaveLength(1);
     fireEvent.change(screen.getByLabelText("Ticker"), { target: { value: "$DO$JI" } });
     expect((screen.getByLabelText("Ticker") as HTMLInputElement).value).toBe("DOJI");
-    expect(screen.getByText("0/60 characters")).toBeTruthy();
-    expect(screen.getByText("0/160 characters")).toBeTruthy();
+    expect(screen.getByText("0/60")).toBeTruthy();
+    expect(screen.getByText("0/160")).toBeTruthy();
     expect(screen.getAllByText("Optional")).toHaveLength(5);
     const assetIdentifier = screen.getByLabelText("Asset identifier");
     expect(assetIdentifier.getAttribute("aria-describedby")).toBe("assetType-description");
@@ -63,12 +63,12 @@ describe("ProjectSubmissionFlow", () => {
     const profileImageInput = screen.getByLabelText("Profile image");
     expect(profileImageInput.className).toContain("hidden");
     expect(profileImageInput.closest('[data-slot="field"]')?.parentElement?.className).toContain(
-      "gap-6",
+      "gap-7",
     );
     expect(screen.queryByText(/40 MP/u)).toBeNull();
   });
 
-  it("keeps one stable supporting slot and replaces the image picker after selection", async () => {
+  it("keeps semantic guidance and places validation after the control", async () => {
     render(
       <ProjectSubmissionForm
         configuration={CONFIGURATION}
@@ -78,18 +78,21 @@ describe("ProjectSubmissionFlow", () => {
     );
 
     const assetIdentifier = screen.getByLabelText("Asset identifier");
-    const restingSlot = assetIdentifier.nextElementSibling;
-    expect(restingSlot?.getAttribute("data-slot")).toBe("field-description");
-    expect(restingSlot?.getAttribute("aria-hidden")).toBeNull();
-    expect(restingSlot?.textContent).toBe(
+    const field = assetIdentifier.closest('[data-slot="field"]');
+    const guidance = field?.querySelector('[data-slot="field-description"]');
+    expect(guidance?.textContent).toBe(
       "Use the complete identifier for the asset you want to add or update.",
     );
-    expect(restingSlot?.className).toContain("min-h-6");
+    expect(guidance?.closest('[data-slot="field-content"]')).toBeTruthy();
+    expect(field?.querySelector('[data-slot="field-error"]')).toBeNull();
 
     fireEvent.blur(assetIdentifier);
-    const errorSlot = assetIdentifier.nextElementSibling;
-    expect(errorSlot?.getAttribute("data-slot")).toBe("field-error");
-    expect(errorSlot?.className).toContain("min-h-6");
+    const errorSlot = field?.querySelector('[data-slot="field-error"]');
+    expect(errorSlot?.textContent).toBe("Enter the complete valid asset identifier.");
+    expect(assetIdentifier.nextElementSibling).toBe(errorSlot);
+    expect(guidance?.textContent).toBe(
+      "Use the complete identifier for the asset you want to add or update.",
+    );
 
     fireEvent.change(screen.getByLabelText("Profile image"), {
       target: { files: [createPngFile()] },

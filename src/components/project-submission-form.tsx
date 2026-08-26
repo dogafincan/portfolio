@@ -18,8 +18,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import {
   Item,
   ItemActions,
@@ -336,57 +347,55 @@ export function ProjectSubmissionForm({
           </CardHeader>
 
           <CardContent>
-            <FieldGroup className="gap-6">
-              <FieldGroup className="gap-3">
-                <TextField
-                  autoComplete="off"
-                  description="Use the complete identifier for the asset you want to add or update."
-                  error={errors.assetType}
-                  label="Asset identifier"
-                  name="assetType"
-                  onBlur={() => validateField("assetType")}
-                  onChange={(value) => updateField("assetType", value)}
-                  placeholder="Enter the complete asset identifier"
-                  required
-                  value={values.assetType}
-                />
-                <TextField
-                  autoComplete="organization"
-                  description={`${countGraphemes(values.projectName)}/${PROJECT_SUBMISSION_LIMITS.projectNameMaxGraphemes} characters`}
-                  error={errors.projectName}
-                  label="Project name"
-                  name="projectName"
-                  onBlur={() => validateField("projectName")}
-                  onChange={(value) => updateField("projectName", value)}
-                  placeholder="Project name"
-                  required
-                  value={values.projectName}
-                />
-                <TextField
-                  autoComplete="off"
-                  description={`${countGraphemes(values.shortDescription)}/${PROJECT_SUBMISSION_LIMITS.shortDescriptionMaxGraphemes} characters`}
-                  error={errors.shortDescription}
-                  label="Short description"
-                  name="shortDescription"
-                  onBlur={() => validateField("shortDescription")}
-                  onChange={(value) => updateField("shortDescription", value)}
-                  placeholder="What does this project help people do?"
-                  required
-                  value={values.shortDescription}
-                />
-                <TextField
-                  autoComplete="off"
-                  description="Optional"
-                  error={errors.ticker}
-                  label="Ticker"
-                  name="ticker"
-                  onBlur={() => validateField("ticker")}
-                  onChange={(value) => updateField("ticker", value.replaceAll("$", ""))}
-                  placeholder="DOJI"
-                  value={values.ticker}
-                />
-              </FieldGroup>
-
+            <FieldGroup>
+              <TextField
+                autoComplete="off"
+                description="Use the complete identifier for the asset you want to add or update."
+                error={errors.assetType}
+                label="Asset identifier"
+                name="assetType"
+                onBlur={() => validateField("assetType")}
+                onChange={(value) => updateField("assetType", value)}
+                placeholder="Enter the complete asset identifier"
+                required
+                value={values.assetType}
+              />
+              <TextField
+                autoComplete="organization"
+                counter={`${countGraphemes(values.projectName)}/${PROJECT_SUBMISSION_LIMITS.projectNameMaxGraphemes}`}
+                error={errors.projectName}
+                label="Project name"
+                name="projectName"
+                onBlur={() => validateField("projectName")}
+                onChange={(value) => updateField("projectName", value)}
+                placeholder="Project name"
+                required
+                value={values.projectName}
+              />
+              <TextField
+                autoComplete="off"
+                counter={`${countGraphemes(values.shortDescription)}/${PROJECT_SUBMISSION_LIMITS.shortDescriptionMaxGraphemes}`}
+                error={errors.shortDescription}
+                label="Short description"
+                name="shortDescription"
+                onBlur={() => validateField("shortDescription")}
+                onChange={(value) => updateField("shortDescription", value)}
+                placeholder="What does this project help people do?"
+                required
+                value={values.shortDescription}
+              />
+              <TextField
+                autoComplete="off"
+                description="Optional"
+                error={errors.ticker}
+                label="Ticker"
+                name="ticker"
+                onBlur={() => validateField("ticker")}
+                onChange={(value) => updateField("ticker", value.replaceAll("$", ""))}
+                placeholder="DOJI"
+                value={values.ticker}
+              />
+              <FieldSeparator />
               <Field data-invalid={Boolean(errors.profileImage)}>
                 <FieldLabel className="sr-only" htmlFor="profileImage">
                   Profile image
@@ -465,13 +474,9 @@ export function ProjectSubmissionForm({
                     </ItemMedia>
                     <ItemContent>
                       <ItemTitle>Profile image</ItemTitle>
-                      {errors.profileImage ? (
-                        <FieldError id="profileImage-error">{errors.profileImage}</FieldError>
-                      ) : (
-                        <ItemDescription id="profileImage-description">
-                          JPG, PNG, WebP, or AVIF up to 5 MB.
-                        </ItemDescription>
-                      )}
+                      <ItemDescription id="profileImage-description">
+                        JPG, PNG, WebP, or AVIF up to 5 MB.
+                      </ItemDescription>
                     </ItemContent>
                     <ItemActions>
                       <Button
@@ -485,54 +490,64 @@ export function ProjectSubmissionForm({
                     </ItemActions>
                   </Item>
                 )}
+                {errors.profileImage ? (
+                  <FieldError id="profileImage-error">{errors.profileImage}</FieldError>
+                ) : null}
               </Field>
 
-              <FieldGroup className="grid gap-3 md:grid-cols-2">
-                <TextField
-                  autoComplete="url"
-                  description="Optional"
-                  error={errors.websiteUrl}
-                  label="Website URL"
-                  name="websiteUrl"
-                  onBlur={() => validateField("websiteUrl")}
-                  onChange={(value) => updateField("websiteUrl", value)}
-                  placeholder="https://project.com"
-                  value={values.websiteUrl}
-                />
-                <TextField
-                  autoComplete="url"
-                  description="Optional"
-                  error={errors.xUrl}
-                  label="X URL"
-                  name="xUrl"
-                  onBlur={() => validateField("xUrl")}
-                  onChange={(value) => updateField("xUrl", value)}
-                  placeholder="https://x.com/project"
-                  value={values.xUrl}
-                />
-                <TextField
-                  autoComplete="url"
-                  description="Optional"
-                  error={errors.telegramUrl}
-                  label="Telegram URL"
-                  name="telegramUrl"
-                  onBlur={() => validateField("telegramUrl")}
-                  onChange={(value) => updateField("telegramUrl", value)}
-                  placeholder="https://t.me/project"
-                  value={values.telegramUrl}
-                />
-                <TextField
-                  autoComplete="url"
-                  description="Optional"
-                  error={errors.discordUrl}
-                  label="Discord URL"
-                  name="discordUrl"
-                  onBlur={() => validateField("discordUrl")}
-                  onChange={(value) => updateField("discordUrl", value)}
-                  placeholder="https://discord.gg/project"
-                  value={values.discordUrl}
-                />
-              </FieldGroup>
+              <FieldSeparator />
+              <FieldSet>
+                <FieldLegend>Project links</FieldLegend>
+                <FieldDescription>
+                  Add the official destinations people can use to learn more about the project.
+                </FieldDescription>
+                <FieldGroup className="grid gap-7 md:grid-cols-2">
+                  <TextField
+                    autoComplete="url"
+                    description="Optional"
+                    error={errors.websiteUrl}
+                    label="Website URL"
+                    name="websiteUrl"
+                    onBlur={() => validateField("websiteUrl")}
+                    onChange={(value) => updateField("websiteUrl", value)}
+                    placeholder="https://project.com"
+                    value={values.websiteUrl}
+                  />
+                  <TextField
+                    autoComplete="url"
+                    description="Optional"
+                    error={errors.xUrl}
+                    label="X URL"
+                    name="xUrl"
+                    onBlur={() => validateField("xUrl")}
+                    onChange={(value) => updateField("xUrl", value)}
+                    placeholder="https://x.com/project"
+                    value={values.xUrl}
+                  />
+                  <TextField
+                    autoComplete="url"
+                    description="Optional"
+                    error={errors.telegramUrl}
+                    label="Telegram URL"
+                    name="telegramUrl"
+                    onBlur={() => validateField("telegramUrl")}
+                    onChange={(value) => updateField("telegramUrl", value)}
+                    placeholder="https://t.me/project"
+                    value={values.telegramUrl}
+                  />
+                  <TextField
+                    autoComplete="url"
+                    description="Optional"
+                    error={errors.discordUrl}
+                    label="Discord URL"
+                    name="discordUrl"
+                    onBlur={() => validateField("discordUrl")}
+                    onChange={(value) => updateField("discordUrl", value)}
+                    placeholder="https://discord.gg/project"
+                    value={values.discordUrl}
+                  />
+                </FieldGroup>
+              </FieldSet>
             </FieldGroup>
           </CardContent>
 
@@ -565,6 +580,7 @@ export function ProjectSubmissionForm({
 }
 
 function TextField({
+  counter,
   description,
   error,
   label,
@@ -575,7 +591,8 @@ function TextField({
   value,
   ...props
 }: Omit<ComponentProps<typeof Input>, "name" | "onBlur" | "onChange" | "value"> & {
-  description: string;
+  counter?: string;
+  description?: string;
   error?: string;
   label: string;
   name: keyof ProjectSubmissionFormValues;
@@ -584,30 +601,46 @@ function TextField({
   required?: boolean;
   value: string;
 }) {
-  const messageId = `${name}-${error ? "error" : "description"}`;
+  const descriptionId = description ? `${name}-description` : undefined;
+  const errorId = error ? `${name}-error` : undefined;
+  const describedBy = [descriptionId, errorId].filter(Boolean).join(" ") || undefined;
   return (
     <Field data-invalid={Boolean(error)}>
-      <FieldLabel htmlFor={name}>{label}</FieldLabel>
-      <Input
-        {...props}
-        aria-describedby={messageId}
-        aria-invalid={Boolean(error)}
-        id={name}
-        name={name}
-        onBlur={onBlur}
-        onChange={(event) => onChange(event.target.value)}
-        required={required}
-        value={value}
-      />
-      {error ? (
-        <FieldError className="min-h-6" id={messageId}>
-          {error}
-        </FieldError>
+      <FieldContent>
+        <FieldLabel htmlFor={name}>{label}</FieldLabel>
+        {description ? <FieldDescription id={descriptionId}>{description}</FieldDescription> : null}
+      </FieldContent>
+      {counter ? (
+        <InputGroup>
+          <InputGroupInput
+            {...props}
+            aria-describedby={describedBy}
+            aria-invalid={Boolean(error)}
+            id={name}
+            name={name}
+            onBlur={onBlur}
+            onChange={(event) => onChange(event.target.value)}
+            required={required}
+            value={value}
+          />
+          <InputGroupAddon align="inline-end" aria-hidden="true">
+            {counter}
+          </InputGroupAddon>
+        </InputGroup>
       ) : (
-        <FieldDescription className="min-h-6" id={messageId}>
-          {description}
-        </FieldDescription>
+        <Input
+          {...props}
+          aria-describedby={describedBy}
+          aria-invalid={Boolean(error)}
+          id={name}
+          name={name}
+          onBlur={onBlur}
+          onChange={(event) => onChange(event.target.value)}
+          required={required}
+          value={value}
+        />
       )}
+      {error ? <FieldError id={errorId}>{error}</FieldError> : null}
     </Field>
   );
 }
