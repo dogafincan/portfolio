@@ -437,8 +437,10 @@ export function ProjectSubmissionForm({
                     )}
                   </ItemMedia>
                   <ItemContent>
-                    <ItemTitle title={profileImage?.file.name}>
-                      {profileImage?.file.name ?? "No profile image selected"}
+                    <ItemTitle className="min-w-0 max-w-full" title={profileImage?.file.name}>
+                      <span className="block min-w-0 max-w-full truncate">
+                        {profileImage?.file.name ?? "No profile image selected"}
+                      </span>
                     </ItemTitle>
                     <ItemDescription id="profileImage-selection-description">
                       {profileImage
@@ -448,7 +450,7 @@ export function ProjectSubmissionForm({
                           : "The preview will appear here."}
                     </ItemDescription>
                   </ItemContent>
-                  <ItemActions>
+                  <ItemActions className="ml-auto self-center">
                     <Button
                       aria-label={
                         profileImage ? "Browse for another profile image" : "Browse profile images"

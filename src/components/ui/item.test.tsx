@@ -7,7 +7,14 @@ import { render } from "@testing-library/react";
 import { describe, expect, it } from "vite-plus/test";
 
 import { Alert } from "@/components/ui/alert";
-import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item";
 
 const DESCRIPTION_CUTOFF_UTILITY =
   /\b(?:line-clamp(?:-[^\s"'`}]+)?|truncate|text-ellipsis|overflow-hidden)\b/u;
@@ -150,6 +157,26 @@ describe("Item", () => {
     expect(container.querySelector('[data-slot="item-media"]')?.className).toContain(
       "bg-item-avatar-background",
     );
+  });
+
+  it("keeps horizontal Item actions visible while the content column yields", () => {
+    const { container } = render(
+      <Item className="flex-nowrap overflow-hidden">
+        <ItemMedia variant="icon">
+          <svg aria-hidden="true" />
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Variable identifier</ItemTitle>
+        </ItemContent>
+        <ItemActions>
+          <button type="button">Browse</button>
+        </ItemActions>
+      </Item>,
+    );
+
+    expect(container.querySelector('[data-slot="item-content"]')?.className).toContain("min-w-0");
+    expect(container.querySelector('[data-slot="item-title"]')?.className).toContain("max-w-full");
+    expect(container.querySelector('[data-slot="item-actions"]')?.className).toContain("shrink-0");
   });
 
   it("never cuts off semantic description text", () => {

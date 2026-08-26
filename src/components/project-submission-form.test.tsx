@@ -250,6 +250,13 @@ async function enterValidProject() {
   await waitFor(() => {
     expect(screen.getByRole("img", { name: "Selected project profile preview" })).toBeTruthy();
   });
+  const selectedFilename = screen.getByText(
+    "project-profile-image-with-an-intentionally-long-local-filename.png",
+  );
+  expect(selectedFilename.className).toContain("truncate");
+  expect(selectedFilename.closest('[data-slot="item-title"]')?.getAttribute("title")).toBe(
+    selectedFilename.textContent,
+  );
 }
 
 function createPngFile() {
@@ -260,7 +267,11 @@ function createPngFile() {
   const view = new DataView(bytes.buffer);
   view.setUint32(16, 320);
   view.setUint32(20, 320);
-  const file = new File([bytes], "profile.png", { type: "image/png" });
+  const file = new File(
+    [bytes],
+    "project-profile-image-with-an-intentionally-long-local-filename.png",
+    { type: "image/png" },
+  );
   if (typeof file.arrayBuffer !== "function") {
     Object.defineProperty(file, "arrayBuffer", {
       value: async () => bytes.slice().buffer,

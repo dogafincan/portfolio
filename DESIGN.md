@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `5203a172c9c18da9f090a42bfbde18bc7e219672` (committed draft; release tag pending)
+Doji Design System source revision: `dd942d4781c39bf239862a42918da09a87981dff` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -443,7 +443,9 @@ submission lock remains separate from that static directory.
   precede one non-interactive outline Item with an explicit **Browse** action.
   The initial dashed Item uses a muted image placeholder; a validated local
   selection updates the same solid Item with the preview, filename, dimensions,
-  and file size.
+  and file size. Media and Browse action remain non-shrinking while the content
+  column yields. A long filename visually ellipsizes in its title while its
+  complete DOM and hover value, metadata, and descriptions remain available.
 - Use the stock shadcn form hierarchy: `FieldGroup` keeps `gap-7`, each Field
   keeps its internal `gap-3`, and `FieldContent` groups the label with durable
   purpose, format, or constraint guidance before the control. Project-name and

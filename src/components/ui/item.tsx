@@ -136,7 +136,7 @@ function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="item-title"
       className={cn(
-        "line-clamp-1 flex w-fit items-center gap-2 underline-offset-4",
+        "line-clamp-1 flex min-w-0 max-w-full w-fit items-center gap-2 underline-offset-4",
         dojiTypography.uiTitle,
         className,
       )}
@@ -161,7 +161,11 @@ function ItemDescription({ className, ...props }: React.ComponentProps<"p">) {
 
 function ItemActions({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div data-slot="item-actions" className={cn("flex items-center gap-2", className)} {...props} />
+    <div
+      data-slot="item-actions"
+      className={cn("flex shrink-0 items-center gap-2", className)}
+      {...props}
+    />
   );
 }
 

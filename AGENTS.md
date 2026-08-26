@@ -204,7 +204,10 @@ Expected portfolio omissions:
   gap. Its title and format/size description precede one non-interactive outline
   Item with an explicit **Browse** action. The initial dashed Item uses a muted
   image placeholder; local validation updates the same solid Item with the
-  preview, filename, dimensions, and size. Preserve the stock 24px form-to-footer action boundary without an
+  preview, filename, dimensions, and size. Keep media and Browse action
+  non-shrinking, let the content column yield, and visually ellipsize only an
+  unbounded filename title while preserving its complete DOM and hover value.
+  Preserve the stock 24px form-to-footer action boundary without an
   additive Field margin or separator
 
 - Cloudflare Durable Objects
