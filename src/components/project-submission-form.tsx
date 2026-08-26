@@ -386,9 +386,8 @@ export function ProjectSubmissionForm({
               />
               <TextField
                 autoComplete="off"
-                description="Optional"
                 error={errors.ticker}
-                label="Ticker"
+                label="Ticker (optional)"
                 name="ticker"
                 onBlur={() => validateField("ticker")}
                 onChange={(value) => updateField("ticker", value.replaceAll("$", ""))}
@@ -498,13 +497,10 @@ export function ProjectSubmissionForm({
               <FieldSeparator />
               <FieldSet>
                 <FieldLegend>Project links</FieldLegend>
-                <FieldDescription>
-                  Add the official destinations people can use to learn more about the project.
-                </FieldDescription>
+                <FieldDescription>Project links are optional.</FieldDescription>
                 <FieldGroup className="grid gap-7 md:grid-cols-2">
                   <TextField
                     autoComplete="url"
-                    description="Optional"
                     error={errors.websiteUrl}
                     label="Website URL"
                     name="websiteUrl"
@@ -515,7 +511,6 @@ export function ProjectSubmissionForm({
                   />
                   <TextField
                     autoComplete="url"
-                    description="Optional"
                     error={errors.xUrl}
                     label="X URL"
                     name="xUrl"
@@ -526,7 +521,6 @@ export function ProjectSubmissionForm({
                   />
                   <TextField
                     autoComplete="url"
-                    description="Optional"
                     error={errors.telegramUrl}
                     label="Telegram URL"
                     name="telegramUrl"
@@ -537,7 +531,6 @@ export function ProjectSubmissionForm({
                   />
                   <TextField
                     autoComplete="url"
-                    description="Optional"
                     error={errors.discordUrl}
                     label="Discord URL"
                     name="discordUrl"

@@ -49,11 +49,14 @@ describe("ProjectSubmissionFlow", () => {
 
     expect(screen.queryByText("One submission across every Doji app")).toBeNull();
     expect(container.querySelectorAll('[data-slot="item"]')).toHaveLength(1);
-    fireEvent.change(screen.getByLabelText("Ticker"), { target: { value: "$DO$JI" } });
-    expect((screen.getByLabelText("Ticker") as HTMLInputElement).value).toBe("DOJI");
+    fireEvent.change(screen.getByLabelText("Ticker (optional)"), {
+      target: { value: "$DO$JI" },
+    });
+    expect((screen.getByLabelText("Ticker (optional)") as HTMLInputElement).value).toBe("DOJI");
     expect(screen.getByText("0/60")).toBeTruthy();
     expect(screen.getByText("0/160")).toBeTruthy();
-    expect(screen.getAllByText("Optional")).toHaveLength(5);
+    expect(screen.getByText("Project links are optional.")).toBeTruthy();
+    expect(screen.queryByText("Optional")).toBeNull();
     const assetIdentifier = screen.getByLabelText("Asset identifier");
     expect(assetIdentifier.getAttribute("aria-describedby")).toBe("assetType-description");
     expect(
@@ -188,7 +191,7 @@ describe("ProjectSubmissionFlow", () => {
       "Asset identifier",
       "Project name",
       "Short description",
-      "Ticker",
+      "Ticker (optional)",
       "Profile image",
       "Website URL",
       "X URL",

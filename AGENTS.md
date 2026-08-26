@@ -194,9 +194,11 @@ Expected portfolio omissions:
 
 - the preserved `/submit` form uses stock shadcn composition: `FieldGroup`
   gap-7, primitive-owned Field gap-3, `FieldContent` for label plus durable
-  pre-control guidance, `InputGroup` for in-control counters, `FieldSet` for
-  Project links, and `FieldSeparator` between identity, image, and link
-  sections. Validation follows its control without removing durable guidance;
+  pre-control guidance, `InputGroup` for in-control counters, `Ticker
+(optional)` for the isolated ticker, one optionality statement in the
+  Project-links `FieldSet`, and no repeated standalone `Optional` rows.
+  `FieldSeparator` separates identity, image, and link sections. Validation
+  follows its control without removing durable guidance;
   the profile-image Field is an ordinary FieldGroup peer without a custom outer
   gap
 

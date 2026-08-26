@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `76564cccd3f17b960f76970eff314a83e6823a2b` (committed draft; release tag pending)
+Doji Design System source revision: `ca37a97c31ad36b003a34785e99bada4622775ee` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -447,10 +447,12 @@ submission lock remains separate from that static directory.
   copy on mobile.
 - Use the stock shadcn form hierarchy: `FieldGroup` keeps `gap-7`, each Field
   keeps its internal `gap-3`, and `FieldContent` groups the label with durable
-  purpose, format, or optional guidance before the control. Project-name and
+  purpose, format, or constraint guidance before the control. Project-name and
   short-description counters render inside `InputGroup`; validation follows the
-  control and does not remove durable guidance. `FieldSet` groups Project links
-  and `FieldSeparator` divides identity, profile image, and link sections. Use
+  control and does not remove durable guidance. Use `Ticker (optional)` for the
+  isolated ticker field. `FieldSet` groups Project links and states optionality
+  once, without repeated standalone `Optional` helper rows. `FieldSeparator`
+  divides identity, profile image, and link sections. Use
   Website URL, X URL, Telegram URL, and Discord URL. The profile-image Field is
   an ordinary FieldGroup peer without a custom outer gap. Ticker typing and
   paste filter `$` while domain validation still enforces the alphanumeric
