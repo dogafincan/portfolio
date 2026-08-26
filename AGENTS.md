@@ -201,10 +201,10 @@ Expected portfolio omissions:
   and links without decorative separators. Validation
   follows its control without removing durable guidance;
   the profile-image Field is an ordinary FieldGroup peer without a custom outer
-  gap, starts with a visible labelled shadcn file Input, and replaces that
-  control after local validation with one shadcn Attachment containing the
-  preview, filename, dimensions, size, and outline **Browse** replacement
-  action. Preserve the stock 24px form-to-footer action boundary without an
+  gap. Its title and format/size description precede one non-interactive outline
+  Item with an explicit **Browse** action. The initial dashed Item uses a muted
+  image placeholder; local validation updates the same solid Item with the
+  preview, filename, dimensions, and size. Preserve the stock 24px form-to-footer action boundary without an
   additive Field margin or separator
 
 - Cloudflare Durable Objects

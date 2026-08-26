@@ -6,16 +6,9 @@ import {
   type ComponentProps,
   type FormEvent,
 } from "react";
+import { ImageIcon } from "lucide-react";
+
 import { useDojiWallet } from "@/components/doji-wallet";
-import {
-  Attachment,
-  AttachmentAction,
-  AttachmentActions,
-  AttachmentContent,
-  AttachmentDescription,
-  AttachmentMedia,
-  AttachmentTitle,
-} from "@/components/ui/attachment";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -37,6 +30,14 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item";
 import { StatusAlert } from "@/components/ui/status-alert";
 import {
   CHAIN_MIGRATION_ALERT_TITLE,
@@ -393,17 +394,18 @@ export function ProjectSubmissionForm({
                 value={values.ticker}
               />
               <Field data-invalid={Boolean(errors.profileImage)}>
-                <FieldLabel htmlFor="profileImage">Profile image</FieldLabel>
+                <FieldContent>
+                  <FieldLabel htmlFor="profileImage">Profile image</FieldLabel>
+                  <FieldDescription id="profileImage-description">
+                    Choose a JPG, PNG, WebP, or AVIF up to 5 MB.
+                  </FieldDescription>
+                </FieldContent>
                 <Input
                   accept="image/avif,image/jpeg,image/png,image/webp"
                   aria-describedby={
                     errors.profileImage
-                      ? "profileImage-error"
-                      : profileImage
-                        ? "profileImage-selection-description"
-                        : imagePending
-                          ? "profileImage-pending-description"
-                          : "profileImage-description"
+                      ? "profileImage-description profileImage-error"
+                      : "profileImage-description profileImage-selection-description"
                   }
                   aria-invalid={Boolean(errors.profileImage)}
                   disabled={imagePending}
@@ -412,52 +414,54 @@ export function ProjectSubmissionForm({
                   onChange={(event) => void handleImageChange(event)}
                   ref={profileImageInputRef}
                   required
-                  className={profileImage ? "hidden" : undefined}
+                  className="sr-only"
                   type="file"
                 />
-                {profileImage && previewUrl ? (
-                  <Attachment className="w-full">
-                    <AttachmentMedia variant="image">
+                <Item
+                  className={`flex-nowrap items-start overflow-hidden ${profileImage && previewUrl ? "border-solid" : "border-dashed"}`}
+                  variant="outline"
+                >
+                  <ItemMedia
+                    className={profileImage && previewUrl ? undefined : "bg-muted"}
+                    variant="image"
+                  >
+                    {profileImage && previewUrl ? (
                       <img
                         alt="Selected project profile preview"
                         height={profileImage.height}
                         src={previewUrl}
                         width={profileImage.width}
                       />
-                    </AttachmentMedia>
-                    <AttachmentContent>
-                      <AttachmentTitle title={profileImage.file.name}>
-                        {profileImage.file.name}
-                      </AttachmentTitle>
-                      <AttachmentDescription id="profileImage-selection-description">
-                        {profileImage.width} × {profileImage.height}px ·{" "}
-                        {formatFileSize(profileImage.file.size)}
-                      </AttachmentDescription>
-                    </AttachmentContent>
-                    <AttachmentActions>
-                      <AttachmentAction
-                        aria-label="Browse for another profile image"
-                        onClick={browseProfileImage}
-                        size="default"
-                        type="button"
-                        variant="outline"
-                      >
-                        Browse
-                      </AttachmentAction>
-                    </AttachmentActions>
-                  </Attachment>
-                ) : null}
-                {!profileImage && !errors.profileImage ? (
-                  <FieldDescription
-                    id={
-                      imagePending ? "profileImage-pending-description" : "profileImage-description"
-                    }
-                  >
-                    {imagePending
-                      ? "Checking locally; the image stays on this page."
-                      : "JPG, PNG, WebP, or AVIF up to 5 MB."}
-                  </FieldDescription>
-                ) : null}
+                    ) : (
+                      <ImageIcon aria-hidden="true" className="size-5 text-muted-foreground" />
+                    )}
+                  </ItemMedia>
+                  <ItemContent>
+                    <ItemTitle title={profileImage?.file.name}>
+                      {profileImage?.file.name ?? "No profile image selected"}
+                    </ItemTitle>
+                    <ItemDescription id="profileImage-selection-description">
+                      {profileImage
+                        ? `${profileImage.width} × ${profileImage.height}px · ${formatFileSize(profileImage.file.size)}`
+                        : imagePending
+                          ? "Checking the image locally…"
+                          : "The preview will appear here."}
+                    </ItemDescription>
+                  </ItemContent>
+                  <ItemActions>
+                    <Button
+                      aria-label={
+                        profileImage ? "Browse for another profile image" : "Browse profile images"
+                      }
+                      disabled={imagePending}
+                      onClick={browseProfileImage}
+                      type="button"
+                      variant="outline"
+                    >
+                      Browse
+                    </Button>
+                  </ItemActions>
+                </Item>
                 {errors.profileImage ? (
                   <FieldError id="profileImage-error">{errors.profileImage}</FieldError>
                 ) : null}

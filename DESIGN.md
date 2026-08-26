@@ -431,7 +431,7 @@ submission lock remains separate from that static directory.
 - Fields and the selected image stay in page memory only until payment
   succeeds. Do not persist drafts or perform pre-payment search, prefill,
   validation, upload, or other backend work.
-- Use shared `Field`, `Input`, `Attachment`, `Badge`, `Alert`, `Drawer`, and `Button`
+- Use shared `Field`, `Input`, `Item`, `Badge`, `Alert`, `Drawer`, and `Button`
   primitives. The form wraps the complete Card; inputs belong in
   `CardContent`, actions and their feedback in `CardFooter`.
 - Keep the shared 24px card inset/section rhythm and 12px sibling rhythm.
@@ -439,10 +439,11 @@ submission lock remains separate from that static directory.
   input-like controls are 36px high. Labels are visible;
   errors are field-local and programmatically associated.
 - Image input accepts static JPG, PNG, WebP, or AVIF up to 5,000,000 bytes and
-  40 million decoded pixels. The initial control is the visible labelled
-  shadcn file Input with concise format/5 MB guidance. A validated local
-  selection replaces it with one shadcn Attachment containing the preview,
-  filename, dimensions, file size, and outline **Browse** replacement action.
+  40 million decoded pixels. Its visible title and concise format/5 MB guidance
+  precede one non-interactive outline Item with an explicit **Browse** action.
+  The initial dashed Item uses a muted image placeholder; a validated local
+  selection updates the same solid Item with the preview, filename, dimensions,
+  and file size.
 - Use the stock shadcn form hierarchy: `FieldGroup` keeps `gap-7`, each Field
   keeps its internal `gap-3`, and `FieldContent` groups the label with durable
   purpose, format, or constraint guidance before the control. Project-name and
