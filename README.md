@@ -231,7 +231,7 @@ The imported sibling organization now used here:
   header and project card grid.
 - `src/components/project-submission-form.tsx`: local-only form and payment UI
   for `/submit`, with stock shadcn FieldGroup rhythm, label-plus-guidance
-  FieldContent, in-control counters, FieldSet link grouping, section separators,
+  FieldContent, in-control counters, FieldSet link grouping, no decorative field separators,
   validation after controls, no redundant fee-summary Item, and no manual
   recovery surface.
 - `src/components/wallet-runtime.tsx`: interaction-gated Mysten wallet island.

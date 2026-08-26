@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `4e9d4f1a6a86a29a6db987f23fa8d0b1129c1187` (committed draft; release tag pending)
+Doji Design System source revision: `a94b8c0cf18b1d347a17b70d5ccef4367ccdfc77` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -194,9 +194,8 @@ submission lock remains separate from that static directory.
   one persistent informational Doji Alert immediately after it.
 - Portfolio has no project or asset selector trigger; its manual asset-type
   input is not a selector, so the migration selector-Drawer requirement is not
-  applicable here. The non-interactive centered selector summary, its explicit
-  outline selector Button, and dashed unresolved-selection Item outline are
-  therefore also not applicable to the current app. If a selector is added
+  applicable here. The stock labelled selector Field and its explicit outline
+  Button are therefore also not applicable to the current app. If a selector is added
   during this lockout, its migration explanation belongs only in its Empty
   surface, never in an Alert below the Button.
 - Every public chain-dependent API path and broad server-function path returns
@@ -450,9 +449,10 @@ submission lock remains separate from that static directory.
   short-description counters render inside `InputGroup`; validation follows the
   control and does not remove durable guidance. Use `Ticker (optional)` for the
   isolated ticker field. `FieldSet` groups Project links and states optionality
-  once, without repeated standalone `Optional` helper rows. `FieldSeparator`
-  divides identity, profile image, and link sections. Use
-  Website URL, X URL, Telegram URL, and Discord URL. The profile-image Field is
+  once, without repeated standalone `Optional` helper rows. FieldGroup rhythm
+  and the Project-links FieldSet divide identity, profile image, and links
+  without decorative separators. Use Website, X profile, Telegram, and Discord.
+  The profile-image Field is
   an ordinary FieldGroup peer without a custom outer gap. Ticker typing and
   paste filter `$` while domain validation still enforces the alphanumeric
   contract.

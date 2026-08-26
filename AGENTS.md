@@ -197,7 +197,8 @@ Expected portfolio omissions:
   pre-control guidance, `InputGroup` for in-control counters, `Ticker
 (optional)` for the isolated ticker, one optionality statement in the
   Project-links `FieldSet`, and no repeated standalone `Optional` rows.
-  `FieldSeparator` separates identity, image, and link sections. Validation
+  FieldGroup rhythm and the Project-links FieldSet separate identity, image,
+  and links without decorative separators. Validation
   follows its control without removing durable guidance;
   the profile-image Field is an ordinary FieldGroup peer without a custom outer
   gap, starts with a visible labelled shadcn file Input, and replaces that

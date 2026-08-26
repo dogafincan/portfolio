@@ -49,6 +49,7 @@ describe("ProjectSubmissionFlow", () => {
 
     expect(screen.queryByText("One submission across every Doji app")).toBeNull();
     expect(container.querySelectorAll('[data-slot="item"]')).toHaveLength(0);
+    expect(container.querySelector('[data-slot="field-separator"]')).toBeNull();
     fireEvent.change(screen.getByLabelText("Ticker (optional)"), {
       target: { value: "$DO$JI" },
     });
@@ -194,10 +195,10 @@ describe("ProjectSubmissionFlow", () => {
       "Short description",
       "Ticker (optional)",
       "Profile image",
-      "Website URL",
-      "X URL",
-      "Telegram URL",
-      "Discord URL",
+      "Website",
+      "X profile",
+      "Telegram",
+      "Discord",
     ]);
     expect(content?.querySelector('[data-slot="empty"]')).toBeNull();
     expect(content?.querySelector('[data-slot="alert"]')).toBeNull();

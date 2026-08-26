@@ -33,7 +33,6 @@ import {
   FieldGroup,
   FieldLabel,
   FieldLegend,
-  FieldSeparator,
   FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -393,7 +392,6 @@ export function ProjectSubmissionForm({
                 placeholder="DOJI"
                 value={values.ticker}
               />
-              <FieldSeparator />
               <Field data-invalid={Boolean(errors.profileImage)}>
                 <FieldLabel htmlFor="profileImage">Profile image</FieldLabel>
                 <Input
@@ -465,7 +463,6 @@ export function ProjectSubmissionForm({
                 ) : null}
               </Field>
 
-              <FieldSeparator />
               <FieldSet>
                 <FieldLegend>Project links</FieldLegend>
                 <FieldDescription>Project links are optional.</FieldDescription>
@@ -473,7 +470,7 @@ export function ProjectSubmissionForm({
                   <TextField
                     autoComplete="url"
                     error={errors.websiteUrl}
-                    label="Website URL"
+                    label="Website"
                     name="websiteUrl"
                     onBlur={() => validateField("websiteUrl")}
                     onChange={(value) => updateField("websiteUrl", value)}
@@ -483,7 +480,7 @@ export function ProjectSubmissionForm({
                   <TextField
                     autoComplete="url"
                     error={errors.xUrl}
-                    label="X URL"
+                    label="X profile"
                     name="xUrl"
                     onBlur={() => validateField("xUrl")}
                     onChange={(value) => updateField("xUrl", value)}
@@ -493,7 +490,7 @@ export function ProjectSubmissionForm({
                   <TextField
                     autoComplete="url"
                     error={errors.telegramUrl}
-                    label="Telegram URL"
+                    label="Telegram"
                     name="telegramUrl"
                     onBlur={() => validateField("telegramUrl")}
                     onChange={(value) => updateField("telegramUrl", value)}
@@ -503,7 +500,7 @@ export function ProjectSubmissionForm({
                   <TextField
                     autoComplete="url"
                     error={errors.discordUrl}
-                    label="Discord URL"
+                    label="Discord"
                     name="discordUrl"
                     onBlur={() => validateField("discordUrl")}
                     onChange={(value) => updateField("discordUrl", value)}
