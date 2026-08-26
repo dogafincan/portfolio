@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `27a255aa0f26530b09a3344c54e41fd064dcd515` (committed draft; release tag pending)
+Doji Design System source revision: `9097e3cf07ff50352f9ed0d0703c2feb13b78cd5` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -151,6 +151,8 @@ by default. A present footer stays in ordinary flow after the exact structural
 `CardFooter` use 12px (`gap-3`). Forms keep the stock shadcn rhythm instead: a
 direct `FieldGroup` uses 28px (`gap-7`) between Fields and each Field uses its
 primitive-owned 12px (`gap-3`) internal spacing.
+Every immediate Button/Button or Button/Alert pair in a Card or Drawer footer
+keeps that same `gap-3` rhythm, including inside a nested action wrapper.
 
 At the large breakpoint, page-level peer Cards use equal fractional columns and
 align to the start. Every Card keeps its independent natural height, so unequal

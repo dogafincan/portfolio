@@ -11,6 +11,15 @@ const walletLoaderSource = readFileSync(
 );
 
 describe("connect-wallet drawer contract", () => {
+  it("keeps Drawer footer action and status siblings at the shared gap-3 rhythm", () => {
+    const footer = drawerPrimitiveSource.match(
+      /function DrawerFooter[\s\S]*?function DrawerTitle/u,
+    )?.[0];
+
+    expect(footer).toContain("flex-col gap-3");
+    expect(footer).not.toContain("flex-col gap-2");
+  });
+
   it("centers every visible Drawer header at every width", () => {
     const drawerHeader = drawerPrimitiveSource.match(
       /function DrawerHeader[\s\S]*?function DrawerFooter/u,
