@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `b6963350249e5d5d57e6234e2acdc52ed5660cde` (committed draft; release tag pending)
+Doji Design System source revision: `8321085b0d9ab0524a1d1d2408c9c61c40cd345f` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -460,20 +460,25 @@ submission lock remains separate from that static directory.
   input-like controls are 36px high. Labels are visible;
   errors are field-local and programmatically associated.
 - Image input accepts static JPG, PNG, WebP, or AVIF up to 5,000,000 bytes and
-  40 million decoded pixels. Its visible title and concise format/5 MB guidance
-  precede one non-interactive outline Item with an explicit **Browse** action.
+  40 million decoded pixels. Its visible title precedes one non-interactive
+  outline Item with an explicit **Browse** action; the unresolved Item
+  description owns the concise format/5 MB guidance.
   The initial dashed Item uses a bare stock 16px image icon; a validated local
   selection updates the same solid Item with the preview, filename, dimensions,
   and file size. Media and Browse action remain non-shrinking while the content
   column yields. A long filename visually ellipsizes in its title while its
   complete DOM and hover value, metadata, and descriptions remain available.
 - Use the stock shadcn form hierarchy: `FieldGroup` keeps `gap-7`, each Field
-  keeps its internal `gap-3`, and `FieldContent` groups the label with durable
-  purpose, format, or constraint guidance before the control. Project-name and
+  keeps its internal `gap-3`, and `FieldContent` groups the label with useful
+  nonredundant purpose or constraint guidance before the control. Project-name and
   short-description counters render inside `InputGroup`; validation follows the
-  control and does not remove durable guidance. Use `Ticker (optional)` for the
+  control and does not remove useful guidance. Keep information density
+  proportional to the decision: the Asset identifier label and complete-value
+  placeholder need no helper row. Use `Ticker (optional)` for the
   isolated ticker field. `FieldSet` groups Project links and states optionality
-  once, without repeated standalone `Optional` helper rows. FieldGroup rhythm
+  once, without repeated standalone `Optional` helper rows. The profile-image
+  label sits above its selector, while the unresolved Item description owns the
+  concise format/5 MB guidance. FieldGroup rhythm
   and the Project-links FieldSet divide identity, profile image, and links
   without decorative separators. Use Website, X profile, Telegram, and Discord.
   The profile-image Field is

@@ -60,10 +60,10 @@ describe("ProjectSubmissionFlow", () => {
     expect(screen.getByText("Project links are optional.")).toBeTruthy();
     expect(screen.queryByText("Optional")).toBeNull();
     const assetIdentifier = screen.getByLabelText("Asset identifier");
-    expect(assetIdentifier.getAttribute("aria-describedby")).toBe("assetType-description");
+    expect(assetIdentifier.getAttribute("aria-describedby")).toBeNull();
     expect(
-      screen.getByText("Use the complete identifier for the asset you want to add or update."),
-    ).toBeTruthy();
+      screen.queryByText("Use the complete identifier for the asset you want to add or update."),
+    ).toBeNull();
     expect(screen.getByRole("button", { name: "Browse profile images" }).textContent).toBe(
       "Browse",
     );
@@ -77,6 +77,13 @@ describe("ProjectSubmissionFlow", () => {
     );
     expect(unselectedProfileImageMedia?.className).not.toContain("bg-muted");
     const profileImageInput = screen.getByLabelText("Profile image");
+    const profileImageGuidance = screen.getByText("Choose a JPG, PNG, WebP, or AVIF up to 5 MB.");
+    expect(profileImageGuidance.closest('[data-slot="item"]')).toBe(
+      unselectedProfileImageTitle.closest('[data-slot="item"]'),
+    );
+    expect(profileImageInput.getAttribute("aria-describedby")).toBe(
+      "profileImage-selection-description",
+    );
     expect(profileImageInput.className).toContain("sr-only");
     expect(profileImageInput.getAttribute("type")).toBe("file");
     expect(profileImageInput.closest('[data-slot="field"]')?.parentElement?.className).toContain(
@@ -85,7 +92,7 @@ describe("ProjectSubmissionFlow", () => {
     expect(screen.queryByText(/40 MP/u)).toBeNull();
   });
 
-  it("keeps semantic guidance and places validation after the control", async () => {
+  it("omits redundant guidance, keeps validation associated, and owns picker guidance in the Item", async () => {
     render(
       <ProjectSubmissionForm
         configuration={CONFIGURATION}
@@ -97,19 +104,20 @@ describe("ProjectSubmissionFlow", () => {
     const assetIdentifier = screen.getByLabelText("Asset identifier");
     const field = assetIdentifier.closest('[data-slot="field"]');
     const guidance = field?.querySelector('[data-slot="field-description"]');
-    expect(guidance?.textContent).toBe(
-      "Use the complete identifier for the asset you want to add or update.",
-    );
-    expect(guidance?.closest('[data-slot="field-content"]')).toBeTruthy();
+    expect(guidance).toBeNull();
+    expect(assetIdentifier.getAttribute("aria-describedby")).toBeNull();
     expect(field?.querySelector('[data-slot="field-error"]')).toBeNull();
 
     fireEvent.blur(assetIdentifier);
     const errorSlot = field?.querySelector('[data-slot="field-error"]');
     expect(errorSlot?.textContent).toBe("Enter the complete valid asset identifier.");
     expect(assetIdentifier.nextElementSibling).toBe(errorSlot);
-    expect(guidance?.textContent).toBe(
-      "Use the complete identifier for the asset you want to add or update.",
-    );
+    expect(assetIdentifier.getAttribute("aria-describedby")).toBe("assetType-error");
+    expect(
+      screen
+        .getByText("Choose a JPG, PNG, WebP, or AVIF up to 5 MB.")
+        .closest('[data-slot="item"]'),
+    ).toBeTruthy();
 
     fireEvent.change(screen.getByLabelText("Profile image"), {
       target: { files: [createPngFile()] },

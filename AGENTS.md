@@ -193,16 +193,19 @@ Expected portfolio omissions:
   remains preserved
 
 - the preserved `/submit` form uses stock shadcn composition: `FieldGroup`
-  gap-7, primitive-owned Field gap-3, `FieldContent` for label plus durable
-  pre-control guidance, `InputGroup` for in-control counters, `Ticker
+  gap-7, primitive-owned Field gap-3, `FieldContent` only for useful
+  nonredundant pre-control guidance, `InputGroup` for in-control counters, `Ticker
 (optional)` for the isolated ticker, one optionality statement in the
   Project-links `FieldSet`, and no repeated standalone `Optional` rows.
   FieldGroup rhythm and the Project-links FieldSet separate identity, image,
-  and links without decorative separators. Validation
-  follows its control without removing durable guidance;
+  and links without decorative separators. Validation follows its control
+  without removing useful guidance. Keep information density proportional to
+  the decision: the Asset identifier label and complete-value placeholder need
+  no helper row;
   the profile-image Field is an ordinary FieldGroup peer without a custom outer
-  gap. Its title and format/size description precede one non-interactive outline
-  Item with an explicit **Browse** action. The initial dashed Item uses a bare
+  gap. Its title precedes one non-interactive outline Item with an explicit
+  **Browse** action; its unresolved description owns the concise format/size
+  guidance. The initial dashed Item uses a bare
   stock 16px image icon; local validation updates the same solid Item with the
   preview, filename, dimensions, and size. Keep media and Browse action
   non-shrinking, let the content column yield, and visually ellipsize only an

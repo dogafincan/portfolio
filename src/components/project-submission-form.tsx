@@ -349,7 +349,6 @@ export function ProjectSubmissionForm({
             <FieldGroup>
               <TextField
                 autoComplete="off"
-                description="Use the complete identifier for the asset you want to add or update."
                 error={errors.assetType}
                 label="Asset identifier"
                 name="assetType"
@@ -394,18 +393,13 @@ export function ProjectSubmissionForm({
                 value={values.ticker}
               />
               <Field data-invalid={Boolean(errors.profileImage)}>
-                <FieldContent>
-                  <FieldLabel htmlFor="profileImage">Profile image</FieldLabel>
-                  <FieldDescription id="profileImage-description">
-                    Choose a JPG, PNG, WebP, or AVIF up to 5 MB.
-                  </FieldDescription>
-                </FieldContent>
+                <FieldLabel htmlFor="profileImage">Profile image</FieldLabel>
                 <Input
                   accept="image/avif,image/jpeg,image/png,image/webp"
                   aria-describedby={
                     errors.profileImage
-                      ? "profileImage-description profileImage-error"
-                      : "profileImage-description profileImage-selection-description"
+                      ? "profileImage-selection-description profileImage-error"
+                      : "profileImage-selection-description"
                   }
                   aria-invalid={Boolean(errors.profileImage)}
                   disabled={imagePending}
@@ -444,7 +438,7 @@ export function ProjectSubmissionForm({
                         ? `${profileImage.width} × ${profileImage.height}px · ${formatFileSize(profileImage.file.size)}`
                         : imagePending
                           ? "Checking the image locally…"
-                          : "The preview will appear here."}
+                          : "Choose a JPG, PNG, WebP, or AVIF up to 5 MB."}
                     </ItemDescription>
                   </ItemContent>
                   <ItemActions className="ml-auto self-center">
