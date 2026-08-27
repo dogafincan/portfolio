@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `a818075b8457916c20328977dcfd81d2a838a888` (committed draft; release tag pending)
+Doji Design System source revision: `535e3a342b8e5b9661fff6cf9fb83496255eb518` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -68,15 +68,18 @@ badge are content and navigation, not workflow-status metadata.
 
 Doji Design System adoption: current
 
-This synchronization uses stock shadcn neutral typography and neutral surface
-roles. `--foreground` is `oklch(0.145 0 0)` light /
-`oklch(0.985 0 0)` dark, `--muted-foreground` is `oklch(0.556 0 0)`
-light / `oklch(0.708 0 0)` dark, and neutral `--muted` is
-`oklch(0.97 0 0)` light / `oklch(0.269 0 0)` dark. Editable inputs use
-stock shadcn `--input` paint at 50% opacity, entered text and labels use
-foreground, and placeholders, field descriptions, search icons, and supporting
-form copy use muted foreground. Geist-backed blue, green, amber, and red
-semantics retain their existing Doji surfaces and foregrounds.
+This synchronization keeps stock shadcn neutral typography while using the
+canonical subtle Doji neutral-surface ladder. `--foreground` is
+`oklch(0.145 0 0)` light / `oklch(0.985 0 0)` dark,
+`--muted-foreground` is `oklch(0.556 0 0)` light /
+`oklch(0.708 0 0)` dark, and persistent neutral `--muted` is
+`oklch(0.985 0 0)` light / `oklch(0.18 0 0)` dark. Editable fields use
+`bg-muted`; the unchanged shadcn `--input` token remains a border semantic.
+Neutral hover, expanded, and selected states use `--control-hover` at
+`oklch(0.97 0 0)` light / `oklch(0.205 0 0)` dark, while active and
+pressed states use `--control-active` at `oklch(0.955 0 0)` light /
+`oklch(0.23 0 0)` dark. Page, Card, navbar, footer, border, and Geist-backed
+blue, green, amber, and red roles remain unchanged.
 
 This radius-only synchronization sets the shared shadcn foundation to
 `--radius: 0.625rem`, yielding the existing semantic utility scale from 6px
@@ -230,10 +233,13 @@ submission lock remains separate from that static directory.
 - Browser-rendered colors resolve through semantic aliases in `src/styles.css`.
   Do not use raw palette utilities, component-local color literals,
   `color-mix()`, or painted opacity suffixes.
-- Neutral muted surfaces use stock shadcn `--muted`: `oklch(0.97 0 0)`
-  in light mode and `oklch(0.269 0 0)` in dark mode. Inputs and search use
-  stock `--input` through `bg-input/50`, foreground entered text, and
-  muted-foreground placeholders and descriptions. Explicit neutral fills, icon
+- Persistent neutral muted surfaces use subtle Doji `--muted`:
+  `oklch(0.985 0 0)` in light mode and `oklch(0.18 0 0)` in dark mode.
+  Inputs and search use `bg-muted`; the unchanged shadcn `--input` role
+  remains available for border semantics. Neutral hover/expanded/selected
+  states use `--control-hover`; active/pressed states use
+  `--control-active`. Foreground and muted-foreground text roles remain
+  unchanged. Explicit neutral fills, icon
   and project-logo containers, and neutral badges use `--muted`. Chromatic
   Alerts and Items use matching scheme-aware Geist tone 100 backgrounds plus
   tone 400 borders; chromatic Badges use matching tone 100 backgrounds without

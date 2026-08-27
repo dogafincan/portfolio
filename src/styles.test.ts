@@ -64,7 +64,6 @@ describe("global styles", () => {
     const styles = readFileSync("src/styles.css", "utf8");
     const mappings = {
       skeleton: "gray-300",
-      accent: "gray-200",
       destructive: "red-900",
     } as const;
 
@@ -72,6 +71,7 @@ describe("global styles", () => {
       expect(styles).toContain(`--${semantic}: var(--ds-${geist});`);
     }
 
+    expect(styles).toContain("--accent: var(--control-hover);");
     expect(styles).toContain("--foreground: light-dark(oklch(0.145 0 0), oklch(0.985 0 0));");
     expect(styles).toContain("--muted-foreground: light-dark(oklch(0.556 0 0), oklch(0.708 0 0));");
     for (const semantic of [
@@ -118,12 +118,8 @@ describe("global styles", () => {
       expect(styles).toContain(`--${semantic}: var(--ds-${geist});`);
     }
 
-    expect(styles).toContain(
-      "--control-hover: light-dark(var(--ds-gray-100), var(--ds-gray-200));",
-    );
-    expect(styles).toContain(
-      "--control-active: light-dark(var(--ds-gray-200), var(--ds-gray-300));",
-    );
+    expect(styles).toContain("--control-hover: light-dark(oklch(0.97 0 0), oklch(0.205 0 0));");
+    expect(styles).toContain("--control-active: light-dark(oklch(0.955 0 0), oklch(0.23 0 0));");
     expect(styles).toContain("--color-secondary-hover: var(--secondary-hover);");
     expect(styles).toContain("--secondary-hover: var(--control-hover);");
     expect(styles).toContain("--color-destructive-hover: var(--destructive-hover);");
@@ -183,11 +179,21 @@ describe("global styles", () => {
     expect(lucideBlock).toContain("stroke-width: var(--lucide-stroke-width);");
   });
 
-  it("uses stock shadcn neutral muted and input surface roles", () => {
+  it("uses the subtle neutral surface ladder without changing shell or border roles", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
-    expect(styles).toContain("--muted: light-dark(oklch(0.97 0 0), oklch(0.269 0 0));");
+    expect(styles).toContain(
+      "--background: light-dark(oklch(99.11% 0 0), var(--ds-background-200));",
+    );
+    expect(styles).toContain("--card: light-dark(var(--ds-background-100), oklch(0.14 0 0));");
+    expect(styles).toContain(
+      "--border: light-dark(oklch(0 0 0 / 0.075), oklch(100% 0 0 / 10.1961%));",
+    );
+    expect(styles).toContain("--muted: light-dark(oklch(0.985 0 0), oklch(0.18 0 0));");
     expect(styles).toContain("--input: light-dark(oklch(0.922 0 0), oklch(1 0 0 / 15%));");
+    expect(styles).toContain("--accent: var(--control-hover);");
+    expect(styles).toContain("--control-hover: light-dark(oklch(0.97 0 0), oklch(0.205 0 0));");
+    expect(styles).toContain("--control-active: light-dark(oklch(0.955 0 0), oklch(0.23 0 0));");
     expect(styles).toContain("--item-muted: var(--muted);");
     expect(styles).toContain(
       "--item-avatar-background: light-dark(var(--card), var(--background));",
@@ -198,6 +204,16 @@ describe("global styles", () => {
     expect(styles).toContain("--secondary: var(--muted);");
     expect(styles).not.toContain("color-mix(");
     expect(styles).not.toContain("--muted: var(--ds-gray-100);");
+  });
+
+  it("keeps persistent muted fills separate from neutral interaction states", () => {
+    const attachment = readFileSync("src/components/ui/attachment.tsx", "utf8");
+    const field = readFileSync("src/components/ui/field.tsx", "utf8");
+
+    expect(attachment).toContain("has-[>a,>button]:hover:bg-control-hover");
+    expect(attachment).not.toContain("has-[>a,>button]:hover:bg-muted");
+    expect(field).toContain("has-data-checked:bg-control-hover");
+    expect(field).not.toContain("has-data-checked:bg-muted");
   });
 
   it("maps chromatic surfaces and borders to scheme-aware Geist tone families", () => {

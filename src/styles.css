@@ -238,14 +238,14 @@
   --primary-foreground: var(--contrast-foreground);
   --secondary: var(--muted);
   --secondary-foreground: var(--foreground);
-  --muted: light-dark(oklch(0.97 0 0), oklch(0.269 0 0));
+  --muted: light-dark(oklch(0.985 0 0), oklch(0.18 0 0));
   --item-muted: var(--muted);
   --item-avatar-background: light-dark(var(--card), var(--background));
   --muted-foreground: light-dark(oklch(0.556 0 0), oklch(0.708 0 0));
   --quiet-foreground: var(--muted-foreground);
   --skeleton: var(--ds-gray-300);
   --page-title-accent: var(--info-foreground);
-  --accent: var(--ds-gray-200);
+  --accent: var(--control-hover);
   --accent-foreground: var(--foreground);
   --destructive: var(--ds-red-900);
   --destructive-foreground: light-dark(var(--ds-red-700), var(--ds-red-900));
@@ -258,8 +258,8 @@
   --destructive-strong-hover: oklch(0.51 0.225 25.29);
   --destructive-strong-active: oklch(0.47 0.215 25.29);
   --control: var(--muted);
-  --control-hover: light-dark(var(--ds-gray-100), var(--ds-gray-200));
-  --control-active: light-dark(var(--ds-gray-200), var(--ds-gray-300));
+  --control-hover: light-dark(oklch(0.97 0 0), oklch(0.205 0 0));
+  --control-active: light-dark(oklch(0.955 0 0), oklch(0.23 0 0));
   --control-info: var(--ds-blue-100);
   --control-info-foreground: var(--badge-info-foreground);
   --control-info-hover: var(--ds-blue-200);
