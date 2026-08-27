@@ -95,11 +95,9 @@ describe("global styles", () => {
     expect(styles).toContain("--color-skeleton: var(--skeleton);");
     expect(styles).toContain("--contrast-foreground: oklch(100% 0 0);");
     expect(styles).toContain("--primary-foreground: var(--contrast-foreground);");
-    expect(styles).toContain(
-      "--background: light-dark(oklch(99.11% 0 0), var(--ds-background-200));",
-    );
-    expect(styles).toContain("--card: light-dark(var(--ds-background-100), oklch(0.14 0 0));");
-    expect(styles).toContain("--popover: light-dark(var(--ds-background-100), oklch(0.14 0 0));");
+    expect(styles).toContain("--background: var(--ds-background-200);");
+    expect(styles).toContain("--card: light-dark(var(--ds-background-100), oklch(0.16 0 0));");
+    expect(styles).toContain("--popover: light-dark(var(--ds-background-100), oklch(0.16 0 0));");
     expect(styles).toContain(
       "--border: light-dark(oklch(0 0 0 / 0.075), oklch(100% 0 0 / 10.1961%));",
     );
@@ -118,8 +116,8 @@ describe("global styles", () => {
       expect(styles).toContain(`--${semantic}: var(--ds-${geist});`);
     }
 
-    expect(styles).toContain("--control-hover: light-dark(oklch(0.97 0 0), oklch(0.205 0 0));");
-    expect(styles).toContain("--control-active: light-dark(oklch(0.955 0 0), oklch(0.23 0 0));");
+    expect(styles).toContain("--control-hover: light-dark(oklch(0.965 0 0), oklch(0.225 0 0));");
+    expect(styles).toContain("--control-active: light-dark(oklch(0.95 0 0), oklch(0.25 0 0));");
     expect(styles).toContain("--color-secondary-hover: var(--secondary-hover);");
     expect(styles).toContain("--secondary-hover: var(--control-hover);");
     expect(styles).toContain("--color-destructive-hover: var(--destructive-hover);");
@@ -182,18 +180,16 @@ describe("global styles", () => {
   it("uses the subtle neutral surface ladder without changing shell or border roles", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
-    expect(styles).toContain(
-      "--background: light-dark(oklch(99.11% 0 0), var(--ds-background-200));",
-    );
-    expect(styles).toContain("--card: light-dark(var(--ds-background-100), oklch(0.14 0 0));");
+    expect(styles).toContain("--background: var(--ds-background-200);");
+    expect(styles).toContain("--card: light-dark(var(--ds-background-100), oklch(0.16 0 0));");
     expect(styles).toContain(
       "--border: light-dark(oklch(0 0 0 / 0.075), oklch(100% 0 0 / 10.1961%));",
     );
-    expect(styles).toContain("--muted: light-dark(oklch(0.985 0 0), oklch(0.18 0 0));");
+    expect(styles).toContain("--muted: light-dark(oklch(0.98 0 0), oklch(0.2 0 0));");
     expect(styles).toContain("--input: light-dark(oklch(0.922 0 0), oklch(1 0 0 / 15%));");
     expect(styles).toContain("--accent: var(--control-hover);");
-    expect(styles).toContain("--control-hover: light-dark(oklch(0.97 0 0), oklch(0.205 0 0));");
-    expect(styles).toContain("--control-active: light-dark(oklch(0.955 0 0), oklch(0.23 0 0));");
+    expect(styles).toContain("--control-hover: light-dark(oklch(0.965 0 0), oklch(0.225 0 0));");
+    expect(styles).toContain("--control-active: light-dark(oklch(0.95 0 0), oklch(0.25 0 0));");
     expect(styles).toContain("--item-muted: var(--muted);");
     expect(styles).toContain(
       "--item-avatar-background: light-dark(var(--card), var(--background));",
@@ -323,11 +319,7 @@ describe("global styles", () => {
     expect(styles).toContain(":root:not(.light) {");
     expect(styles).toContain(".light {");
     expect(styles).toContain(".dark {");
-    expect(
-      styles.match(
-        /--background: light-dark\(oklch\(99\.11% 0 0\), var\(--ds-background-200\)\);/g,
-      ),
-    ).toHaveLength(1);
+    expect(styles.match(/--background: var\(--ds-background-200\);/g)).toHaveLength(1);
     expect(styles.match(/--portfolio-app-chrome-color: var\(--card\);/g)).toHaveLength(1);
     expect(styles.match(/--portfolio-page-background: var\(--background\);/g)).toHaveLength(1);
     expect(styles).not.toContain("@custom-variant dark");
@@ -336,11 +328,9 @@ describe("global styles", () => {
   it("uses coordinated app-owned page, raised-surface, and chrome colors", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
-    expect(styles).toContain(
-      "--background: light-dark(oklch(99.11% 0 0), var(--ds-background-200));",
-    );
-    expect(styles).toContain("--card: light-dark(var(--ds-background-100), oklch(0.14 0 0));");
-    expect(styles).toContain("--popover: light-dark(var(--ds-background-100), oklch(0.14 0 0));");
+    expect(styles).toContain("--background: var(--ds-background-200);");
+    expect(styles).toContain("--card: light-dark(var(--ds-background-100), oklch(0.16 0 0));");
+    expect(styles).toContain("--popover: light-dark(var(--ds-background-100), oklch(0.16 0 0));");
     expect(styles).toContain("--portfolio-app-chrome-color: var(--card);");
     expect(styles).toContain("--portfolio-page-background: var(--background);");
   });

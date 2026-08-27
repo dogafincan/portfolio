@@ -327,7 +327,7 @@ inside its Empty surface, not in an Alert below its trigger.
   chrome color spanning safe areas and responsive insets on `.app-navbar` and
   `.app-shell`.
 - Manifest and theme colors stay aligned to the neutral chrome:
-  `#FFFFFF` light, `#090909` dark, and `#FCFCFC` manifest background.
+  `#FFFFFF` light, `#0D0D0D` dark, and `#FAFAFA` manifest background.
 - Header logo images should define `width`, `height`, `sizes`, and `srcset`,
   and the header logo wrapper should preserve the logo's rounded-square shape
   while showing a visible border.

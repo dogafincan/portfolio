@@ -15,7 +15,7 @@ import geistLatinWghtNormal from "@fontsource-variable/geist/files/geist-latin-w
 import appCss from "../styles.css?url";
 
 const APP_CHROME_COLOR = "#ffffff";
-const APP_CHROME_COLOR_DARK = "#090909";
+const APP_CHROME_COLOR_DARK = "#0D0D0D";
 
 export const Route = createRootRoute({
   head: () => ({

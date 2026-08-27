@@ -35,7 +35,7 @@ describe("RootDocument head", () => {
     );
 
     expect(source).toContain('const APP_CHROME_COLOR = "#ffffff";');
-    expect(source).toContain('const APP_CHROME_COLOR_DARK = "#090909";');
+    expect(source).toContain('const APP_CHROME_COLOR_DARK = "#0D0D0D";');
     expect(source).toContain('content: "width=device-width, initial-scale=1, viewport-fit=cover"');
     expect(source).toContain(
       'import geistLatinWghtNormal from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url";',
@@ -65,7 +65,7 @@ describe("RootDocument head", () => {
     expect(manifest).toContain('"/android-chrome-192x192.png?v=2026082701"');
     expect(manifest).toContain('"/android-chrome-512x512.png?v=2026082701"');
     expect(manifest).toContain('"theme_color": "#FFFFFF"');
-    expect(manifest).toContain('"background_color": "#FCFCFC"');
+    expect(manifest).toContain('"background_color": "#FAFAFA"');
     expect(manifest).toContain('"short_name": "Doga Fincan"');
     expect(manifest).toContain('"name": "Doga Fincan"');
     expect(readPngSize("../../public/app-logo-120.png")).toEqual({ width: 120, height: 120 });

@@ -228,17 +228,17 @@
 
 :root {
   color-scheme: light;
-  --background: light-dark(oklch(99.11% 0 0), var(--ds-background-200));
+  --background: var(--ds-background-200);
   --foreground: light-dark(oklch(0.145 0 0), oklch(0.985 0 0));
-  --card: light-dark(var(--ds-background-100), oklch(0.14 0 0));
+  --card: light-dark(var(--ds-background-100), oklch(0.16 0 0));
   --card-foreground: var(--foreground);
-  --popover: light-dark(var(--ds-background-100), oklch(0.14 0 0));
+  --popover: light-dark(var(--ds-background-100), oklch(0.16 0 0));
   --popover-foreground: var(--foreground);
   --primary: light-dark(oklch(0.6 0.2508 258.230011), var(--ds-blue-700));
   --primary-foreground: var(--contrast-foreground);
   --secondary: var(--muted);
   --secondary-foreground: var(--foreground);
-  --muted: light-dark(oklch(0.985 0 0), oklch(0.18 0 0));
+  --muted: light-dark(oklch(0.98 0 0), oklch(0.2 0 0));
   --item-muted: var(--muted);
   --item-avatar-background: light-dark(var(--card), var(--background));
   --muted-foreground: light-dark(oklch(0.556 0 0), oklch(0.708 0 0));
@@ -258,8 +258,8 @@
   --destructive-strong-hover: oklch(0.51 0.225 25.29);
   --destructive-strong-active: oklch(0.47 0.215 25.29);
   --control: var(--muted);
-  --control-hover: light-dark(oklch(0.97 0 0), oklch(0.205 0 0));
-  --control-active: light-dark(oklch(0.955 0 0), oklch(0.23 0 0));
+  --control-hover: light-dark(oklch(0.965 0 0), oklch(0.225 0 0));
+  --control-active: light-dark(oklch(0.95 0 0), oklch(0.25 0 0));
   --control-info: var(--ds-blue-100);
   --control-info-foreground: var(--badge-info-foreground);
   --control-info-hover: var(--ds-blue-200);
