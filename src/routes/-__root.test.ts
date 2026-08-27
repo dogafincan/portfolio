@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 
+import sharp from "sharp";
 import { describe, expect, it } from "vite-plus/test";
 
 function readPngSize(path: string) {
@@ -13,10 +14,25 @@ function readPngSize(path: string) {
   };
 }
 
+async function readPngCornerRgba(path: string) {
+  const image = readFileSync(new URL(path, import.meta.url));
+  const { data } = await sharp(image).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+
+  return Array.from(data.subarray(0, 4));
+}
+
 describe("RootDocument head", () => {
   it("declares app manifest, shared logo assets, and mobile chrome colors", () => {
     const source = readFileSync(new URL("./__root.tsx", import.meta.url), "utf8");
     const manifest = readFileSync(new URL("../../public/manifest.json", import.meta.url), "utf8");
+    const assetSource = readFileSync(
+      new URL("../lib/portfolio.assets.ts", import.meta.url),
+      "utf8",
+    );
+    const generator = readFileSync(
+      new URL("../../scripts/generate-identity-assets.mjs", import.meta.url),
+      "utf8",
+    );
 
     expect(source).toContain('const APP_CHROME_COLOR = "#ffffff";');
     expect(source).toContain('const APP_CHROME_COLOR_DARK = "#090909";');
@@ -35,17 +51,19 @@ describe("RootDocument head", () => {
     expect(source).toContain("<body>");
     expect(source).not.toContain('<body className="bg-background">');
     expect(source).toContain('rel: "manifest"');
-    expect(source).toContain('href: "/manifest.json"');
-    expect(source).toContain('href: "/favicon.ico"');
+    expect(assetSource).toContain('APP_ICON_ASSET_VERSION = "2026082701"');
+    expect(generator).toContain('IDENTITY_ASSET_VERSION = "2026082701"');
+    expect(source).toContain('href: versionAppAsset("/manifest.json")');
+    expect(source).toContain('href: versionAppAsset("/favicon.ico")');
     expect(source).not.toContain('href: "/favicon.svg"');
-    expect(source).toContain('href: "/favicon-16x16.png"');
-    expect(source).toContain('href: "/favicon-32x32.png"');
+    expect(source).toContain('href: versionAppAsset("/favicon-16x16.png")');
+    expect(source).toContain('href: versionAppAsset("/favicon-32x32.png")');
     expect(source).toContain('rel: "apple-touch-icon"');
-    expect(source).toContain('href: "/apple-touch-icon.png"');
+    expect(source).toContain('href: versionAppAsset("/apple-touch-icon.png")');
     expect(source).not.toContain("favicon-light");
     expect(source).not.toContain("favicon-dark");
-    expect(manifest).toContain('"/android-chrome-192x192.png"');
-    expect(manifest).toContain('"/android-chrome-512x512.png"');
+    expect(manifest).toContain('"/android-chrome-192x192.png?v=2026082701"');
+    expect(manifest).toContain('"/android-chrome-512x512.png?v=2026082701"');
     expect(manifest).toContain('"theme_color": "#FFFFFF"');
     expect(manifest).toContain('"background_color": "#FCFCFC"');
     expect(manifest).toContain('"short_name": "Doga Fincan"');
@@ -60,6 +78,16 @@ describe("RootDocument head", () => {
       width: 512,
       height: 512,
     });
+  });
+
+  it("keeps the Portfolio install identity on the approved black canvas", async () => {
+    for (const fileName of [
+      "apple-touch-icon.png",
+      "android-chrome-192x192.png",
+      "android-chrome-512x512.png",
+    ]) {
+      await expect(readPngCornerRgba(`../../public/${fileName}`)).resolves.toEqual([0, 0, 0, 255]);
+    }
   });
 
   it("mounts restore recovery and a visible root error fallback", () => {

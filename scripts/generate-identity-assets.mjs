@@ -13,6 +13,7 @@ const FAVICON_SUBJECT_SCALE = 0.75;
 const IDENTITY_SUBJECT_SCALE = 0.6;
 const LIGHT_BACKGROUND_SRGB = "#ffffff";
 const DARK_BACKGROUND_SRGB = "#000000";
+const IDENTITY_ASSET_VERSION = "2026082701";
 const MASK_SRGB = "#ffffff";
 
 if (source.info.width !== source.info.height) {
@@ -57,7 +58,9 @@ await writeFile(resolve(repoRoot, "public/favicon-16x16.png"), favicon16);
 await writeFile(resolve(repoRoot, "public/favicon-32x32.png"), favicon32);
 await writeFile(resolve(repoRoot, "public/favicon.ico"), createIco([favicon16, favicon32]));
 
-console.log("Generated Portfolio identity assets from the approved memoji-behind-laptop source.");
+console.log(
+  `Generated Portfolio identity assets (${IDENTITY_ASSET_VERSION}) from the approved memoji-behind-laptop source.`,
+);
 
 async function renderIdentityAsset(size, mark, sourceInfo, markBounds, background) {
   const subjectSize = Math.round(size * IDENTITY_SUBJECT_SCALE);

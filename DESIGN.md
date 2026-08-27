@@ -338,6 +338,11 @@ submission lock remains separate from that static directory.
   exception to the canonical solid-white favicon-mark default; the black frame,
   corner radius, transparent outer pixels, source ownership, and manifest sync
   remain shared Doji rules.
+  The browser and install identity family uses the monotonic `2026082701`
+  cache token across the manifest, favicon links, Apple touch icon, and Android
+  manifest icons. Advance that one token without reuse whenever any family
+  member changes; do not wait for Safari or another browser to expire an older
+  icon cache.
   `npx vp run generate:identity` regenerates the complete public identity family
   from `scripts/assets/app-logo-source.png`. The centered shared source geometry
   keeps the navbar subject's visible bottom aligned with the initial `D`.

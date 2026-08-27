@@ -245,6 +245,8 @@ The imported sibling organization now used here:
   used until the owner supplies production wallet addresses.
 - `src/lib/submission-api.ts`: bounded, exact-response client for the
   digest-bound challenge, redemption, idempotent receipt, and one image upload.
+- `src/lib/portfolio.assets.ts`: one cache version for the manifest, favicons,
+  Apple touch icon, and Android install icons.
 - `src/components/ui/*`: local shadcn/Base UI primitives synchronized through
   the canonical design-system skill.
 - `src/routes/-__root.test.ts`: regression guard for app chrome, manifest

@@ -10,6 +10,7 @@ import {
 } from "@/components/app-header";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { versionAppAsset } from "@/lib/portfolio.assets";
 import geistLatinWghtNormal from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url";
 import appCss from "../styles.css?url";
 
@@ -45,28 +46,28 @@ export const Route = createRootRoute({
       {
         rel: "icon",
         type: "image/x-icon",
-        href: "/favicon.ico",
+        href: versionAppAsset("/favicon.ico"),
       },
       {
         rel: "icon",
         type: "image/png",
         sizes: "16x16",
-        href: "/favicon-16x16.png",
+        href: versionAppAsset("/favicon-16x16.png"),
       },
       {
         rel: "icon",
         type: "image/png",
         sizes: "32x32",
-        href: "/favicon-32x32.png",
+        href: versionAppAsset("/favicon-32x32.png"),
       },
       {
         rel: "apple-touch-icon",
         sizes: "180x180",
-        href: "/apple-touch-icon.png",
+        href: versionAppAsset("/apple-touch-icon.png"),
       },
       {
         rel: "manifest",
-        href: "/manifest.json",
+        href: versionAppAsset("/manifest.json"),
       },
     ],
   }),
@@ -156,8 +157,8 @@ function StaticNotFoundHead() {
         crossOrigin="anonymous"
       />
       <link rel="stylesheet" href={appCss} />
-      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-      <link rel="manifest" href="/manifest.json" />
+      <link rel="icon" type="image/x-icon" href={versionAppAsset("/favicon.ico")} />
+      <link rel="manifest" href={versionAppAsset("/manifest.json")} />
     </>
   );
 }
