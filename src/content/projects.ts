@@ -27,7 +27,7 @@ export const portfolioProjects: PortfolioProject[] = [
     logoLight: "/projects/doji-swap-logo-light-3eda353.png",
     logoDark: "/projects/doji-swap-logo-dark-3eda353.png",
     logoAlt: "Doji Swap logo.",
-    liveUrl: "https://sui-swap.dogafincan.workers.dev",
+    liveUrl: "https://swap.dogafincan.com",
   },
   {
     name: "Doji Drop",

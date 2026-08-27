@@ -28,7 +28,7 @@ describe("portfolioProjects", () => {
         name: "Doji Swap",
         subtitle:
           "Choose two approved assets, review the live route, compare the expected amounts, and complete the swap directly with your connected wallet.",
-        liveUrl: "https://sui-swap.dogafincan.workers.dev",
+        liveUrl: "https://swap.dogafincan.com",
       },
       {
         slug: "sui-airdrop",
