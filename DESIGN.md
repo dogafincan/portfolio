@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `4e1690400ca2f58dc8eecf6e19ec537499b8122e` (committed draft; release tag pending)
+Doji Design System source revision: `a818075b8457916c20328977dcfd81d2a838a888` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
