@@ -165,6 +165,7 @@
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
+  --color-boundary: var(--boundary);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-destructive-border: var(--destructive-border);
@@ -238,7 +239,7 @@
   --primary-foreground: var(--contrast-foreground);
   --secondary: var(--muted);
   --secondary-foreground: var(--foreground);
-  --muted: light-dark(oklch(0.98 0 0), oklch(0.2 0 0));
+  --muted: light-dark(oklch(0.975 0 0), oklch(0.21 0 0));
   --item-muted: var(--muted);
   --item-avatar-background: light-dark(var(--card), var(--background));
   --muted-foreground: light-dark(oklch(0.556 0 0), oklch(0.708 0 0));
@@ -321,6 +322,7 @@
   --warning-strong-hover: oklch(0.68 0.18 70);
   --warning-strong-active: oklch(0.64 0.18 70);
   --border: light-dark(oklch(0 0 0 / 0.075), oklch(100% 0 0 / 10.1961%));
+  --boundary: light-dark(oklch(0 0 0 / 12%), oklch(1 0 0 / 16%));
   --input: light-dark(oklch(0.922 0 0), oklch(1 0 0 / 15%));
   --ring: light-dark(var(--ds-blue-700), var(--ds-blue-900));
   --chart-1: var(--ds-blue-700);

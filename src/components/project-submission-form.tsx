@@ -418,7 +418,7 @@ export function ProjectSubmissionForm({
                   type="file"
                 />
                 <Item
-                  className={`flex-nowrap items-start overflow-hidden ${profileImage && previewUrl ? "border-solid" : "border-dashed"}`}
+                  className={`flex-nowrap items-start overflow-hidden ${profileImage && previewUrl ? "border-solid" : "border-boundary border-dashed"}`}
                   variant="outline"
                 >
                   <ItemMedia variant={profileImage && previewUrl ? "image" : "icon"}>

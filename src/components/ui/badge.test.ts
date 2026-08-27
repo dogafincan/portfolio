@@ -3,7 +3,7 @@ import { describe, expect, it } from "vite-plus/test";
 import { badgeVariants } from "./badge";
 
 describe("badge variants", () => {
-  it("uses a subtle neutral treatment by default", () => {
+  it("uses a restrained visible neutral treatment by default", () => {
     const badge = badgeVariants();
 
     expect(badge).toContain("bg-badge-neutral");

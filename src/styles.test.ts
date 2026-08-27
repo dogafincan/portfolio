@@ -177,7 +177,7 @@ describe("global styles", () => {
     expect(lucideBlock).toContain("stroke-width: var(--lucide-stroke-width);");
   });
 
-  it("uses the subtle neutral surface ladder without changing shell or border roles", () => {
+  it("uses the visible neutral inset ladder without changing shell or border roles", () => {
     const styles = readFileSync("src/styles.css", "utf8");
 
     expect(styles).toContain("--background: var(--ds-background-200);");
@@ -185,7 +185,8 @@ describe("global styles", () => {
     expect(styles).toContain(
       "--border: light-dark(oklch(0 0 0 / 0.075), oklch(100% 0 0 / 10.1961%));",
     );
-    expect(styles).toContain("--muted: light-dark(oklch(0.98 0 0), oklch(0.2 0 0));");
+    expect(styles).toContain("--muted: light-dark(oklch(0.975 0 0), oklch(0.21 0 0));");
+    expect(styles).toContain("--boundary: light-dark(oklch(0 0 0 / 12%), oklch(1 0 0 / 16%));");
     expect(styles).toContain("--input: light-dark(oklch(0.922 0 0), oklch(1 0 0 / 15%));");
     expect(styles).toContain("--accent: var(--control-hover);");
     expect(styles).toContain("--control-hover: light-dark(oklch(0.965 0 0), oklch(0.225 0 0));");
@@ -204,10 +205,13 @@ describe("global styles", () => {
 
   it("keeps persistent muted fills separate from neutral interaction states", () => {
     const attachment = readFileSync("src/components/ui/attachment.tsx", "utf8");
+    const empty = readFileSync("src/components/ui/empty.tsx", "utf8");
     const field = readFileSync("src/components/ui/field.tsx", "utf8");
 
     expect(attachment).toContain("has-[>a,>button]:hover:bg-control-hover");
+    expect(attachment).toContain("data-[state=idle]:border-boundary");
     expect(attachment).not.toContain("has-[>a,>button]:hover:bg-muted");
+    expect(empty).toContain("border-boundary border-dashed");
     expect(field).toContain("has-data-checked:bg-control-hover");
     expect(field).not.toContain("has-data-checked:bg-muted");
   });

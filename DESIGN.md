@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `34999d0d6a8e9fddd0bbccb57e59c2933d523aaa` (committed draft; release tag pending)
+Doji Design System source revision: `81a41b3468ae70c79b7a44e50e2069412e66e957` (committed draft; release tag pending)
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
@@ -69,12 +69,12 @@ badge are content and navigation, not workflow-status metadata.
 Doji Design System adoption: current
 
 This synchronization keeps stock shadcn neutral typography while using the
-canonical subtle Doji neutral-elevation ladder. The page canvas uses
+canonical restrained, visible Doji neutral-elevation ladder. The page canvas uses
 `var(--ds-background-200)`: `oklch(98.4805% 0 0)` in light mode and
 `oklch(0% 0 0)` in dark mode. Raised Card, navbar, footer, popover, and Drawer
 surfaces use `oklch(1 0 0)` light / `oklch(0.16 0 0)` dark. Persistent
-neutral `--muted` surfaces use `oklch(0.98 0 0)` light /
-`oklch(0.20 0 0)` dark. Editable fields use `bg-muted`; the unchanged
+neutral `--muted` surfaces use `oklch(0.975 0 0)` light /
+`oklch(0.21 0 0)` dark. Editable fields use `bg-muted`; the unchanged
 shadcn `--input` token remains a border semantic. Neutral hover, expanded, and
 selected states use `--control-hover` at `oklch(0.965 0 0)` light /
 `oklch(0.225 0 0)` dark, while active and pressed states use
@@ -83,6 +83,11 @@ The light hierarchy moves gray canvas to white raised surface to gray inset;
 the dark hierarchy moves from black canvas through progressively lighter
 raised, inset, hover, and active surfaces. Border, `--input`, neutral text,
 and Geist-backed blue, green, amber, and red roles remain unchanged.
+
+Dashed Empty and unresolved Item or file boundaries use the dedicated
+`--boundary` role at `oklch(0 0 0 / 12%)` light /
+`oklch(1 0 0 / 16%)` dark. The stronger dashed boundary does not alter the
+ordinary Card, navbar, footer, divider, input, or resolved solid Item border.
 
 This radius-only synchronization sets the shared shadcn foundation to
 `--radius: 0.625rem`, yielding the existing semantic utility scale from 6px
@@ -237,7 +242,7 @@ submission lock remains separate from that static directory.
   Do not use raw palette utilities, component-local color literals,
   `color-mix()`, or painted opacity suffixes.
 - Persistent neutral muted surfaces use subtle Doji `--muted`:
-  `oklch(0.98 0 0)` in light mode and `oklch(0.20 0 0)` in dark mode.
+  `oklch(0.975 0 0)` in light mode and `oklch(0.21 0 0)` in dark mode.
   Inputs and search use `bg-muted`; the unchanged shadcn `--input` role
   remains available for border semantics. Neutral hover/expanded/selected
   states use `--control-hover`; active/pressed states use
