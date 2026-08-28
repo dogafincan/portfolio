@@ -1,7 +1,12 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `8321085b0d9ab0524a1d1d2408c9c61c40cd345f` (committed draft; release tag pending)
+Doji Design System source revision: `fc7862923bac3536eaab8d38a9449ed1ce626044` (committed draft; release tag pending)
+
+The current Portfolio surface is a project-card collection, not a multi-stage
+form. Card composition already supplies its hierarchy, so adding separators
+would be decorative and increase information density; the dormant Submit form
+continues to rely on FieldGroup and FieldSet boundaries instead.
 
 Portfolio's project grid and app chrome use the 72rem wide rail. Submit project
 and the static not-found Card use the 48rem standard rail. Its retained dormant
