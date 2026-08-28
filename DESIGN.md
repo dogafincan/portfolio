@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `7528700275bdf3b70df876c56cfb5aca5f4b9c9a` (committed draft; release tag pending)
+Doji Design System source revision: `2e60008189399e11a512ce07b91ca6d96d2f47b1` (committed draft; release tag pending)
 
 The current Portfolio surface is a project-card collection, not a multi-stage
 form. Card composition already supplies its hierarchy, so adding separators
@@ -492,7 +492,9 @@ submission lock remains separate from that static directory.
   contract.
 - The Pay action follows the form after the standard 24px content-to-footer
   boundary. Do not add a fee-summary Item, separator, or bespoke margin there;
-  action-owned feedback follows the complete footer action cluster.
+  action-owned feedback follows the complete footer action cluster. The shared
+  Drawer-only 10px/20px Project-links allowance is not applicable because
+  Portfolio intentionally exposes no interactive Submit-project Drawer.
 - Alerts use semantic surface, border, foreground, and icon pairings:
   `Info`, `CircleCheck`, `TriangleAlert`, and `CircleAlert` as appropriate.
 - Once a digest exists, failure copy tells the user not to pay again, keeps the

@@ -210,8 +210,10 @@ Expected portfolio omissions:
   preview, filename, dimensions, and size. Keep media and Browse action
   non-shrinking, let the content column yield, and visually ellipsize only an
   unbounded filename title while preserving its complete DOM and hover value.
-  Preserve the stock 24px form-to-footer action boundary without an
-  additive Field margin or separator
+  Preserve the stock 24px form-to-footer action boundary on Portfolio's public
+  direct `/submit` Card without an additive Field margin or separator. The
+  shared Drawer-only Project-links allowance is not applicable because
+  Portfolio intentionally exposes no Submit-project Drawer trigger
 
 - Cloudflare Durable Objects
 - Cloudflare storage bindings
