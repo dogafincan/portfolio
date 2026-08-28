@@ -31,7 +31,7 @@ describe("public delivery hardening", () => {
   });
 
   it("keeps application documents mutable and versioned assets immutable", () => {
-    const documentPaths = ["/", "/submit", "/og-preview", "/404.html"].flatMap((pathname) =>
+    const documentPaths = ["/", "/submit", "/og-preview", "/404.html", "/404"].flatMap((pathname) =>
       pathname !== "/" && !pathname.includes(".") ? [pathname, `${pathname}/`] : [pathname],
     );
     for (const pathname of documentPaths) {
