@@ -7,7 +7,13 @@
 /submit
   Cache-Control: no-store
 
+/submit/
+  Cache-Control: no-store
+
 /og-preview
+  Cache-Control: no-store
+
+/og-preview/
   Cache-Control: no-store
 
 /404.html

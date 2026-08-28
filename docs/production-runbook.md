@@ -16,8 +16,9 @@ this temporary state.
 
 ### Safari document-restore resilience
 
-Keep `/`, `/submit`, `/og-preview`, and `/404.html` on `Cache-Control:
-no-store`; keep fingerprinted `/assets/*` files immutable. The document head
+Keep `/`, `/submit`, `/og-preview`, `/404.html`, and the final trailing-slash
+document URLs on `Cache-Control: no-store`; keep fingerprinted `/assets/*`
+files immutable. The document head
 installs the self-contained app-shell recovery guard before hydrated head
 content and application scripts. It checks a restored shell and scoped
 module/chunk failures, then reloads the same-origin document at most once per

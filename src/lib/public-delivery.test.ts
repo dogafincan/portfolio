@@ -31,7 +31,10 @@ describe("public delivery hardening", () => {
   });
 
   it("keeps application documents mutable and versioned assets immutable", () => {
-    for (const pathname of ["/", "/submit", "/og-preview", "/404.html"]) {
+    const documentPaths = ["/", "/submit", "/og-preview", "/404.html"].flatMap((pathname) =>
+      pathname !== "/" && !pathname.includes(".") ? [pathname, `${pathname}/`] : [pathname],
+    );
+    for (const pathname of documentPaths) {
       expect(headers).toContain(`${pathname}\n  Cache-Control: no-store`);
     }
     expect(headers).toContain("/assets/*\n  Cache-Control: public, max-age=31536000, immutable");
