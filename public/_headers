@@ -1,2 +1,14 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+/
+  Cache-Control: no-store
+
+/submit
+  Cache-Control: no-store
+
+/og-preview
+  Cache-Control: no-store
+
+/404.html
+  Cache-Control: no-store

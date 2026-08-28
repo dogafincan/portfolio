@@ -1,7 +1,7 @@
 # Portfolio Design Contract
 
 Doji Design System version: 1.0.1-draft
-Doji Design System source revision: `fc7862923bac3536eaab8d38a9449ed1ce626044` (committed draft; release tag pending)
+Doji Design System source revision: `ea10197063e8ff645f27a3d35dc46bce1869d526` (committed draft; release tag pending)
 
 The current Portfolio surface is a project-card collection, not a multi-stage
 form. Card composition already supplies its hierarchy, so adding separators
@@ -524,6 +524,16 @@ submission lock remains separate from that static directory.
 - Motion uses shared duration/easing roles and respects reduced motion. Loading
   indicators may spin only while work is active.
 - Do not rely on color alone for status, selection, or validation.
+
+## Browser Document Restore Resilience
+
+The prerendered application documents (`/`, `/submit`, `/og-preview`, and
+`/404.html`) use `Cache-Control: no-store`; fingerprinted `/assets/*` files
+remain immutable. A self-contained recovery guard appears in the document head
+before hydrated head content and application scripts. Healthy loads render no
+new UI. A missing `.app-shell` or scoped module/chunk load failure may reload
+the same-origin document at most once per tab, without initializing wallet,
+provider, Registry, backend, application-cache, analytics, or polling work.
 
 ## Static 404
 

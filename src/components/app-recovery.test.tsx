@@ -6,8 +6,10 @@ import { afterEach, describe, expect, it, vi } from "vite-plus/test";
 
 import {
   AppErrorBoundary,
+  EarlyAppRecoveryScript,
   RECOVERY_RELOAD_STORAGE_KEY,
   hasMeaningfulAppShell,
+  installEarlyAppRecovery,
   isRecoverableAssetLoadError,
   recoverFromAssetLoadError,
   recoverFromMissingAppShell,
@@ -38,6 +40,40 @@ afterEach(() => {
 });
 
 describe("app restore recovery", () => {
+  it("installs a pre-hydration recovery script in the document head", () => {
+    render(<EarlyAppRecoveryScript />);
+    const script = document.querySelector("script[data-doji-app-recovery]");
+    expect(script?.textContent).toContain("early-missing-app-shell");
+    expect(script?.textContent).toContain('addEventListener("pageshow"');
+    expect(script?.textContent).toContain("early-asset-load-failure");
+  });
+
+  it("recovers an empty shell restored before React hydration", () => {
+    const storage = createMemoryStorage();
+    const reload = vi.fn();
+    const frames: FrameRequestCallback[] = [];
+    document.body.innerHTML = '<main class="app-shell">Doga Fincan</main>';
+    const cleanupRecovery = installEarlyAppRecovery({
+      cancelFrame: () => {},
+      reload,
+      requestFrame: (callback) => {
+        frames.push(callback);
+        return frames.length;
+      },
+      root: document,
+      storage,
+    });
+    if (frames.length === 0) document.dispatchEvent(new Event("DOMContentLoaded"));
+    frames.shift()?.(0);
+    expect(reload).not.toHaveBeenCalled();
+    document.body.innerHTML = "";
+    window.dispatchEvent(new PageTransitionEvent("pageshow", { persisted: true }));
+    frames.shift()?.(0);
+    expect(reload).toHaveBeenCalledTimes(1);
+    expect(storage.getItem(RECOVERY_RELOAD_STORAGE_KEY)).toBe("early-missing-app-shell");
+    cleanupRecovery();
+  });
+
   it("recognizes a meaningful app shell and clears a previous reload guard", () => {
     const storage = createMemoryStorage();
     storage.setItem(RECOVERY_RELOAD_STORAGE_KEY, "missing-app-shell");

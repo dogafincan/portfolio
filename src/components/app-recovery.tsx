@@ -5,6 +5,15 @@ import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/comp
 
 export const RECOVERY_RELOAD_STORAGE_KEY = "doji-app-shell-recovery:reload-attempted";
 
+type EarlyRecoveryOptions = {
+  browserWindow?: Window;
+  cancelFrame?: (frameId: number) => void;
+  reload?: () => void;
+  requestFrame?: (callback: FrameRequestCallback) => number;
+  root?: Document;
+  storage?: RecoveryStorage | null;
+};
+
 type RecoveryStorage = Pick<Storage, "getItem" | "removeItem" | "setItem">;
 
 type RecoveryOptions = {
@@ -14,6 +23,124 @@ type RecoveryOptions = {
 };
 
 let volatileReloadAttempted = false;
+
+/** Installs the bounded app-shell guard before React hydration. */
+export function installEarlyAppRecovery(options: EarlyRecoveryOptions = {}) {
+  const browserWindow = options.browserWindow ?? window;
+  const root = options.root ?? document;
+  const reload = options.reload ?? (() => browserWindow.location.reload());
+  const requestFrame =
+    options.requestFrame ?? browserWindow.requestAnimationFrame.bind(browserWindow);
+  const cancelFrame = options.cancelFrame ?? browserWindow.cancelAnimationFrame.bind(browserWindow);
+  const storage =
+    options.storage === undefined
+      ? (() => {
+          try {
+            return browserWindow.sessionStorage;
+          } catch {
+            return null;
+          }
+        })()
+      : options.storage;
+  const storageKey = "doji-app-shell-recovery:reload-attempted";
+  let frameId: number | null = null;
+  let volatileAttempted = false;
+
+  function hasShell() {
+    const shell = root.querySelector(".app-shell");
+    if (!shell) return false;
+    const text = shell.textContent?.replace(/\s+/g, " ").trim() ?? "";
+    return (
+      text.length > 0 ||
+      shell.querySelector("a, button, input, select, textarea, img, svg, [role], [data-slot]") !==
+        null
+    );
+  }
+  function clearGuard() {
+    volatileAttempted = false;
+    try {
+      storage?.removeItem(storageKey);
+    } catch {
+      /* Storage can be unavailable. */
+    }
+  }
+  function reloadOnce(reason: string) {
+    if (storage) {
+      try {
+        if (storage.getItem(storageKey)) return;
+        storage.setItem(storageKey, reason);
+        reload();
+        return;
+      } catch {
+        /* Fall back to the in-memory guard. */
+      }
+    }
+    if (volatileAttempted) return;
+    volatileAttempted = true;
+    reload();
+  }
+  function scheduleShellCheck() {
+    if (root.visibilityState === "hidden") return;
+    if (frameId !== null) cancelFrame(frameId);
+    frameId = requestFrame(() => {
+      frameId = null;
+      if (hasShell()) {
+        clearGuard();
+        return;
+      }
+      reloadOnce("early-missing-app-shell");
+    });
+  }
+  function assetFailureText(event: Event | PromiseRejectionEvent) {
+    const candidate = event as Event & {
+      filename?: string;
+      message?: string;
+      reason?: { message?: string } | string;
+      target?: { href?: string; src?: string } | null;
+    };
+    const reason =
+      typeof candidate.reason === "string" ? candidate.reason : candidate.reason?.message;
+    return [
+      candidate.message,
+      candidate.filename,
+      reason,
+      candidate.target?.src,
+      candidate.target?.href,
+    ]
+      .filter(Boolean)
+      .join(" ");
+  }
+  function handleAssetFailure(event: Event | PromiseRejectionEvent) {
+    if (
+      /failed to fetch dynamically imported module|error loading dynamically imported module|importing a module script failed|chunkloaderror|loading chunk \S+ failed|\/assets\/[^"' >]+\.js(?:\?|$)/i.test(
+        assetFailureText(event),
+      )
+    ) {
+      reloadOnce("early-asset-load-failure");
+    }
+  }
+  browserWindow.addEventListener("pageshow", scheduleShellCheck);
+  browserWindow.addEventListener("focus", scheduleShellCheck);
+  root.addEventListener("visibilitychange", scheduleShellCheck);
+  browserWindow.addEventListener("error", handleAssetFailure, true);
+  browserWindow.addEventListener("unhandledrejection", handleAssetFailure);
+  if (root.readyState === "loading")
+    root.addEventListener("DOMContentLoaded", scheduleShellCheck, { once: true });
+  else scheduleShellCheck();
+  return () => {
+    if (frameId !== null) cancelFrame(frameId);
+    browserWindow.removeEventListener("pageshow", scheduleShellCheck);
+    browserWindow.removeEventListener("focus", scheduleShellCheck);
+    root.removeEventListener("visibilitychange", scheduleShellCheck);
+    browserWindow.removeEventListener("error", handleAssetFailure, true);
+    browserWindow.removeEventListener("unhandledrejection", handleAssetFailure);
+  };
+}
+
+export function EarlyAppRecoveryScript() {
+  const source = `(${installEarlyAppRecovery.toString()})()`;
+  return <script data-doji-app-recovery dangerouslySetInnerHTML={{ __html: source }} />;
+}
 
 export function hasMeaningfulAppShell(root: ParentNode = document) {
   const shell = root.querySelector(".app-shell");

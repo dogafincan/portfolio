@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vite-plus/test";
 
 const config = readFileSync("wrangler.assets.jsonc", "utf8");
+const headers = readFileSync("public/_headers", "utf8");
 const packageJson = JSON.parse(readFileSync("package.json", "utf8")) as {
   scripts: Record<string, string>;
 };
@@ -27,5 +28,12 @@ describe("public delivery hardening", () => {
   it("names the assets-only config from every public deploy command", () => {
     expect(packageJson.scripts.deploy).toContain("--config wrangler.assets.jsonc");
     expect(packageJson.scripts["deploy:dry-run"]).toContain("--config wrangler.assets.jsonc");
+  });
+
+  it("keeps application documents mutable and versioned assets immutable", () => {
+    for (const pathname of ["/", "/submit", "/og-preview", "/404.html"]) {
+      expect(headers).toContain(`${pathname}\n  Cache-Control: no-store`);
+    }
+    expect(headers).toContain("/assets/*\n  Cache-Control: public, max-age=31536000, immutable");
   });
 });

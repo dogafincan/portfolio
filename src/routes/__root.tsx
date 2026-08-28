@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { HeadContent, Scripts, createRootRoute, useRouterState } from "@tanstack/react-router";
 
-import { AppErrorBoundary, AppRecovery } from "../components/app-recovery";
+import { AppErrorBoundary, AppRecovery, EarlyAppRecoveryScript } from "../components/app-recovery";
 import { AppProviders } from "@/components/app-providers";
 import {
   PortfolioPageHeader,
@@ -89,6 +89,7 @@ function RootDocument({ children }: { children: ReactNode }) {
           content={APP_CHROME_COLOR_DARK}
           media="(prefers-color-scheme: dark)"
         />
+        {isStaticNotFoundDocument ? null : <EarlyAppRecoveryScript />}
         {isStaticNotFoundDocument ? <StaticNotFoundHead /> : <HeadContent />}
       </head>
       <body>

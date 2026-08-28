@@ -1,10 +1,16 @@
 {
-  "contractVersion": 2,
+  "contractVersion": 3,
   "application": "portfolio",
   "publicDeliveryHardening": {
     "classification": "assets-only",
     "configEvidence": ["wrangler.assets.jsonc"],
     "testEvidence": ["src/lib/public-delivery.test.ts"]
+  },
+  "documentRestoreResilience": {
+    "applicationRoutes": ["/", "/submit", "/og-preview", "/404.html"],
+    "headerEvidence": ["public/_headers"],
+    "runtimeEvidence": ["src/components/app-recovery.tsx", "src/routes/__root.tsx"],
+    "testEvidence": ["src/components/app-recovery.test.tsx", "src/lib/public-delivery.test.ts"]
   },
   "costAbuseHardening": {
     "classification": "dynamic",

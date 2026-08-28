@@ -14,6 +14,23 @@ no-store JSON `503` before envelope processing, limiters, bindings, providers,
 or mutations. Do not remove the preserved Sui implementation merely to enforce
 this temporary state.
 
+### Safari document-restore resilience
+
+Keep `/`, `/submit`, `/og-preview`, and `/404.html` on `Cache-Control:
+no-store`; keep fingerprinted `/assets/*` files immutable. The document head
+installs the self-contained app-shell recovery guard before hydrated head
+content and application scripts. It checks a restored shell and scoped
+module/chunk failures, then reloads the same-origin document at most once per
+tab. A healthy load has no visible recovery UI and the guard may not initialize
+wallet, provider, Registry, backend, application-cache, analytics, or polling
+work.
+
+For a Safari-profile-only white page, inspect the document and network timeline
+before changing Cloudflare. An empty document with no request points to local
+restore; a real request requires response and mitigation inspection. After
+deployment, verify root HTTP 200, `Cache-Control: no-store`, early-script
+ordering, a rendered `.app-shell`, and unchanged immutable asset caching.
+
 ## Activation prerequisites
 
 - The owner has supplied the real Registry publication and treasury address.
