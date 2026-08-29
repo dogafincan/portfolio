@@ -282,7 +282,7 @@ inside its Empty surface, not in an Alert below its trigger.
   Source apps own end-user-first wording that leads with the intended person's
   outcome, useful signal, and next action while keeping internal mechanics
   secondary and material qualifiers truthful.
-- Current project-card order is Doji Rank, Doji Swap, Doji Drop, Doji Snap,
+- Current project-card order is Doji Drop, Doji Snap, Doji Rank, Doji Swap,
   and Doji Registry.
 - Do not list the portfolio website as one of its own projects.
 - `liveUrl` should only point to a useful public app surface.

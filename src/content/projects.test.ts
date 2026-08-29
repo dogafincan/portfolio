@@ -17,20 +17,6 @@ describe("portfolioProjects", () => {
       })),
     ).toEqual([
       {
-        slug: "memerank",
-        name: "Doji Rank",
-        subtitle:
-          "Discover the approved projects drawing the most trading activity on Doji Rank, spot useful signals in the ranked list, and trade your picks in one place.",
-        liveUrl: "https://dojirank.com",
-      },
-      {
-        slug: "sui-swap",
-        name: "Doji Swap",
-        subtitle:
-          "Choose two approved assets, review the live route, compare the expected amounts, and complete the swap directly with your connected wallet.",
-        liveUrl: "https://swap.dogafincan.com",
-      },
-      {
         slug: "sui-airdrop",
         name: "Doji Drop",
         subtitle:
@@ -43,6 +29,20 @@ describe("portfolioProjects", () => {
         subtitle:
           "Choose an approved project, complete its published payment, then let Doji Snap build a complete ranked holder CSV in the background for review and export.",
         liveUrl: "https://dojisnap.xyz",
+      },
+      {
+        slug: "memerank",
+        name: "Doji Rank",
+        subtitle:
+          "Discover the approved projects drawing the most trading activity on Doji Rank, spot useful signals in the ranked list, and trade your picks in one place.",
+        liveUrl: "https://dojirank.com",
+      },
+      {
+        slug: "sui-swap",
+        name: "Doji Swap",
+        subtitle:
+          "Choose two approved assets, review the live route, compare the expected amounts, and complete the swap directly with your connected wallet.",
+        liveUrl: "https://swap.dogafincan.com",
       },
       {
         slug: "doji-registry",

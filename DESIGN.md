@@ -397,6 +397,9 @@ submission lock remains separate from that static directory.
   height; the footer follows content after the required 24px structural gap.
   Unequal row bottoms are expected when descriptions differ. Do not wrap the
   grid in a second card-like workbench.
+- The checked-in editorial order is Doji Drop, Doji Snap, Doji Rank, Doji
+  Swap, then Doji Registry. This sequence is Portfolio-owned content ordering,
+  not a shared Doji Design System hierarchy for other directories.
 - Each project Card centers one 40px current product logo, its title, complete
   primary-page subtitle, and optional action in one `CardContent` stack. The
   centered-action rhythm uses a 40px top/bottom inset, 24px logo-to-title gap,

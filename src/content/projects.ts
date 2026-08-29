@@ -10,26 +10,6 @@ export type PortfolioProject = {
 
 export const portfolioProjects: PortfolioProject[] = [
   {
-    name: "Doji Rank",
-    slug: "memerank",
-    subtitle:
-      "Discover the approved projects drawing the most trading activity on Doji Rank, spot useful signals in the ranked list, and trade your picks in one place.",
-    logoLight: "/projects/doji-memerank-logo-light-2ce5e89.png",
-    logoDark: "/projects/doji-memerank-logo-dark-2ce5e89.png",
-    logoAlt: "Doji Rank logo.",
-    liveUrl: "https://dojirank.com",
-  },
-  {
-    name: "Doji Swap",
-    slug: "sui-swap",
-    subtitle:
-      "Choose two approved assets, review the live route, compare the expected amounts, and complete the swap directly with your connected wallet.",
-    logoLight: "/projects/doji-swap-logo-light-3eda353.png",
-    logoDark: "/projects/doji-swap-logo-dark-3eda353.png",
-    logoAlt: "Doji Swap logo.",
-    liveUrl: "https://swap.dogafincan.com",
-  },
-  {
     name: "Doji Drop",
     slug: "sui-airdrop",
     subtitle:
@@ -48,6 +28,26 @@ export const portfolioProjects: PortfolioProject[] = [
     logoDark: "/projects/dojisnap-logo-dark-17fd090.png",
     logoAlt: "Doji Snap logo.",
     liveUrl: "https://dojisnap.xyz",
+  },
+  {
+    name: "Doji Rank",
+    slug: "memerank",
+    subtitle:
+      "Discover the approved projects drawing the most trading activity on Doji Rank, spot useful signals in the ranked list, and trade your picks in one place.",
+    logoLight: "/projects/doji-memerank-logo-light-2ce5e89.png",
+    logoDark: "/projects/doji-memerank-logo-dark-2ce5e89.png",
+    logoAlt: "Doji Rank logo.",
+    liveUrl: "https://dojirank.com",
+  },
+  {
+    name: "Doji Swap",
+    slug: "sui-swap",
+    subtitle:
+      "Choose two approved assets, review the live route, compare the expected amounts, and complete the swap directly with your connected wallet.",
+    logoLight: "/projects/doji-swap-logo-light-3eda353.png",
+    logoDark: "/projects/doji-swap-logo-dark-3eda353.png",
+    logoAlt: "Doji Swap logo.",
+    liveUrl: "https://swap.dogafincan.com",
   },
   {
     name: "Doji Registry",

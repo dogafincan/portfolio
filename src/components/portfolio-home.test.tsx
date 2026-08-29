@@ -86,15 +86,15 @@ describe("PortfolioHome", () => {
     expect(footer?.textContent).toContain("Copyright Doga Fincan");
 
     expect(portfolioProjects.map((project) => project.slug)).toEqual([
-      "memerank",
-      "sui-swap",
       "sui-airdrop",
       "sui-snapshot",
+      "memerank",
+      "sui-swap",
       "doji-registry",
     ]);
     expect(
       screen.getAllByRole("heading", { level: 2 }).map((heading) => heading.textContent),
-    ).toEqual(["Doji Rank", "Doji Swap", "Doji Drop", "Doji Snap", "Doji Registry"]);
+    ).toEqual(["Doji Drop", "Doji Snap", "Doji Rank", "Doji Swap", "Doji Registry"]);
   });
 
   it("keeps every project Card at its independent natural height", () => {
